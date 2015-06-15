@@ -1,0 +1,39 @@
+.events ul { list-style: none;}
+.events h3 { font-size: 24px; line-height: 1; margin: 0 0 20px 0;}
+.events .tour-date{background-color: #00a7fa;}
+.events .tour-dates { margin-bottom:55px; }
+.events .tour-dates li { position:relative; background-color: #242424; border: 1px solid #2F2F2F; margin: 0 0 1px 0;}
+.events .tour-dates li:nth-child(2n) {background-color: #1E1E1E; border: 1px solid #292929;}
+.events .tour-dates .tour-place { padding:20px 0 0 15px; width:auto; }
+.events .tour-dates .sub-head { font-size:14px; color: #bebebe; text-transform: none;}
+.events .tour-dates .main-head { font-size:12px; color: #fff; font-weight: bold; text-transform: none;}
+.events .tour-dates .action-btn { position: absolute; top:23px; right:24px; }
+.events .tour-date { float:left; width:60px; text-align: center; margin:0; padding:17px 0 15px 0; }
+.events .tour-date .day{font-size:24px; font-weight:bold; display:block; color: #fff; }
+.events .tour-date .month { font-size:12px; text-transform: uppercase;}
+.events .tour-place { float:left; width:138px; padding:10px; }
+.events .tour-place .action-btn.sold,
+.events .tour-place .action-btn.canceled{background-color: #000;}
+
+
+#event-info { margin-bottom:25px; }
+#event-info p { border-bottom:solid 1px #333; margin-bottom:0; font-size:13px; padding:5px 0; }
+#event-info p span { font-weight:bold; display:inline-block; width:120px; }
+#event-info time { background: none; font-size:13px; }
+
+.group:before,
+.group:after,
+.row:before,
+.row:after {
+    content: '\0020';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0; }
+.row:after,
+.group:after {
+    clear: both; }
+.row,
+.group {
+    zoom: 1; }

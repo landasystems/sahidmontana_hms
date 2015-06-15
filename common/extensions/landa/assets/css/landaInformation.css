@@ -1,0 +1,21 @@
+ul.post_meta_links {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+.post_meta_links li {
+    float: left;
+    margin: 0px;
+    padding: 0px 25px 0px 0px;
+    list-style-type: none;
+    color: #999;
+}
+.post_meta_links li a {
+    color: #a1a1a1;
+    padding: 0px 18px 0px 0px;
+    text-decoration: none;
+    font-size: 11px;
+}
+.post_meta_links li a:hover {
+    color: #727272;
+    text-decoration: none;
+}

@@ -1,0 +1,12 @@
+.bordered {
+    border:10px solid #3f3f3f;
+}
+.album-info{
+background-color: #EEEEEE;
+padding: 5px; 
+border-top: 1px solid #CDC9C9; 
+border-bottom: 1px solid #CDC9C9;
+}
+.content {
+    color:#fff;
+}

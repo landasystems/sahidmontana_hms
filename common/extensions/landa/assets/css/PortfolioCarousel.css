@@ -1,0 +1,19 @@
+/* 
+    Document   : PortfolioCarousel
+    Created on : Jun 20, 2013, 11:56:23 AM
+    Author     : landa
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.portofolio-cimg { 
+    overflow: hidden;
+    height: 150px;
+    border-bottom: 3px solid #0093d0;
+    margin-bottom: 5px;
+}
+.portofolio-cimg img { 
+    width: 100%;
+}
+
+

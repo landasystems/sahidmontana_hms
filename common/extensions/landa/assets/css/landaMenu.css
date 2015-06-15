@@ -1,0 +1,193 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+/*===== nav style ======*/
+#fdw{
+    float: right;
+}
+#fdw nav select {
+    display:none; /* this is just for the mobile display */
+}
+#fdw nav ul {
+    display:block;
+    z-index:999999;
+}
+#fdw nav ul li {
+    display:inline-block;
+    padding:0px 3px 20px;
+    margin-left:30px;
+    position:relative;
+}
+#fdw nav ul li a:link, #fdw nav ul li a:visited {
+    color:#666;
+    font-size:18px ;
+    font-family: 'Montserrat', sans-serif;
+    text-transform:uppercase;
+    display:inline-block;
+    position:relative;
+    font-weight: bold;
+    text-shadow: 2px 2px #000;
+}
+#fdw nav ul li a:hover, #fdw nav ul li a:active {
+    color:#ffffff;
+    text-decoration:none;
+}
+#fdw nav ul li span {
+    position:absolute;
+    right:-12px;
+    bottom:6px;
+    width:7px;
+    height:8px;
+    margin:0 0 0 3px;
+    float:right;
+    display:block;
+    background:url('../img/nav_arrow.png') no-repeat left -8px;
+    font:0/0 a;
+}
+#fdw nav ul li.current {
+    border-bottom:2px solid #ffffff;
+}
+#fdw nav ul li.current a {
+    color:#ffffff;
+    cursor: default;
+}
+#fdw nav ul li.current a span {
+    background:url('../../img/nav_arrow.png') no-repeat left 0;
+}
+#fdw nav ul li.current ul li a {
+    cursor:pointer;
+}
+
+/*===== sub_menu Style =======*/
+#fdw nav ul li ul.sub_menu {
+    position:absolute;
+    top:40px;
+    left:0;
+    margin:0;
+    padding:0;
+    background:#fff;
+    border:1px solid #ececec;
+    border-top:5px solid #ffffff;
+    display:none;
+    z-index:999999;
+    -moz-box-shadow: 0px 6px 7px #121012;
+    -webkit-box-shadow: 0px 6px 7px #121012;
+    box-shadow: 0px 6px 7px #121012;
+}
+#fdw nav ul li ul.sub_menu:before {
+    content: "";
+    position: absolute;
+    top:-12px !important;
+    left:12px !important;
+    background:url('../img/arrow_top.png') no-repeat left top;
+    width:13px !important;
+    height:8px !important;
+    border:none !important;
+    z-index: 5;
+}
+/*#fdw nav ul li ul.sub_menu li.arrow_top {
+    position:absolute;
+    top:-12px;
+    left:12px;
+    width:13px;
+    height:8px;
+    display:block;
+    border:none;
+    background:url('../img/arrow_top.png') no-repeat left top;
+}*/
+#fdw nav ul li ul.sub_menu li {
+    float:none;
+    margin:0;
+    padding:0;
+    border-bottom:1px solid #ececec;
+}
+#fdw nav ul li ul.sub_menu li a {
+    white-space: nowrap;
+    width: 150px;
+    padding:12px;
+    font-size:13px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform:capitalize;
+    color:#777;
+    text-shadow: none;
+}
+#fdw nav ul li ul.sub_menu li a:hover {
+    background:#000EC4;
+    color:#fff;
+}
+#fdw nav ul li ul.sub_menu li a.subCurrent {
+    color:#ffffff;
+    cursor:default;
+}
+#fdw nav ul li ul.sub_menu li a.subCurrent:hover {
+    background:none;
+}
+/*===================== end Header style ======================*/
+
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+    /* nav */
+    #fdw nav ul li{
+        margin-left:12px;
+    }
+}
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+    #fdw{
+        float: none;
+    }
+    /* nav menu ul & select */
+    #fdw nav ul {
+        display:none;
+    }
+    #fdw nav select {
+        width:100%;
+        display:block;
+        margin-bottom:30px;
+        cursor:pointer;
+        padding:6px;
+        background:#f9f9f9;
+        border:1px solid #e3e3e3;
+        color:#777;
+    }
+}
+#accordian li {
+				list-style-type: none;
+			}
+			
+			#accordian ul ul li a, #accordian h4 {
+				color: white;
+				text-decoration: none;
+				font-size: 11px;
+				line-height: 27px;
+				display: block;
+				padding: 0 15px;
+
+				transition: all 0.15s;
+				position: relative;
+			}
+			
+			#accordian ul ul li a:hover {
+				background: #003545;
+				border-left: 5px solid lightgreen;
+			}
+			
+			#accordian ul ul {
+				display: none;
+			}
+			#accordian li.active>ul {
+				display: block;
+			}
+
+			#accordian ul ul ul{
+				margin-left: 15px; border-left: 1px dotted rgba(0, 0, 0, 0.5);
+			}
+
+			#accordian a:not(:only-child):after {
+				content: "\f104";
+				font-family: fontawesome;
+				position: absolute; right: 10px; top: 0;
+				font-size: 14px;
+			}
+			#accordian .active>a:not(:only-child):after {
+				content: "\f107";
+			}

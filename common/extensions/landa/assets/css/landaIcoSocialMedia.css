@@ -1,0 +1,71 @@
+/*circle*/
+.icn { text-align:left; width: 24px; height: 24px; background-image: url(../img/social-icons.png); background-repeat: no-repeat; display:inline-block; margin-right: 3px; text-indent: -999em; cursor: pointer; }
+.icn:hover { border:none; }
+.icn:focus,
+.icn:active { outline: none }
+.icn.twitter { background-position: -31px -1px }
+.icn.twitter:hover { background-position: -31px -31px }
+.icn.facebook { background-position: 0 -1px }
+.icn.facebook:hover { background-position: 0 -31px }
+.icn.flickr { background-position: -62px -1px }
+.icn.flickr:hover { background-position: -62px -31px }
+.icn.picasa { background-position: -94px 0 }
+.icn.picasa:hover { background-position: -94px -30px }
+.icn.lnkdin { background-position: -125px 0 }
+.icn.lnkdin:hover { background-position: -125px -30px }
+.icn.gplus { background-position: -156px -1px }
+.icn.gplus:hover { background-position: -156px -31px }
+.icn.rss { background-position: -187px -1px }
+.icn.rss:hover { background-position: -187px -31px }
+.icn.youtube { background-position: -218px -1px }
+.icn.youtube:hover { background-position: -218px -31px }
+.icn.wordpress { background-position: -250px -1px }
+.icn.wordpress:hover { background-position: -250px -31px }
+.icn.dribbble { background-position: -282px -1px }
+.icn.dribbble:hover { background-position: -282px -31px }
+.icn.pinterest { background-position: -313px -1px }
+.icn.pinterest:hover { background-position: -313px -31px }
+.icn.stumble { background-position: -345px -1px }
+.icn.stumble:hover { background-position: -345px -30px }
+.icn.digg { background-position: -380px -1px }
+.icn.digg:hover { background-position: -380px -30px }
+
+
+/*horizontal*/
+.contact-social {
+	font-size:12px;
+	padding:15px 0}
+
+.contact-social div {
+	margin:0 0 0 12px;
+	float:left}
+
+.contact-social div:first-child {
+	margin-left:0}
+.btn_skype, .btn_twitter, .btn_fb {
+    display:inline-block;
+    /*	height:25px;
+            width:79px;*/
+    overflow:hidden;
+    text-indent:-400px;
+    background:url(../img/btn_social.png) 0 -23px no-repeat;
+    margin-top:5px}
+
+.btn_twitter {
+    background-position:-100px -23px}	
+.btn_fb {
+    width:88px;
+    background-position:-198px -23px}
+
+.btn_skype, .btn_twitter, .btn_fb {
+    height:23px}
+
+.btn_skype {
+    width:90px;
+    background-position:0 0}
+.btn_twitter {
+    width:88px;
+    background-position:-100px 0}
+.btn_fb {
+    width:97px;
+    background-position:-198px 0}	

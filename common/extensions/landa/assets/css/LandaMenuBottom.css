@@ -1,0 +1,25 @@
+/* usefullLinks */
+	footer .usefullLinks .unstyled {
+		margin-top:24px;
+	}
+	footer .usefullLinks .unstyled li {
+		border-bottom:1px dotted #6c7172;
+	}
+	footer .usefullLinks .unstyled li:last-child {
+		border-bottom:none;
+	}
+	footer .usefullLinks .unstyled li a {
+		padding:6px 0;
+		color:#ccc;
+		display: block;
+		-webkit-text-shadow:0 1px 0 rgba(0,0,0, .1);
+		-moz-text-shadow:0 1px 0 rgba(0,0,0, .1);
+		text-shadow:0 1px 0 rgba(0,0,0, .1);
+	}
+	footer .usefullLinks .unstyled li a:hover,
+	footer .usefullLinks .unstyled li a:active {
+		background:rgba(0,0,0,.1);
+	}
+	footer .usefullLinks .unstyled li i {
+		font-size: 18px;
+	}

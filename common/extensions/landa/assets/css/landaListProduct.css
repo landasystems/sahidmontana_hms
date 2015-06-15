@@ -1,0 +1,164 @@
+/*============== .hProductItems ============*/
+.hProductItems {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.hProductItems li {
+    margin-top:36px;
+    padding: 10px;
+}
+/* img */
+.hProductItems .thumbnail {
+
+    padding: 0;
+    border: none;
+    background-color:none;
+    border-radius:0; 
+    box-shadow: none;
+    padding: 4px;
+    border: 1px solid #e0e0e0;
+    background-color:none;
+    border-radius:0; 
+    height:160px;
+}
+.hProductItems .thumbnail:hover {
+    border: 1px solid #aaa;
+}
+/* thumbSetting */
+.hProductItems .thumbSetting {
+    padding-left:0;
+    padding-right:0;
+}
+.hProductItems .thumbSetting div {
+    margin-top:6px;
+    min-height: 20px;
+}
+/* title */
+.hProductItems .thumbSetting .thumbTitle h3 {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 22px;
+    padding:5px 0;
+    font-family: 'Open Sans', Arial, Tahoma sans-serif;
+    min-height: 60px;
+}
+/* desc */
+.hProductItems .thumbSetting .product-desc {
+    height:65px;
+}
+.hProductItems .thumbSetting .product-desc p {
+    margin:0;
+    padding:0;
+    line-height: 18px;
+    white-space: normal;
+}
+/* price */
+.hProductItems .thumbSetting .thumbPrice {
+    display: block;
+    text-align: center;
+    background:#eee;
+    padding-top:3px;
+    padding-bottom:3px;
+    border-top:1px solid #d5d5d5;
+}
+.hProductItems .thumbSetting .thumbPrice span {
+    font-weight: 700;
+    font-size: 15px;
+    color:#666;
+    padding-right:8px;
+    margin:0 auto;
+    text-align: center;
+}
+
+.hProductItems .thumbSetting .thumbPrice span .strike-through {
+    color:#c0c0c0;
+    text-decoration: line-through;
+}
+/* bttons */
+.hProductItems .thumbSetting .thumbButtons {
+    margin:6px 0 0 0;
+}
+.hProductItems .thumbSetting .thumbButtons .btn {
+    line-height:24px;
+    font-size: 12px
+}
+/* rating */
+.hProductItems .thumbSetting .rating {
+    list-style: none;
+    margin:4px 0;
+    padding:0;
+}
+.hProductItems .thumbSetting .rating li {
+    margin:0;
+    padding:0;
+    float: left;
+}
+.hProductItems .thumbSetting .rating i.star-on {
+    width:17px;
+    height:17px;
+    display: block;
+    background:url('../img/star-on.png') no-repeat left top;
+}
+.hProductItems .thumbSetting .rating i.star-off {
+    width:17px;
+    height:17px;
+    display: block;
+    background:url('../img/star-off.png') no-repeat left top;
+}
+a.invarseColor:link, a.invarseColor:visited {
+    color:#505050;
+}
+a.invarseColor:hover, a.invarseColor:active {
+    color:#fb6f58;
+    text-decoration:none;
+}
+/* templete 2 */
+.hProductItems .thumbSetting .nama h3 {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 22px;
+    padding:5px 0;
+    font-family: 'Open Sans', Arial, Tahoma sans-serif;
+    min-height: 60px;
+    color: white !important;
+    background: #008AD2;
+    padding-left: 5px;
+    border-bottom-right-radius:2em;
+    border-bottom-left-radius:2em;
+    border: 1px solid;
+    margin-top: -10px;
+}
+.hProductItems .thumbSetting .nama h3 a {
+    color: white !important;
+}
+.hProductItems .thumbSetting .harga {
+    display: block;
+    text-align: center;
+    background:#FFFF00;
+    padding-top:3px;
+    padding-bottom:3px;
+    border-top:1px solid #d5d5d5;
+    border:1px solid #d5d5d5;
+    border-radius:25px;
+
+}
+.hProductItems .thumbSetting .harga span {
+    font-weight: 700;
+    font-size: 15px;
+    color:#000;
+    padding-right:8px;
+    margin:0 auto;
+    margin-top:-30px;
+    text-align: center;
+
+
+}
+.row-fluid ul.thumbnails li.span12 + li { margin-left : 0px;clear:left }
+.row-fluid ul.thumbnails li.span6:nth-child(2n + 3) { margin-left : 0px;clear:left }
+.row-fluid ul.thumbnails li.span8:nth-child(2n + 3) { margin-left : 0px;clear:left }
+.row-fluid ul.thumbnails li.span9:nth-child(2n + 3) { margin-left : 0px;clear:left }
+.row-fluid ul.thumbnails li.span4:nth-child(3n + 4) { margin-left : 0px;clear:left }
+.row-fluid ul.thumbnails li.span3:nth-child(4n + 5) { margin-left : 0px; clear:left}
+.row-fluid ul.thumbnails li.span2:nth-child(6n + 7) { margin-left : 0px;clear:left }
+.row-fluid ul.thumbnails li.span1:nth-child(12n + 13) { margin-left : 0px;clear:left }

@@ -1,0 +1,19 @@
+ol.landaGallery{list-style: none;}
+.album-info{
+
+padding: 5px; 
+
+border-left: 1px solid #CDC9C9; 
+border-right: 1px solid #CDC9C9; 
+border-bottom: 1px solid #CDC9C9;
+text-align: center;
+font-size: 13px;
+min-height: 40px;
+}
+span.album-actions{float: left; width: 30px; height: 30px; background: #2d2d2d; margin: 0 5px 0 0; position: relative;}
+.latest-item img.scale-with-grid.widget-img,
+.listing img.scale-with-grid {opacity:0.5; filter:alpha(opacity=40); /* For IE8 and earlier */}
+.latest-item:hover img.scale-with-grid.widget-img { opacity:1; }
+
+.gallery-item a:hover img { opacity:0.8; }
+.gallery-actions { padding:2px 0 5px 0; display:block; }

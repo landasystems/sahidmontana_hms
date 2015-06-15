@@ -1,0 +1,12 @@
+ul#itemContainer {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul#itemContainer li {
+    display: inline-block;
+    margin: 5px;
+    zoom: 1;
+    position: relative;
+}

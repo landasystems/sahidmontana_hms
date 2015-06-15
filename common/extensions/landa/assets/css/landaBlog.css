@@ -1,0 +1,7 @@
+article { display: block}
+.blog-post { padding-bottom:21px; border-bottom:1px dotted #d2d9db; margin-bottom:35px; text-align: justify;}
+.blog-post h3 {  font-weight:400; line-height:1; letter-spacing: -0.03em; }
+.blog-post h3 a {color: #d2d9db; -webkit-transition: color 0.18s ease; -moz-transition: color 0.18s ease; -o-transition: color 0.18s ease; transition: color 0.18s ease; }
+.blog-post h3 a:hover { color:#fff; }
+.blog-post h6 { display:inline; margin-right:6px;}
+
