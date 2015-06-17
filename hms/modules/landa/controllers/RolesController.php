@@ -159,29 +159,32 @@ class RolesController extends Controller {
 
         if (Yii::app()->request->isPostRequest) {
 
+            $cek = User::model()->find(array('condition' => 'roles_id=' . $id));
             $siteConfig = SiteConfig::model()->findByPk(1);
 
-
-            if ($type == 'guest') {
-                $guest = json_decode($siteConfig->roles_guest, true);
-                $guest = array_diff($guest, array($id));
-                $siteConfig->roles_guest = json_encode($guest);
-            }
-
-            $siteConfig->save();
-
             //delete roles auth
-            RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $id));
 
+            if (count($cek) > 0 and $type == 'guest') {
+              
+                
+            } else {
+                
+                if ($type == 'guest') {
+                    $guest = json_decode($siteConfig->roles_guest, true);
+                    $guest = array_diff($guest, array($id));
+                    $siteConfig->roles_guest = json_encode($guest);
+                }
 
-            $this->loadModel($id)->delete();
-
+                $siteConfig->save();
+                $this->loadModel($id)->delete();
+                RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $id));
+            }
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                
             unset(Yii::app()->session['site']);
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
@@ -216,8 +219,6 @@ class RolesController extends Controller {
             'type' => 'index'
         ));
     }
-    
-   
 
     public function actionUser() {
         $session = new CHttpSession;
@@ -298,7 +299,7 @@ class RolesController extends Controller {
 
         $this->render('admin', array(
             'model' => $model,
-            'customer' => $customer,
+//            'customer' => $customer,
         ));
     }
 

@@ -620,8 +620,8 @@ class ReservationController extends Controller {
         $siteConfig = SiteConfig::model()->findByPk(1);
         $settings = json_decode($siteConfig->settings, true);
         $this->layout = "mainWide";
-        $model = $this->loadModel($id);
-        $mDetail = ReservationDetail::model()->findAll(array('condition' => 'reservation_id=' . $id));
+        $model = $this->loadModel($id)->with('Guest','Guest.City','Guest.City.province','Bill','Bill.Roles');
+        $mDetail = ReservationDetail::model()->with('Room','Room.RoomType')->findAll(array('condition' => 'reservation_id=' . $id));
         $this->js();
 
         if (!empty($model->deposite_id)) {

@@ -18,7 +18,7 @@
  */
 class LandaArticleCategory extends CActiveRecord {
     public function getDbConnection() {
-        return Yii::app()->db2;
+        return Yii::app()->db;
     }
     /**
      * Returns the static model of the specified AR class.

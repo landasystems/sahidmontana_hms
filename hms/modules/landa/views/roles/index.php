@@ -57,9 +57,6 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 ));
 $this->endWidget();
 ?>
-
-
-
 <div class="search-form" style="display:none">
     <?php
     $this->renderPartial('_search', array(

@@ -2,7 +2,6 @@
 
 class BillChargeController extends Controller {
 
-
     public $breadcrumbs;
 
     /**
@@ -113,16 +112,22 @@ class BillChargeController extends Controller {
                         
                         function subtotal(total){
                             subTotal = 0;
+                            totalDiscount = 0;
                             
                             $(".detTotal").each(function() {
-                                 subTotal += parseInt($(this).val());                                 
+                                 subTotal += parseInt($(this).val());   
+                                 totalDiscount += Math.round(($(this).parent().find("#detDiscount").val()/ 100 ) * parseInt($(this).parent().find("#detCharge").val()) * parseInt($(this).parent().find("#detQty").val()));
                             });
+                            
                             $(".depositeAmount").each(function() {
                                  subTotal -= parseInt($(this).val());                                 
                             });
                             
                             $("#total").html("Rp. " + rp(subTotal));
-                            $("#BillCharge_total").val(subTotal);                           
+                            $("#BillCharge_total").val(subTotal);       
+                            
+                            $("#totalDiscount").html("Rp. " + rp(totalDiscount));
+                            $("#BillCharge_discount").val(totalDiscount); 
                             pay();
                         }
                         
@@ -294,7 +299,7 @@ class BillChargeController extends Controller {
         if (count($model) > 0) {
             if (!empty($_POST['amount'])) {
                 $charge = (!empty($_POST['charge'])) ? $_POST['charge'] : 0;
-                
+
                 $subtotal = ($charge * $_POST['amount']) - round(($charge * $_POST['amount']) * ($_POST['discount'] / 100));
                 echo '                                                  
                     <tr class="items">
@@ -420,7 +425,7 @@ class BillChargeController extends Controller {
      */
     public function actionUpdate($id) {
         $this->cssJs();
-        $model = $this->loadModel($id);
+        $model = $this->loadModel($id)->with('Deposite','Deposite.Guest','Additional');
 
         if ($model->is_temp == 0 && user()->roles_id != -1 && $model->is_na == 0) {
             user()->setFlash('error', '<strong>Sorry! </strong>This transaction has been paid, so it can not be edited. Call admin to edit this transaction. Thanks!.');
@@ -629,7 +634,5 @@ class BillChargeController extends Controller {
             Yii::app()->end();
         }
     }
-
-    
 
 }

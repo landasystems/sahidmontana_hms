@@ -11,7 +11,7 @@
 class City extends CActiveRecord {
 
     public function getDbConnection() {
-        return Yii::app()->db2;
+        return Yii::app()->db;
     }
 
     /**

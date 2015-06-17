@@ -870,7 +870,7 @@ class RegistrationController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $model = $this->loadModel($id);
+        $model = $this->loadModel($id)->with('Guest','Guest.City','Guest.City.province','Bill');
         $this->js();
 
         if ($model->is_na == 1 and ! isset($_GET['v'])) // jika sudah di NA registrasi tidak bisa di update
@@ -886,7 +886,7 @@ class RegistrationController extends Controller {
             $modelDp = new Deposite;
             $modelDp->code = SiteConfig::model()->formatting('deposite');
         }
-        $mDetail = RegistrationDetail::model()->findAll(array('condition' => 'registration_id=' . $id));
+        $mDetail = RegistrationDetail::model()->with('Room','Room.RoomType')->findAll(array('condition' => 't.registration_id=' . $id));
         if (isset($_POST['Registration'])) {
             if (!empty($_POST['RegistrationDetail']['room_id'])) {
                 $reservation_id = $model->reservation_id;

@@ -171,7 +171,7 @@ class RoomChartingController extends Controller {
             }
             //$amountDay = landa()->daysInMonth($_POST['month'], $_POST['year']);
             $modelRoom = Room::model()->findAll(array('condition' => $filter, 'order' => ' number'));
-            $mSchedule = RoomSchedule::model()->findAll(array('order' => 'id ASC', 'condition' => 'date_schedule >= "' . $start . '" and date_schedule <= "' . $end . '"'));
+            $mSchedule = RoomSchedule::model()->with('Reservation','Registration','Registration.Guest', 'Registration.Deposite')->findAll(array('order' => 't.id ASC', 'condition' => 't.date_schedule >= "' . $start . '" and t.date_schedule <= "' . $end . '"'));
             foreach ($mSchedule as $o) {
                 $arrSchedule[$o->daySchedule][$o->room_id] = $o;
             }
@@ -219,9 +219,9 @@ class RoomChartingController extends Controller {
                 $filter .= 'Registration.guest_user_id="' . $_POST['user'] . '"';
             }
 
-            $modelRoom = Room::model()->with(array('Registration'))->findAll(array('condition' => $filter, 'order' => 'number'));
+            $modelRoom = Room::model()->with(array('Registration','Registration.Guest'))->findAll(array('condition' => $filter, 'order' => 'number'));
         } else {
-            $modelRoom = Room::model()->findAll(array('order' => 'number'));
+            $modelRoom = Room::model()->with(array('Registration','Registration.Guest'))->findAll(array('order' => 'number'));
         }
         $mSchedule = RoomSchedule::model()->findAll(array('index' => 'room_id', 'condition' => 'date_schedule="' . date('Y-m-d', strtotime($siteConfig->date_system)) . '"'));
         $this->render('stay', array(
