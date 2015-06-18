@@ -177,13 +177,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             </td>
             <td style="text-align:right"><span id="total"><?php echo (!empty($model->total)) ? landa()->rp($model->total) : '' ?></span></td>                                                        
         </tr>      
-        <tr>
+<!--        <tr>
             <td colspan="5" style="text-align: right">
                 <b>Discount :</b>                    
                 <input type="hidden" id ="BillCharge_discount" name="BillCharge[discount]" value="<?php echo $model->discount ?>" />
             </td>
             <td style="text-align:right"><span id="totalDiscount"><?php echo (!empty($model->discount)) ? landa()->rp($model->discount) : '' ?></span></td>                                                        
-        </tr>  
+        </tr>  -->
         <tr class="cash">
             <td colspan="5" style="text-align: right">
                 <b>Cash :</b>                                    
