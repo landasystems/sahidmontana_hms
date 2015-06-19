@@ -21,7 +21,7 @@
             url: "<?php echo url('user/getDetail'); ?>",
             type: "POST",
             data: {id: id},
-            success: function (data) {
+            success: function(data) {
                 obj = JSON.parse(data);
                 $("#id").val(obj.id);
                 $("#group").val(obj.group);
@@ -119,7 +119,11 @@ if ($model->isNewRecord == FALSE) {
     $dateResult = date('d/m/Y', strtotime($model->date_from)) . ' - ' . date('d/m/Y', strtotime($model->date_to));
     $roles_id = $model->Guest->roles_id;
 } else {
-    $dateResult = date('d/m/Y', strtotime($siteConfig->date_system)) . ' - ' . date('d/m/Y', strtotime($siteConfig->date_system) + 86400);
+    if(isset($_GET['date'])) {
+        $dateResult = date('d/m/Y', strtotime($_GET['date'])) . ' - ' . date('d/m/Y', strtotime($_GET['date']) + 86400);
+    } else {
+        $dateResult = date('d/m/Y', strtotime($siteConfig->date_system)) . ' - ' . date('d/m/Y', strtotime($siteConfig->date_system) + 86400);
+    }
 }
 echo $form->hiddenField($model, 'id');
 ?>
@@ -330,7 +334,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     if (!empty($_GET['reservationId'])) {
                         $reservation_id = $model->reservation_id = $_GET['reservationId'];
                     }
-                    $dataReservation = array(0 => 'Select Reservation') + CHtml::listData(Reservation::model()->with('Guest')->findAll(array('condition' => 'status="reservation" or status="reserved" and date_from="' . date('Y-m-d') . '"')), 'id', 'fullReservation');
+                    $dataReservation = array(0 => 'Select Reservation') + CHtml::listData(Reservation::model()->with('Guest')->findAll(array('condition' => '(t.status="reservation" or t.status="reserved") and t.date_from = "' . date('Y-m-d') . '"')), 'id', 'fullReservation');
                     echo $form->select2Row($model, 'reservation_id', array(
                         'asDropDownList' => true,
                         'data' => $dataReservation,
@@ -358,9 +362,15 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 $date2 = date('d/m/Y', strtotime($model->date_to));
                                 $minDate = $date;
                             } else {
-                                $date = date('d/m/Y', strtotime($siteConfig->date_system));
-                                $minDate = date('d/m/Y', strtotime($siteConfig->date_system));
-                                $date2 = date('d/m/Y', strtotime("+1 day", strtotime($siteConfig->date_system)));
+                                if (isset($_GET['date'])) {
+                                    $date = date('d/m/Y', strtotime($_GET['date']));
+                                    $minDate = date('d/m/Y', strtotime($siteConfig->date_system));
+                                    $date2 = date('d/m/Y', strtotime("+1 day", strtotime($_GET['date'])));
+                                } else {
+                                    $date = date('d/m/Y', strtotime($siteConfig->date_system));
+                                    $minDate = date('d/m/Y', strtotime($siteConfig->date_system));
+                                    $date2 = date('d/m/Y', strtotime("+1 day", strtotime($siteConfig->date_system)));
+                                }
                             }
 
                             echo $form->dateRangeRow(
@@ -1046,7 +1056,7 @@ if ($model->isNewRecord == FALSE) {
             window.print();
 
             document.body.innerHTML = originalContents;
-            $("#myTab a").click(function (e) {
+            $("#myTab a").click(function(e) {
                 e.preventDefault();
                 $(this).tab("show");
             });
@@ -1066,7 +1076,7 @@ if (!empty($id)) {
 ?>
     function calculation() {
 
-        $(".pax").each(function () {
+        $(".pax").each(function() {
             var pax = parseInt($(this).val());
             pax = pax ? pax : 0;
             var bed = parseInt($(this).parent().parent().find(".extrabed").val());
@@ -1079,7 +1089,7 @@ if (!empty($id)) {
             bed_price = bed_price ? bed_price : 0;
             var rowId = $(this).parent().parent().attr('id');
             var other = 0;
-            $(".others_include").each(function () {
+            $(".others_include").each(function() {
                 var thisRowId = $(this).attr('r');
                 if (rowId == thisRowId) {
                     if (this.checked) {
@@ -1093,7 +1103,7 @@ if (!empty($id)) {
         });
     }
 
-    $("#Registration_package_room_type_id").on("change", function () {
+    $("#Registration_package_room_type_id").on("change", function() {
         if ($(this).val() == 0) {
             $(".detail_paket").html('');
             $(".pckg").html('');
@@ -1103,23 +1113,23 @@ if (!empty($id)) {
                 url: "<?php echo url('registration/getPackage'); ?>",
                 type: "POST",
                 data: $('form').serialize(),
-                success: function (data) {
+                success: function(data) {
                     $(".detail_paket").html(data);
                     data = $('#detPackage').val();
                     data = JSON.parse(data);
                     data2 = $('#pricePackage').val();
                     data2 = JSON.parse(data2);
-                    $(".pckg").each(function () {
+                    $(".pckg").each(function() {
                         a = this;
                         result = '';
-                        $.each(data, function (i, n) {
+                        $.each(data, function(i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += '<label><input checked class="others_include ' + n['id'] + '" kode="' + n['id'] + '" style="margin:0px 5px 0px 0px" type="checkbox" r="' + room_id + '" name="others_include[' + room_id + '][' + n['id'] + ']"  value="' + n['total'] + '">' + n['name'] + '</label>';
                         });
                         $(a).html(result);
                     });
                     // baru ditambahkan
-                    $(".room_rate").each(function () {
+                    $(".room_rate").each(function() {
                         b = this;
                         result = '';
                         //$.each(data2, function (i, n) {
@@ -1128,16 +1138,16 @@ if (!empty($id)) {
                         //});
                         $(b).val(result);
                     });
-                    $(".pax").each(function () {
+                    $(".pax").each(function() {
                         b = this;
                         result = '';
-                        $.each(data, function (i, n) {
+                        $.each(data, function(i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += n['pax'];
                         });
                         $(b).val(result);
                     });
-                    $(".fnb_price").each(function () {
+                    $(".fnb_price").each(function() {
                         b = this;
                         result = '';
                         //$.each(data2, function (i, n) {
@@ -1152,7 +1162,7 @@ if (!empty($id)) {
             });
         }
     });
-    $("#Registration_type").on("change", function () {
+    $("#Registration_type").on("change", function() {
         if ($(this).val() == 'regular') {
 
         } else {
@@ -1162,7 +1172,7 @@ if (!empty($id)) {
             $('#tb-choosed-room').find(".total_rate").val(0)
         }
     });
-    $("#btn_eb_price").on("click", function () {
+    $("#btn_eb_price").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_eb_price").val();
@@ -1170,7 +1180,7 @@ if (!empty($id)) {
             calculation();
         }
     });
-    $("#btn_pax").on("click", function () {
+    $("#btn_pax").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_pax").val();
@@ -1178,7 +1188,7 @@ if (!empty($id)) {
             calculation();
         }
     });
-    $("#btn_fb_price").on("click", function () {
+    $("#btn_fb_price").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_fb_price").val();
@@ -1186,7 +1196,7 @@ if (!empty($id)) {
             calculation();
         }
     });
-    $("#btn_room_rate").on("click", function () {
+    $("#btn_room_rate").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_room_rate").val();
@@ -1199,22 +1209,22 @@ if (!empty($id)) {
         $("#totalRoom").html(total);
     }
 
-    $('#nationality').on('change', function () {
+    $('#nationality').on('change', function() {
         if ($(this).val() == 'ID') {
             $('#s2id_city_guest').show();
         } else {
             $('#s2id_city_guest').hide();
         }
     })
-    $('#btnFindRoom').on('click', function () {
+    $('#btnFindRoom').on('click', function() {
         $('#findRoom').modal('show');
     })
-    $("#Registration_reservation_id").on("change", function () {
+    $("#Registration_reservation_id").on("change", function() {
         $.ajax({
             url: "<?php echo url('registration/getReservation'); ?>",
             type: "POST",
             data: {id: $(this).val()},
-            success: function (data) {
+            success: function(data) {
                 obj = JSON.parse(data);
                 $("#group").val(obj.group);
                 $("#roles").val(obj.group);
@@ -1259,7 +1269,7 @@ if (!empty($id)) {
             }
         });
     });
-    $("#tb-choosed-room").on('click', '.others_include', function (event) {  //on click    
+    $("#tb-choosed-room").on('click', '.others_include', function(event) {  //on click    
         calculation();
     });
 <?php
@@ -1280,7 +1290,7 @@ if (!empty($reservation_id)) {
             url: "<?php echo url('registration/checkRoom'); ?>",
             type: "POST",
             data: $('form').serialize(),
-            success: function (data) {
+            success: function(data) {
                 if (data != '') {
                     $('button[type="submit"]').attr('disabled', 'disabled');
                     $("#teks-warning").html(data);
@@ -1291,7 +1301,5 @@ if (!empty($reservation_id)) {
             }
         });
     }
-
-
 </script>
 
