@@ -176,7 +176,14 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 <input type="hidden" id ="BillCharge_total" name="BillCharge[total]" value="<?php echo $model->total ?>" />
             </td>
             <td style="text-align:right"><span id="total"><?php echo (!empty($model->total)) ? landa()->rp($model->total) : '' ?></span></td>                                                        
-        </tr>                                
+        </tr>      
+        <!--<tr>
+            <td colspan="5" style="text-align: right">
+                <b>Discount :</b>                    
+                <input type="hidden" id ="BillCharge_discount" name="BillCharge[discount]" value="<?php echo $model->discount ?>" />
+            </td>
+            <td style="text-align:right"><span id="totalDiscount"><?php echo (!empty($model->discount)) ? landa()->rp($model->discount) : '' ?></span></td>                                                        
+        </tr>  -->
         <tr class="cash">
             <td colspan="5" style="text-align: right">
                 <b>Cash :</b>                                    
@@ -206,11 +213,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         </tr>
         <tr class="cc debit">
             <td colspan="2" style="text-align: right">
-                <b>Guest Ledger Name :</b>                                    
+                <b>Guest Ledger Name : </b>                                    
             </td>
             <td colspan="2" style="text-align: right">
                 <?php
-                $roomBill = RoomBill::model()->findAll(array('condition' => 'is_checkedout=0 and lead_room_bill_id=0', "order" => "room_number Asc"));
+                $roomBill = RoomBill::model()->with('Registration.Guest')->findAll(array('condition' => 't.is_checkedout=0 and t.lead_room_bill_id=0', "order" => "t.room_number Asc"));
                 $data = array(0 => t('choose', 'global')) + CHtml::listData($roomBill, 'id', 'fullRoom');
                 $this->widget(
                         'bootstrap.widgets.TbSelect2', array(

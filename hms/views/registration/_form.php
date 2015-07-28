@@ -330,7 +330,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     if (!empty($_GET['reservationId'])) {
                         $reservation_id = $model->reservation_id = $_GET['reservationId'];
                     }
-                    $dataReservation = array(0 => 'Select Reservation') + CHtml::listData(Reservation::model()->findAll(array('condition' => 'status="reservation" or status="reserved" and date_from="' . date('Y-m-d') . '"')), 'id', 'fullReservation');
+                    $dataReservation = array(0 => 'Select Reservation') + CHtml::listData(Reservation::model()->with('Guest')->findAll(array('condition' => 'status="reservation" or status="reserved" and date_from="' . date('Y-m-d') . '"')), 'id', 'fullReservation');
                     echo $form->select2Row($model, 'reservation_id', array(
                         'asDropDownList' => true,
                         'data' => $dataReservation,
@@ -630,7 +630,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             }
 
                             if (!empty($_GET['roomNumber']) && !empty($_GET['date'])) {
-                                $thisRoom = Room::model()->findByPk($_GET['roomNumber']);
+                                $thisRoom = Room::model()->with('RoomType')->findByPk($_GET['roomNumber']);
                                 $usertype = 1; // hardcode for type GUEST
                                 if (!empty($thisRoom)) {
                                     if ($thisRoom->RoomType->is_package == 0) {

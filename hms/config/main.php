@@ -49,17 +49,17 @@ return array(
             'enableProfiling' => true,
             'enableParamLogging' => true
         ),
-        'db2' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=landa_acca',
-            'emulatePrepare' => true,
-            'username' => $dbUser,
-            'password' => $dbPwd,
-            'tablePrefix' => 'intern_',
-            'charset' => 'utf8',
-            'enableProfiling' => true,
-            'enableParamLogging' => true,
-            'class' => 'CDbConnection'          // DO NOT FORGET THIS!
-        ),
+//        'db2' => array(
+//            'connectionString' => 'mysql:host=localhost;dbname=landa_acca',
+//            'emulatePrepare' => true,
+//            'username' => $dbUser,
+//            'password' => $dbPwd,
+//            'tablePrefix' => 'intern_',
+//            'charset' => 'utf8',
+//            'enableProfiling' => true,
+//            'enableParamLogging' => true,
+//            'class' => 'CDbConnection'          // DO NOT FORGET THIS!
+//        ),
         'db3' => array(
             'connectionString' => 'mysql:host=localhost;dbname=landa_acc_sahidmontana',
             'emulatePrepare' => true,

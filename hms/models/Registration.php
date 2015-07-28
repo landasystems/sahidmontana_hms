@@ -99,7 +99,7 @@ class Registration extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-         $criteria->with = array('Guest');
+         $criteria->with = array('Guest','Guest.Roles','Package');
         $criteria->together = true;
 
         $criteria->compare('id', $this->id);

@@ -62,7 +62,7 @@ class UserController extends Controller {
                 $list .= '"' . $o . '",';
             }
             $list = substr($list, 0, strlen($list) - 1);
-            $sResult = User::model()->findAll(array('condition' => 'name like "%' . $name . '%" and roles_id in(' . $list . ')', 'limit' => '10'));
+            $sResult = User::model()->findAll(array('condition' => 'name like "%' . $name . '%" and roles_id in(' . $list . ')'));
             if (empty($sResult)) {
                 $data[] = array("id" => "0", "text" => "No Results Found..");
             } else {
@@ -79,7 +79,7 @@ class UserController extends Controller {
     public function actionGetListUser() {
         $name = $_GET["q"];
         $list = array();
-        $data = User::model()->findAll(array('condition' => 'name like "%' . $name . '%"', 'limit' => '10'));
+        $data = User::model()->findAll(array('condition' => 'name like "%' . $name . '%"'));
         if (empty($data)) {
             $list[] = array("id" => "0", "text" => "No Results Found..");
         } else {
@@ -93,7 +93,7 @@ class UserController extends Controller {
     public function actionGetListGuestLedger() {
         $name = $_GET["q"];
         $list = array();
-        $query = 'select acca_user.name as name, acca_room_bill.id as id, acca_room_bill.room_number as room_number from acca_user, acca_registration, acca_room_bill where acca_user.id = acca_registration.guest_user_id and acca_registration.id = acca_room_bill.registration_id and acca_room_bill.is_checkedout=0 and acca_room_bill.lead_room_bill_id=0 and acca_user.name like "%' . $name . '%" or acca_room_bill.room_number = "' . $name . '" order by acca_room_bill.room_number ASC limit 10';
+        $query = 'select acca_user.name as name, acca_room_bill.id as id, acca_room_bill.room_number as room_number from acca_user, acca_registration, acca_room_bill where acca_user.id = acca_registration.guest_user_id and acca_registration.id = acca_room_bill.registration_id and acca_room_bill.is_checkedout=0 and acca_room_bill.lead_room_bill_id=0 and acca_user.name like "%' . $name . '%" or acca_room_bill.room_number = "' . $name . '" order by acca_room_bill.room_number ASC';
         $data =  Yii::app()->db->createCommand($query)->queryAll();
         //$data = RoomBill::model()->with('Registration')->with('User')->findAll(array('condition' => 'User.name like "%' . $name . '%" User.id = Registration.guest_user_id and t.is_checkedout=0 and t.lead_room_bill_id=0', "order" => "t.room_number Asc"));
         if (empty($data)) {
@@ -398,12 +398,6 @@ class UserController extends Controller {
             $return['birth'] = $user->birth;
             $return['nationality'] = $user->nationality;
             $return['company'] = $user->company;
-            /* if (!empty($user->others)) {
-              $other = json_decode($user->others, true);
-              if (isset($other['company'])) {
-              $return['company'] = $other['company'];
-              }
-              } */
             echo json_encode($return);
         } else {
             $return['id'] = '';

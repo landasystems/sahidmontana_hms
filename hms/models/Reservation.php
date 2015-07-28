@@ -106,7 +106,7 @@ class Reservation extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-        $criteria->with = array('Guest');
+        $criteria->with = array('Guest','Guest.Roles',);
         $criteria->together = true;
 
         $criteria->compare('id', $this->id);
