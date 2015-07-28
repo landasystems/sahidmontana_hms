@@ -60,8 +60,8 @@ return array(
 //            'enableParamLogging' => true,
 //            'class' => 'CDbConnection'          // DO NOT FORGET THIS!
 //        ),
-        'db3' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=landa_acc_sahidmontana',
+        'db2' => array(
+            'connectionString' => 'mysql:host=localhost;dbname='.$db2,
             'emulatePrepare' => true,
             'username' => $dbUser,
             'password' => $dbPwd,

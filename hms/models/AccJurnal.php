@@ -19,7 +19,7 @@
 class AccJurnal extends CActiveRecord {
 
     public function getDbConnection() {
-        return Yii::app()->db3;
+        return Yii::app()->db2;
     }
 
     /**

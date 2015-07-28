@@ -127,7 +127,7 @@ class RegistrationController extends Controller {
         $return['package'] = $reservation->package_room_type_id;
         $return['type'] = $reservation->type;
         $return['market_segment'] = $reservation->market_segment_id;
-        $return['date_from'] = date('m/d/Y', strtotime($reservation->date_from)) . " - " . date('m/d/Y', strtotime($reservation->date_to));
+        $return['date_from'] = date('d/m/Y', strtotime($reservation->date_from)) . " - " . date('d/m/Y', strtotime($reservation->date_to));
         $return['billing'] = "0";
         $return['billing_user'] = "<span>Please Choose</span>" . '<abbr class="select2-search-choice-close" style=""></abbr>' . '<div><b></b></div>';
         if (!empty($reservation->billing_user_id)) {
@@ -320,7 +320,7 @@ class RegistrationController extends Controller {
     public function actionGetListGuest() {
         //$guestName = User::model()->listUsers('guest');
         $name = $_GET['term'];
-        $guestName = User::model()->with('Roles')->findAll(array('condition' => 'Roles.is_allow_login=0 and t.name like "%' . $name . '%"','limit' => '10'));
+        $guestName = User::model()->with('Roles')->findAll(array('condition' => 'Roles.is_allow_login=0 and t.name like "%' . $name . '%"'));
         $source = array();
         foreach ($guestName as $val) {
             if (empty($val->company)) {
