@@ -243,6 +243,7 @@
                                             $this->widget('zii.widgets.CMenu', array(
                                                 'items' => array(
                                                     array('visible' => true, 'label' => '<span class="icon16 icomoon-icon-user-3"></span>Edit profile', 'url' => url('user/updateProfile') . '?type=' . $type),
+                                                    array('label' => '<span class="icon16 icomoon-icon-exit"></span> Logout', 'url' => bu().'/site/logout'),
                                                 ),
                                                 'encodeLabel' => false,
                                             ));
@@ -250,7 +251,6 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="<?php echo bu() ?>/site/logout"><span class="icon16 icomoon-icon-exit"></span> Logout</a></li>
                             </ul>
                         </div><!-- /.nav-collapse -->
                     </div>
