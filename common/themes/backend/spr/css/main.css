@@ -13,7 +13,7 @@ table.table td { padding : 2px  !important; vertical-align: middle}
 table.table th { padding : 5px 2px  !important; text-align: center !important; vertical-align: middle}
 
 #loader{
-    position: fixed;
+    position: fixed;  width: 100%;
     top: 0;
     z-index: 2000;
     width: 100%;
@@ -1513,6 +1513,7 @@ select {width: 150px;}
 }
 
 .sidenav {
+    width: 100%;
     float: left;
     margin-left:1px;
 }

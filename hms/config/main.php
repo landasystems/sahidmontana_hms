@@ -136,6 +136,8 @@ return array(
             'class' => 'common.extensions.bootstrap.components.Bootstrap',
             'responsiveCss' => true,
             'fontAwesomeCss' => true,
+            'enableBootboxJS'=>false,
+            'enableNotifierJS'=>false,
         ),
         'image' => array(
             'class' => 'common.extensions.image.CImageComponent',
