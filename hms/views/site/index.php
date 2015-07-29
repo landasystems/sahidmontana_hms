@@ -220,7 +220,7 @@ $totBill = count($bill);
                 <ul>
 
                     <?php
-                    $oUserLogs = UserLog::model()->findAll(array('with'=>array('User','User.Roles'),'order' => 'created DESC', 'limit' => '5'));
+                    $oUserLogs = UserLog::model()->findAll(array('with'=>array('User','User.Roles'),'order' => 't.created DESC', 'limit' => '5'));
                     foreach ($oUserLogs as $oUserLog) {
                         if (isset($oUserLog->User->Roles->name)) {
                             echo '<li class="clearfix">' .

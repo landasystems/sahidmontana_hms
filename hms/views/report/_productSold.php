@@ -33,7 +33,6 @@
             <thead>   
                 <tr><th colspan="5" style="height:30px;vertical-align: middle">DEPARTEMENT : <?php echo strtoupper($departement->name); ?></th></tr>
                 <tr>
-                    <th>&nbsp;&nbsp;</th>
                     <th class="span1" style="text-align: left;vertical-align: middle">No</th>
                     <th class="span5" style="text-align: left;vertical-align: middle">Product Name</th>                                                                                         
                     <th class="span3" style="text-align: center;vertical-align: middle">Sold</th>                            
@@ -58,12 +57,11 @@
                     <tbody>
                         <tr>              
                             <td></td>
-                            <td colspan="4" style="background: aliceblue"><?php echo strtoupper($acc->name); ?></td>
+                            <td colspan="3" style="background: aliceblue"><?php echo strtoupper($acc->name); ?></td>
                         </tr>
                         <?php
                         foreach ($detail as $d) {
                             echo '<tr>';
-                            echo '<td style="text-align:center"></td>';
                             echo '<td style="text-align:left">' . $nomer . '</td>';
                             echo '<td>' . $d->Additional->name . '</td>';
                             echo '<td style="text-align:center">' . $d->qty . '</td>';
@@ -75,8 +73,7 @@
                             $qty += $d->qty;
                         }
                         ?>
-                        <tr>
-                            <td></td>            
+                        <tr>           
                             <td colspan="2" style="text-align: right;vertical-align: middle">Total  :</td>            
                             <td style="text-align: center;vertical-align: middle"><?php echo $qty; ?></td>             
                             <td  colspan="1" style="text-align: right;vertical-align: middle"><?php echo landa()->rp($total); ?></td>             
@@ -89,15 +86,13 @@
                 }
             }
             ?>
-            <tr><td colspan="5">&nbsp;</td></tr>
+            <tr><td colspan="4">&nbsp;</td></tr>
             <?php
         }
         ?>
-
-
         <thead>  
             <tr>
-                <th colspan="3" style="text-align: right;vertical-align: middle">Total All:</th>            
+                <th colspan="2" style="text-align: right;vertical-align: middle">Total All:</th>            
                 <th style="text-align: center;vertical-align: middle"><?php echo $qtyAll; ?></th>               
                 <th colspan="1" style="text-align: right;vertical-align: middle"><?php echo landa()->rp($totAll); ?></th>               
             </tr>
