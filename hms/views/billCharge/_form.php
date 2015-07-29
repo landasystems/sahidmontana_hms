@@ -242,8 +242,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             </td>
             <td colspan="2" style="text-align: right">
                 <?php
-//                $user = User::model()->findAll();
-//                $data = array(0 => 'Please Choose') + CHtml::listData($user, 'id', 'fullName');
                 $id = isset($model->ca_user_id) ? $model->ca_user_id : 0;
                 $selName = isset($model->CityLedger->name) ? $model->CityLedger->name : '';
                 $this->widget(
@@ -251,7 +249,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     'asDropDownList' => false,
                     'name' => 'BillCharge[ca_user_id]',
                     'value' => $model->ca_user_id,
-//                    'data' => $data,
                     'options' => array(
                         'allowClear' => true,
                         "placeholder" => 'Please Choose',

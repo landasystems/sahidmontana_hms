@@ -20,14 +20,11 @@ $this->breadcrumbs = array(
         $(".well").hide();
         $(".form-horizontal").hide();
     }
-
 </script>
 <div class="well">
 
     <div class="row-fluid">
         <div class="span11">
-            <?php // echo $form->dropDownListRow($mBuy, 'departement_id', CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => 'Please Choose'));  ?>      
-
             <?php
             echo $form->dateRangeRow(
                     $model, 'created', array(
@@ -36,8 +33,7 @@ $this->breadcrumbs = array(
                 'options' => array('callback' => 'js:function(start, end){console.log(start.toString("MMMM d, yyyy") + " - " + end.toString("MMMM d, yyyy"));}')
                     )
             );
-            ?>   
-            <?php
+
             $departement = Chtml::listdata(ChargeAdditionalCategory::model()->findAll(array('condition' => 'level=1')), 'id', 'name');
             echo $form->dropDownListRow($model, 'charge_additional_category_id', $departement, array('id' => 'departement', 'class' => 'span4', 'empty' => 'Please Choose',));
             ?>

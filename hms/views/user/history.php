@@ -28,16 +28,43 @@ $this->breadcrumbs = array(
             $list = substr($list, 0, strlen($list) - 1);
             $sResult = User::model()->findAll(array('condition' => 'roles_id in(' . $list . ')'));
             $listUser = Chtml::listdata($sResult, 'id', 'fullName');
+//            $this->widget(
+//                    'bootstrap.widgets.TbSelect2', array(
+//                'asDropDownList' => true,
+//                'name' => 'user',
+//                'value' => (!empty($_POST['user'])) ? $_POST['user'] : '',
+//                'data' => array(0 => 'Please Choose') + $listUser,
+//                'options' => array(
+//                    "placeholder" => 'Please Choose',
+//                    "allowClear" => false,
+//                    'width' => '30%',
+//                ),
+//                    )
+//            );
             $this->widget(
                     'bootstrap.widgets.TbSelect2', array(
-                'asDropDownList' => true,
+                'asDropDownList' => false,
                 'name' => 'user',
                 'value' => (!empty($_POST['user'])) ? $_POST['user'] : '',
-                'data' => array(0 => 'Please Choose') + $listUser,
                 'options' => array(
+                    'allowClear' => true,
                     "placeholder" => 'Please Choose',
-                    "allowClear" => false,
-                    'width' => '30%',
+                    'width' => '85%',
+                    'minimumInputLength' => '3',
+                    'ajax' => array(
+                        'url' => Yii::app()->createUrl('user/getListUser'),
+                        'dataType' => 'json',
+                        'data' => 'js:function(term, page) { 
+                                                        return {
+                                                            q: term 
+                                                        }; 
+                                                    }',
+                        'results' => 'js:function(data) { 
+                                                        return {
+                                                            results: data
+                                                        };
+                                                    }',
+                    ),
                 ),
                     )
             );
@@ -59,8 +86,9 @@ $this->breadcrumbs = array(
 
 <?php
 if (isset($_POST['user'])) {
-    $criteria = new CDbCriteria();    
-    $model = new Registration('search');    
+    echo $_POST['user'];
+    $criteria = new CDbCriteria();
+    $model = new Registration('search');
     $model->guest_user_id = $_POST['user'];
     $this->renderPartial('_history', array('model' => $model));
 }
