@@ -165,7 +165,7 @@ class NaController extends Controller {
                     //mencari kamar yang rusak / out of order
                     $outOfOrder = Room::model()->findAll(array('condition' => 'status="out of order"'));
 //                    $account = Account::model()->findAll();
-//                    $newCityLedger = array();
+                    $newCityLedger = array();
                     
 //                    //simpan ke jurnal
 //                    $cash = $_POST['cash'];
