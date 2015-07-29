@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Site Config | ID : '. $model->id);
+$this->setPageTitle('Edit Site Config');
 $this->breadcrumbs=array(
 	'Site Configs'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),

@@ -25,14 +25,14 @@
             <lable class="control-label">Chart of Account <span class="required">*</span></lable>
             <div class="controls">
                 <?php
-                $coa = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+                $coa = array(0 => 'Please Choose') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
                 $this->widget('bootstrap.widgets.TbSelect2', array(
                     'asDropDownList' => TRUE,
                     'data' => $coa,
                     'value' => $model->acc_coa_id,
                     'name' => 'Account[acc_coa_id]',
                     'options' => array(
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         "allowClear" => true,
                         'width' => '40%',
                     ),

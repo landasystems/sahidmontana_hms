@@ -7,29 +7,6 @@
  */
 class UserIdentity extends CUserIdentity {
 
-    /**
-     * Authenticates a user.
-     * The example implementation makes sure if the username and password
-     * are both 'demo'.
-     * In practical applications, this should be changed to authenticate
-     * against some persistent user identity storage (e.g. database).
-     * @return boolean whether authentication succeeds.
-     */
-//	public function authenticate()
-//	{
-//		$users=array(
-//			// username => password
-//			'demo'=>'demo',
-//			'admin'=>'admin',
-//		);
-//		if(!isset($users[$this->username]))
-//			$this->errorCode=self::ERROR_USERNAME_INVALID;
-//		elseif($users[$this->username]!==$this->password)
-//			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-//		else
-//			$this->errorCode=self::ERROR_NONE;
-//		return !$this->errorCode;
-//	}
     private $_id;
 
     public function authenticate() {
@@ -63,7 +40,6 @@ class UserIdentity extends CUserIdentity {
             $this->setState('roles_id', $record->roles_id);
             $this->setState('departement_id',(isset($record->departement_id)) ? $record->departement_id : '');
             $this->setState('roles_name', $sRolesName);
-            $this->setState('saldo', (isset($record->saldo)) ? $record->saldo : 0);
             $this->setState('avatar_img', landa()->urlImg('avatar/', $record->avatar_img, $this->_id));
 
             //save the auth session

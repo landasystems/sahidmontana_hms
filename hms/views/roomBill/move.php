@@ -46,7 +46,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         <label class="control-label" for="Reservation_guest_user_id">Find Room :</label>
                         <div class="controls">
                             <?php
-                            $data = array(0 => t('choose', 'global')) + CHtml::listData($room, 'id', 'fullRoom');
+                            $data = array(0 => 'Please Choose') + CHtml::listData($room, 'id', 'fullRoom');
                             $this->widget(
                                     'bootstrap.widgets.TbSelect2', array(
                                 'asDropDownList' => true,
@@ -54,7 +54,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 'data' => $data,
                                 'value' => (!empty($number)) ? $number : '',
                                 'options' => array(
-                                    "placeholder" => t('choose', 'global'),
+                                    "placeholder" => 'Please Choose',
                                     "allowClear" => true,
                                     'width' => '50%',
 //                                    'minimumInputLength' => '3',
@@ -158,7 +158,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     <td>
                         <label>Root Type :</label>  
                         <?php
-                        $roomType = array(0 => t('choose', 'global')) +
+                        $roomType = array(0 => 'Please Choose') +
                                 CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=0')), 'id', 'name');
                         ?>
                         <?php echo Chtml::dropdownList('roomType', '', $roomType, array('class' => '',)); ?>
@@ -171,7 +171,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                         <label>Floor :</label> 
                         <?php
-                        $floor = array(0 => t('choose', 'global')) +
+                        $floor = array(0 => 'Please Choose') +
                                 CHtml::listData(Room::model()->findAll(
                                                 array('group' => 't.floor')
                                         ), 'floor', 'floor');

@@ -211,7 +211,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             <td colspan="2" style="text-align: right">
                 <?php
                 $roomBill = RoomBill::model()->with('Registration.Guest')->findAll(array('condition' => 't.is_checkedout=0 and t.lead_room_bill_id=0', "order" => "t.room_number Asc"));
-                $data = array(0 => t('choose', 'global')) + CHtml::listData($roomBill, 'id', 'fullRoom');
+                $data = array(0 => 'Please Choose') + CHtml::listData($roomBill, 'id', 'fullRoom');
                 $this->widget(
                         'bootstrap.widgets.TbSelect2', array(
                     'asDropDownList' => true,
@@ -220,7 +220,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     'data' => $data,
                     'options' => array(
                         'allowClear' => true,
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         'width' => '85%',
                     ),
                         )
@@ -243,7 +243,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             <td colspan="2" style="text-align: right">
                 <?php
 //                $user = User::model()->findAll();
-//                $data = array(0 => t('choose', 'global')) + CHtml::listData($user, 'id', 'fullName');
+//                $data = array(0 => 'Please Choose') + CHtml::listData($user, 'id', 'fullName');
                 $id = isset($model->ca_user_id) ? $model->ca_user_id : 0;
                 $selName = isset($model->CityLedger->name) ? $model->CityLedger->name : '';
                 $this->widget(
@@ -254,7 +254,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 //                    'data' => $data,
                     'options' => array(
                         'allowClear' => true,
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         'width' => '85%',
                         'minimumInputLength' => '3',
                         'ajax' => array(

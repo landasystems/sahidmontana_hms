@@ -25,10 +25,10 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             $type = CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=0')), 'id', 'name');
             $bed = Room::model()->getBedList();
             ?>
-            Tahun : <?php echo CHtml::dropDownList('year', (!empty($_POST['year'])) ? $_POST['year'] : date('Y'), landa()->yearly(date('Y') - 1), array('empty' => t('choose', 'global'))); ?> &nbsp;&nbsp;
-            Bulan : <?php echo CHtml::dropDownList('month', (!empty($_POST['month'])) ? $_POST['month'] : date('n'), landa()->monthly(), array('empty' => t('choose', 'global'))); ?>&nbsp;&nbsp;
-            Room Type : <?php echo CHtml::dropDownList('type', (!empty($_POST['type'])) ? $_POST['type'] : '', $type, array('empty' => t('choose', 'global'))); ?>&nbsp;&nbsp;
-            Bed : <?php echo CHtml::dropDownList('bed', (!empty($_POST['bed'])) ? $_POST['bed'] : '', $bed, array('empty' => t('choose', 'global'))); ?>&nbsp;&nbsp;
+            Tahun : <?php echo CHtml::dropDownList('year', (!empty($_POST['year'])) ? $_POST['year'] : date('Y'), landa()->yearly(date('Y') - 1), array('empty' => 'Please Choose')); ?> &nbsp;&nbsp;
+            Bulan : <?php echo CHtml::dropDownList('month', (!empty($_POST['month'])) ? $_POST['month'] : date('n'), landa()->monthly(), array('empty' => 'Please Choose')); ?>&nbsp;&nbsp;
+            Room Type : <?php echo CHtml::dropDownList('type', (!empty($_POST['type'])) ? $_POST['type'] : '', $type, array('empty' => 'Please Choose')); ?>&nbsp;&nbsp;
+            Bed : <?php echo CHtml::dropDownList('bed', (!empty($_POST['bed'])) ? $_POST['bed'] : '', $bed, array('empty' => 'Please Choose')); ?>&nbsp;&nbsp;
 
             <?php
             $this->widget('bootstrap.widgets.TbButton', array(

@@ -30,9 +30,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 'bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => true,
             'name' => 'roomId',
-            'data' => array(0 => t('choose', 'global')) + $data,
+            'data' => array(0 => 'Please Choose') + $data,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => false,
                 'width' => '50%',
             ),
@@ -168,9 +168,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                                 'bootstrap.widgets.TbSelect2', array(
                             'asDropDownList' => true,
                             'name' => 'billedBy',
-                            'data' => array(0 => t('choose', 'global')) + $datauser,
+                            'data' => array(0 => 'Please Choose') + $datauser,
                             'options' => array(
-                                "placeholder" => t('choose', 'global'),
+                                "placeholder" => 'Please Choose',
                                 "allowClear" => false,
                             ),
                             'events' => array('change' => 'js: function() {

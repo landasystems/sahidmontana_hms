@@ -23,7 +23,7 @@
         <?php echo $form->textFieldRow($model, 'name', array('class' => 'span4', 'maxlength' => 45)); ?>
 
         <?php echo $form->dropDownListRow($model, 'charge_additional_category_id', CHtml::listData(ChargeAdditionalCategory::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname'), array('class' => 'span4', 'empty' => 'root')); ?>
-        <?php echo $form->dropDownListRow($model, 'account_id', array(0 => t('choose', 'global')) + CHtml::listData(Account::model()->findAll(), 'id', 'name'), array('class' => 'span4')); ?>
+        <?php echo $form->dropDownListRow($model, 'account_id', array(0 => 'Please Choose') + CHtml::listData(Account::model()->findAll(), 'id', 'name'), array('class' => 'span4')); ?>
         <?php
         $transaction = SiteConfig::model()->getStandartTransactionMalang();
         $type_transaction = array();

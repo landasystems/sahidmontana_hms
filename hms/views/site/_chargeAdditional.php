@@ -21,7 +21,7 @@
             <label class="control-label" for="additionalAccount">Account <span class="required">*</span></label>
             <div class="controls">
                 <?php
-                echo CHtml::dropDownList('additionalAccount', '', array(0 => t('choose', 'global')) + CHtml::listData(Account::model()->findAll(), 'id', 'name'), array('class' => 'span3'));
+                echo CHtml::dropDownList('additionalAccount', '', array(0 => 'Please Choose') + CHtml::listData(Account::model()->findAll(), 'id', 'name'), array('class' => 'span3'));
                 ?>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     'data' => $data,
                     'name' => 'additionalTypeTransaction',
                     'options' => array(
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         "allowClear" => true,
                         "width" => '270px',
                     ),

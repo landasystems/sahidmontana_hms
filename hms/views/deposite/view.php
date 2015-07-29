@@ -57,19 +57,19 @@ $this->endWidget();
 
             <div class="content">                   
                 <?php
-                $data = array(0 => t('choose', 'global')) + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
+                $data = array(0 => 'Please Choose') + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
                 echo $form->select2Row($model, 'guest_user_id', array(
                     'asDropDownList' => true,
                     'data' => $data,
                     'disabled' => true,
                     'options' => array(
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         "allowClear" => true,
                         'width' => '50%',
                 )));
                
                 $dp_by = array('cash' => 'Cash', 'cc' => 'Credit Card', 'debit' => 'Debit Card', 'ca' => 'City Ledger');
-                echo $form->dropDownListRow($model, 'dp_by', $dp_by, array('class' => 'span2', 'maxlength' => 5, 'empty' => t('choose', 'global'), 'disabled' => true,));
+                echo $form->dropDownListRow($model, 'dp_by', $dp_by, array('class' => 'span2', 'maxlength' => 5, 'empty' => 'Please Choose', 'disabled' => true,));
                 echo $form->textFieldRow($model, 'amount', array('class' => 'span3', 'prepend' => 'Rp', 'disabled' => true,));
                 echo $form->textFieldRow($model, 'cc_number', array('class' => 'span3', 'disabled' => true));
                 echo $form->textAreaRow($model, 'description', array('rows' => 6, 'cols' => 50, 'class' => 'span8', 'disabled' => true,));

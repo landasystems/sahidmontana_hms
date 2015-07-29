@@ -61,7 +61,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 $checkOut = date("Y-m-d", strtotime($roomBill->date_bill));
                             }
 
-                            $data = array(0 => t('choose', 'global')) + CHtml::listData($room, 'room_id', 'Room.fullRoom');
+                            $data = array(0 => 'Please Choose') + CHtml::listData($room, 'room_id', 'Room.fullRoom');
                             $this->widget(
                                     'bootstrap.widgets.TbSelect2', array(
                                 'asDropDownList' => true,
@@ -72,7 +72,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     'multiple' => 'multiple',
                                 ),
                                 'options' => array(
-                                    "placeholder" => t('choose', 'global'),
+                                    "placeholder" => 'Please Choose',
                                     "allowClear" => true,
                                     'width' => '80%',
                                 ),
@@ -108,7 +108,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         <div class="row-fluid">
             <div class="span6">Package : 
                 <?php
-                $roomTypePackage = array(0 => t('choose', 'global')) + CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=1')), 'id', 'name');
+                $roomTypePackage = array(0 => 'Please Choose') + CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=1')), 'id', 'name');
                 echo Chtml::dropdownList('Registration[package_room_type_id]', '', $roomTypePackage, array('class' => 'span9',));
                 ?><br/><br/>
                 <div class="detail_paket" ></div>

@@ -38,7 +38,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             'asDropDownList' => true,
             'name' => 'clevertech',
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => true,
                 'width' => '30%',
             ),

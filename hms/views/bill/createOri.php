@@ -76,7 +76,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             'value' => (!empty($number)) ? $number : '',
             'data' => $data,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => false,
                 'width' => '70%',
             ),
@@ -100,9 +100,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 'bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => true,
             'name' => 'registration_id',
-            'data' => array(0 => t('choose', 'global')) + $dataq,
+            'data' => array(0 => 'Please Choose') + $dataq,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => false,
                 'width' => '70%',
             ),
@@ -288,9 +288,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             'asDropDownList' => true,
                             'value' => (!empty($billTo)) ? $billTo : '',
                             'name' => 'billedBy',
-                            'data' => array(0 => t('choose', 'global')) + $datauser,
+                            'data' => array(0 => 'Please Choose') + $datauser,
                             'options' => array(
-                                "placeholder" => t('choose', 'global'),
+                                "placeholder" => 'Please Choose',
                                 "allowClear" => false,
                                 "width" => '100%',
                         )));

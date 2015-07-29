@@ -72,7 +72,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         <td >
                             <?php
                             $departement = Chtml::listdata(ChargeAdditionalCategory::model()->findAll(), 'id', 'name');
-                            echo CHtml::dropDownList('BillCharge[charge_additional_category_id]', $model->charge_additional_category_id, $departement, array('id' => 'departement', 'class' => 'span3', 'disabled' => true, 'empty' => t('choose', 'global'),
+                            echo CHtml::dropDownList('BillCharge[charge_additional_category_id]', $model->charge_additional_category_id, $departement, array('id' => 'departement', 'class' => 'span3', 'disabled' => true, 'empty' => 'Please Choose',
                                 'ajax' => array(
                                     'type' => 'POST',
                                     'url' => url('billCharge/selectDepartement'),

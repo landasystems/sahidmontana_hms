@@ -340,7 +340,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         'data' => $dataReservation,
                         'label' => FALSE,
                         'options' => array(
-                            "placeholder" => t('choose', 'global'),
+                            "placeholder" => 'Please Choose',
                             "allowClear" => true,
                             'width' => '50%',
                         ))
@@ -404,7 +404,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 <label class="control-label">Room Type</label>
                                 <div class="controls">
                                     <?php
-                                    $roomType = array(0 => t('choose', 'global')) +
+                                    $roomType = array(0 => 'Please Choose') +
                                             CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=0')), 'id', 'description');
                                     ;
                                     ?>
@@ -434,7 +434,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 </div>
                             </div>  
                             <?php
-                            $roomTypePackage = array(0 => t('choose', 'global')) + CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=1')), 'id', 'name');
+                            $roomTypePackage = array(0 => 'Please Choose') + CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=1')), 'id', 'name');
                             echo $form->dropdownListRow($model, 'package_room_type_id', $roomTypePackage, array('class' => 'span3',));
                             ?>                              
                         </td>
@@ -733,7 +733,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             </div>
             <div class="content">                                           
                 <?php
-//                $data = array(0 => t('choose', 'global')) + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
+//                $data = array(0 => 'Please Choose') + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
                 $id = isset($model->billing_user_id) ? $model->billing_user_id : 0;
                 $billName = isset($model->Bill->name) ? '[' . $model->Bill->Roles->name . '] ' . $model->Bill->name : '';
 //                $billName = User::model()->findByPk($model->billing_user_id);
@@ -743,7 +743,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 //                    'data' => $data,
 //                    'value' => $model->billing_user_id,
                     'options' => array(
-                        'placeholder' => t('choose', 'global'),
+                        'placeholder' => 'Please Choose',
                         'allowClear' => true,
                         'width' => '400px',
                         'minimumInputLength' => '3',

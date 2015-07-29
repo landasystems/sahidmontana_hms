@@ -228,10 +228,10 @@ class SiteController extends Controller {
 //        if (isset(user()->id)) {
 //            $this->redirect(Yii::app()->user->returnUrl);
 //        }
-        $siteConfig = SiteConfig::model()->findByPk(1);
-        if ($siteConfig->is_setup == 0) {
-            $this->redirect('setup');
-        } else {
+//        $siteConfig = SiteConfig::model()->findByPk(1);
+//        if ($siteConfig->is_setup == 0) {
+//            $this->redirect('setup');
+//        } else {
             $model = new LoginForm;
 
             // if it is ajax validation request
@@ -254,7 +254,7 @@ class SiteController extends Controller {
             // display the login form
             $this->layout = 'blankHeader';
             $this->render('login', array('model' => $model));
-        }
+//        }
     }
 
     public function actionSetup() {

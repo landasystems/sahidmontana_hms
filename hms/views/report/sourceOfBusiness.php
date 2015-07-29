@@ -25,8 +25,8 @@ $this->breadcrumbs = array(
 <div class="well">
     <div class="row-fluid">
         <div class="span12">
-            Tahun : <?php echo CHtml::dropDownList('year', (!empty($_POST['year'])) ? $_POST['year'] : date('Y'), landa()->yearly(date('Y') - 1), array('empty' => t('choose', 'global'))); ?> &nbsp;&nbsp;
-            Bulan : <?php echo CHtml::dropDownList('month', (!empty($_POST['month'])) ? $_POST['month'] : date('n'), landa()->monthly(), array('empty' => t('choose', 'global'))); ?>&nbsp;&nbsp;
+            Tahun : <?php echo CHtml::dropDownList('year', (!empty($_POST['year'])) ? $_POST['year'] : date('Y'), landa()->yearly(date('Y') - 1), array('empty' => 'Please Choose')); ?> &nbsp;&nbsp;
+            Bulan : <?php echo CHtml::dropDownList('month', (!empty($_POST['month'])) ? $_POST['month'] : date('n'), landa()->monthly(), array('empty' => 'Please Choose')); ?>&nbsp;&nbsp;
 
             <?php
             echo CHtml::ajaxSubmitButton('View Report', Yii::app()->createUrl('Report/viewSob'), array(

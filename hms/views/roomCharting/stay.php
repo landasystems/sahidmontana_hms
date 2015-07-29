@@ -50,9 +50,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 'asDropDownList' => true,
                 'name' => 'user',
                 'value' => (!empty($_POST['user'])) ? $_POST['user'] : '',
-                'data' => array(0 => t('choose', 'global')) + $listUser,
+                'data' => array(0 => 'Please Choose') + $listUser,
                 'options' => array(
-                    "placeholder" => t('choose', 'global'),
+                    "placeholder" => 'Please Choose',
                     "allowClear" => false,
                     'width' => '135px',
                 ),
@@ -63,10 +63,10 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             Status: <?php
             echo CHtml::dropDownList('status', (!empty($_POST['status'])) ? $_POST['status'] : '', array(
                 'vacant inspect' => 'Vacant Inpected', 'vacant' => 'Vacant', 'dirty' => 'Dirty', 'reservation' => 'Reservation Unconfirmed', 'reserved' => 'Reservation Confirmed', 'occupied' => 'Occupied', 'do not disturb' => 'Do Not Disturb', 'sleep out' => 'Sleep Out', 'occupied no luggage' => 'Occupied No Luggage', 'house use' => 'House Use', 'out of order' => 'Out of Order'
-                    ), array('style' => 'width:135px', 'empty' => t('choose', 'global')));
+                    ), array('style' => 'width:135px', 'empty' => 'Please Choose'));
             ?>&nbsp;&nbsp;            
-            Room Type : <?php echo CHtml::dropDownList('type', (!empty($_POST['type'])) ? $_POST['type'] : '', $type, array('style' => 'width:135px', 'empty' => t('choose', 'global'))); ?>&nbsp;&nbsp;&nbsp;&nbsp;            
-            Room Bed : <?php echo CHtml::dropDownList('bed', (!empty($_POST['bed'])) ? $_POST['bed'] : '', $bed, array('style' => 'width:135px', 'empty' => t('choose', 'global'))); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+            Room Type : <?php echo CHtml::dropDownList('type', (!empty($_POST['type'])) ? $_POST['type'] : '', $type, array('style' => 'width:135px', 'empty' => 'Please Choose')); ?>&nbsp;&nbsp;&nbsp;&nbsp;            
+            Room Bed : <?php echo CHtml::dropDownList('bed', (!empty($_POST['bed'])) ? $_POST['bed'] : '', $bed, array('style' => 'width:135px', 'empty' => 'Please Choose')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
 
             <?php
             $this->widget('bootstrap.widgets.TbButton', array(

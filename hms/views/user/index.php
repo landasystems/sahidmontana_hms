@@ -51,7 +51,7 @@ $this->endWidget();
     <div class="row">   
 
         <div class="span4">
-            <?php echo $form->dropDownListRow($model, 'roles_id', CHtml::listData(Roles::model()->listRole($type), 'id', 'name'), array('class' => 'span4', 'empty' => t('choose', 'global'),)); ?>
+            <?php echo $form->dropDownListRow($model, 'roles_id', CHtml::listData(Roles::model()->listRole($type), 'id', 'name'), array('class' => 'span4', 'empty' => 'Please Choose',)); ?>
             <?php // echo $form->textFieldRow($model, 'name', array('class' => 'span4', 'maxlength' => 255)); ?>
         </div>
 

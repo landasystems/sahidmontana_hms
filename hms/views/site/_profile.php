@@ -45,7 +45,7 @@
                 <div class="controls">
                     <?php
                     echo CHtml::dropDownList('province_id', isset($model->City->province_id) ? $model->City->province_id : 0, CHtml::listData(Province::model()->findAll(), 'id', 'name'), array(
-                        'empty' => t('choose', 'global'),
+                        'empty' => 'Please Choose',
                         'ajax' => array(
                             'type' => 'POST',
                             'url' => CController::createUrl('landa/city/dynacities'),

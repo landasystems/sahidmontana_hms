@@ -56,7 +56,7 @@ echo $form->datepickerRow(
             'data' => $dataAccount,
             'value' => $fnbAccount,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => false,
                 'width' => '30%;margin:0px',
         )));
@@ -73,7 +73,7 @@ echo $form->datepickerRow(
             'data' => $dataAccount,
             'value' => $roomAccount,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => false,
                 'width' => '30%;margin:0px',
         )));
@@ -119,7 +119,7 @@ echo $form->datepickerRow(
                             'name' => 'additional_id',
                             'data' => $data2,
                             'options' => array(
-                                "placeholder" => t('choose', 'global'),
+                                "placeholder" => 'Please Choose',
                                 "allowClear" => false,
                                 'width' => '100%;margin:0px',
                             ),

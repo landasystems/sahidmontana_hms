@@ -10,19 +10,19 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <?php echo $form->textFieldRow($model, 'code', array('class' => 'span5', 'maxlength' => 45)); ?>
 <?php
-$data = array('' => t('choose', 'global')) + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
+$data = array('' => 'Please Choose') + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
 echo $form->select2Row($model, 'guest_user_id', array(
     'asDropDownList' => true,
     'data' => $data,
     'options' => array(
-        "placeholder" => t('choose', 'global'),
+        "placeholder" => 'Please Choose',
         "allowClear" => true,
         'width' => '30%',
 )));
 ?>
 <?php
 $dp_by = array('cash' => 'Cash', 'cc' => 'Credit Card', 'debit' => 'Debit Card', 'ca' => 'City Ledger');
-echo $form->dropDownListRow($model, 'dp_by', $dp_by, array('class' => 'span2', 'maxlength' => 5, 'empty' => t('choose', 'global')));
+echo $form->dropDownListRow($model, 'dp_by', $dp_by, array('class' => 'span2', 'maxlength' => 5, 'empty' => 'Please Choose'));
 ?>
 
 <?php echo $form->textFieldRow($model, 'amount', array('class' => 'span3', 'prepend' => 'Rp')); ?>
@@ -31,16 +31,16 @@ echo $form->dropDownListRow($model, 'dp_by', $dp_by, array('class' => 'span2', '
 
 <?php
 $is_applied = array('0' => 'Not Yet', '1' => 'Yes');
-echo $form->dropDownListRow($model, 'is_applied', $is_applied, array('class' => 'span2', 'maxlength' => 5, 'empty' => t('choose', 'global')));
+echo $form->dropDownListRow($model, 'is_applied', $is_applied, array('class' => 'span2', 'maxlength' => 5, 'empty' => 'Please Choose'));
 ?>
 
 <?php
-$data2 = array('' => t('choose', 'global')) + CHtml::listData(User::model()->listUsers('user'), 'id', 'name');
+$data2 = array('' => 'Please Choose') + CHtml::listData(User::model()->listUsers('user'), 'id', 'name');
 echo $form->select2Row($model, 'created_user_id', array(
     'asDropDownList' => true,
     'data' => $data2,
     'options' => array(
-        "placeholder" => t('choose', 'global'),
+        "placeholder" => 'Please Choose',
         "allowClear" => true,
         'width' => '30%',
 )));

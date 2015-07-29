@@ -43,7 +43,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         <?php
         $number = (!empty($_GET['number'])) ? $_GET['number'] : '';
 
-        $data = array(0 => t('choose', 'global')) + CHtml::listData($room, 'id', 'fullRoom');
+        $data = array(0 => 'Please Choose') + CHtml::listData($room, 'id', 'fullRoom');
         $this->widget(
                 'bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => true,
@@ -51,7 +51,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             'value' => $number,
             'data' => $data,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => true,
                 'width' => '100%',
             ),
@@ -166,7 +166,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             'name' => 'additional_id',
                             'data' => $data2,
                             'options' => array(
-                                "placeholder" => t('choose', 'global'),
+                                "placeholder" => 'Please Choose',
                                 "allowClear" => false,
                                 'width' => '100%',
                             ),

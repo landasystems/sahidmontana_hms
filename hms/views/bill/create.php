@@ -81,7 +81,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             'value' => (!empty($number)) ? $number : '',
             'data' => $data,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => false,
                 'width' => '70%',
             ),
@@ -105,9 +105,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 'bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => true,
             'name' => 'registration_id',
-            'data' => array(0 => t('choose', 'global')) + $dataq,
+            'data' => array(0 => 'Please Choose') + $dataq,
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => false,
                 'width' => '70%',
             ),
@@ -249,7 +249,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     <td colspan="2" style="text-align:right">
                         <?php
                         $roomBill = RoomBill::model()->findAll(array('condition' => 'is_checkedout=0 and lead_room_bill_id=0', "order" => "room_number Asc"));
-                        $data = array(0 => t('choose', 'global')) + CHtml::listData($roomBill, 'id', 'fullRoom');
+                        $data = array(0 => 'Please Choose') + CHtml::listData($roomBill, 'id', 'fullRoom');
                         $this->widget(
                                 'bootstrap.widgets.TbSelect2', array(
                             'asDropDownList' => true,
@@ -257,7 +257,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             'data' => $data,
                             'options' => array(
                                 'allowClear' => true,
-                                "placeholder" => t('choose', 'global'),
+                                "placeholder" => 'Please Choose',
                                 'width' => '85%',
                             ),
                                 )
@@ -301,9 +301,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             'asDropDownList' => true,
                             'value' => (!empty($billTo)) ? $billTo : '',
                             'name' => 'billedBy',
-                            'data' => array(0 => t('choose', 'global')) + $datauser,
+                            'data' => array(0 => 'Please Choose') + $datauser,
                             'options' => array(
-                                "placeholder" => t('choose', 'global'),
+                                "placeholder" => 'Please Choose',
                                 "allowClear" => true,
                                 "width" => '100%',
                         )));

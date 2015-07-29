@@ -5,14 +5,14 @@
     <lable class="control-label">Cash <span class="required">*</span></lable>
     <div class="controls">
         <?php
-        $coa = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+        $coa = array(0 => 'Please Choose') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $this->widget('bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => TRUE,
             'data' => $coa,
             'value' => $model->acc_cash_id,
             'name' => 'SiteConfig[acc_cash_id]',
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => true,
                 'width' => '40%',
             ),
@@ -27,14 +27,14 @@
     <lable class="control-label">City Ledger <span class="required">*</span></lable>
     <div class="controls">
         <?php
-        $coa = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+        $coa = array(0 => 'Please Choose') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $this->widget('bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => TRUE,
             'data' => $coa,
             'value' => $model->acc_city_ledger_id,
             'name' => 'SiteConfig[acc_city_ledger_id]',
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => true,
                 'width' => '40%',
             ),
@@ -49,14 +49,14 @@
     <lable class="control-label">Service Charge <span class="required">*</span></lable>
     <div class="controls">
         <?php
-        $coa = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+        $coa = array(0 => 'Please Choose') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $this->widget('bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => TRUE,
             'data' => $coa,
             'value' => $model->acc_service_charge_id,
             'name' => 'SiteConfig[acc_service_charge_id]',
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => true,
                 'width' => '40%',
             ),
@@ -71,14 +71,14 @@
     <lable class="control-label">Tax <span class="required">*</span></lable>
     <div class="controls">
         <?php
-        $coa = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+        $coa = array(0 => 'Please Choose') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $this->widget('bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => TRUE,
             'data' => $coa,
             'value' => $model->acc_tax_id,
             'name' => 'SiteConfig[acc_tax_id]',
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => true,
                 'width' => '40%',
             ),
@@ -93,14 +93,14 @@
     <lable class="control-label">Clearance <span class="required">*</span></lable>
     <div class="controls">
         <?php
-        $coa = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+        $coa = array(0 => 'Please Choose') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $this->widget('bootstrap.widgets.TbSelect2', array(
             'asDropDownList' => TRUE,
             'data' => $coa,
             'value' => $model->acc_clearance_id,
             'name' => 'SiteConfig[acc_clearance_id]',
             'options' => array(
-                "placeholder" => t('choose', 'global'),
+                "placeholder" => 'Please Choose',
                 "allowClear" => true,
                 'width' => '40%',
             ),

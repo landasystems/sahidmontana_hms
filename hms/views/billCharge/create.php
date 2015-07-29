@@ -68,8 +68,8 @@ $this->endWidget();
                         <td  style="width:5px">:</td>
                         <td >
                             <?php
-                            $departement = array(0 => t('choose', 'global')) + Chtml::listdata(ChargeAdditionalCategory::model()->findAll(array('condition' => 'level=1')), 'id', 'name');
-//                            echo CHtml::dropDownList('BillCharge[charge_additional_category_id]', $model->charge_additional_category_id, $departement, array('id' => 'BillCharge_charge_additional_category_id', 'class' => 'span3', 'empty' => t('choose', 'global'),
+                            $departement = array(0 => 'Please Choose') + Chtml::listdata(ChargeAdditionalCategory::model()->findAll(array('condition' => 'level=1')), 'id', 'name');
+//                            echo CHtml::dropDownList('BillCharge[charge_additional_category_id]', $model->charge_additional_category_id, $departement, array('id' => 'BillCharge_charge_additional_category_id', 'class' => 'span3', 'empty' => 'Please Choose',
 //                                'ajax' => array(
 //                                    'type' => 'POST',
 //                                    'url' => url('billCharge/selectDepartement'),

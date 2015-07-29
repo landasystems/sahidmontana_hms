@@ -12,7 +12,7 @@ $departement = Chtml::listdata(ChargeAdditionalCategory::model()->findAll(array(
 
 
 <?php echo $form->textFieldRow($model, 'code', array('class' => 'span2', 'maxlength' => 45)); ?>       
-<?php echo $form->dropDownListRow($model, 'charge_additional_category_id', $departement,array('class' => 'span2', 'empty' => t('choose', 'global'))); ?>       
+<?php echo $form->dropDownListRow($model, 'charge_additional_category_id', $departement,array('class' => 'span2', 'empty' => 'Please Choose')); ?>       
 <?php echo $form->textFieldRow($model, 'total', array('prepend'=>'Rp','class' => 'span2', 'maxlength' => 45)); ?>       
 <?php echo $form->textFieldRow($model, 'created_user_id', array('class' => 'span2', 'maxlength' => 45)); ?>       
 

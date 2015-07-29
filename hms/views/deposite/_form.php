@@ -42,7 +42,7 @@
                     'asDropDownList' => false,
 //                    'data' => $data,
                     'options' => array(
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         "allowClear" => true,
                         'width' => '30%',
                         'minimumInputLength' => '3',
@@ -73,7 +73,7 @@
                 );
 
 
-                echo $form->radioButtonListRow($model, 'dp_by', $model->by(), array('class' => 'span2', 'maxlength' => 5, 'empty' => t('choose', 'global')));
+                echo $form->radioButtonListRow($model, 'dp_by', $model->by(), array('class' => 'span2', 'maxlength' => 5, 'empty' => 'Please Choose'));
                 echo $form->textFieldRow($model, 'amount', array('class' => 'angka', 'prepend' => 'Rp'));
                 echo $form->textFieldRow($model, 'cc_number', array('class' => 'span3'));
                 echo $form->textAreaRow($model, 'description', array('rows' => 6, 'cols' => 50, 'class' => 'span8'));

@@ -30,7 +30,7 @@
                 <?php
 //                $number = (!empty($_GET['number'])) ? $_GET['number'] : '';
                 $room = Room::model()->findAll(array('group' => 'registration_id', 'condition' => 'status="occupied"'));
-                $data = array(0 => t('choose', 'global')) + CHtml::listData($room, 'registration_id', 'guestRegistered');
+                $data = array(0 => 'Please Choose') + CHtml::listData($room, 'registration_id', 'guestRegistered');
 
                 $this->widget(
                         'bootstrap.widgets.TbSelect2', array(
@@ -39,7 +39,7 @@
                     'value' => $model->registration_id,
                     'data' => $data,
                     'options' => array(
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         "allowClear" => true,
                         'width' => '30%',
                     ),

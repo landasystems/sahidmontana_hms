@@ -33,9 +33,9 @@ $this->breadcrumbs = array(
                 'asDropDownList' => true,
                 'name' => 'user',
                 'value' => (!empty($_POST['user'])) ? $_POST['user'] : '',
-                'data' => array(0 => t('choose', 'global')) + $listUser,
+                'data' => array(0 => 'Please Choose') + $listUser,
                 'options' => array(
-                    "placeholder" => t('choose', 'global'),
+                    "placeholder" => 'Please Choose',
                     "allowClear" => false,
                     'width' => '30%',
                 ),

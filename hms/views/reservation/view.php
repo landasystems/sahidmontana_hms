@@ -94,7 +94,7 @@ $this->endWidget();
                     <?php
                     $siteConfig = SiteConfig::model()->listSiteConfig();
                     $sRoles = json_decode($siteConfig->roles_guest, true);
-                    $data = array(0 => t('choose', 'global')) + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
+                    $data = array(0 => 'Please Choose') + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
                     ?>
 
                     <?php
@@ -139,7 +139,7 @@ $this->endWidget();
                                         <?php
                                         $array = User::model()->typeRoles('guest');
                                         echo CHtml::dropDownList('group', $group, $array, array(
-                                            'empty' => t('choose', 'global'),
+                                            'empty' => 'Please Choose',
                                             'class' => 'span3',
                                             'disabled' => true,
                                             'onchange' => '$("#roles").val(this.value)',
@@ -270,7 +270,7 @@ $this->endWidget();
                                 ?>
 
                                 <?php
-                                $roomTypePackage = array(0 => t('choose', 'global')) + CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=1')), 'id', 'name');
+                                $roomTypePackage = array(0 => 'Please Choose') + CHtml::listData(RoomType::model()->findAll(array('condition' => 'is_package=1')), 'id', 'name');
                                 echo $form->dropdownListRow($model, 'package_room_type_id', $roomTypePackage, array('disabled' => true, 'class' => 'span3', 'ajax' => array('type' => 'POST', 'url' => url('reservation/getPackage'), 'success' => 'function (data){                                
                                     $(".detail_paket").html(data);                                    
                                  }')));
@@ -497,7 +497,7 @@ $this->endWidget();
                             'data' => $data,
                             'disabled' => true,
                             'options' => array(
-                                "placeholder" => t('choose', 'global'),
+                                "placeholder" => 'Please Choose',
                                 "allowClear" => true,
                                 'width' => '100%',
                             ),
@@ -521,7 +521,7 @@ $this->endWidget();
             <?php
             $dp_by = array('cash' => 'Cash', 'cc' => 'Credit Card', 'debit' => 'Debit Card');
             echo $form->textFieldRow($modelDp, 'code', array('class' => 'span3', 'disabled' => true));
-            echo $form->dropDownListRow($modelDp, 'dp_by', $dp_by, array('class' => 'span2', 'maxlength' => 5, 'empty' => t('choose', 'global')));
+            echo $form->dropDownListRow($modelDp, 'dp_by', $dp_by, array('class' => 'span2', 'maxlength' => 5, 'empty' => 'Please Choose'));
             echo $form->textFieldRow($modelDp, 'amount', array('class' => 'span3', 'prepend' => 'Rp', 'disabled' => true));
             echo $form->textFieldRow($modelDp, 'cc_number', array('class' => 'span3', 'disabled' => true));
             echo $form->textAreaRow($modelDp, 'description', array('rows' => 6, 'cols' => 50, 'class' => 'span8', 'disabled' => true));

@@ -26,7 +26,7 @@ $this->breadcrumbs = array(
 
     <div class="row-fluid">
         <div class="span11">
-            <?php // echo $form->dropDownListRow($mBuy, 'departement_id', CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => t('choose', 'global')));  ?>      
+            <?php // echo $form->dropDownListRow($mBuy, 'departement_id', CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => 'Please Choose'));  ?>      
 
             <?php
             echo $form->dateRangeRow(
@@ -39,7 +39,7 @@ $this->breadcrumbs = array(
             ?>   
             <?php
             $departement = Chtml::listdata(ChargeAdditionalCategory::model()->findAll(array('condition' => 'level=1')), 'id', 'name');
-            echo $form->dropDownListRow($model, 'charge_additional_category_id', $departement, array('id' => 'departement', 'class' => 'span4', 'empty' => t('choose', 'global'),));
+            echo $form->dropDownListRow($model, 'charge_additional_category_id', $departement, array('id' => 'departement', 'class' => 'span4', 'empty' => 'Please Choose',));
             ?>
 
         </div>

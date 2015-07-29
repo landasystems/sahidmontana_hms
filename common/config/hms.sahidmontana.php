@@ -1,13 +1,14 @@
 <?php
 //=========change this scope=========================================================
-$root = '/var/www/landa/';
-$themesUrl = 'http://localhost/landa/common/themes/';
+$root = '/var/www/sahidmontana_hms/';
+$themesUrl = 'http://localhost/sahidmontana_hms/common/';
 $db = 'landa_hms_sahidmontana';
+$db2 = 'landa_acc_sahidmontana';
 $dbUser = 'root';
 $dbPwd = 'landak';
 $client = 'hms.sahidmontana';
-$clientName = 'Hotel Management Hotel Sahid Montana';
+$clientName = 'Sahid Montana';
 $menu = array();
-$rootUrl = 'http://localhost/landa/hms/www/'.$client.'/';
+$rootUrl = 'http://localhost/sahidmontana_hms/hms/www/'.$client.'/';
 //===================================================================================
 ?>

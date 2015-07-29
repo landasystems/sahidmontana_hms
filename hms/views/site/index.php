@@ -53,32 +53,6 @@ $totBill = count($bill);
                     </li>
                 </ul>
             </div>
-            <!--            <div class="box gradient">
-                            <div class="content" style="display: block;">-->
-            <?php
-//                    $this->Widget('common.extensions.highcharts.HighchartsWidget', array(
-//                        'options' => array(
-//                            'title' => array('text' => 'Today`s Guest Information'),
-//                            'xAxis' => array(
-//                                'categories' => array('Expected Arrival', 'Expected Departure', 'Reservation', 'Registration')
-//                            ),
-//                            'yAxis' => array(
-//                                'title' => array('text' => 'Amount')
-//                            ),
-//                            'series' => array(
-//                                array('name' => 'Guest', 'data' => array($totExpArrival, $totExpDeparture, $totReservation, $totRegistration)),
-//                            ),
-//                            'legend' => array(
-//                                'enabled' => false
-//                            ),
-//                            'credits' => array(
-//                                'enabled' => false
-//                            ),
-//                        )
-//                    ));
-            ?>
-            <!--                </div>
-                        </div> End .box -->
 
             <div class="box">
                 <div class="title">
@@ -235,27 +209,6 @@ $totBill = count($bill);
                         <span class="txt">Check Out</span>
                         <span class="number"><?php echo $totBill; ?></span> 
                     </li>
-                    <!--                    <li class="clearfix">
-                                            <div class="icon">
-                                                <span class="icon32 meteo-icon-cloud blue"></span>
-                                            </div>
-                                            <span class="txt">Extend</span> 
-                                            <span class="number">4</span> 
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="icon">
-                                                <span class="icon32 silk-icon-exit green"></span>
-                                            </div>
-                                            <span class="txt">Checked Out</span> 
-                                            <span class="number">13</span> 
-                                        </li>                            
-                                        <li class="clearfix">
-                                            <div class="icon">
-                                                <span class="icon32 icomoon-icon-cancel red"></span>
-                                            </div>
-                                            <span class="txt">Canceled</span> 
-                                            <span class="number">2</span> 
-                                        </li>            -->
                 </ul>
             </div><!-- End .reminder -->
 
@@ -267,8 +220,7 @@ $totBill = count($bill);
                 <ul>
 
                     <?php
-                    $listUser = User::model()->listUser();
-                    $oUserLogs = UserLog::model()->findAll(array('order' => 'created DESC', 'limit' => '5'));
+                    $oUserLogs = UserLog::model()->findAll(array('with'=>array('User','User.Roles'),'order' => 'created DESC', 'limit' => '5'));
                     foreach ($oUserLogs as $oUserLog) {
                         if (isset($oUserLog->User->Roles->name)) {
                             echo '<li class="clearfix">' .
@@ -278,7 +230,6 @@ $totBill = count($bill);
                         };
                     }
                     ?>
-
                 </ul>
             </div>
         </div>

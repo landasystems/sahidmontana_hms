@@ -23,7 +23,7 @@
                 <?php
                 $number = (!empty($_GET['number'])) ? $_GET['number'] : '';
                 $room = Room::model()->findAll(array('condition' => 'status="occupied"'));
-                $data = array(0 => t('choose', 'global')) + CHtml::listData($room, 'id', 'fullRoom');
+                $data = array(0 => 'Please Choose') + CHtml::listData($room, 'id', 'fullRoom');
                 $this->widget(
                         'bootstrap.widgets.TbSelect2', array(
                     'asDropDownList' => true,
@@ -31,7 +31,7 @@
                     'value' => $number,
                     'data' => $data,
                     'options' => array(
-                        "placeholder" => t('choose', 'global'),
+                        "placeholder" => 'Please Choose',
                         "allowClear" => true,
                         'width' => '30%',
                     ),

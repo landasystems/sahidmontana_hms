@@ -26,7 +26,7 @@ $this->breadcrumbs = array(
 
     <div class="row-fluid">
         <div class="span11">
-            <?php // echo $form->dropDownListRow($mBuy, 'departement_id', CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => t('choose', 'global')));  ?>      
+            <?php // echo $form->dropDownListRow($mBuy, 'departement_id', CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => 'Please Choose'));  ?>      
 
             <?php
             echo $form->dateRangeRow(
