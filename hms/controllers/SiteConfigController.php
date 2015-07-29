@@ -104,7 +104,6 @@ class SiteConfigController extends Controller {
             $settings['fb_account'] = $_POST['breakfastAccount'];
             $settings['room_account'] = $_POST['roomAccount'];
             $settings['rate'] = $_POST['rate'];
-//            $settings['tax'] = $_POST['tax'];
 
             $model->settings = json_encode($settings);
 
@@ -155,8 +154,6 @@ class SiteConfigController extends Controller {
         if (isset($_GET['SiteConfig'])) {
             $model->attributes = $_GET['SiteConfig'];
 
-
-
             if (!empty($model->id))
                 $criteria->addCondition('id = "' . $model->id . '"');
 
@@ -184,8 +181,6 @@ class SiteConfigController extends Controller {
             if (!empty($model->email))
                 $criteria->addCondition('email = "' . $model->email . '"');
         }
-
-
 
         $this->render('index', array(
             'model' => $model,
