@@ -1,0 +1,12 @@
+RewriteEngine on
+php_value date.timezone "Asia/Jakarta"
+php_value post_max_size 30M
+php_value upload_max_filesize 30M
+
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteRule . index.php

@@ -1,0 +1,185 @@
+2015/07/28 18:12:19 [error] [php] Trying to get property of non-object (/var/www/kta_acc/ims/controllers/AccCashInController.php:492)
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(133): AccCashInController->runAction()
+#1 /var/www/kta_acc/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/kta_acc/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/kta_acc/common/lib/yii/web/filters/CInlineFilter.php(58): AccCashInController->filterAccessControl()
+#4 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): AccCashInController->runActionWithFilters()
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): AccCashInController->run()
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CWebApplication->run()
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/AccCashIn/addRow.html
+in /var/www/kta_acc/ims/controllers/AccCashInController.php (492)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/28 18:12:29 [error] [php] Trying to get property of non-object (/var/www/kta_acc/ims/controllers/AccCoaController.php:323)
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(133): AccCoaController->runAction()
+#1 /var/www/kta_acc/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/kta_acc/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/kta_acc/common/lib/yii/web/filters/CInlineFilter.php(58): AccCoaController->filterAccessControl()
+#4 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): AccCoaController->runActionWithFilters()
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): AccCoaController->run()
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CWebApplication->run()
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/accCoa/retAccount.html
+in /var/www/kta_acc/ims/controllers/AccCoaController.php (323)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/28 18:12:29 [error] [php] Trying to get property of non-object (/var/www/kta_acc/ims/controllers/AccCoaController.php:323)
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(133): AccCoaController->runAction()
+#1 /var/www/kta_acc/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/kta_acc/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/kta_acc/common/lib/yii/web/filters/CInlineFilter.php(58): AccCoaController->filterAccessControl()
+#4 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): AccCoaController->runActionWithFilters()
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): AccCoaController->run()
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CWebApplication->run()
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/accCoa/retAccount.html
+in /var/www/kta_acc/ims/controllers/AccCoaController.php (323)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/28 18:12:38 [warning] [application] Failed to set unsafe attribute "accCoa" of "AccCashIn".
+in /var/www/kta_acc/ims/controllers/AccCashInController.php (79)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/28 18:12:38 [error] [exception.CException] exception 'CException' with message 'Property "SiteConfig.is_approval" is not defined.' in /var/www/kta_acc/common/lib/yii/base/CComponent.php:130
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php(145): CComponent->__get('is_approval')
+#1 /var/www/kta_acc/ims/controllers/AccCashInController.php(144): CActiveRecord->__get('is_approval')
+#2 /var/www/kta_acc/common/lib/yii/web/actions/CInlineAction.php(49): AccCashInController->actionCreate()
+#3 /var/www/kta_acc/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/kta_acc/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/kta_acc/common/lib/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/kta_acc/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#10 /var/www/kta_acc/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): CController->run('create')
+#12 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('accCashIn/creat...')
+#13 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#15 {main}
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/accCashIn/create.html
+HTTP_REFERER=http://localhost/kta_acc/ims/www/karyatugasanda/accCashIn/create.html
+---
+2015/07/29 08:41:08 [error] [exception.CException] exception 'CException' with message 'SiteController cannot find the requested view "login".' in /var/www/kta_acc/common/lib/yii/web/CController.php:878
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/web/CController.php(782): CController->renderPartial('login', Array, true)
+#1 /var/www/kta_acc/ims/controllers/SiteController.php(108): CController->render('login', Array)
+#2 /var/www/kta_acc/common/lib/yii/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#3 /var/www/kta_acc/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/kta_acc/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/kta_acc/common/lib/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/kta_acc/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#10 /var/www/kta_acc/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): CController->run('login')
+#12 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#13 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#15 {main}
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/site/login.html
+HTTP_REFERER=http://localhost/kta_acc/ims/www/karyatugasanda/landa/roles.html
+---
+2015/07/29 09:09:11 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'landa_ims_karyatugasanda.acc_coa_sub' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `acc_coa_sub`.
+in /var/www/kta_acc/ims/controllers/ReportController.php (491)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/29 09:09:11 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{acc_coa_sub}}" for active record class "AccCoaSub" cannot be found in the database.' in /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(AccCoaSub))
+#1 /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 /var/www/kta_acc/ims/controllers/ReportController.php(491): CActiveRecord->__construct()
+#3 /var/www/kta_acc/common/lib/yii/web/actions/CInlineAction.php(49): ReportController->actionRekapHutang()
+#4 /var/www/kta_acc/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): CController->run('RekapHutang')
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('report/RekapHut...')
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#11 {main}
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/report/RekapHutang.html
+HTTP_REFERER=http://localhost/kta_acc/ims/www/karyatugasanda/report/kartuHutang.html
+---
+2015/07/29 09:09:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'landa_ims_karyatugasanda.acc_coa_sub' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `acc_coa_sub`.
+in /var/www/kta_acc/ims/controllers/ReportController.php (491)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/29 09:09:40 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{acc_coa_sub}}" for active record class "AccCoaSub" cannot be found in the database.' in /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(AccCoaSub))
+#1 /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 /var/www/kta_acc/ims/controllers/ReportController.php(491): CActiveRecord->__construct()
+#3 /var/www/kta_acc/common/lib/yii/web/actions/CInlineAction.php(49): ReportController->actionRekapHutang()
+#4 /var/www/kta_acc/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): CController->run('RekapHutang')
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('report/RekapHut...')
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#11 {main}
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/report/RekapHutang.html
+HTTP_REFERER=http://localhost/kta_acc/ims/www/karyatugasanda/report/kartuHutang.html
+---
+2015/07/29 09:09:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'landa_ims_karyatugasanda.acc_coa_sub' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `acc_coa_sub`.
+in /var/www/kta_acc/ims/controllers/ReportController.php (479)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/29 09:09:43 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{acc_coa_sub}}" for active record class "AccCoaSub" cannot be found in the database.' in /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(AccCoaSub))
+#1 /var/www/kta_acc/common/lib/yii/db/ar/CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 /var/www/kta_acc/ims/controllers/ReportController.php(479): CActiveRecord->__construct()
+#3 /var/www/kta_acc/common/lib/yii/web/actions/CInlineAction.php(49): ReportController->actionRekapPiutang()
+#4 /var/www/kta_acc/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): CController->run('RekapPiutang')
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('report/RekapPiu...')
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#11 {main}
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/report/RekapPiutang.html
+HTTP_REFERER=http://localhost/kta_acc/ims/www/karyatugasanda/report/kartuHutang.html
+---
+2015/07/29 11:11:22 [error] [php] Trying to get property of non-object (/var/www/kta_acc/ims/controllers/AccCoaController.php:323)
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(133): AccCoaController->runAction()
+#1 /var/www/kta_acc/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/kta_acc/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/kta_acc/common/lib/yii/web/filters/CInlineFilter.php(58): AccCoaController->filterAccessControl()
+#4 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): AccCoaController->runActionWithFilters()
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): AccCoaController->run()
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CWebApplication->run()
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/accCoa/retAccount.html
+in /var/www/kta_acc/ims/controllers/AccCoaController.php (323)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/29 11:11:22 [error] [php] Trying to get property of non-object (/var/www/kta_acc/ims/controllers/AccCoaController.php:323)
+Stack trace:
+#0 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(133): AccCoaController->runAction()
+#1 /var/www/kta_acc/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/kta_acc/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/kta_acc/common/lib/yii/web/filters/CInlineFilter.php(58): AccCoaController->filterAccessControl()
+#4 /var/www/kta_acc/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/kta_acc/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#6 /var/www/kta_acc/common/lib/yii/web/CController.php(265): AccCoaController->runActionWithFilters()
+#7 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(282): AccCoaController->run()
+#8 /var/www/kta_acc/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/kta_acc/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/kta_acc/ims/www/karyatugasanda/index.php(16): CWebApplication->run()
+REQUEST_URI=/kta_acc/ims/www/karyatugasanda/accCoa/retAccount.html
+in /var/www/kta_acc/ims/controllers/AccCoaController.php (323)
+in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
