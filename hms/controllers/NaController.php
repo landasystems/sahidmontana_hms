@@ -66,7 +66,6 @@ class NaController extends Controller {
         $room_number = '';
         $no = 0;
         $warning = '';
-        //$roomUser = Room::model()->findAll(array('condition' => 'status="occupied" or status="house use"'));
         $roomUser = Room::model()->findAll(array('condition' => 'status="occupied" or status="house use" or status="compliment"', 'order' => 'number'));
         foreach ($roomUser as $val) {
             $max = RoomBill::model()->find(array('order' => 'date_bill DESC', 'condition' => 'room_id=' . $val->id . ' and registration_id=' . $val->registration_id));
@@ -143,7 +142,7 @@ class NaController extends Controller {
                 });  '
             );
 
-            if (isset($_POST['approve'])) {
+            if (isset($_POST['Na'])) {
                 $siteConfig = SiteConfig::model()->findByPk(1);
                 $settings = json_decode($siteConfig->settings, true);
                 $rateDolar = (!empty($settings['rate'])) ? $settings['rate'] : 0;
@@ -154,123 +153,120 @@ class NaController extends Controller {
                 $model->date_na = $siteConfig->date_system;
                 if ($model->save()) {
 
-                    //$roomBills = RoomBill::model()->findAll(array('condition' => 'processed=1 and is_checkedout=0 and is_na=0', 'order' => 'registration_id', 'index' => 'id'));
                     $roomBills = RoomBill::model()->findAll(array('condition' => '(date_bill<="' . $siteConfig->date_system . '" and is_checkedout=0 and t.is_na=0) or (date_format(Bill.created,"%Y-%m-%d")="' . $siteConfig->date_system . '")', 'order' => 'registration_id', 'index' => 'id', 'with' => array('BillDet', 'BillDet.Bill')));
                     $bill = Bill::model()->findAll(array('condition' => 'is_na=0', 'index' => 'id'));
                     $billCharge = BillCharge::model()->findAll(array('condition' => 'is_na=0 and is_temp=0', 'index' => 'id'));
                     $deposite = Deposite::model()->findAll(array('condition' => 'is_na=0', 'index' => 'id'));
-//                $deposite_unused = Deposite::model()->findAll(array('condition' => 'is_applied=0 and is_used=0', 'index' => 'id'));
                     $deposite_unapplied = Deposite::model()->findAll(array('condition' => 'is_used=0', 'index' => 'id'));
                     $deposite_unused = Deposite::model()->findAll(array('condition' => 'is_applied=0', 'index' => 'id'));
-//                $deposite_used = Deposite::model()->findAll(array('condition' => 'is_applied=0 and is_used=1 and used_today=1', 'index' => 'id'));
                     $expectedArrival = Reservation::model()->findAll(array('condition' => 'date_from="' . date("Y-m-d", strtotime('+1 days', strtotime($siteConfig->date_system))) . '"'));
                     $expectedDeparture = RoomBill::model()->findAll(array('select' => '*,max(date_bill)', 'group' => 'room_id', 'condition' => 'is_checkedout=0', 'order' => 'registration_id', 'index' => 'id', 'having' => 'max(date_bill)="' . date("Y-m-d", strtotime($siteConfig->date_system)) . '"'));
+
                     //mencari kamar yang rusak / out of order
                     $outOfOrder = Room::model()->findAll(array('condition' => 'status="out of order"'));
-                    $account = Account::model()->findAll();
-                    $newCityLedger = array();
-                    print_r($outOfOrder);
-
-                    //simpan ke jurnal
-                    $cash = $_POST['cash'];
-                    $cityLedger = $_POST['grossSales'] - $_POST['cash'];
-                    $total = $_POST['grossSales'] + $_POST['cash'];
-
-                    $jurnal = new AccJurnal;
-                    $jurnal->code = 'NA' . date('m-d-y', strtotime($siteConfig->date_system)); //SiteConfig::model()->formatting('jurnal', FALSE);
-                    $jurnal->code_acc = 'NA' . date('m-d-y', strtotime($siteConfig->date_system));
-                    //; //SiteConfig::model()->formatting('jurnal_acc', False, '', '', $siteConfig->date_system);
-                    $jurnal->date_trans = $siteConfig->date_system;
-                    $jurnal->date_posting = $siteConfig->date_system;
-                    $jurnal->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                    $jurnal->total_debet = $total;
-                    $jurnal->total_credit = $total;
-                    $jurnal->save();
-
-                    //simpan debet cash ke jurnal
-                    $jurnalDet = new AccJurnalDet;
-                    $jurnalDet->acc_jurnal_id = $jurnal->id;
-                    $jurnalDet->acc_coa_id = $siteConfig->acc_cash_id;
-                    $jurnalDet->debet = $cash;
-                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                    $jurnalDet->save();
-
-                    //simpan debet city ledger ke jurnal
-                    $jurnalDet = new AccJurnalDet;
-                    $jurnalDet->acc_jurnal_id = $jurnal->id;
-                    $jurnalDet->acc_coa_id = $siteConfig->acc_city_ledger_id;
-                    $jurnalDet->debet = $cityLedger;
-                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                    $jurnalDet->save();
-
-                    //simpan kredit account ke jurnal
-                    foreach ($account as $acc) {
-                        if ($_POST['todayNet'][$acc->id] > 0) {
-                            $jurnalDet = new AccJurnalDet;
-                            $jurnalDet->acc_jurnal_id = $jurnal->id;
-                            $jurnalDet->acc_coa_id = $acc->acc_coa_id;
-                            $jurnalDet->credit = $_POST['todayNet'][$acc->id];
-                            $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                            $jurnalDet->save();
-
-                            $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $acc->id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['todayNet'][$acc->id], "code" => $jurnal->code, "reff_type" => "jurnal");
-                        }
-                    }
-
-                    //simpan kredit tax ke jurnal
-                    $jurnalDet = new AccJurnalDet;
-                    $jurnalDet->acc_jurnal_id = $jurnal->id;
-                    $jurnalDet->acc_coa_id = $siteConfig->acc_tax_id;
-                    $jurnalDet->credit = $_POST['tax'];
-                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                    $jurnalDet->save();
-
-                    //simpan kredit service charge ke jurnal
-                    $jurnalDet = new AccJurnalDet;
-                    $jurnalDet->acc_jurnal_id = $jurnal->id;
-                    $jurnalDet->acc_coa_id = $siteConfig->acc_service_charge_id;
-                    $jurnalDet->credit = $_POST['servisDay'];
-                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                    $jurnalDet->save();
-
-                    //simpan debet clearance ke jurnal
-                    $jurnalDet = new AccJurnalDet;
-                    $jurnalDet->acc_jurnal_id = $jurnal->id;
-                    $jurnalDet->acc_coa_id = $siteConfig->acc_clearance_id;
-                    $jurnalDet->debet = $cash;
-                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                    $jurnalDet->save();
-
-                    //simpan kredit city ledger ke jurnal
-                    $jurnalDet = new AccJurnalDet;
-                    $jurnalDet->acc_jurnal_id = $jurnal->id;
-                    $jurnalDet->acc_coa_id = $siteConfig->acc_city_ledger_id;
-                    $jurnalDet->credit = $cash;
-                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
-                    $jurnalDet->save();
-
-                    //simpan ke acc det
-                    // credit servis
-                    $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_service_charge_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['servisDay'], "code" => $jurnal->code, "reff_type" => "jurnal");
-                    // credit tax
-                    $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_tax_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['tax'], "code" => $jurnal->code, "reff_type" => "jurnal");
-
-                    // debet cash
-                    $debet[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_cash_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['cash'], "code" => $jurnal->code, "reff_type" => "jurnal");
-                    // debet cityledger
-                    $debet[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_city_ledger_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => ($_POST['grossSales'] - $_POST['cash']), "code" => $jurnal->code, "reff_type" => "jurnal");
-
-                    AccCoa::model()->trans($debet, $credit);
-
-                    unset($credit);
-                    unset($debet);
-
-                    // credit city ledger
-                    $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_city_ledger_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['cash'], "code" => $jurnal->code, "reff_type" => "jurnal");
-                    // debet clearance
-                    $debet[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_clearance_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['cash'], "code" => $jurnal->code, "reff_type" => "jurnal");
-
-                    AccCoa::model()->trans($debet, $credit);
+//                    $account = Account::model()->findAll();
+//                    $newCityLedger = array();
+                    
+//                    //simpan ke jurnal
+//                    $cash = $_POST['cash'];
+//                    $cityLedger = $_POST['grossSales'] - $_POST['cash'];
+//                    $total = $_POST['grossSales'] + $_POST['cash'];
+//
+//                    $jurnal = new AccJurnal;
+//                    $jurnal->code = 'NA' . date('m-d-y', strtotime($siteConfig->date_system)); //SiteConfig::model()->formatting('jurnal', FALSE);
+//                    $jurnal->code_acc = 'NA' . date('m-d-y', strtotime($siteConfig->date_system));
+//                    //SiteConfig::model()->formatting('jurnal_acc', False, '', '', $siteConfig->date_system);
+//                    $jurnal->date_trans = $siteConfig->date_system;
+//                    $jurnal->date_posting = $siteConfig->date_system;
+//                    $jurnal->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                    $jurnal->total_debet = $total;
+//                    $jurnal->total_credit = $total;
+//                    $jurnal->save();
+//
+//                    //simpan debet cash ke jurnal
+//                    $jurnalDet = new AccJurnalDet;
+//                    $jurnalDet->acc_jurnal_id = $jurnal->id;
+//                    $jurnalDet->acc_coa_id = $siteConfig->acc_cash_id;
+//                    $jurnalDet->debet = $cash;
+//                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                    $jurnalDet->save();
+//
+//                    //simpan debet city ledger ke jurnal
+//                    $jurnalDet = new AccJurnalDet;
+//                    $jurnalDet->acc_jurnal_id = $jurnal->id;
+//                    $jurnalDet->acc_coa_id = $siteConfig->acc_city_ledger_id;
+//                    $jurnalDet->debet = $cityLedger;
+//                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                    $jurnalDet->save();
+//
+//                    //simpan kredit account ke jurnal
+//                    foreach ($account as $acc) {
+//                        if ($_POST['todayNet'][$acc->id] > 0) {
+//                            $jurnalDet = new AccJurnalDet;
+//                            $jurnalDet->acc_jurnal_id = $jurnal->id;
+//                            $jurnalDet->acc_coa_id = $acc->acc_coa_id;
+//                            $jurnalDet->credit = $_POST['todayNet'][$acc->id];
+//                            $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                            $jurnalDet->save();
+//
+//                            $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $acc->id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['todayNet'][$acc->id], "code" => $jurnal->code, "reff_type" => "jurnal");
+//                        }
+//                    }
+//
+//                    //simpan kredit tax ke jurnal
+//                    $jurnalDet = new AccJurnalDet;
+//                    $jurnalDet->acc_jurnal_id = $jurnal->id;
+//                    $jurnalDet->acc_coa_id = $siteConfig->acc_tax_id;
+//                    $jurnalDet->credit = $_POST['tax'];
+//                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                    $jurnalDet->save();
+//
+//                    //simpan kredit service charge ke jurnal
+//                    $jurnalDet = new AccJurnalDet;
+//                    $jurnalDet->acc_jurnal_id = $jurnal->id;
+//                    $jurnalDet->acc_coa_id = $siteConfig->acc_service_charge_id;
+//                    $jurnalDet->credit = $_POST['servisDay'];
+//                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                    $jurnalDet->save();
+//
+//                    //simpan debet clearance ke jurnal
+//                    $jurnalDet = new AccJurnalDet;
+//                    $jurnalDet->acc_jurnal_id = $jurnal->id;
+//                    $jurnalDet->acc_coa_id = $siteConfig->acc_clearance_id;
+//                    $jurnalDet->debet = $cash;
+//                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                    $jurnalDet->save();
+//
+//                    //simpan kredit city ledger ke jurnal
+//                    $jurnalDet = new AccJurnalDet;
+//                    $jurnalDet->acc_jurnal_id = $jurnal->id;
+//                    $jurnalDet->acc_coa_id = $siteConfig->acc_city_ledger_id;
+//                    $jurnalDet->credit = $cash;
+//                    $jurnalDet->description = 'NA pada tanggal ' . $siteConfig->date_system;
+//                    $jurnalDet->save();
+//
+//                    //simpan ke acc det
+//                    // credit servis
+//                    $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_service_charge_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['servisDay'], "code" => $jurnal->code, "reff_type" => "jurnal");
+//                    // credit tax
+//                    $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_tax_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['tax'], "code" => $jurnal->code, "reff_type" => "jurnal");
+//
+//                    // debet cash
+//                    $debet[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_cash_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['cash'], "code" => $jurnal->code, "reff_type" => "jurnal");
+//                    // debet cityledger
+//                    $debet[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_city_ledger_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => ($_POST['grossSales'] - $_POST['cash']), "code" => $jurnal->code, "reff_type" => "jurnal");
+//
+//                    AccCoa::model()->trans($debet, $credit);
+//
+//                    unset($credit);
+//                    unset($debet);
+//
+//                    // credit city ledger
+//                    $credit[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_city_ledger_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['cash'], "code" => $jurnal->code, "reff_type" => "jurnal");
+//                    // debet clearance
+//                    $debet[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_clearance_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['cash'], "code" => $jurnal->code, "reff_type" => "jurnal");
+//
+//                    AccCoa::model()->trans($debet, $credit);
 
 
                     //simpan out of order di room schedule
@@ -325,7 +321,7 @@ class NaController extends Controller {
                     }
 
                     //save accounting city ledger
-                    InvoiceDet::model()->saveCityLedger($newCityLedger);
+//                    InvoiceDet::model()->saveCityLedger($newCityLedger);
 
                     //save deposite applied
 //                foreach ($deposite_used as $data) {
