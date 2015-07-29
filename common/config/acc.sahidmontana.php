@@ -8,7 +8,6 @@ $dbUser = 'root';
 $dbPwd = 'landak';
 $client = 'hms.sahidmontana';
 $clientName = 'Sahid Montana';
-$menu = array();
 $rootUrl = 'http://localhost/sahidmontana_hms/ims/www/'.$client.'/';
 //===================================================================================
 ?>
