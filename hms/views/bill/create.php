@@ -348,13 +348,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
 <div class="form-actions">
     <button class="btn btn-primary" id="submit" type="submit" name="room"><i class="icon-ok icon-white"></i> Checkout</button>
-    <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'reset',
-        'icon' => 'remove',
-        'label' => 'Reset',
-    ));
-    ?>
 </div>     
 <?php
 $this->endWidget();

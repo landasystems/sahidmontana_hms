@@ -170,7 +170,6 @@ $this->breadcrumbs = array(
             $this->widget('bootstrap.widgets.TbButton', array(
                 'buttonType' => 'reset',
                 'icon' => 'refresh',
-                'label' => 'Reset',
             ));
             ?>           
             

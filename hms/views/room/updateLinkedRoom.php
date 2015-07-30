@@ -70,13 +70,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'label' => $model->isNewRecord ? 'Create' : 'Save',
     ));
     ?>
-    <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'reset',
-        'icon' => 'remove',
-        'label' => 'Reset',
-    ));
-    ?>
 </div>
 
 <?php $this->endWidget(); ?>

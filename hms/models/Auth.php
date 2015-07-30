@@ -163,8 +163,8 @@ class Auth extends CActiveRecord {
                     array('visible' => landa()->checkAccess('Report_RoomSales', 'r'), 'label' => '<span class="icon16 icomoon-icon-arrow-right"></span>Top Producers', 'url' => array('report/topProducers'), 'auth_id' => 'Report_RoomSales'),
                     array('visible' => landa()->checkAccess('Report_RoomSales', 'r'), 'label' => '<span class="icon16 icomoon-icon-arrow-right"></span>Top Ten', 'url' => array('report/topTen'), 'auth_id' => 'Report_RoomSales'),
                 )),
-            array('label' => '<span class="icon16 icomoon-icon-bars"></span>Chart', 'url' => array('/User'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                )),
+//            array('label' => '<span class="icon16 icomoon-icon-bars"></span>Chart', 'url' => array('/User'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+//                )),
         );
     }
 

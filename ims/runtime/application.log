@@ -183,3 +183,274 @@ Stack trace:
 REQUEST_URI=/kta_acc/ims/www/karyatugasanda/accCoa/retAccount.html
 in /var/www/kta_acc/ims/controllers/AccCoaController.php (323)
 in /var/www/kta_acc/ims/www/karyatugasanda/index.php (16)
+2015/07/29 16:21:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/logo.png".' in /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/logo.png')
+#1 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/images/logo.png
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/site/login.html
+---
+2015/07/29 16:21:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/logo.png".' in /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/logo.png')
+#1 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/images/logo.png
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/site/login.html
+---
+2015/07/29 16:22:06 [error] [php] Trying to get property of non-object (/var/www/sahidmontana_hms/ims/views/departement/_form.php:46)
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): DepartementController->renderFile()
+#2 /var/www/sahidmontana_hms/ims/views/departement/create.php(17): DepartementController->renderPartial()
+#3 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require()
+#4 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): DepartementController->renderInternal()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile()
+#6 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): DepartementController->renderFile()
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): DepartementController->renderPartial()
+#8 /var/www/sahidmontana_hms/ims/controllers/DepartementController.php(78): DepartementController->render()
+#9 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(49): DepartementController->actionCreate()
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): DepartementController->runAction()
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#14 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): DepartementController->filterAccessControl()
+#15 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#16 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#17 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): DepartementController->runActionWithFilters()
+#18 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): DepartementController->run()
+#19 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#20 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CWebApplication->run()
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/departement/create.html
+in /var/www/sahidmontana_hms/ims/views/departement/_form.php (46)
+in /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php (40)
+in /var/www/sahidmontana_hms/ims/views/departement/create.php (17)
+2015/07/29 16:22:11 [error] [php] Trying to get property of non-object (/var/www/sahidmontana_hms/ims/views/departement/_form.php:46)
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): DepartementController->renderFile()
+#2 /var/www/sahidmontana_hms/ims/views/departement/create.php(17): DepartementController->renderPartial()
+#3 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require()
+#4 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): DepartementController->renderInternal()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile()
+#6 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): DepartementController->renderFile()
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): DepartementController->renderPartial()
+#8 /var/www/sahidmontana_hms/ims/controllers/DepartementController.php(78): DepartementController->render()
+#9 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(49): DepartementController->actionCreate()
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): DepartementController->runAction()
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#14 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): DepartementController->filterAccessControl()
+#15 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#16 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#17 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): DepartementController->runActionWithFilters()
+#18 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): DepartementController->run()
+#19 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#20 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CWebApplication->run()
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/departement/create.html
+in /var/www/sahidmontana_hms/ims/views/departement/_form.php (46)
+in /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php (40)
+in /var/www/sahidmontana_hms/ims/views/departement/create.php (17)
+2015/07/29 16:24:14 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'landa_acc_sahidmontana.province' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `province`.
+in /var/www/sahidmontana_hms/ims/views/user/_search.php (17)
+in /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php (40)
+in /var/www/sahidmontana_hms/ims/views/user/index.php (51)
+2015/07/29 16:24:14 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{province}}" for active record class "Province" cannot be found in the database.' in /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Province))
+#1 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#3 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /var/www/sahidmontana_hms/ims/views/user/_search.php(17): CActiveRecord->findAll()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#6 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(UserController), '/var/www/sahidm...', Array, true)
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#9 /var/www/sahidmontana_hms/ims/views/user/index.php(51): CController->renderPartial('_search', Array)
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#11 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(UserController), '/var/www/sahidm...', Array, true)
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#14 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/sahidmontana_hms/ims/controllers/UserController.php(538): CController->render('index', Array)
+#16 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(49): UserController->actionSupplier()
+#17 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): CController->run('supplier')
+#21 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('user/supplier')
+#22 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/user/supplier.html
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/accCoa.html
+---
+2015/07/29 16:24:53 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'landa_acc_sahidmontana.province' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `province`.
+in /var/www/sahidmontana_hms/ims/views/user/_search.php (17)
+in /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php (40)
+in /var/www/sahidmontana_hms/ims/views/user/index.php (51)
+2015/07/29 16:24:53 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{province}}" for active record class "Province" cannot be found in the database.' in /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Province))
+#1 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#3 /var/www/sahidmontana_hms/common/lib/yii/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /var/www/sahidmontana_hms/ims/views/user/_search.php(17): CActiveRecord->findAll()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#6 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(UserController), '/var/www/sahidm...', Array, true)
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#9 /var/www/sahidmontana_hms/ims/views/user/index.php(51): CController->renderPartial('_search', Array)
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#11 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(UserController), '/var/www/sahidm...', Array, true)
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#14 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): CController->renderPartial('index', Array, true)
+#15 /var/www/sahidmontana_hms/ims/controllers/UserController.php(538): CController->render('index', Array)
+#16 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(49): UserController->actionSupplier()
+#17 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): CController->run('supplier')
+#21 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('user/supplier')
+#22 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/user/supplier.html
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/accCashIn.html
+---
+2015/07/29 16:29:06 [error] [php] Trying to get property of non-object (/var/www/sahidmontana_hms/ims/models/SiteConfig.php:166)
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): AccCashInController->runAction()
+#2 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): AccCashInController->filterAccessControl()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): AccCashInController->runActionWithFilters()
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): AccCashInController->run()
+#9 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CWebApplication->run()
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/accCashIn/create.html
+in /var/www/sahidmontana_hms/ims/models/SiteConfig.php (166)
+in /var/www/sahidmontana_hms/ims/controllers/AccCashInController.php (71)
+in /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php (13)
+2015/07/29 16:30:57 [error] [php] Trying to get property of non-object (/var/www/sahidmontana_hms/ims/models/SiteConfig.php:166)
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): AccCashInController->runAction()
+#2 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): AccCashInController->filterAccessControl()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): AccCashInController->runActionWithFilters()
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): AccCashInController->run()
+#9 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CWebApplication->run()
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/accCashIn/create.html
+in /var/www/sahidmontana_hms/ims/models/SiteConfig.php (166)
+in /var/www/sahidmontana_hms/ims/controllers/AccCashInController.php (71)
+in /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php (13)
+2015/07/29 16:39:00 [error] [exception.CException] exception 'CException' with message 'TbInput: Failed to initialize widget! Model is not set.' in /var/www/sahidmontana_hms/common/extensions/bootstrap/widgets/input/TbInput.php:142
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(147): TbInput->init()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#2 /var/www/sahidmontana_hms/common/extensions/bootstrap/widgets/TbActiveForm.php(1096): CBaseController->widget('bootstrap.widge...', Array)
+#3 /var/www/sahidmontana_hms/common/extensions/bootstrap/widgets/TbActiveForm.php(278): TbActiveForm->inputRow('text', NULL, 'cash_in', NULL, Array)
+#4 /var/www/sahidmontana_hms/ims/views/departement/_form.php(114): TbActiveForm->textFieldRow(NULL, 'cash_in', Array)
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#6 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(DepartementController), '/var/www/sahidm...', Array, true)
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#9 /var/www/sahidmontana_hms/ims/views/departement/update.php(18): CController->renderPartial('_form', Array)
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#11 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(DepartementController), '/var/www/sahidm...', Array, true)
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#14 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): CController->renderPartial('update', Array, true)
+#15 /var/www/sahidmontana_hms/ims/controllers/DepartementController.php(105): CController->render('update', Array)
+#16 /var/www/sahidmontana_hms/ims/controllers/DepartementController.php(50): DepartementController->actionUpdate('1')
+#17 [internal function]: DepartementController->actionView('1')
+#18 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DepartementController), Array)
+#19 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DepartementController), Object(ReflectionMethod), Array)
+#20 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#21 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#23 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#27 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): CController->run('view')
+#29 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('departement/vie...')
+#30 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#31 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/departement/1.html
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/departement/create.html
+---
+2015/07/29 16:40:05 [error] [exception.CException] exception 'CException' with message 'TbInput: Failed to initialize widget! Model is not set.' in /var/www/sahidmontana_hms/common/extensions/bootstrap/widgets/input/TbInput.php:142
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(147): TbInput->init()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#2 /var/www/sahidmontana_hms/common/extensions/bootstrap/widgets/TbActiveForm.php(1096): CBaseController->widget('bootstrap.widge...', Array)
+#3 /var/www/sahidmontana_hms/common/extensions/bootstrap/widgets/TbActiveForm.php(278): TbActiveForm->inputRow('text', NULL, 'cash_in', NULL, Array)
+#4 /var/www/sahidmontana_hms/ims/views/departement/_form.php(114): TbActiveForm->textFieldRow(NULL, 'cash_in', Array)
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#6 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(DepartementController), '/var/www/sahidm...', Array, true)
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#9 /var/www/sahidmontana_hms/ims/views/departement/update.php(18): CController->renderPartial('_form', Array)
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require('/var/www/sahidm...')
+#11 /var/www/sahidmontana_hms/common/extensions/yii-debug-toolbar/YiiDebugViewRenderer.php(40): CBaseController->renderInternal('/var/www/sahidm...', Array, true)
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(93): YiiDebugViewRenderer->renderFile(Object(DepartementController), '/var/www/sahidm...', Array, true)
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): CBaseController->renderFile('/var/www/sahidm...', Array, true)
+#14 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): CController->renderPartial('update', Array, true)
+#15 /var/www/sahidmontana_hms/ims/controllers/DepartementController.php(105): CController->render('update', Array)
+#16 [internal function]: DepartementController->actionUpdate('1')
+#17 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DepartementController), Array)
+#18 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DepartementController), Object(ReflectionMethod), Array)
+#19 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#22 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#26 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): CController->run('update')
+#28 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('departement/upd...')
+#29 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#30 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/departement/update/1.html
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/departement/index.html
+---
+2015/07/29 16:57:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/site/1-700x700-sahid-montana.png".' in /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/site/1-7...')
+#1 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/images/site/1-700x700-sahid-montana.png
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/dashboard.html
+---
+2015/07/29 16:57:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/site/1-700x700-sahid-montana.png".' in /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/site/1-7...')
+#1 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/images/site/1-700x700-sahid-montana.png
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/dashboard.html
+---
