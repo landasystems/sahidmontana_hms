@@ -411,7 +411,7 @@
                                         if (count($charge) > 0) {
                                             echo '                                                  
                                         <tr class="items">
-                                            <input type="hidden" name="others_include[]" id="' . $charge->id . '" value="' . $model->id . '"/>                                                                                                    
+                                            <input type="hidden" name="others_include[]" id="' . $charge->id . '" value="' . $other . '"/>                                                                                                    
                                             <td style="text-align:center"><button class="delRow"><i class="icon-remove-circle" style="cursor:all-scroll;"></i></button></td>
                                             <td> &nbsp;&nbsp;&raquo; ' . $charge->name . '</td>                        
                                             <td style="text-align:right">' . landa()->rp($charge->charge) . '</td>                                                        
