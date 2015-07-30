@@ -221,13 +221,6 @@
 //        ));
 //        
         ?>
-        <?php
-//        $this->widget('bootstrap.widgets.TbButton', array(
-//            'buttonType' => 'reset',
-//            'icon' => 'remove',
-//            'label' => 'Reset',
-//        ));
-        ?>
     </div>
 
     <?php $this->endWidget(); ?>

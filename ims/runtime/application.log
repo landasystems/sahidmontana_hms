@@ -436,3 +436,21 @@ Stack trace:
 REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/departement/update/1.html
 HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/departement/index.html
 ---
+2015/07/29 16:57:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/site/1-700x700-sahid-montana.png".' in /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/site/1-7...')
+#1 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/images/site/1-700x700-sahid-montana.png
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/dashboard.html
+---
+2015/07/29 16:57:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/site/1-700x700-sahid-montana.png".' in /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/site/1-7...')
+#1 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/sahidmontana_hms/ims/www/acc.sahidmontana/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sahidmontana_hms/ims/www/acc.sahidmontana/images/site/1-700x700-sahid-montana.png
+HTTP_REFERER=http://localhost/sahidmontana_hms/ims/www/acc.sahidmontana/dashboard.html
+---

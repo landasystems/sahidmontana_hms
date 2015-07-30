@@ -255,13 +255,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     </div>
     <div class="form-actions">
         <button class="btn btn-primary" id="submit" type="submit" name="room"><i class="icon-ok icon-white"></i> Save</button>
-        <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
-            'buttonType' => 'reset',
-            'icon' => 'remove',
-            'label' => 'Reset',
-        ));
-        ?>
     </div>
 </div> 
 <?php

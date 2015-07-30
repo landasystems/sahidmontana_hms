@@ -276,21 +276,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
 <div class="form-actions">
     <button class="btn btn-primary"  type="submit" onclick="printDiv()"><i class="icon-ok icon-white"></i> Print & Save</button>
-    <?php
-//    $this->widget('bootstrap.widgets.TbButton', array(
-//        'buttonType' => 'submit',
-//        'type' => 'primary',
-//        'icon' => 'ok white',
-//        'label' => $model->isNewRecord ? 'Create' : 'Save',
-//    ));
-    ?>
-    <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'reset',
-        'icon' => 'remove',
-        'label' => 'Reset',
-    ));
-    ?>
 </div>
 </fieldset>
 
