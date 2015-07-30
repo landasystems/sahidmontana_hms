@@ -99,7 +99,7 @@ class Registration extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-         $criteria->with = array('Guest','Guest.Roles','Package');
+        $criteria->with = array('Guest', 'Guest.Roles', 'Package');
         $criteria->together = true;
 
         $criteria->compare('id', $this->id);
@@ -110,7 +110,8 @@ class Registration extends CActiveRecord {
         $criteria->compare('created', $this->created, true);
         $criteria->compare('created_user_id', $this->created_user_id);
 //        $criteria->compare('billing', $this->billing, true);
-        $criteria->compare('date_to', $this->date_to, true);
+        $criteria->compare('t.date_to', $this->date_to, true);
+        $criteria->compare('t.guest_user_id', $this->guest_user_id);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -118,6 +119,21 @@ class Registration extends CActiveRecord {
         ));
     }
 
+    public function search2() {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+
+        $criteria = new CDbCriteria;
+        $criteria->with = array('Guest', 'Guest.Roles', 'Package');
+        $criteria->together = true;
+        $criteria->compare('t.guest_user_id', $this->guest_user_id);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+            'sort' => array('defaultOrder' => 't.date_from DESC')
+        ));
+    }
+    
     public function getThisPackage() {
         if (empty($this->package_room_type_id) || $this->package_room_type_id == 0) {
             echo '';
@@ -128,7 +144,7 @@ class Registration extends CActiveRecord {
 
     public function getIs_checkedout() {
 
-        $check = RoomBill::model()->findAll(array('condition'=>'registration_id=' .$this->id. ' and is_checkedout=0'));
+        $check = RoomBill::model()->findAll(array('condition' => 'registration_id=' . $this->id . ' and is_checkedout=0'));
         if (!empty($check)) {
             return 0;
         } else {
@@ -169,6 +185,7 @@ class Registration extends CActiveRecord {
         }
         return substr($return, 0, strlen($return) - 3);
     }
+
     public function getRoomNumberDet() {
         $return = '';
         $tot = 0;
@@ -176,13 +193,13 @@ class Registration extends CActiveRecord {
         foreach ($roomNumber as $number) {
             $tot += $number->charge;
             $return .= '<tr>
-                        <td>'.$number->room_id.'</td>
-                        <td>'.$number->pax.'</td>
-                        <td>'.$number->extrabed.'</td>
-                        <td>'.landa()->rp($number->charge).'</td>
+                        <td>' . $number->room_id . '</td>
+                        <td>' . $number->pax . '</td>
+                        <td>' . $number->extrabed . '</td>
+                        <td>' . landa()->rp($number->charge) . '</td>
                       </tr>';
         }
-        
+
         $return = '<table class=\'table\'>
                         <thead>
                         <tr>
@@ -192,11 +209,11 @@ class Registration extends CActiveRecord {
                           <th>Room Rate</th>
                         </tr>
                         </thead>
-                        <tbody>'.$return.'</tbody>
+                        <tbody>' . $return . '</tbody>
                         <tfoot>
                         <tr>
                           <td colspan=\'3\'>Total</th>
-                          <td>'.landa()->rp($tot).'</td>
+                          <td>' . landa()->rp($tot) . '</td>
                         </tr>
                         </tfoot>
                    </table>';

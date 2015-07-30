@@ -1,8 +1,9 @@
 <?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'results',
+    'action' => Yii::app()->createUrl('user/history?v=1'),
     'enableAjaxValidation' => false,
-    'method' => 'post',
+    'method' => 'get',
     'type' => 'horizontal',
     'htmlOptions' => array(
         'enctype' => 'multipart/form-data'
@@ -28,19 +29,6 @@ $this->breadcrumbs = array(
             $list = substr($list, 0, strlen($list) - 1);
             $sResult = User::model()->findAll(array('condition' => 'roles_id in(' . $list . ')'));
             $listUser = Chtml::listdata($sResult, 'id', 'fullName');
-//            $this->widget(
-//                    'bootstrap.widgets.TbSelect2', array(
-//                'asDropDownList' => true,
-//                'name' => 'user',
-//                'value' => (!empty($_POST['user'])) ? $_POST['user'] : '',
-//                'data' => array(0 => 'Please Choose') + $listUser,
-//                'options' => array(
-//                    "placeholder" => 'Please Choose',
-//                    "allowClear" => false,
-//                    'width' => '30%',
-//                ),
-//                    )
-//            );
             $this->widget(
                     'bootstrap.widgets.TbSelect2', array(
                 'asDropDownList' => false,
@@ -85,12 +73,13 @@ $this->breadcrumbs = array(
 </div>
 
 <?php
-if (isset($_POST['user'])) {
-    echo $_POST['user'];
-    $criteria = new CDbCriteria();
-    $model = new Registration('search');
-    $model->guest_user_id = $_POST['user'];
-    $this->renderPartial('_history', array('model' => $model));
+$cari = isset($_GET['v']) ? "1" : "0";
+if ($cari == "1") {
+    $criteria = new CDbCriteria;
+    $user = User::model()->findByPk($_GET['user']);
+    $model = new Registration;
+    $model->guest_user_id = $_GET['user'];
+    $this->renderPartial('_history', array('model' => $model, 'user' => $user));
 }
 ?>
 
