@@ -20,6 +20,13 @@ $this->breadcrumbs = array(
         <label class="control-label" for="guest">Guest Name</label>
         <div class="controls">
             <?php
+            $id = 0;
+            $selName = '';
+            if (isset($_GET['user'])) {
+                $user = User::model()->findByPk($_GET['user']);
+                $id = $_GET['user'];
+                $selName = '[' . $user->Roles->name . '] ' . $user->name;
+            }
             $siteConfig = SiteConfig::model()->listSiteConfig();
             $sCriteria = json_decode($siteConfig->roles_guest, true);
             $list = '';
@@ -53,6 +60,14 @@ $this->breadcrumbs = array(
                                                         };
                                                     }',
                     ),
+                    'initSelection' => 'js:function(element, callback) 
+                            { 
+                                data = {
+                                    "id": ' . $id . ',
+                                    "text": "' . $selName . '",
+                                }
+                                  callback(data);   
+                            }',
                 ),
                     )
             );
