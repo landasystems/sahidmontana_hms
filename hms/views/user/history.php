@@ -33,7 +33,7 @@ $this->breadcrumbs = array(
                     'bootstrap.widgets.TbSelect2', array(
                 'asDropDownList' => false,
                 'name' => 'user',
-                'value' => (!empty($_POST['user'])) ? $_POST['user'] : '',
+                'value' => (!empty($_GET['user'])) ? $_GET['user'] : '',
                 'options' => array(
                     'allowClear' => true,
                     "placeholder" => 'Please Choose',
