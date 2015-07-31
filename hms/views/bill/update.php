@@ -49,14 +49,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     <?php
                     echo $model->code;
                     ?>
-                </strong></span>
-
-
+                </strong>
+            </span>
         </div> 
     </div>
 
     <div class="content">   
-
         <table style="width:100%">
             <tr>
                 <td class="span2" style="vertical-align: top">Mr. / Mrs.</td>
@@ -98,13 +96,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             </thead>
             <tbody>     
 
-
                 <?php
                 $bill = new Bill();
                 $bill->total = 0;
                 $bill->total_dp = 0;
                 $room_bill_ids = array();
-                $leadRoomBills = array();
+                $leadRoomBills = array(0);
                 $guestUserIds = array();
                 $modelRoom = array();
                 $billCharge = array();
@@ -137,19 +134,16 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 echo $return;
                 ?>
 
-
-
                 <tr>
                     <td colspan="6" style="text-align: right">
                         <b>Grand Total :</b>                                         
                         <input type="hidden" name="totalDeposite" id="totalDeposite" value="<?php echo $bill->total_dp; ?>" />
-                        <input type="hidden" name="grandTotal" id="grandTotal" value="<?php echo $bill->total; ?>" />
-                        <input type="hidden" name="totalNoDeposite" id="totalNoDeposite" value="<?php echo $bill->total - $bill->total_dp; ?>" />
+                        <input type="hidden" name="grandTotal" id="grandTotal" value="<?php echo $model->total; ?>" />
+                        <input type="hidden" name="totalNoDeposite" id="totalNoDeposite" value="<?php echo $model->total - $bill->total_dp; ?>" />
 
                     </td>
-                    <td style="text-align:right"><?php echo landa()->rp($bill->total); ?></td>                                                        
+                    <td style="text-align:right"><?php echo landa()->rp($model->total); ?></td>                                                        
                 </tr>
-
 
                 <tr>          
                     <td colspan="3" style="text-align: right">
@@ -178,7 +172,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     </td>
                     <td style="text-align:right">
                         <div class="input-prepend"><span class="add-on">Rp</span>
-                            <input <?php echo (!empty($billTo)) ? 'disabled' : ''; ?> style="width:100px;" id="cash" name="cash"  type="text" class="angka">
+                            <input <?php echo (!empty($billTo)) ? 'disabled' : ''; ?> value="<?php echo $model->cash; ?>" style="width:100px;" id="cash" name="cash"  type="text" class="angka">
                         </div>                        
                     </td>                                                        
                 </tr> 
@@ -187,14 +181,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                         <b>Credit Card Number :</b>                        
                     </td>
                     <td colspan="2" style="text-align:right">
-                        <input <?php echo (!empty($billTo)) ? 'disabled' : ''; ?> style="width:90%" id="cc_number" name="cc_number"  type="text">
+                        <input <?php echo (!empty($billTo)) ? 'disabled' : ''; ?> value="<?php echo $model->cc_number; ?>" style="width:90%" id="cc_number" name="cc_number"  type="text">
                     </td>
                     <td style="text-align: right">
                         <b>Credit Card :</b>                        
                     </td>
                     <td style="text-align:right">
                         <div class="input-prepend"><span class="add-on">Rp</span>
-                            <input <?php echo (!empty($billTo)) ? 'disabled' : ''; ?> style="width:100px;" id="credit" name="credit"  type="text" class="angka">
+                            <input <?php echo (!empty($billTo)) ? 'disabled' : ''; ?> value="<?php echo $model->cc_charge; ?>" style="width:100px;" id="credit" name="credit"  type="text" class="angka">
                         </div>
                     </td>                                                        
                 </tr>
@@ -223,18 +217,18 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     </td>
                     <td style="text-align:right">
                         <div class="input-prepend"><span class="add-on">Rp</span>
-                            <input style="width:100px;" id="cl" name="cl"  type="text" class="angka">
+                            <input style="width:100px;" id="cl" name="cl"  type="text" class="angka" value="<?php echo $model->ca_charge; ?>">
                         </div>
                     </td>                                                        
                 </tr> 
-                <tr >
+                <tr>
                     <td colspan="6" style="text-align: right">
                         <b>Discount :</b>                        
                     </td>
                     <td style="text-align:right">
                         <div class="input-prepend">
                             <span class="add-on">Rp</span>
-                            <input class="angka" style="width:100px;" id="discount" name="discount"  type="text">
+                            <input class="angka" style="width:100px;" id="discount" name="discount"  type="text" value="<?php echo $model->discount; ?>">
 
                         </div>
                     </td>                                                        
@@ -245,7 +239,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     </td>
                     <td style="text-align:right">
                         <div class="input-prepend"><span class="add-on">Rp</span>
-                            <input style="width:100px;" id="refund" name="refund" ReadOnly type="text" class="angka">                            
+                            <input style="width:100px;" id="refund" name="refund" ReadOnly type="text" class="angka" value="<?php echo $model->refund; ?>">                            
                         </div>
                     </td>                                                        
                 </tr>

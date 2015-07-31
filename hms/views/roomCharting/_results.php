@@ -157,6 +157,9 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
                         $rooms = $mSchedule[$i][$arr->id]->Registration->roomNumberDet;
                         $total_rooms = $mSchedule[$i][$arr->id]->Registration->roomCount;
                     } elseif ($reservation_id != '') { //jika reservasi
+                        $status = $mSchedule[$i][$arr->id]->Reservation->status;
+//                    $status = ($status == "out of order") ? "out of order" : $status;
+                        $status = str_replace(' ', '', $status);
                         $guestName = $mSchedule[$i][$arr->id]->Reservation->Guest->guestName;
                         $guestPhone = $mSchedule[$i][$arr->id]->Reservation->Guest->phone;
                         $remarks = $mSchedule[$i][$arr->id]->Reservation->remarks;
@@ -183,8 +186,9 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
                         if (strtotime($thisDate) < strtotime($siteConfig->date_system))
                             $past = '-past';
 
-                        if ($status == 'outoforder') {
-                            $tdDay .='<td colspan="' . $selisih . '" style="background:#e3e3e3;"><div style="background:#353535;width:100%;height:20px;text-align:center;color:white;font-size: 9px;">Out Of Order</div></td>';
+                        if ($status == 'cancel') {
+                            $tdDay .='<td><a href="#" data-toggle="tooltip" title=" ' . ucwords($status_hover) . ' "><div number="' . $thisNumber . '"  status="vacant" reservation="" registration="" date="' . $thisDate . '" class="tombol vacant"></div></a></td>';
+//                            $tdDay .='<td colspan="' . $selisih . '" style="background:#e3e3e3;"><div style="background:#353535;width:100%;height:20px;text-align:center;color:white;font-size: 9px;">Out Of Order</div></td>';
                         } else {
                             if (strtotime($thisDate) < strtotime($siteConfig->date_system and $status == "vacant")) {
                                 $tdDay .='<td style="background-color:lightgray;"><div number="' . $thisNumber . '"  status="' . $status . '" reservation="" registration="" date="' . $thisDate . '" class="lewat ' . $status . '"></div></td>';
@@ -209,10 +213,6 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
                     if (strtotime($thisDate) > strtotime($siteConfig->date_system))
                         $sStatus = $status;
 
-
-                    //if ($status == 'outoforder' and $i < $endDate) {
-                    //   $selisih += 1;
-                    // } else {
                     if ($status == 'outoforder') {
                         if ($i < $endDate) {
                             $selisih += 1;

@@ -119,7 +119,7 @@ class ReservationController extends Controller {
 
     public function actionSelectReservation() {
         $model = Reservation::model()->findByPk($_POST['id']);
-        $disabled = ($model->status == 'registered' or $model->status == 'cancel') ? true : false;
+        $disabled = ($model->status == 'registered' or $model->status == 'cancel' or (strtotime($model->date_to) < strtotime(date("Y-m-d")))) ? true : false;
         $id = ($model->status != 'registered') ? '<input type="hidden" name="cancelId" value="' . $model->id . '" />' : '';
         $array = ($model->status != 'registered') ? array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'cancel' => 'Cancel', 'noshow' => 'No Show') : array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'registered' => 'Registered', 'cancel' => 'Cancel', 'noshow' => 'No Show');
 
@@ -552,7 +552,7 @@ class ReservationController extends Controller {
                 $model->date_to = date("Y/m/d", strtotime($date2));
                 $model->status = 'reservation';
 
-                if ($model->guest_user_id != 0 and ! empty($model->guest_user_id)) {
+                if ($model->guest_user_id != 0 and !empty($model->guest_user_id)) {
                     if ($model->save()) {
 
                         if ($_POST['Deposite']['amount'] > 0) {
@@ -620,8 +620,8 @@ class ReservationController extends Controller {
         $siteConfig = SiteConfig::model()->findByPk(1);
         $settings = json_decode($siteConfig->settings, true);
         $this->layout = "mainWide";
-        $model = $this->loadModel($id)->with('Guest','Guest.City','Guest.City.province','Bill','Bill.Roles');
-        $mDetail = ReservationDetail::model()->with('Room','Room.RoomType')->findAll(array('condition' => 'reservation_id=' . $id));
+        $model = $this->loadModel($id)->with('Guest', 'Guest.City', 'Guest.City.province', 'Bill', 'Bill.Roles');
+        $mDetail = ReservationDetail::model()->with('Room', 'Room.RoomType')->findAll(array('condition' => 'reservation_id=' . $id));
         $this->js();
 
         if (!empty($model->deposite_id)) {

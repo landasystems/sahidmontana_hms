@@ -283,6 +283,7 @@ class BillController extends Controller {
                 }
 
                 foreach ($roomBills as $roomBill) {
+                    $leader = 0;
                     if ($roomBill->lead_room_bill_id == 0)
                         $leader = $roomBill->id;
 

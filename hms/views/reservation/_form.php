@@ -820,7 +820,7 @@
                 <div class="span1" style="width:10px">:</div>
                 <div class="span8" style="text-align:left">
                     <?php
-                    $readOnly = ($model->status != 'registered') ? false : true;
+                    $readOnly = ($model->status != 'registered' or $model->status != 'cancel') ? false : true;
                     $array = ($model->status != 'registered') ? array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'cancel' => 'Cancel', 'noshow' => 'No Show') : array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'registered' => 'Registered', 'cancel' => 'Cancel', 'noshow' => 'No Show');
                     ?>
                     <?php echo $form->dropDownListRow($model, 'status', $array, array('disabled' => $readOnly, 'label' => false)); ?>

@@ -312,7 +312,7 @@ class Bill extends CActiveRecord {
                         <td style="text-align:center">' . '-' . '</td>                                                        
                         <td style="text-align:right">' .
                         '<input type="hidden" id="max" value="' . $m->deposite_amount . '" />' .
-                        '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70%;direction:rtl" class="angka deposite_amount" value="' . $m->deposite_amount . '" name="Deposite[' . $m->Deposite->id . ']" type="text"></div>'
+                        '<div class="input-prepend"><span class="add-on">Rp</span><input style="direction:rtl" class="angka deposite_amount" value="' . $m->deposite_amount . '" name="Deposite[' . $m->Deposite->id . ']" type="text"></div>'
                         . '</td>                                                        
                         <td style="text-align:right" id="subtotal">' . landa()->rp($m->deposite_amount * -1) . '</td>                                                        
                     </tr>';
