@@ -25,15 +25,6 @@ $dp_by = array('cash' => 'Cash', 'cc' => 'Credit Card', 'debit' => 'Debit Card',
 echo $form->dropDownListRow($model, 'dp_by', $dp_by, array('class' => 'span2', 'maxlength' => 5, 'empty' => 'Please Choose'));
 ?>
 
-<?php echo $form->textFieldRow($model, 'amount', array('class' => 'span3', 'prepend' => 'Rp')); ?>
-
-<?php echo $form->textFieldRow($model, 'description', array('class' => 'span5')); ?>
-
-<?php
-$is_applied = array('0' => 'Not Yet', '1' => 'Yes');
-echo $form->dropDownListRow($model, 'is_applied', $is_applied, array('class' => 'span2', 'maxlength' => 5, 'empty' => 'Please Choose'));
-?>
-
 <?php
 $data2 = array('' => 'Please Choose') + CHtml::listData(User::model()->listUsers('user'), 'id', 'name');
 echo $form->select2Row($model, 'created_user_id', array(

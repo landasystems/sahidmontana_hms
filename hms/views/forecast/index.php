@@ -52,7 +52,11 @@ $this->endWidget();
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
 		'tahun',
-		'created',
+            array(
+            'name' => 'created',
+            'type' => 'raw',
+            'value' => 'date("d M Y h:i:s", strtotime($data->created))',
+        ),
        array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template' => '{view} {update} {delete}',

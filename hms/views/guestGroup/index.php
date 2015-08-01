@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Access Roles');
+$this->setPageTitle('Group Guest');
 
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(

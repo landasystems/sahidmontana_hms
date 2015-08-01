@@ -172,13 +172,13 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                             $booked = '<span class="label label-info">Yes (Confirmed)</span>';
                             $name = $mSchedule[$arr->id]->Reservation->Guest->name;
                             $regDetail = ReservationDetail::model()->find(array('condition' => 'reservation_id=' . $mSchedule[$arr->id]['reservation_id'] . ' and room_id=' . $mSchedule[$arr->id]['room_id']));
-                            $dateCheckout = date('Y-M-d', strtotime($regDetail->Reservation->date_to));
+                            $dateCheckout = date('d-M-Y', strtotime($regDetail->Reservation->date_to));
                         } elseif ($mSchedule[$arr->id]['status'] == 'reservation') {
                             $class = 'reservation';
                             $booked = '<span class="label label-info">Yes (Unconfirmed)</span>';
                             $name = $mSchedule[$arr->id]->Reservation->Guest->name;
                             $regDetail = ReservationDetail::model()->find(array('condition' => 'reservation_id=' . $mSchedule[$arr->id]['reservation_id'] . ' and room_id=' . $mSchedule[$arr->id]['room_id']));
-                            $dateCheckout = date('Y-M-d', strtotime($regDetail->Reservation->date_to));
+                            $dateCheckout = date('d-M-Y', strtotime($regDetail->Reservation->date_to));
                         } else {
                             $booked = '<span class="label label-vc">No</span>';
                         }
@@ -193,7 +193,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                         <td>' . $arr->bed . '</td>
                         <td>' . $name . '</td>
                         <td>' . $dateCheckout . '</td>
-                        <td>' . $arr->modified . '</td>
+                        <td>' . date("d M Y H:i:s",strtotime($arr->modified)) . '</td>
                         <td>' . $houseKeeper . '</td>
                         <td>' . $description . '</td>
                   </tr>';
