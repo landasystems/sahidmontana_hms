@@ -310,7 +310,7 @@
                                     'options' => array(
                                         'format' => 'dd/MM/yyyy',
                                         'minDate' => $minDate,
-                                        'callback' => 'js:function(start, end){console.log(start.toString("d MMMM, yyyy") + " - " + end.toString("d MMMM, yyyy"));changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
+                                        'callback' => 'js:function(start, end){changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
                                         'startDate' => $date, 'endDate' => $date2
                                     ),
                                     'hint' => '<label><i>Arrival - Departure</i><label>'
@@ -320,7 +320,7 @@
                                 <div class="control-group ">
                                     <label class="control-label">Night</label>
                                     <div class="controls">
-                                        <input class="span1" name="night" id="night" type="text">
+                                        <input class="span1" name="night" id="night" type="text" readonly>
                                     </div>
                                 </div>
 
@@ -781,10 +781,6 @@
         ?>
     </div>
 
-
-
-
-
     <?php
 //change from charting
     $autoOpen = false;
@@ -1024,8 +1020,8 @@
 
 
 <script>
-    function calculation() {
 
+    function calculation() {
         $(".pax").each(function() {
             var pax = parseInt($(this).val());
             pax = pax ? pax : 0;
@@ -1166,10 +1162,6 @@
     }
 
     function changeDate(start, end) {
-//        var start = getDate(start);
-//        var end = getDate(end);
-//        var days = (end - start) / 1000 / 60 / 60 / 24;
-//        $('#night').val(days);
         $.ajax({
             url: "<?php echo url('reservation/checkRoom'); ?>",
             type: "POST",
@@ -1184,5 +1176,20 @@
                 }
             }
         });
+        selisihHari(start, end);
+    }
+<?php
+$date1 = explode('/', $date);
+$date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
+$date2 = explode('/', $date2);
+$date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
+?>
+    selisihHari("<?php echo $date1 ?>", "<?php echo $date2 ?>");
+
+    function selisihHari(start, end) {
+        var start = new Date(start);
+        var end = new Date(end);
+        var days = (end - start) / 1000 / 60 / 60 / 24;
+        $('#night').val(days);
     }
 </script>

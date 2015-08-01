@@ -517,7 +517,6 @@ class ReservationController extends Controller {
                     $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
                     $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
                     $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                    //$other = json_encode(array('company' => $company));
                     $user->company = $company;
                     $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
                     $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';

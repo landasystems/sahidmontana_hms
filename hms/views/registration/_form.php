@@ -376,7 +376,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 'options' => array(
                                     'format' => 'dd/MM/yyyy',
                                     'minDate' => $minDate,
-                                    'callback' => 'js:function(start, end){console.log(start.toString("d MMMM, yyyy") + " - " + end.toString("d MMMM, yyyy"));changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
+                                    'callback' => 'js:function(start, end){changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
                                     'startDate' => $date, 'endDate' => $date2),
                                 'hint' => '<label><i>Arrival - Departure</i><label>',
                                     )
@@ -386,7 +386,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             <div class="control-group ">
                                 <label class="control-label">Night</label>
                                 <div class="controls">
-                                    <input class="span1" name="night" id="night" type="text">
+                                    <input class="span1" name="night" id="night" type="text" readonly="true">
                                 </div>
                             </div>
 
@@ -1061,14 +1061,14 @@ if ($model->isNewRecord == FALSE) {
 }
 ?>
 <script>
-<?php
-if (!empty($id)) {
-    ?>
+    <?php
+    if (!empty($id)) {
+        ?>
         $("#newGuest").hide();
         $("#reservation").hide();
-    <?php
-}
-?>
+        <?php
+    }
+    ?>
     function calculation() {
 
         $(".pax").each(function() {
@@ -1267,13 +1267,13 @@ if (!empty($id)) {
     $("#tb-choosed-room").on('click', '.others_include', function(event) {  //on click    
         calculation();
     });
-<?php
-if (!empty($reservation_id)) {
-    echo '$("#Registration_reservation_id").trigger("change");';
-    echo '$("seachBy").prop("checked", false);';
-    echo '$("#seachBy").trigger("change");';
-}
-?>
+    <?php
+    if (!empty($reservation_id)) {
+        echo '$("#Registration_reservation_id").trigger("change");';
+        echo '$("seachBy").prop("checked", false);';
+        echo '$("#seachBy").trigger("change");';
+    }
+    ?>
 
     function clearItem() {
         $(".itemSelected").remove();
@@ -1295,6 +1295,19 @@ if (!empty($reservation_id)) {
                 }
             }
         });
+        selisihHari(start, end);
     }
-</script>
+    <?php
+    $date1 = explode('/', $date);
+    $date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
+    $date2 = explode('/', $date2);
+    $date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
+    ?>
+    selisihHari("<?php echo $date1 ?>", "<?php echo $date2 ?>");
 
+    function selisihHari(start, end) {
+        var start = new Date(start);
+        var end = new Date(end);
+        var days = (end - start) / 1000 / 60 / 60 / 24;
+        $('#night').val(days);
+    }
