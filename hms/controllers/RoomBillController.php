@@ -320,17 +320,17 @@ class RoomBillController extends Controller {
                     $end = date("Y-m-d", strtotime($extendDate));
 
                     //pengecekan jika bentrok dengan room schedule (Reservasi)
-//                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status <>"vacant"';
-//                    $data = RoomSchedule::model()->findAll(array('condition' => $filter)); 
-//                    if (empty($data)) {
-                    //                    } else {
-//                        foreach ($data as $o) {
-//                            if (!empty($o->reservation_id)) {
-//                                $id = $o->reservation_id;
-//                            }
-//                        }
-//                        Yii::app()->user->setFlash('error', '<strong>Sorry! </strong> This room is reserved in arange date. Please edit room in this reservation first.  <a target="_blank" href="' . url('reservation/update/' . $id) . '">Edit Reservation</a> ');
-//                    }
+                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status <>"vacant"';
+                    $data = RoomSchedule::model()->findAll(array('condition' => $filter)); 
+                    if (empty($data)) {
+                                        } else {
+                        foreach ($data as $o) {
+                            if (!empty($o->reservation_id)) {
+                                $id = $o->reservation_id;
+                            }
+                        }
+                        Yii::app()->user->setFlash('error', '<strong>Sorry! </strong> This room is reserved in arange date. Please edit room in this reservation first.  <a target="_blank" href="' . url('reservation/update/' . $id) . '">Edit Reservation</a> ');
+                    }
 
                     $roomBill = RoomBill::model()->find(array(
                         'condition' => 'room_id=' . $id . ' and is_checkedout=0'
