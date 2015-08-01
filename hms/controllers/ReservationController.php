@@ -2,8 +2,6 @@
 
 class ReservationController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -178,9 +176,6 @@ class ReservationController extends Controller {
         $bed = $_POST['bed'];
         $package = $_POST['Reservation']['package_room_type_id'];
 
-//        $date = explode('-', $sDate);
-//        $start = date("Y/m/d", strtotime($date[0]));
-//        $end = date("Y/m/d", strtotime('-1 day', strtotime($date[1])));
         $date = explode('-', $sDate);
         $date1 = explode('/', $date[0]);
         $date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
@@ -484,7 +479,7 @@ class ReservationController extends Controller {
 //            'modelDp' => $modelDp,
 //        ));
 //    }
-    
+
     public function actionView($id) {
         cs()->registerScript('read', '
             $("form input, form textarea, form select").each(function(){
@@ -663,8 +658,6 @@ class ReservationController extends Controller {
 
                 $model->attributes = $_POST['Reservation'];
                 $model->guest_user_id = $_POST['id'];
-//                $sDate = $_POST['Reservation']['date_from'];
-//                $date = explode('-', $sDate);
                 $sDate = str_replace(" ", "", $_POST['Reservation']['date_from']);
                 $date = explode('-', $sDate);
                 $date1 = explode('/', $date[0]);
@@ -796,7 +789,7 @@ class ReservationController extends Controller {
         $model = new Reservation('search');
         $model->unsetAttributes();  // clear any default values
 
-        if (isset($_POST['cancel'])) {
+//        if (isset($_POST['cancel'])) {
             if (!empty($_POST['cancelId'])) {
                 $cancel = Reservation::model()->findByPk($_POST['cancelId']);
                 $cancel->status = $_POST['cancelStatus'];
@@ -805,14 +798,16 @@ class ReservationController extends Controller {
                 } else {
                     $cancel->reason_of_cancel = '';
                 }
-                $cancel->save();
 
                 //update schedule
                 $status = ($cancel->status == 'cancel' || $cancel->status == 'noshow') ? 'vacant' : $cancel->status;
                 RoomSchedule::model()->updateAll(array('status' => $status), 'reservation_id=' . $cancel->id);
+
+                if ($cancel->save()) {
+                    $this->redirect(array('index'));
+                }
             }
-            $this->redirect(array('index'));
-        }
+//        }
 
 
         if (isset($_GET['Reservation'])) {

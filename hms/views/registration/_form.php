@@ -42,14 +42,6 @@
             }
         });
     }
-    /*$(document).ready(function () {
-     $("#Registration_guest_user_id").blur(function () {
-     //setTimeout(getDetail(),30000);
-     setTimeout(function () {
-     getDetail()
-     }, 2000);
-     })
-     }); */
 </script>
 <div class="alert alert-danger fade in">   
     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -119,7 +111,7 @@ if ($model->isNewRecord == FALSE) {
     $dateResult = date('d/m/Y', strtotime($model->date_from)) . ' - ' . date('d/m/Y', strtotime($model->date_to));
     $roles_id = $model->Guest->roles_id;
 } else {
-    if(isset($_GET['date'])) {
+    if (isset($_GET['date'])) {
         $dateResult = date('d/m/Y', strtotime($_GET['date'])) . ' - ' . date('d/m/Y', strtotime($_GET['date']) + 86400);
     } else {
         $dateResult = date('d/m/Y', strtotime($siteConfig->date_system)) . ' - ' . date('d/m/Y', strtotime($siteConfig->date_system) + 86400);
@@ -150,7 +142,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     <span class="entypo-icon-user"></span>
                     <span>Guest Information</span>                    
                 </h4>
-
             </div>
 
             <div class="content" >    
@@ -173,7 +164,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                 <?php
                 $date_siteconfig = $siteConfig->date_system;
-                
                 ?>
 
                 <?php
@@ -351,7 +341,12 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                 <table width="100%">
                     <tr>
-                        <td style="vertical-align: top" class="td">
+                        <td style="vertical-align: top">
+                            <style>
+                                .form-horizontal .input-prepend+.help-block, .form-horizontal .input-append+.help-block {
+                                    margin-top: 0px;
+                                }
+                            </style>
                             <?php
                             echo $form->radioButtonListRow($model, 'type', array('regular' => 'Regular', 'house use' => 'House Use', 'compliment' => 'Compliment'), array('separator' => '', 'onchange' => 'calculation()'));
                             ?>  
@@ -383,9 +378,18 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     'minDate' => $minDate,
                                     'callback' => 'js:function(start, end){console.log(start.toString("d MMMM, yyyy") + " - " + end.toString("d MMMM, yyyy"));changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
                                     'startDate' => $date, 'endDate' => $date2),
+                                'hint' => '<label><i>Arrival - Departure</i><label>',
                                     )
                             );
                             ?>   
+
+                            <div class="control-group ">
+                                <label class="control-label">Night</label>
+                                <div class="controls">
+                                    <input class="span1" name="night" id="night" type="text">
+                                </div>
+                            </div>
+
                             <div class="control-group ">
                                 <label class="control-label">Guest Type</label>
                                 <div class="controls">                            
@@ -400,6 +404,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     <input type="hidden" name="roles" id="roles" value="<?php echo $role ?>"/>                                    
                                 </div>
                             </div>
+                        </td>
+
+                        <td style="vertical-align: top" class="td">
                             <div class="control-group ">
                                 <label class="control-label">Room Type</label>
                                 <div class="controls">
@@ -411,14 +418,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     <?php echo Chtml::dropdownList('roomType', '', $roomType, array('class' => 'span3',)); ?>
                                 </div>
                             </div> 
-
-                        </td>
-
-                        <td style="vertical-align: top" class="td">
                             <div class="control-group ">
                                 <label class="control-label">Bed</label>
                                 <div class="controls">                                        
-                                    <?php // echo Chtml::dropdownList('bed', '', Room::model()->bedList, array('style' => 'width:98%',));                 ?>
                                     <?php echo Chtml::radioButtonList('bed', 0, array(0 => '-') + Room::model()->bedList, array('separator' => '')); ?>
                                 </div>
                             </div>                    
