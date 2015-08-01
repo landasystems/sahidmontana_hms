@@ -53,7 +53,15 @@ class SiteController extends Controller {
      * This is the action to handle external exceptions.
      */
     public function actionError() {
-        $this->layout = 'blank';
+        $this->layout = 'blankHeader';
+        cs()->registerScript('error', '
+                $(".errorContainer").hide();
+                $(".errorContainer").fadeIn(1000).animate({
+                    "top": "50%", "margin-top": +($(".errorContainer").height() / -2 - 30)
+                }, {duration: 750, queue: false}, function () {
+                    // Animation complete.
+                });
+            ');
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
@@ -232,28 +240,28 @@ class SiteController extends Controller {
 //        if ($siteConfig->is_setup == 0) {
 //            $this->redirect('setup');
 //        } else {
-            $model = new LoginForm;
+        $model = new LoginForm;
 
-            // if it is ajax validation request
-            if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
-                echo CActiveForm::validate($model);
-                Yii::app()->end();
+        // if it is ajax validation request
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if (isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate() && $model->login()) {
+                $userLog = new UserLog;
+                $userLog->save();
+
+                $this->redirect(Yii::app()->user->returnUrl);
             }
-
-            // collect user input data
-            if (isset($_POST['LoginForm'])) {
-                $model->attributes = $_POST['LoginForm'];
-                // validate user input and redirect to the previous page if valid
-                if ($model->validate() && $model->login()) {
-                    $userLog = new UserLog;
-                    $userLog->save();
-
-                    $this->redirect(Yii::app()->user->returnUrl);
-                }
-            }
-            // display the login form
-            $this->layout = 'blankHeader';
-            $this->render('login', array('model' => $model));
+        }
+        // display the login form
+        $this->layout = 'blankHeader';
+        $this->render('login', array('model' => $model));
 //        }
     }
 

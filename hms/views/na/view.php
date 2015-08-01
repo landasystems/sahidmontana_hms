@@ -4,7 +4,7 @@
     
 </style>
 <?php
-$this->setPageTitle('View Night Audit | Date : ' . $model->date_na);
+$this->setPageTitle('Night Audit | ' . date('d F Y',strtotime($model->date_na)));
 
 ?>
 

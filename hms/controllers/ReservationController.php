@@ -496,7 +496,7 @@ class ReservationController extends Controller {
         $modelDp = new Deposite;
         $modelDp->code = SiteConfig::model()->formatting('deposite');
         $this->js();
-        $this->layout = "mainWide";
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         if (isset($_POST['Reservation'])) {
             if (!empty($_POST['ReservationDetail']['room_id'])) {
                 //$model->guest_user_id = 0;
@@ -625,7 +625,7 @@ class ReservationController extends Controller {
     public function actionUpdate($id) {
         $siteConfig = SiteConfig::model()->findByPk(1);
         $settings = json_decode($siteConfig->settings, true);
-        $this->layout = "mainWide";
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $model = $this->loadModel($id)->with('Guest', 'Guest.City', 'Guest.City.province', 'Bill', 'Bill.Roles');
         $mDetail = ReservationDetail::model()->with('Room', 'Room.RoomType')->findAll(array('condition' => 'reservation_id=' . $id));
         $this->js();
