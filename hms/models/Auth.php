@@ -1,124 +1,26 @@
+
 <?php
 
-/**
- * This is the model class for table "{{auth}}".
- *
- * The followings are the available columns in table '{{auth}}':
- * @property integer $id
- * @property string $name
- * @property string $description
- * @property string $alias
- * @property string $module
- * @property string $crud
- */
 class Auth extends CActiveRecord {
 
-    /**
-     * @return string the associated database table name
-     */
-    public function tableName() {
-        return '{{auth}}';
-    }
-
-    /**
-     * @return array validation rules for model attributes.
-     */
-    public function rules() {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
-        return array(
-            array('id, description', 'length', 'max' => 255),
-            array('module, crud', 'safe'),
-            // The following rule is used by search().
-            // @todo Please remove those attributes that should not be searched.
-            array('id, description, crud', 'safe', 'on' => 'search'),
-        );
-    }
-
-    /**
-     * @return array relational rules.
-     */
-    public function relations() {
-        // NOTE: you may need to adjust the relation name and the related
-        // class name for the relations automatically generated below.
-        return array(
-        );
-    }
-
-    /**
-     * @return array customized attribute labels (name=>label)
-     */
-    public function attributeLabels() {
-        return array(
-            'id' => 'ID',
-            'description' => 'Description',
-//            'alias' => 'Alias',
-//            'module' => 'Module',
-            'crud' => 'Crud',
-        );
-    }
-
-    /**
-     * Retrieves a list of models based on the current search/filter conditions.
-     *
-     * Typical usecase:
-     * - Initialize the model fields with values from filter form.
-     * - Execute this method to get CActiveDataProvider instance which will filter
-     * models according to data in model fields.
-     * - Pass data provider to CGridView, CListView or any similar widget.
-     *
-     * @return CActiveDataProvider the data provider that can return the models
-     * based on the search/filter conditions.
-     */
-    public function search() {
-        // @todo Please modify the following code to remove attributes that should not be searched.
-
-        $criteria = new CDbCriteria;
-
-        $criteria->compare('id', $this->id);
-//        $criteria->compare('name', $this->name, true);
-        $criteria->compare('description', $this->description, true);
-//        $criteria->compare('alias', $this->alias, true);
-//        $criteria->compare('module', $this->module, true);
-        $criteria->compare('crud', $this->crud, true);
-
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
-        ));
-    }
-
-    /**
-     * @return CDbConnection the database connection used for this class
-     */
-    public function getDbConnection() {
-        return Yii::app()->db;
-    }
-
-    /**
-     * Returns the static model of the specified AR class.
-     * Please note that you should have this exact method in all your CActiveRecord descendants!
-     * @param string $className active record class name.
-     * @return Auth the static model class
-     */
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
     public function modules() {
-
         return array(
             array('label' => '<span class="icon16 icomoon-icon-screen"></span>Dashboard', 'url' => array('/dashboard')),
-            array('visible' => user()->isSuperUser, 'label' => '<span class="icon16 icomoon-icon-cog"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update/1')),
-                    array('label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/landa/roles')),
+            array('visible' => landa()->checkAccess('SiteConfig', 'r') || landa()->checkAccess('Roles', 'r'), 'label' => '<span class="icon16 icomoon-icon-cog"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+                    array('visible' => landa()->checkAccess('SiteConfig', 'r'), 'auth_id' => 'SiteConfig', 'label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update/1'), 'crud' => array("r" => 1)),
+                    array('visible' => landa()->checkAccess('Roles', 'r'), 'auth_id' => 'Roles', 'label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/roles'), 'crud' => array("c" => 1, "r" => 1, "u" => 1, "d" => 1)),
                 ),
             ),
             array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-contact"></span>User', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('GroupUser', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group User', 'url' => url('landa/roles/user'), 'auth_id' => 'GroupUser'),
+                    array('visible' => landa()->checkAccess('GroupUser', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group User', 'url' => url('/roles/user'), 'auth_id' => 'GroupUser'),
                     array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-user"></span>User', 'url' => url('/user'), 'auth_id' => 'User'),
                 )),
             array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => '<span class="icon16  icomoon-icon-accessibility"></span>Guest', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group Guest', 'url' => url('landa/roles/guest'), 'auth_id' => 'GroupGuest'),
+                    array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group Guest', 'url' => url('/roles/guest'), 'auth_id' => 'GroupGuest'),
                     array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-user"></span>Guest', 'url' => url('/user/guest'), 'auth_id' => 'Guest'),
                 )),
             array('visible' => landa()->checkAccess('Room', 'r'), 'label' => '<span class="icon16 wpzoom-factory"></span>Rooms', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
@@ -163,9 +65,9 @@ class Auth extends CActiveRecord {
                     array('visible' => landa()->checkAccess('Report_RoomSales', 'r'), 'label' => '<span class="icon16 icomoon-icon-arrow-right"></span>Top Producers', 'url' => array('report/topProducers'), 'auth_id' => 'Report_RoomSales'),
                     array('visible' => landa()->checkAccess('Report_RoomSales', 'r'), 'label' => '<span class="icon16 icomoon-icon-arrow-right"></span>Top Ten', 'url' => array('report/topTen'), 'auth_id' => 'Report_RoomSales'),
                 )),
-//            array('label' => '<span class="icon16 icomoon-icon-bars"></span>Chart', 'url' => array('/User'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-//                )),
         );
     }
 
 }
+
+?>

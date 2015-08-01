@@ -11,7 +11,7 @@
         <td width="300" align="center">
             <?php
             $siteConfig = SiteConfig::model()->listSiteConfig();
-            $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, param('id'));
+            $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, 1);
             echo '<img src="' . $img['big'] . '" class="img-polaroid" style="max-width: 350px;"/>';
             ?>
             <div style="margin-left: 0px; margin-top: 10px;"> <?php echo $form->fileFieldRow($model, 'client_logo', array('class' => 'span3', 'label' => false)); ?></div>

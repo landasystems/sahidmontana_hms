@@ -42,7 +42,7 @@
                 <div class="content">
                     <div class="you span6">
                         <?php
-                        $img = Yii::app()->landa->urlImg('site/', Yii::app()->session['site']['client_logo'], param('id'));
+                        $img = Yii::app()->landa->urlImg('site/', Yii::app()->session['site']['client_logo'], 1);
                         echo '<img src="' . $img['small'] . '" style="float:left; margin-right: 10px" class="img-polaroid"/>';
                         ?>
                         <h3><?php echo Yii::app()->session['site']['client_name'] ?></h3>

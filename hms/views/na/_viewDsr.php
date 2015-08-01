@@ -18,7 +18,7 @@ foreach ($arrOtherForecast as $dep) {
     <center><table width="100%" style="font-size: 11px;line-height: 11px !important;">
             <tr>
                 <td style="text-align: center;width: 33%"><?php
-                    $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, param('id'));
+                    $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, 1);
                     echo '<img src="' . $img['small'] . '" class="cc logo" width="100"';
                     ?></td>
                 <td style="text-align: center;width: 33%"> 

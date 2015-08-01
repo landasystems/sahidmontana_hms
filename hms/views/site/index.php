@@ -155,7 +155,7 @@ $totBill = count($bill);
                 </div>
                 <div class="content">
                     <?php
-                    $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, param('id'));
+                    $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, 1);
                     echo '<img style="width:97%" src="' . $img['big'] . '" class="img-polaroid"/>';
                     ?>
                     <div class="clearfix"></div>

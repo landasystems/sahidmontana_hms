@@ -150,7 +150,7 @@ class SiteConfig extends CActiveRecord {
 
         if (empty(Yii::app()->session['site'])) {
 //            trace('bb');
-            Yii::app()->session['site'] = $this->findByPk(param('id'));
+            Yii::app()->session['site'] = $this->findByPk(1);
         }
 //        trace ($this->cache['listSiteConfig']);
         return Yii::app()->session['site'];
