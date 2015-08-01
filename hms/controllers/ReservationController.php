@@ -622,7 +622,6 @@ class ReservationController extends Controller {
             if (!empty($_POST['ReservationDetail']['room_id'])) {
 
                 $model->attributes = $_POST['Reservation'];
-                $model->attributes = $_POST['Reservation'];
                 $model->status = $_POST['Reservation']['status'];
                 $status = ($model->status == 'cancel' || $model->status == 'noshow') ? 'vacant' : $model->status;
 
@@ -700,14 +699,18 @@ class ReservationController extends Controller {
                         $endTime = strtotime("-1 day", strtotime($date2));
 
                         // Loop between timestamps, 24 hours at a time
-                        for ($t = $startTime; $t <= $endTime; $t = $t + 86400) {
-                            $mSchedule = new RoomSchedule;
-                            $mSchedule->room_id = $mDet->room_id;
-                            $mSchedule->date_schedule = date('Y/m/d', $t);
-                            $mSchedule->status = $status;
-                            $mSchedule->reservation_id = $model->id;
-                            if (!$mSchedule->save())
-                                throw new CHttpException(404, 'The requested page does not exist.');
+                        if ($status == "vacant") {
+                            //do nothing
+                        } else {
+                            for ($t = $startTime; $t <= $endTime; $t = $t + 86400) {
+                                $mSchedule = new RoomSchedule;
+                                $mSchedule->room_id = $mDet->room_id;
+                                $mSchedule->date_schedule = date('Y/m/d', $t);
+                                $mSchedule->status = $status;
+                                $mSchedule->reservation_id = $model->id;
+                                if (!$mSchedule->save())
+                                    throw new CHttpException(404, 'The requested page does not exist.');
+                            }
                         }
                     }
                     $this->redirect(array('view', 'id' => $model->id));
@@ -761,7 +764,7 @@ class ReservationController extends Controller {
         if (!empty($_POST['cancelId'])) {
             $cancel = Reservation::model()->findByPk($_POST['cancelId']);
             $cancel->status = $_POST['cancelStatus'];
-            if ($_POST['cancelStatus'] == 'cancel') {
+            if ($cancel->status == 'cancel') {
                 $cancel->reason_of_cancel = $_POST['cancelReason'];
             } else {
                 $cancel->reason_of_cancel = '';
@@ -769,8 +772,11 @@ class ReservationController extends Controller {
 
             //update schedule
             $status = ($cancel->status == 'cancel' || $cancel->status == 'noshow') ? 'vacant' : $cancel->status;
-            RoomSchedule::model()->updateAll(array('status' => $status), 'reservation_id=' . $cancel->id);
-
+            if ($status == "vacant") {
+                RoomSchedule::model()->deleteAll('reservation_id=' . $cancel->id);
+            } else {
+                RoomSchedule::model()->updateAll(array('status' => $status), 'reservation_id=' . $cancel->id);
+            }
             if ($cancel->save()) {
                 $this->redirect(array('index'));
             }

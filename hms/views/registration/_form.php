@@ -1311,3 +1311,4 @@ if ($model->isNewRecord == FALSE) {
         var days = (end - start) / 1000 / 60 / 60 / 24;
         $('#night').val(days);
     }
+</script>

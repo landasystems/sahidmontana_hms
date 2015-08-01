@@ -2,8 +2,6 @@
 
 class RoomBillController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -269,9 +267,8 @@ class RoomBillController extends Controller {
         }
     }
 
-
     public function actionExtend() {
-        
+
         $model = new RoomBill;
         $filter = 't.status="occupied" or t.status="compliment" or t.status="house use"';
 
@@ -279,68 +276,66 @@ class RoomBillController extends Controller {
         $number = isset($_GET['roomNumber']) ? $_GET['roomNumber'] : '';
 
 
-        if (isset($_POST['yt0'])) {
+        if (isset($_POST['roomId'])) {
 //            $roomBill = RoomBill::model()->find(array('condition' => 'registration_id IN (' . implode(',', $_POST['registration_id']) . ') and is_checkedout=0'));
             foreach ($_POST['roomId'] as $val => $id) {
+                $room = Room::model()->findbyPk($_POST['roomId'][$val]);
                 if (isset($_POST['dateOut'][$val])) {
                     $curentDate = date('m/d/Y', strtotime($_POST['dateOut'][$val]));
-                    $extendDate = date('m/d/Y', strtotime('-1 day', strtotime($_POST['extend'])));
+                    $extendDate = date('m/d/Y', strtotime(strtotime($_POST['extend'])));
                     $start = date("Y-m-d", strtotime($curentDate));
                     $end = date("Y-m-d", strtotime($extendDate));
 
                     //pengecekan jika bentrok dengan room schedule (Reservasi)
-                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status <>"vacant"';
-                    $data = RoomSchedule::model()->findAll(array('condition' => $filter)); 
-                    if (empty($data)) {
-                                        } else {
-                        foreach ($data as $o) {
-                            if (!empty($o->reservation_id)) {
-                                $id = $o->reservation_id;
+                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status != "vacant"';
+                    $data = RoomSchedule::model()->findAll(array('condition' => $filter));
+                    if (!empty($data)) {
+                        $roomBill = RoomBill::model()->find(array(
+                            'condition' => 'room_id=' . $id . ' and is_checkedout=0'
+                        ));
+                        $lead = RoomBill::model()->find(array(
+                            'condition' => 'lead_room_bill_id=0 AND room_id=' . $id . ' and is_checkedout=0'
+                        ));
+                        $attributes = $roomBill->getAttributes();
+                        if ($extendDate >= $curentDate) {
+                            while (strtotime($curentDate) <= strtotime($extendDate)) {
+                                $newRoomBill = new RoomBill;
+                                $newRoomBill->attributes = $attributes;
+                                unset($newRoomBill->id);
+                                $newRoomBill->date_bill = date('Y-m-d', strtotime($curentDate));
+                                $newRoomBill->registration_id = $roomBill->registration_id;
+                                $newRoomBill->room_number = $_POST['roomId'][$val];
+                                $newRoomBill->room_id = $roomBill->room_id;
+                                $newRoomBill->moved_room_bill_id = $roomBill->moved_room_bill_id;
+                                $newRoomBill->processed = 0;
+                                $newRoomBill->is_checkedout = 0;
+                                $newRoomBill->is_na = 0;
+                                $newRoomBill->na_id = NULL;
+                                $newRoomBill->lead_room_bill_id = $lead->id;
+                                $newRoomBill->save();
+
+                                $newSchedule = new RoomSchedule;
+                                $newSchedule->room_bill_id = $newRoomBill->id;
+                                $newSchedule->room_id = $roomBill->room_id;
+                                $newSchedule->date_schedule = date('Y-m-d', strtotime($curentDate));
+                                $newSchedule->status = "occupied";
+                                $newSchedule->registration_id = $roomBill->registration_id;
+                                $newSchedule->save();
+                                $curentDate = date('m/d/Y', strtotime("+1 day", strtotime($curentDate)));
                             }
+                            $scc[] = $room->number;
+                            Yii::app()->user->setFlash('success', '<strong>Success! </strong> Room ' . join(',', $scc) . ' has been extended.');
+                        } else {
+                            $erDate[] = $room->number;
+                            Yii::app()->user->setFlash('error', '<strong>Ups! </strong> Date for room ' . join(',', $erDate) . ' must more than current checkout date.');
                         }
-                        Yii::app()->user->setFlash('error', '<strong>Sorry! </strong> This room is reserved in arange date. Please edit room in this reservation first.  <a target="_blank" href="' . url('reservation/update/' . $id) . '">Edit Reservation</a> ');
-                    }
-
-                    $roomBill = RoomBill::model()->find(array(
-                        'condition' => 'room_id=' . $id . ' and is_checkedout=0'
-                    ));
-                    $lead = RoomBill::model()->find(array(
-                        'condition' => 'lead_room_bill_id=0 AND room_id=' . $id . ' and is_checkedout=0'
-                    ));
-                    $attributes = $roomBill->getAttributes();
-                    if ($extendDate >= $curentDate) {
-                        while (strtotime($curentDate) <= strtotime($extendDate)) {
-                            $newRoomBill = new RoomBill;
-                            $newRoomBill->attributes = $attributes;
-                            unset($newRoomBill->id);
-                            $newRoomBill->date_bill = date('Y-m-d', strtotime($curentDate));
-                            $newRoomBill->registration_id = $roomBill->registration_id;
-                            $newRoomBill->room_number = $_POST['roomId'][$val];
-                            $newRoomBill->room_id = $roomBill->room_id;
-                            $newRoomBill->moved_room_bill_id = $roomBill->moved_room_bill_id;
-                            $newRoomBill->processed = 0;
-                            $newRoomBill->is_checkedout = 0;
-                            $newRoomBill->is_na = 0;
-                            $newRoomBill->na_id = NULL;
-                            $newRoomBill->lead_room_bill_id = $lead->id;
-                            $newRoomBill->save();
-
-                            $newSchedule = new RoomSchedule;
-                            $newSchedule->room_bill_id = $newRoomBill->id;
-                            $newSchedule->room_id = $roomBill->room_id;
-                            $newSchedule->date_schedule = date('Y-m-d', strtotime($curentDate));
-                            $newSchedule->status = "occupied";
-                            $newSchedule->registration_id = $roomBill->registration_id;
-                            $newSchedule->save();
-                            $curentDate = date('m/d/Y', strtotime("+1 day", strtotime($curentDate)));
-                        }
-                        Yii::app()->user->setFlash('success', '<strong>Success! </strong> Room has been extended.');
-//                    $this->redirect(url('roomBill/charge'));
                     } else {
-                        Yii::app()->user->setFlash('error', '<strong>Ups! </strong> Date extend must more than current checkout date.');
+                        $erSch[] = $room->number;
+                        Yii::app()->user->setFlash('error', '<strong>Sorry! </strong> Room ' . join(',', $erSch) . ' is <b>Occupied</b> in arange date. ');
                     }
                 }
             }
+            $this->redirect('extend');
         }
 
         $this->render('extend', array(
@@ -351,7 +346,7 @@ class RoomBillController extends Controller {
     }
 
     public function actionMove() {
-        
+
         $model = new RoomBill;
         $number = isset($_GET['roomNumber']) ? $_GET['roomNumber'] : '';
 
@@ -447,10 +442,11 @@ class RoomBillController extends Controller {
                     }
                 }
 
-                Yii::app()->user->setFlash('success', '<strong>Welldone! </strong>Room success moved to Room ' . $room_selected);
+                Yii::app()->user->setFlash('success', '<strong>Welldone! </strong>Room ' . $roomOld->number . ' success moved to Room ' . $room_selected);
             } else {
                 Yii::app()->user->setFlash('error', '<strong>Error! </strong>No room selected to move.');
             }
+            $this->redirect('move');
         }
         $filter = 't.status="occupied" or t.status="compliment" or t.status="house use"';
         $room = Room::model()->
