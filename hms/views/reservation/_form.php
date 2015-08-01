@@ -809,7 +809,7 @@
                 <div class="span1" style="width:10px">:</div>
                 <div class="span8" style="text-align:left">
                     <?php
-                    $readOnly = ($model->status != 'registered' or $model->status != 'cancel') ? false : true;
+                    $readOnly = ($model->status == 'registered' or $model->status == 'cancel') ? true : false;
                     $array = ($model->status != 'registered') ? array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'cancel' => 'Cancel', 'noshow' => 'No Show') : array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'registered' => 'Registered', 'cancel' => 'Cancel', 'noshow' => 'No Show');
                     ?>
                     <?php echo $form->dropDownListRow($model, 'status', $array, array('disabled' => $readOnly, 'label' => false)); ?>
@@ -821,7 +821,7 @@
                 </div>
                 <div class="span1" style="width:10px">:</div>
                 <div class="span8" style="text-align:left">
-                    <?php echo $form->textAreaRow($model, 'reason_of_cancel', array('style' => 'margin-bottom:5px;height:70px', 'class' => 'span12', 'label' => false)); ?>                    
+                    <?php echo $form->textAreaRow($model, 'reason_of_cancel', array('disabled' => $readOnly, 'style' => 'margin-bottom:5px;height:70px', 'class' => 'span12', 'label' => false)); ?>                    
                 </div>
             </div> 
         </div>
