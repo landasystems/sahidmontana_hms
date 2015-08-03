@@ -1,9 +1,7 @@
 <?php
 $siteConfig = SiteConfig::model()->findByPk(1);
 $this->setPageTitle('Room Charting');
-$this->breadcrumbs = array(
-    'Room Charting',
-);
+
 ?>
 
 <?php

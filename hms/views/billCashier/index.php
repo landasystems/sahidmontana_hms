@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Bill Cashiers');
-$this->breadcrumbs = array(
-    'Bill Cashiers',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

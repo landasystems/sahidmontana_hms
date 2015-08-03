@@ -2,7 +2,7 @@
 
 class CityController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -103,8 +103,7 @@ class CityController extends Controller {
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
@@ -112,7 +111,7 @@ class CityController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-       
+
         $criteria = new CDbCriteria();
 
         $model = new City('search');
@@ -134,7 +133,7 @@ class CityController extends Controller {
             if (!empty($model->province_id))
                 $criteria->addCondition('province_id = "' . $model->province_id . '"');
         }
-        
+
 
 
         $this->render('index', array(
@@ -179,8 +178,6 @@ class CityController extends Controller {
         }
     }
 
-    
-
     public function actionDynaCities() {
         $t_data = City::model()->findAll('province_id=:province_id', array(':province_id' => (int) $_POST['province_id']));
         $data = CHtml::listData($t_data, 'id', 'name');
@@ -198,10 +195,22 @@ class CityController extends Controller {
                 'bootstrap.widgets.TbSelect2', array(
             'name' => $prefix . 'city_' . $name,
             'value' => '',
-            'data' => CHtml::listData(City::model()->findAll(array('condition' => 'province_id="' . $province . '"')), 'id', 'name'),            
+            'data' => CHtml::listData(City::model()->findAll(array('condition' => 'province_id="' . $province . '"')), 'id', 'name'),
             'options' => array(
                 'width' => '40%'
             )), true);
+    }
+
+    public function actionListAjax() {
+        $data = City::model()->with('Province')->findAll(array('condition'=>'t.name like "%'.$_GET['q'].'%" OR Province.name like "%'.$_GET['q'].'%"'));
+        if (empty($data)) {
+            $list[] = array("id" => "0", "text" => "No Results Found..");
+        } else {
+            foreach ($data as $val) {
+                $list[] = array("id" => $val->id, "text" => $val->fullName);
+            }
+        }
+        echo json_encode($list);
     }
 
 }

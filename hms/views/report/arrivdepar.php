@@ -11,9 +11,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Arrival / Departure');
-$this->breadcrumbs = array(
-    'Arrival / Departure',
-);
 
 ?>
 <script>

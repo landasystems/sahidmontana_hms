@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Night Audit');
-$this->breadcrumbs = array(
-    'Night Audit',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

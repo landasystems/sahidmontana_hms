@@ -11,9 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Daily Foods Percover Report');
-$this->breadcrumbs = array(
-    'Daily Foods Percover Report',
-);
+
 ?>
 <script>
     function hide() {

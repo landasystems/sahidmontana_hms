@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Create Charge Additionals');
-$this->breadcrumbs=array(
-	'Charge Additionals'=>array('index'),
-	'Create',
-);
 
 ?>
 

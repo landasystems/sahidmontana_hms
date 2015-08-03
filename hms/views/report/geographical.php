@@ -23,9 +23,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Geographical Guest');
-$this->breadcrumbs = array(
-    'Geographical Guest',
-);
+
 ?>
 <script>
     function hide() {

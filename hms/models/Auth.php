@@ -16,12 +16,12 @@ class Auth extends CActiveRecord {
                 ),
             ),
             array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-contact"></span>User', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('GroupUser', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group User', 'url' => url('/roles/user'), 'auth_id' => 'GroupUser'),
+                    array('visible' => landa()->checkAccess('GroupUser', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group User', 'url' => url('/roles'), 'auth_id' => 'GroupUser'),
                     array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-user"></span>User', 'url' => url('/user'), 'auth_id' => 'User'),
                 )),
             array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => '<span class="icon16  icomoon-icon-accessibility"></span>Guest', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group Guest', 'url' => url('/roles/guest'), 'auth_id' => 'GroupGuest'),
-                    array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-user"></span>Guest', 'url' => url('/user/guest'), 'auth_id' => 'Guest'),
+                    array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group Guest', 'url' => url('/guestGroup'), 'auth_id' => 'GroupGuest'),
+                    array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-user"></span>Guest', 'url' => url('/guest'), 'auth_id' => 'Guest'),
                 )),
             array('visible' => landa()->checkAccess('Room', 'r'), 'label' => '<span class="icon16 wpzoom-factory"></span>Rooms', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('RoomType', 'r'), 'label' => '<span class="icon16 icomoon-icon-arrow-right"></span>Type', 'url' => array('/roomType'), 'auth_id' => 'RoomType'),

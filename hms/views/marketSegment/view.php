@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Market Segments | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Market Segments' => array('index'),
-    $model->name,
-);
+
 ?>
 
 <?php

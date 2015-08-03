@@ -12,10 +12,6 @@ if (!empty($_GET['number'])) {
 
 <?php
 $this->setPageTitle('Charge Guest Ledger');
-$this->breadcrumbs = array(
-    'Charge Guest Ledger',
-);
-
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'sms-form',

@@ -1,10 +1,5 @@
 <?php
 $this->setPageTitle('Edit Room Schedules | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Room Schedules'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
 
 ?>
 

@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Initial Forecasts');
-$this->breadcrumbs = array(
-    'Initial Forecasts',
-);
+
 ?>
 
 <div class="form">

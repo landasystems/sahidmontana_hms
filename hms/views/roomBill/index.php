@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Guest Billing');
-$this->breadcrumbs = array(
-    'Guest Billing',
-);
-
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'sms-form',

@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Room Types | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Room Types' => array('index'),
-    $model->name,
-);
+
 ?>
 
 <?php

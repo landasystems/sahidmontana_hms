@@ -1,8 +1,5 @@
 <?php
 $this->setPageTitle('Site Config');
-$this->breadcrumbs=array(
-	'Site Config',
-);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

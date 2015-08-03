@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Room Bill Dps');
-$this->breadcrumbs = array(
-    'Room Bill Dps',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

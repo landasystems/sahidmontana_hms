@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Move Room');
-$this->breadcrumbs = array(
-    'Move Room',
-);
+
 $siteConfig = SiteConfig::model()->findByPk(1);
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(

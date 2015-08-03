@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Registrations');
-$this->breadcrumbs = array(
-    'Registrations',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

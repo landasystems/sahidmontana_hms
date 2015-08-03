@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Extend');
-$this->breadcrumbs = array(
-    'Extend',
-);
-
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'sms-form',

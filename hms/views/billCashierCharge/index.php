@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Bill Cashier Charges');
-$this->breadcrumbs=array(
-	'Bill Cashier Charges',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Deposites');
-$this->breadcrumbs=array(
-	'Deposites'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

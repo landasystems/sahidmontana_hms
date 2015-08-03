@@ -11,9 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Expected Guest');
-$this->breadcrumbs = array(
-    'Expected Guest',
-);
+
 
 ?>
 <script>

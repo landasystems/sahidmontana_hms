@@ -51,9 +51,9 @@ class User extends CActiveRecord {
             array('name, city_id, roles_id', 'required'),
             array('city_id, created_user_id', 'numerical', 'integerOnly' => true),
             array('username, phone', 'length', 'max' => 20),
-            array('password, name,description, address', 'length', 'max' => 255),
+            array('password, name,description,company, address', 'length', 'max' => 255),
             array('code', 'length', 'max' => 100),
-            array('modified,sex,nationality,others,birth, enabled', 'safe'),
+            array('modified,sex,nationality,birth, enabled', 'safe'),
             array('username, email', 'unique', 'message' => '{attribute} : {value} already exists!', 'on' => 'allow'),
             array('email', 'email', 'on' => 'allow'),
             array('username, email', 'required', 'on' => 'allow'),
@@ -263,8 +263,6 @@ class User extends CActiveRecord {
 
     public function getTagBiodata() {
         $code = (!empty($this->code)) ? '' : '';
-        $companys = json_decode($this->others, true);
-        $company = (!empty($companys['company'])) ? ' (' . $companys['company'] . ')' : '-';
         $phone = (isset($this->phone)) ? $this->phone : '-';
         return '<div class="row-fluid">
                     <div class="span3" style="text-align:left">
@@ -281,7 +279,7 @@ class User extends CActiveRecord {
                     </div>
                     <div class="span1">:</div>
                     <div class="span8" style="text-align:left">
-                        ' . $this->guestName . $company . '
+                        ' . $this->guestName . $this->company . '
                     </div>
                 </div>
                 <div class="row-fluid">

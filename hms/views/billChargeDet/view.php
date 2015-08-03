@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Bill Charge Dets | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Bill Charge Dets'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

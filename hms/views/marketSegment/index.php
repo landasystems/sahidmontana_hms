@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Market Segments');
-$this->breadcrumbs = array(
-    'Market Segments',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Bill Cashier Charges');
-$this->breadcrumbs=array(
-	'Bill Cashier Charges'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

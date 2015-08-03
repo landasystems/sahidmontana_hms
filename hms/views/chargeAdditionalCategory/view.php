@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Departement | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Charge Departement' => array('index'),
-    $model->name,
-);
+
 ?>
 
 <?php

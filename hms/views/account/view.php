@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Accounts | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Accounts'=>array('index'),
-	$model->name,
-);
+
 ?>
 
 <?php 

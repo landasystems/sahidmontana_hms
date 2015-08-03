@@ -2,10 +2,7 @@
 $category = ChargeAdditionalCategory::model()->findAll(array('index' => 'id'));
 $id = $model->charge_additional_category_id;
 $this->setPageTitle('View Bill Charges | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Bill Charges' => array('index'),
-    $model->id,
-);
+
 $departement = '';
 ?>
 

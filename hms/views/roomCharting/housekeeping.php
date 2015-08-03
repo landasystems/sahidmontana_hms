@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('House Keeping');
-$this->breadcrumbs = array(
-    'House Keeping',
-);
+
 ?>
 
 <?php

@@ -1,10 +1,5 @@
 <?php
 $this->setPageTitle('Edit Accounts | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Accounts'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
 
 ?>
 

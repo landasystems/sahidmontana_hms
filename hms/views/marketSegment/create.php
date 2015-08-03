@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Market Segments');
-$this->breadcrumbs=array(
-	'Market Segments'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

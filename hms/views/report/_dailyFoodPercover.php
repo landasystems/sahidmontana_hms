@@ -219,7 +219,7 @@ $category = ChargeAdditionalCategory::model()->findAll(array('condition' => 'lev
             <tr><td colspan="8">&nbsp;</td></tr>
         </tbody>
 
-        <?
+        <?php
     }
     ?>
     <thead>  

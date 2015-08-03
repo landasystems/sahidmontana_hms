@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Bill Charge Dets | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Bill Charge Dets'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

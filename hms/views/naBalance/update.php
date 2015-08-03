@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Na Balances | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Na Balances'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

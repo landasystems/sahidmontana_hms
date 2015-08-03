@@ -6,9 +6,6 @@
 ?>
 <?php
 $this->setPageTitle('Guest Billing');
-$this->breadcrumbs = array(
-    'Guest Billing',
-);
 ?>
 <?php
 $this->beginWidget('zii.widgets.CPortlet', array(

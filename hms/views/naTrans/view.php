@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Na Trans | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Na Trans'=>array('index'),
-	$model->name,
-);
+
 ?>
 
 <?php 

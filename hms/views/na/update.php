@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Nas | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Nas'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

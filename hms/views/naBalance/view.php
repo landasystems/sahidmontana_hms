@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Na Balances | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Na Balances'=>array('index'),
-	$model->name,
-);
+
 ?>
 
 <?php 

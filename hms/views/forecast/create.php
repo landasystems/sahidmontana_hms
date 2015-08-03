@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Forecasts');
-$this->breadcrumbs=array(
-	'Forecasts'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

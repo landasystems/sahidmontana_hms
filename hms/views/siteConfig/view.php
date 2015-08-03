@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Site Config | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Site Config'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

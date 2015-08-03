@@ -1084,7 +1084,7 @@
                         });
                         $(a).html(result);
                     });
-                    // baru ditambahkan
+                    // baru diCreatekan
                     $(".room_rate").each(function () {
                         b = this;
                         result = '';

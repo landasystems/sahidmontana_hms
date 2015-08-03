@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Na Dps | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Na Dps'=>array('index'),
-	$model->name,
-);
+
 ?>
 
 <?php 

@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Hotel Trans');
-$this->breadcrumbs=array(
-	'Hotel Trans',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

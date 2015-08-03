@@ -1,10 +1,7 @@
 <?php
 
 $this->setPageTitle('Create Night Audit');
-$this->breadcrumbs = array(
-    'Night Audit' => array('index'),
-    'Create',
-);
+
 ?>
 
 <?php

@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Provinces');
-$this->breadcrumbs=array(
-	'Provinces'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

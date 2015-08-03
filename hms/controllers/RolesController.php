@@ -2,7 +2,7 @@
 
 class RolesController extends Controller {
 
-    public $breadcrumbs;
+    
     public $layout = '//layouts/main';
 
     public function filters() {
@@ -45,6 +45,7 @@ class RolesController extends Controller {
 
         if (isset($_POST['Roles'])) {
             $model->attributes = $_POST['Roles'];
+            $model->is_allow_login = 1;
 
             if ($model->save()) {
                 $this->saveRolesAuth($model->id);
@@ -62,6 +63,7 @@ class RolesController extends Controller {
 
         if (isset($_POST['Roles'])) {
             $model->attributes = $_POST['Roles'];
+            $model->is_allow_login = 1;
             if ($model->save()) {
                 //delete roles auth
                 RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $model->id));
@@ -119,21 +121,17 @@ class RolesController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
-
         $model = new Roles('search');
-        $model->unsetAttributes();  // clear any default values
+        $model->unsetAttributes();  
+        $model->is_allow_login = 1;  
 
         if (isset($_GET['Roles'])) {
             $model->attributes = $_GET['Roles'];
 
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
         }
 
         $this->render('index', array(
             'model' => $model,
-            'type' => 'index'
         ));
     }
 

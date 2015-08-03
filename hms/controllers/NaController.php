@@ -2,7 +2,7 @@
 
 class NaController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layoutac for the views. Defaults to '//layouts/column2', meaning

@@ -2,7 +2,7 @@
 
 class UserController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -37,17 +37,14 @@ class UserController extends Controller {
         );
     }
 
-    /**
-     * Displays a particular model.
-     * @param integer $id the ID of the model to be displayed
-     */
     public function actionView($id) {
-        $type = 'user';
-        if (!empty($_GET['type']))
-            $type = $_GET['type'];
-        $this->render('view', array(
+        cs()->registerScript('read', '
+            $("form input, form textarea, form select").each(function(){
+                $(this).prop("disabled", true);
+            });');
+        $_GET['v'] = true;
+        $this->render('update', array(
             'model' => $this->loadModel($id),
-            'type' => $type,
         ));
     }
 
@@ -94,7 +91,7 @@ class UserController extends Controller {
         $name = $_GET["q"];
         $list = array();
         $query = 'select acca_user.name as name, acca_room_bill.id as id, acca_room_bill.room_number as room_number from acca_user, acca_registration, acca_room_bill where acca_user.id = acca_registration.guest_user_id and acca_registration.id = acca_room_bill.registration_id and acca_room_bill.is_checkedout=0 and acca_room_bill.lead_room_bill_id=0 and acca_user.name like "%' . $name . '%" or acca_room_bill.room_number = "' . $name . '" order by acca_room_bill.room_number ASC';
-        $data =  Yii::app()->db->createCommand($query)->queryAll();
+        $data = Yii::app()->db->createCommand($query)->queryAll();
         //$data = RoomBill::model()->with('Registration')->with('User')->findAll(array('condition' => 'User.name like "%' . $name . '%" User.id = Registration.guest_user_id and t.is_checkedout=0 and t.lead_room_bill_id=0', "order" => "t.room_number Asc"));
         if (empty($data)) {
             $list[] = array("id" => "0", "text" => "No Results Found..");
@@ -105,7 +102,7 @@ class UserController extends Controller {
         }
         echo json_encode($list);
     }
-    
+
 //    public function actionGetListGlMove() {
 //        $name = $_GET["q"];
 //        $list = array();
@@ -136,22 +133,7 @@ class UserController extends Controller {
       $this->render(url('dashboard'));
       } */
 
-    /**
-     * Creates a new model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     */
-    public function actionAllowLogin() {
-//        logs($_POST);
-        if (!empty($_POST['User']['roles_id'])) {
-            $listRoles = Roles::model()->listRoles();
-            if (isset($listRoles[$_POST['User']['roles_id']]))
-                echo $listRoles[$_POST['User']['roles_id']]['is_allow_login'];
-            elseif ($_POST['User']['roles_id'] == -1)
-                echo '-1';
-            else
-                echo '0';
-        }
-    }
+  
 
     public function actionHistory() {
         $this->render('history', array(
@@ -164,33 +146,19 @@ class UserController extends Controller {
 
     public function actionCreate() {
         $model = new User;
-        $listRoles = Roles::model()->listRoles();
+        $listRoles = Roles::model()->user();
         cs()->registerScript('tab', '$("#myTab a").click(function(e) {
                                         e.preventDefault();
                                         $(this).tab("show");
                                     })');
 
-        $type = 'user';
+     
         $model->scenario = 'allow';
-
-        if (!empty($_GET['type']))
-            $type = $_GET['type'];
-        if ($type != 'user')
-            $model->scenario = 'notAllow';
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
-            if ($type != 'user') {
-                $model->username = '';
-                $model->password = '';
-            }
             $model->birth = (!empty($_POST['User']['birth'])) ? date('Y/m/d', strtotime($_POST['User']['birth'])) : '';
             $model->password = sha1($model->password);
-
-            //$company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-            //$other = json_encode(array('company' => $company));
-            //$model->others = $other;
-            $model->company = $_POST['User']['company'];
 
             $file = CUploadedFile::getInstance($model, 'avatar_img');
             if (is_object($file)) {
@@ -206,14 +174,13 @@ class UserController extends Controller {
                     $file->saveAs('images/avatar/' . $model->avatar_img);
                     Yii::app()->landa->createImg('avatar/', $model->avatar_img, $model->id);
                 }
-                $this->redirect(array('view', 'id' => $model->id, 'type' => $type));
+                $this->redirect(array('view', 'id' => $model->id));
             }
         }
 
 
         $this->render('create', array(
             'model' => $model,
-            'type' => $type,
         ));
     }
 
@@ -223,14 +190,9 @@ class UserController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $listRoles = Roles::model()->listRoles();
+        $listRoles = Roles::model()->user();
         $model = $this->loadModel($id);
-        $type = 'user';
         $model->scenario == 'allow';
-        if (!empty($_GET['type']))
-            $type = $_GET['type'];
-        if ($type != 'user')
-            $model->scenario == 'notAllow';
 
         $tempRoles = $model->roles_id;
         $tempPass = $model->password;
@@ -241,29 +203,10 @@ class UserController extends Controller {
                                         $(this).tab("show");
                                     })');
 
-        if (isset($listRoles[$model->roles_id])) {
-            if ($listRoles[$model->roles_id]['is_allow_login'] == '0')
-                $model->scenario = 'notAllow';
-            else
-                $model->scenario = 'allow';
-        }
-
-
         if (isset($_POST['User'])) {
-            if (!empty($_POST['User']['roles_id'])) {
-                $model->scenario = 'allow';
-                if (isset($listRoles[$_POST['User']['roles_id']])) {
-                    if ($listRoles[$_POST['User']['roles_id']]['is_allow_login'] == '0')
-                        $model->scenario = 'notAllow';
-                }
-            }
 
             $model->attributes = $_POST['User'];
             $model->birth = (!empty($_POST['User']['birth'])) ? date('Y/m/d', strtotime($_POST['User']['birth'])) : '';
-            $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-            //$other = json_encode(array('company' => $company));
-            //$model->others = $other;
-            $model->company = $company;
 
             if (!empty($model->password)) { //not empty, change the password
                 $model->password = sha1($model->password);
@@ -279,39 +222,24 @@ class UserController extends Controller {
             }
 
             if ($model->save()) {
-                //check if any change in roles, revoke then assign new role
-//                if ($tempRoles != $model->roles) {
-//                    $model->revokeRoles($tempRoles, $model->id);
-//                    $model->assignRoles($model->roles, $model->id);
-//                }
-                //clear session user
-                unset(Yii::app()->session['listUser']);
-                unset(Yii::app()->session['listUserPhone']);
 
-                $this->redirect(array('view', 'id' => $model->id, 'type' => $type));
+                $this->redirect(array('view', 'id' => $model->id));
             }
         }
         unset($model->password);
-        if ($type != 'user')
-            $model->scenario == 'allow';
 
         $this->render('update', array(
             'model' => $model,
-            'type' => $type,
         ));
     }
 
     public function actionUpdateProfile() {
         $id = user()->id;
-        $listRoles = Roles::model()->listRoles();
+        $listRoles = Roles::model()->user();
         $model = $this->loadModel($id);
         $_GET['id'] = user()->id;
-        $type = 'user';
+        
         $model->scenario == 'allow';
-        if (!empty($_GET['type']))
-            $type = $_GET['type'];
-        if ($type != 'user')
-            $model->scenario == 'notAllow';
 
         $tempRoles = $model->roles_id;
         $tempPass = $model->password;
@@ -321,21 +249,8 @@ class UserController extends Controller {
                                         e.preventDefault();
                                         $(this).tab("show");
                                     })');
-        if (isset($listRoles[$model->roles_id])) {
-            if ($listRoles[$model->roles_id]['is_allow_login'] == '0')
-                $model->scenario = 'notAllow';
-            else
-                $model->scenario = 'allow';
-        }
 
         if (isset($_POST['User'])) {
-            if (!empty($_POST['User']['roles_id'])) {
-                $model->scenario = 'allow';
-                if (isset($listRoles[$_POST['User']['roles_id']])) {
-                    if ($listRoles[$_POST['User']['roles_id']]['is_allow_login'] == '0')
-                        $model->scenario = 'notAllow';
-                }
-            }
             $model->attributes = $_POST['User'];
 
             if (!empty($model->password)) { //not empty, change the password
@@ -358,7 +273,6 @@ class UserController extends Controller {
         unset($model->password);
         $this->render('update', array(
             'model' => $model,
-            'type' => $type,
         ));
     }
 
@@ -505,7 +419,6 @@ class UserController extends Controller {
 
         $this->render('index', array(
             'model' => $model,
-            'type' => 'user',
             'roles' => $roles,
         ));
     }
@@ -573,63 +486,7 @@ class UserController extends Controller {
 
         $this->render('index', array(
             'model' => $model,
-            'type' => 'user',
             'roles' => $roles,
-        ));
-    }
-
-    public function actionGuest() {
-        $criteria = new CDbCriteria();
-
-        $model = new User('search');
-        $model->unsetAttributes();  // clear any default values
-        $roles = "";
-        if (isset($_GET['User'])) {
-            $model->attributes = $_GET['User'];
-            $roles = (isset($_GET['User']['roles'])) ? $_GET['User']['roles'] : '';
-
-            if (!empty($model->username))
-                $criteria->addCondition('username = "' . $model->username . '"');
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->city_id))
-                $criteria->addCondition('city_id = "' . $model->city_id . '"');
-
-
-            if (!empty($model->address))
-                $criteria->addCondition('address = "' . $model->address . '"');
-
-
-            if (!empty($model->phone))
-                $criteria->addCondition('phone = "' . $model->phone . '"');
-        }
-
-        $this->render('index', array(
-            'model' => $model,
-            'type' => 'guest',
-            'roles' => $roles,
-        ));
-    }
-
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin() {
-        $model = new User('search');
-        $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['User']))
-            $model->attributes = $_GET['User'];
-
-        $this->render('admin', array(
-            'model' => $model,
         ));
     }
 

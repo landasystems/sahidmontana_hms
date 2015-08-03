@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Room Listing / ' . date('d F Y'));
-$this->breadcrumbs = array(
-    'Room Listing',
-);
+
 $siteConfig = SiteConfig::model()->findByPk(1);
 ?>
 

@@ -11,9 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
 $this->setPageTitle('Guest History ');
-$this->breadcrumbs = array(
-    'Guest' => array('guest'),
-);
+
 ?>
 <div class="well">
     <div class="control-group ">

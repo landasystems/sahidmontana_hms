@@ -2,7 +2,7 @@
 
 class ReportController extends Controller {
 
-    public $breadcrumbs;
+    
     public $layout = 'main';
 
     public function filters() {

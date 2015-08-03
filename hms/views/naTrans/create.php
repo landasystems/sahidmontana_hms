@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Na Trans');
-$this->breadcrumbs=array(
-	'Na Trans'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

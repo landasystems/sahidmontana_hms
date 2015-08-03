@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Setting Transaction');
-$this->breadcrumbs = array(
-    'Setting Transaction',
-);
+
 ?>
 
 <?php

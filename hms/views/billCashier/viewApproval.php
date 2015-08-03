@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Bill Cashiers  Approval| ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Bill Cashiers Approval' => array('approving'),
-    $model->id,
-);
+
 ?>
 
 <?php

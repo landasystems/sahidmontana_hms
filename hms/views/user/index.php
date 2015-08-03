@@ -1,8 +1,5 @@
 <?php
-$this->setPageTitle(ucfirst($type));
-$this->breadcrumbs = array(
-    ucfirst($type),
-);
+$this->setPageTitle('User');
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -27,10 +24,9 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-//        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create', array('type' => $type)), 'linkOptions' => array()),
-//        array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl($type), 'active' => true, 'linkOptions' => array()),
-//        array('label' => 'Pencarian', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
-
+        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
+        array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
+        array('label' => 'Pencarian', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
         array('label' => 'Export Excel', 'icon' => 'icomoon-icon-file-excel', 'url' => Yii::app()->controller->createUrl('user/generateExcel'), 'linkOptions' => array()),
     ),
 ));
@@ -38,49 +34,21 @@ $this->endWidget();
 ?>
 
 
-<div class="search-form" >
+<div class="search-form" style="display:none">
     <?php
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'search-User-form',
         'action' => Yii::app()->createUrl($this->route),
         'method' => 'get',
     ));
-    ?>
 
+    $this->renderPartial('_search', array(
+        'model' => $model,
+        'form' => $form,
+    ));
 
-    <div class="row">   
+    $this->endWidget();
 
-        <div class="span4">
-            <?php echo $form->dropDownListRow($model, 'roles_id', CHtml::listData(Roles::model()->listRole($type), 'id', 'name'), array('class' => 'span4', 'empty' => 'Please Choose',)); ?>
-            <?php // echo $form->textFieldRow($model, 'name', array('class' => 'span4', 'maxlength' => 255)); ?>
-        </div>
-
-        <div class="span4" style="padding-left: 90px;">
-            <div class="control-group">
-                <label class="control-label" for="inputEmail">Name</label>
-                <div class="controls">
-                    <div class="input-append">
-                        <input class="span4" maxlength="255" name="User[name]" id="User_name" type="text">
-                        <button class="btn btn-primary" type="submit">Go!</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="search-form2" style="display: none">
-        <?php
-        $this->renderPartial('_search', array(
-            'model' => $model,
-            'form' => $form,
-        ));
-        ?>
-    </div>
-
-
-
-    <?php $this->endWidget(); ?>
-    <?php
     $cs = Yii::app()->getClientScript();
     $cs->registerCoreScript('jquery');
     $cs->registerCoreScript('jquery.ui');
@@ -99,21 +67,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     )
         ));
 
-$btncreate = '';
-if (landa()->checkAccess('User', 'c'))
-    $btncreate .= '<a class="btn btn-primary pull-right" style="margin-left: 10px" href="' . url('user/create', array('type' => $type)) . '"><i class="icon-plus"></i> Create</a>&nbsp;&nbsp;';
+
 $btndelete = '';
 if (landa()->checkAccess('User', 'd'))
-    $btncreate .= '<button type="submit" name="delete" value="dd" style="margin-left: 10px" class="btn btn-danger pull-right"><span class="icon16 brocco-icon-trashcan white"></span> Delete</button>';
+    $btndelete .= '<button type="submit" name="delete" value="dd" style="margin-left: 10px" class="btn btn-danger pull-right"><span class="icon16 brocco-icon-trashcan white"></span> Delete Checked</button>';
 ?>
 <?php echo $btndelete ?>
-<a class="search-button2 btn btn-inverse pull-right" style="margin-left: 10px" href="#"><i class="icon-search"></i> Search</a> 
-<?php echo $btncreate ?>
-<br>
-<br>
 <?php
 $buton = '';
-
 if (landa()->checkAccess('User', 'r'))
     $buton .= '{view}';
 
@@ -125,7 +86,7 @@ if (landa()->checkAccess('User', 'd'))
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'User-grid',
-    'dataProvider' => $model->search($type),
+    'dataProvider' => $model->search(),
     'type' => 'table table-hover',
     'template' => '{pager}{items}{pager}{summary}',
     'columns' => array(
@@ -163,14 +124,14 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'buttons' => array(
                 'view' => array(
                     'label' => 'View',
-                    'url' => 'Yii::app()->createUrl("user/view", array("id"=>$data->id,"type"=>"' . $type . '"))',
+                    'url' => 'Yii::app()->createUrl("user/view", array("id"=>$data->id))',
                     'options' => array(
                         'class' => 'btn btn-small view'
                     )
                 ),
                 'update' => array(
                     'label' => 'Edit',
-                    'url' => 'Yii::app()->createUrl("user/update", array("id"=>$data->id,"type"=>"' . $type . '"))',
+                    'url' => 'Yii::app()->createUrl("user/update", array("id"=>$data->id))',
                     'options' => array(
                         'class' => 'btn btn-small update'
                     )
@@ -188,13 +149,3 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 ));
 ?>
 <?php $this->endWidget(); ?>
-<script>
-    $('.search-button2').click(function() {
-        $('.search-form2').slideToggle('fast');
-        return false;
-    });
-    $('.search-button').click(function() {
-        $('.search-form').slideToggle('fast');
-        return false;
-    });
-</script>
