@@ -33,9 +33,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'enctype' => 'multipart/form-data',
     ),
     'enableClientValidation' => true,
-    'clientOptions' => array(
-        'validateOnSubmit' => true,
-    ),
+    
         ));
 ?>
 

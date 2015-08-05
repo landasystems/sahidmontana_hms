@@ -118,42 +118,14 @@ class HotelTransController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	        
                 $model=new HotelTrans('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['HotelTrans']))
 		{
-                        $model->attributes=$_GET['HotelTrans'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->registration_id)) $criteria->addCondition('registration_id = "'.$model->registration_id.'"');
-                     
-                    	
-                       if (!empty($model->created)) $criteria->addCondition('created = "'.$model->created.'"');
-                     
-                    	
-                       if (!empty($model->created_user_id)) $criteria->addCondition('created_user_id = "'.$model->created_user_id.'"');
-                     
-                    	
-                       if (!empty($model->total)) $criteria->addCondition('total = "'.$model->total.'"');
-                     
-                    	
-                       if (!empty($model->refund)) $criteria->addCondition('refund = "'.$model->refund.'"');
-                     
-                    	
-                       if (!empty($model->barcode)) $criteria->addCondition('barcode = "'.$model->barcode.'"');
-                     
-                    			
+                        $model->attributes=$_GET['HotelTrans'];	
 		}
-                
-       
 
                 $this->render('index',array(
 			'model'=>$model,

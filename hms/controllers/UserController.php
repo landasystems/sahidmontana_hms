@@ -146,7 +146,6 @@ class UserController extends Controller {
 
     public function actionCreate() {
         $model = new User;
-        $listRoles = Roles::model()->user();
         cs()->registerScript('tab', '$("#myTab a").click(function(e) {
                                         e.preventDefault();
                                         $(this).tab("show");
@@ -190,7 +189,6 @@ class UserController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $listRoles = Roles::model()->user();
         $model = $this->loadModel($id);
         $model->scenario == 'allow';
 
@@ -236,7 +234,6 @@ class UserController extends Controller {
 
     public function actionUpdateProfile() {
         $id = user()->id;
-        $listRoles = Roles::model()->user();
         $model = $this->loadModel($id);
         $_GET['id'] = user()->id;
         
@@ -357,133 +354,15 @@ class UserController extends Controller {
 
     public function actionIndex() {
 
-        $criteria = new CDbCriteria();
-
         $model = new User('search');
         $model->unsetAttributes();  // clear any default values
         $roles = "";
         if (isset($_GET['User'])) {
             $model->attributes = $_GET['User'];
             $roles = (isset($_GET['User']['roles'])) ? $_GET['User']['roles'] : '';
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->username))
-                $criteria->addCondition('username = "' . $model->username . '"');
-
-
-            if (!empty($model->email))
-                $criteria->addCondition('email = "' . $model->email . '"');
-
-
-            if (!empty($model->password))
-                $criteria->addCondition('password = "' . $model->password . '"');
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->city_id))
-                $criteria->addCondition('city_id = "' . $model->city_id . '"');
-
-
-            if (!empty($model->address))
-                $criteria->addCondition('address = "' . $model->address . '"');
-
-
-            if (!empty($model->phone))
-                $criteria->addCondition('phone = "' . $model->phone . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-            if (!empty($model->roles))
-                $criteria->addCondition('roles = "' . $model->roles . '"');
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
 
 
-
-        $this->render('index', array(
-            'model' => $model,
-            'roles' => $roles,
-        ));
-    }
-
-    public function actionUser() {
-        $criteria = new CDbCriteria();
-
-        $model = new User('search');
-        $model->unsetAttributes();  // clear any default values   
-
-        $roles = "";
-        if (isset($_GET['User'])) {
-            $model->attributes = $_GET['User'];
-            $roles = (isset($_GET['User']['roles'])) ? $_GET['User']['roles'] : '';
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->username))
-                $criteria->addCondition('username = "' . $model->username . '"');
-
-
-            if (!empty($model->email))
-                $criteria->addCondition('email = "' . $model->email . '"');
-
-
-            if (!empty($model->password))
-                $criteria->addCondition('password = "' . $model->password . '"');
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->city_id))
-                $criteria->addCondition('city_id = "' . $model->city_id . '"');
-
-
-            if (!empty($model->address))
-                $criteria->addCondition('address = "' . $model->address . '"');
-
-
-            if (!empty($model->phone))
-                $criteria->addCondition('phone = "' . $model->phone . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-            if (!empty($model->roles))
-                $criteria->addCondition('roles = "' . $model->roles . '"');
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
-        }
 
         $this->render('index', array(
             'model' => $model,

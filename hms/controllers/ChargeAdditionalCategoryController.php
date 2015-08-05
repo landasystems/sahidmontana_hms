@@ -148,42 +148,13 @@ class ChargeAdditionalCategoryController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        
-        $criteria = new CDbCriteria();
 
         $model = new ChargeAdditionalCategory('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['ChargeAdditionalCategory'])) {
             $model->attributes = $_GET['ChargeAdditionalCategory'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->level))
-                $criteria->addCondition('level = "' . $model->level . '"');
-
-
-            if (!empty($model->lft))
-                $criteria->addCondition('lft = "' . $model->lft . '"');
-
-
-            if (!empty($model->rgt))
-                $criteria->addCondition('rgt = "' . $model->rgt . '"');
-
-
-            if (!empty($model->root))
-                $criteria->addCondition('root = "' . $model->root . '"');
         }
-       
-
 
         $this->render('index', array(
             'model' => $model,

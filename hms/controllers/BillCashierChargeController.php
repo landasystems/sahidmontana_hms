@@ -122,26 +122,12 @@ class BillCashierChargeController extends Controller
 	 */
 	public function actionIndex()
 	{	
-            $criteria = new CDbCriteria();            
-
                 $model=new BillCashierCharge('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['BillCashierCharge']))
 		{
                         $model->attributes=$_GET['BillCashierCharge'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->bill_cashier_id)) $criteria->addCondition('bill_cashier_id = "'.$model->bill_cashier_id.'"');
-                     
-                    	
-                       if (!empty($model->bill_charge_id)) $criteria->addCondition('bill_charge_id = "'.$model->bill_charge_id.'"');
-                     
-                    			
 		}
                 
        

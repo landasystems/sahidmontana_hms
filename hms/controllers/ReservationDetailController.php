@@ -118,30 +118,15 @@ class ReservationDetailController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
+	{	    
 
                 $model=new ReservationDetail('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['ReservationDetail']))
 		{
-                        $model->attributes=$_GET['ReservationDetail'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->reservation_id)) $criteria->addCondition('reservation_id = "'.$model->reservation_id.'"');
-                     
-                    	
-                       if (!empty($model->room_id)) $criteria->addCondition('room_id = "'.$model->room_id.'"');
-                     
-                    			
+                        $model->attributes=$_GET['ReservationDetail'];			   			
 		}
-                
-       
 
                 $this->render('index',array(
 			'model'=>$model,

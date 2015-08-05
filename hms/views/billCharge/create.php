@@ -1,6 +1,5 @@
 <?php
 $this->setPageTitle('Create Bill Charges');
-
 ?>
 
 <?php
@@ -19,15 +18,11 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 $this->endWidget();
 ?>
 
-
 <div class="form">
     <?php
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'bill-charge-form',
         'enableClientValidation' => true,
-        'clientOptions' => array(
-            'validateOnSubmit' => true,
-        ),
         'method' => 'post',
         'type' => 'horizontal',
         'htmlOptions' => array(
@@ -57,7 +52,6 @@ $this->endWidget();
                     <span class="data gray"><?php echo date('d M Y') ?></span>
                 </div> 
             </div>
-
             <div class="content">   
                 <table style="width:100%">
                     <tr>
@@ -136,36 +130,8 @@ $this->endWidget();
         </div>    
 
         <div class="form-actions">
-            <button class="btn btn-primary"  type="button" name ="save" id="save"><i class="icon-ok icon-white"></i> Save & Print</button>
+            <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save & Print</button>
             <button class="btn btn-warning"  type="submit" name="saveTemp" id="saveTemp"><i class="icon-repeat icon-white"></i> Save To Temporary</button>
-            <script>
-                $('#save').on('click', function () {
-                    var refund = $('#BillCharge_refund').val();
-                    var gl_charge = $('#BillCharge_gl_charge').val();
-                    var gl_id = $('#BillCharge_gl_room_bill_id').val();
-                    var ca_charge = $('#BillCharge_ca_charge').val();
-                    var ca_id = $('#BillCharge_ca_user_id').val();
-                    var departement = $('#BillCharge_charge_additional_category_id').val();
-                    if (departement == 0) {
-                        $('#alertContent').html('<strong>Wrong ! </strong> Please select departement');
-                        $('#alert').modal('show');
-                    }
-                    else if (refund < 0) {
-                        $('#alertContent').html('<strong>Wrong Payment! </strong> Please check payment bellow');
-                        $('#alert').modal('show');
-                    }
-                    else if (gl_charge > 0 && gl_id == 0) {
-                        $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose guest ledger name.');
-                        $('#alert').modal('show');
-                    }
-                    else if (ca_charge > 0 && ca_id == 0) {
-                        $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose city ledger name.');
-                        $('#alert').modal('show');
-                    } else {
-                        document.getElementById("bill-charge-form").submit();
-                    }
-                })
-            </script>
             <div id="alert" class="modal large hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -179,7 +145,6 @@ $this->endWidget();
             </div>
         </div>
     </fieldset>
-
     <?php
     $this->beginWidget(
             'bootstrap.widgets.TbModal', array('id' => 'modalAuthority')
@@ -319,4 +284,30 @@ $this->endWidget();
         $(".headerInvoice").css({"display": "block"});
         window.print();
     }
+    $('#save').on('click', function () {
+        var refund = $('#BillCharge_refund').val();
+        var gl_charge = $('#BillCharge_gl_charge').val();
+        var gl_id = $('#BillCharge_gl_room_bill_id').val();
+        var ca_charge = $('#BillCharge_ca_charge').val();
+        var ca_id = $('#BillCharge_ca_user_id').val();
+        var departement = $('#BillCharge_charge_additional_category_id').val();
+        if (departement == 0) {
+            $('#alertContent').html('<strong>Wrong ! </strong> Please select departement');
+            $('#alert').modal('show');
+        }
+        else if (refund < 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please check payment bellow');
+            $('#alert').modal('show');
+        }
+        else if (gl_charge > 0 && gl_id == 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose guest ledger name.');
+            $('#alert').modal('show');
+        }
+        else if (ca_charge > 0 && ca_id == 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose city ledger name.');
+            $('#alert').modal('show');
+        } else {
+            document.getElementById("bill-charge-form").submit();
+        }
+    })
 </script>

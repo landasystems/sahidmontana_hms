@@ -121,57 +121,14 @@ class NaTransController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	   
                 $model=new NaTrans('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['NaTrans']))
 		{
-                        $model->attributes=$_GET['NaTrans'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->na_id)) $criteria->addCondition('na_id = "'.$model->na_id.'"');
-                     
-                    	
-                       if (!empty($model->charge_additional_category_id)) $criteria->addCondition('charge_additional_category_id = "'.$model->charge_additional_category_id.'"');
-                     
-                    	
-                       if (!empty($model->name)) $criteria->addCondition('name = "'.$model->name.'"');
-                     
-                    	
-                       if (!empty($model->room_id)) $criteria->addCondition('room_id = "'.$model->room_id.'"');
-                     
-                    	
-                       if (!empty($model->by)) $criteria->addCondition('by = "'.$model->by.'"');
-                     
-                    	
-                       if (!empty($model->by_cc)) $criteria->addCondition('by_cc = "'.$model->by_cc.'"');
-                     
-                    	
-                       if (!empty($model->by_cl)) $criteria->addCondition('by_cl = "'.$model->by_cl.'"');
-                     
-                    	
-                       if (!empty($model->by_gl)) $criteria->addCondition('by_gl = "'.$model->by_gl.'"');
-                     
-                    	
-                       if (!empty($model->by_bank)) $criteria->addCondition('by_bank = "'.$model->by_bank.'"');
-                     
-                    	
-                       if (!empty($model->by_cash)) $criteria->addCondition('by_cash = "'.$model->by_cash.'"');
-                     
-                    	
-                       if (!empty($model->cashier_user_id)) $criteria->addCondition('cashier_user_id = "'.$model->cashier_user_id.'"');
-                     
-                    			
+                        $model->attributes=$_GET['NaTrans'];	
 		}
-                 
-       
 
                 $this->render('index',array(
 			'model'=>$model,

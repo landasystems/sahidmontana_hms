@@ -121,36 +121,14 @@ class BillChargeDetController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{		
-            $criteria = new CDbCriteria();            
-
+	{		 
                 $model=new BillChargeDet('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['BillChargeDet']))
 		{
                         $model->attributes=$_GET['BillChargeDet'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->bill_charge_id)) $criteria->addCondition('bill_charge_id = "'.$model->bill_charge_id.'"');
-                     
-                    	
-                       if (!empty($model->charge_additional_id)) $criteria->addCondition('charge_additional_id = "'.$model->charge_additional_id.'"');
-                     
-                    	
-                       if (!empty($model->amount)) $criteria->addCondition('amount = "'.$model->amount.'"');
-                     
-                    	
-                       if (!empty($model->charge)) $criteria->addCondition('charge = "'.$model->charge.'"');
-                     
-                    			
 		}
-               
-       
 
                 $this->render('index',array(
 			'model'=>$model,

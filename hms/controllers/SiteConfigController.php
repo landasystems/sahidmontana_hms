@@ -122,7 +122,6 @@ class SiteConfigController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
 
         $model = new SiteConfig('search');
         $model->unsetAttributes();  // clear any default values

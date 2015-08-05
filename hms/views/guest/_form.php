@@ -120,35 +120,7 @@
                     ?>   
                 </div>
             </div>
-
             <?php echo $form->textAreaRow($model, 'address', array('class' => 'span5', 'maxlength' => 255)); ?>
-
-            <?php
-            $cc = '';
-            if ($model->isNewRecord) {
-                $img = Yii::app()->landa->urlImg('', '', '');
-            } else {
-                $img = Yii::app()->landa->urlImg('avatar/', $model->avatar_img, $_GET['id']);
-                $del = '<div class="btn-group photo-det-btn">';
-                $imgs = param('urlImg') . '150x150-noimage.jpg';
-                $cc = CHtml::ajaxLink(
-                                '<i class="icon-trash"></i>', url('user/removephoto', array('id' => $model->id)), array(
-                            'type' => 'POST',
-                            'success' => 'function( data )
-                                                    {
-                                                           $("#my_image").attr("src","' . $imgs . '");
-                                                           $("#yt0").fadeOut();
-                                                    }'), array('class' => 'btn btn-block btn-primary', 'style' => 'width: 160px;font-size: 15px;')
-                        )
-                        . '</div>';
-            }
-
-            echo '<div style="margin-left: 180px">';
-            echo '<img src="' . $img['small'] . '" alt="" class="image img-polaroid" id="my_image"  />';
-            echo $cc;
-            echo '</div>';
-            ?>
-            <?php echo $form->fileFieldRow($model, 'avatar_img', array('class' => 'span3')); ?>
         </div> 
     </div>
 </div>

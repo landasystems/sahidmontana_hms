@@ -130,42 +130,14 @@ class RoomBillDpController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{		
-            $criteria = new CDbCriteria();            
-
+	{		   
                 $model=new RoomBillDp('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['RoomBillDp']))
 		{
-                        $model->attributes=$_GET['RoomBillDp'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->room_bill_id)) $criteria->addCondition('room_bill_id = "'.$model->room_bill_id.'"');
-                     
-                    	
-                       if (!empty($model->amount)) $criteria->addCondition('amount = "'.$model->amount.'"');
-                     
-                    	
-                       if (!empty($model->cc_number)) $criteria->addCondition('cc_number = "'.$model->cc_number.'"');
-                     
-                    	
-                       if (!empty($model->created)) $criteria->addCondition('created = "'.$model->created.'"');
-                     
-                    	
-                       if (!empty($model->created_user_id)) $criteria->addCondition('created_user_id = "'.$model->created_user_id.'"');
-                     
-                    	
-                       if (!empty($model->modified)) $criteria->addCondition('modified = "'.$model->modified.'"');
-                     
-                    			
+                        $model->attributes=$_GET['RoomBillDp'];	
 		}
-                
-       
 
                 $this->render('index',array(
 			'model'=>$model,

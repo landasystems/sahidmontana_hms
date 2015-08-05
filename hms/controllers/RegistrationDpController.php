@@ -126,50 +126,13 @@ class RegistrationDpController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        
-        $criteria = new CDbCriteria();
 
         $model = new RegistrationDp('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['RegistrationDp'])) {
             $model->attributes = $_GET['RegistrationDp'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->registration_id))
-                $criteria->addCondition('registration_id = "' . $model->registration_id . '"');
-
-
-            if (!empty($model->amount))
-                $criteria->addCondition('amount = "' . $model->amount . '"');
-
-
-            if (!empty($model->cc_number))
-                $criteria->addCondition('cc_number = "' . $model->cc_number . '"');
-
-
-            if (!empty($model->is_cashier))
-                $criteria->addCondition('is_cashier = "' . $model->is_cashier . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
-       
-
 
         $this->render('index', array(
             'model' => $model,

@@ -24,9 +24,6 @@ $this->endWidget();
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'bill-charge-form',
         'enableClientValidation' => true,
-        'clientOptions' => array(
-            'validateOnSubmit' => true,
-        ),
         'method' => 'post',
         'type' => 'horizontal',
         'htmlOptions' => array(

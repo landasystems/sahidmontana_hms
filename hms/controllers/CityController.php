@@ -112,26 +112,12 @@ class CityController extends Controller {
      */
     public function actionIndex() {
 
-        $criteria = new CDbCriteria();
 
         $model = new City('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['City'])) {
             $model->attributes = $_GET['City'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->province_id))
-                $criteria->addCondition('province_id = "' . $model->province_id . '"');
         }
 
 

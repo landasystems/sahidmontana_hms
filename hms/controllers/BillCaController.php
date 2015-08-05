@@ -121,48 +121,14 @@ class BillCaController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex(){
-           	
-            $criteria = new CDbCriteria();            
 
                 $model=new BillCa('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['BillCa']))
 		{
-                        $model->attributes=$_GET['BillCa'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->bill_id)) $criteria->addCondition('bill_id = "'.$model->bill_id.'"');
-                     
-                    	
-                       if (!empty($model->bill_charge_id)) $criteria->addCondition('bill_charge_id = "'.$model->bill_charge_id.'"');
-                     
-                    	
-                       if (!empty($model->charge)) $criteria->addCondition('charge = "'.$model->charge.'"');
-                     
-                    	
-                       if (!empty($model->charge_less)) $criteria->addCondition('charge_less = "'.$model->charge_less.'"');
-                     
-                    	
-                       if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
-                     
-                    	
-                       if (!empty($model->created)) $criteria->addCondition('created = "'.$model->created.'"');
-                     
-                    	
-                       if (!empty($model->created_user_id)) $criteria->addCondition('created_user_id = "'.$model->created_user_id.'"');
-                     
-                    	
-                       if (!empty($model->modified)) $criteria->addCondition('modified = "'.$model->modified.'"');
-                     
-                    			
+                        $model->attributes=$_GET['BillCa'];	
 		}
-               
-       
 
                 $this->render('index',array(
 			'model'=>$model,

@@ -121,45 +121,14 @@ class GlController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	            
                 $model=new Gl('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['Gl']))
 		{
                         $model->attributes=$_GET['Gl'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->na_id)) $criteria->addCondition('na_id = "'.$model->na_id.'"');
-                     
-                    	
-                       if (!empty($model->room_id)) $criteria->addCondition('room_id = "'.$model->room_id.'"');
-                     
-                    	
-                       if (!empty($model->guest_user_id)) $criteria->addCondition('guest_user_id = "'.$model->guest_user_id.'"');
-                     
-                    	
-                       if (!empty($model->charge_previous)) $criteria->addCondition('charge_previous = "'.$model->charge_previous.'"');
-                     
-                    	
-                       if (!empty($model->charge)) $criteria->addCondition('charge = "'.$model->charge.'"');
-                     
-                    	
-                       if (!empty($model->charge_settle)) $criteria->addCondition('charge_settle = "'.$model->charge_settle.'"');
-                     
-                    	
-                       if (!empty($model->charge_balance)) $criteria->addCondition('charge_balance = "'.$model->charge_balance.'"');
-                     
-                    			
 		}
-                
-       
 
                 $this->render('index',array(
 			'model'=>$model,

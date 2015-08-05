@@ -144,50 +144,12 @@ class MarketSegmentController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        
-        $criteria = new CDbCriteria();
-
         $model = new MarketSegment('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['MarketSegment'])) {
             $model->attributes = $_GET['MarketSegment'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-
-
-            if (!empty($model->level))
-                $criteria->addCondition('level = "' . $model->level . '"');
-
-
-            if (!empty($model->lft))
-                $criteria->addCondition('lft = "' . $model->lft . '"');
-
-
-            if (!empty($model->rgt))
-                $criteria->addCondition('rgt = "' . $model->rgt . '"');
-
-
-            if (!empty($model->root))
-                $criteria->addCondition('root = "' . $model->root . '"');
-
-
-            if (!empty($model->parent_id))
-                $criteria->addCondition('parent_id = "' . $model->parent_id . '"');
         }
-        
-
 
         $this->render('index', array(
             'model' => $model,

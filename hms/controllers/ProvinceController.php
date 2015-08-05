@@ -112,23 +112,12 @@ class ProvinceController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-      
-        $criteria = new CDbCriteria();
 
         $model = new Province('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Province'])) {
             $model->attributes = $_GET['Province'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
         }
        
 

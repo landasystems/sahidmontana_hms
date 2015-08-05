@@ -125,57 +125,12 @@ class DepositeController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
-
         $model = new Deposite('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Deposite'])) {
             $model->attributes = $_GET['Deposite'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->guest_user_id))
-                $criteria->addCondition('guest_user_id = "' . $model->guest_user_id . '"');
-
-
-            if (!empty($model->dp_by))
-                $criteria->addCondition('dp_by = "' . $model->dp_by . '"');
-
-
-            if (!empty($model->amount))
-                $criteria->addCondition('amount = "' . $model->amount . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-
-
-            if (!empty($model->is_applied))
-                $criteria->addCondition('is_applied = "' . $model->is_applied . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
-      
-
 
         $this->render('index', array(
             'model' => $model,

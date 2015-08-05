@@ -118,33 +118,14 @@ class RoomPackageController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	 
                 $model=new RoomPackage('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['RoomPackage']))
 		{
-                        $model->attributes=$_GET['RoomPackage'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->name)) $criteria->addCondition('name = "'.$model->name.'"');
-                     
-                    	
-                       if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
-                     
-                    	
-                       if (!empty($model->standart_rate)) $criteria->addCondition('standart_rate = "'.$model->standart_rate.'"');
-                     
-                    			
+                        $model->attributes=$_GET['RoomPackage'];	
 		}
-                 
-       
 
                 $this->render('index',array(
 			'model'=>$model,
