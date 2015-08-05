@@ -288,7 +288,15 @@ class UserController extends Controller {
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+            $cek = User::model()->find(array('condition' => 'roles_id=' . $id));
+
+            //delete roles auth
+            if (count($cek) == 0) {
+                $this->loadModel($id)->delete();
+                RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $id));
+            } else {
+                throw new CHttpException(400, "Please empty user for this group before");
+            }
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))

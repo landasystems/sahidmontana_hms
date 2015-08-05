@@ -110,7 +110,7 @@ class GuestGroupController extends Controller {
                 $this->loadModel($id)->delete();
                 RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $id));
             } else {
-                throw new CHttpException(400, "Please empty guest for this group first");
+                throw new CHttpException(400, "Please empty guest for this group before");
             }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
