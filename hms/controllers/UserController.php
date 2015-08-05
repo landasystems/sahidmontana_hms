@@ -2,8 +2,6 @@
 
 class UserController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -50,7 +48,7 @@ class UserController extends Controller {
 
     public function actionGetBillUser() {
         $name = $_GET["q"];
-        
+
         $sCriteria = Roles::model()->guest();
         $data = array();
         if (!empty($sCriteria)) {
@@ -133,7 +131,7 @@ class UserController extends Controller {
       $this->render(url('dashboard'));
       } */
 
-  
+
 
     public function actionHistory() {
         $this->render('history', array(
@@ -151,7 +149,7 @@ class UserController extends Controller {
                                         $(this).tab("show");
                                     })');
 
-     
+
         $model->scenario = 'allow';
 
         if (isset($_POST['User'])) {
@@ -200,7 +198,7 @@ class UserController extends Controller {
                                         e.preventDefault();
                                         $(this).tab("show");
                                     })
-                                    ',0);
+                                    ', 0);
 
         if (isset($_POST['User'])) {
 
@@ -236,7 +234,7 @@ class UserController extends Controller {
         $id = user()->id;
         $model = $this->loadModel($id);
         $_GET['id'] = user()->id;
-        
+
         $model->scenario == 'allow';
 
         $tempRoles = $model->roles_id;
@@ -274,6 +272,14 @@ class UserController extends Controller {
         ));
     }
 
+    public function actionGenerateExcel() {
+        $model = new User;
+        $data = $model->search('user', true);
+        Yii::app()->request->sendFile(date('YmdHi') . 'User.xls', $this->renderPartial('excelReport', array(
+                    'model' => $data,
+                        ), true));
+    }
+
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -296,7 +302,7 @@ class UserController extends Controller {
         //  $user = User::model()->findByPk($id);
         $id = $_POST['id'];
         $user = User::model()->find(array('condition' => 'id="' . $id . '"'));
-        if (isset($user) and ! empty($user)) {
+        if (isset($user) and !empty($user)) {
             $return['id'] = $user->id;
             $return['group'] = $user->roles_id;
             $return['name'] = $user->name;
