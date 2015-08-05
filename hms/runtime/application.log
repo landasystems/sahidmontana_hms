@@ -1,0 +1,26 @@
+2015/08/05 16:28:06 [error] [exception.CException] exception 'CException' with message 'Alias "landa.LandaModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php:322
+Stack trace:
+#0 /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php(196): YiiBase::import('landa.LandaModu...', true)
+#1 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CModule.php(282): YiiBase::createComponent('landa.LandaModu...', 'landa', NULL, Array)
+#2 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(337): CModule->getModule('landa')
+#3 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(276): CWebApplication->createController('landa/roles/gue...')
+#4 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('landa/roles/gue...')
+#5 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/landa/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/landa/sahidmontana_hms/hms/www/hms.sahidmontana/landa/roles/guest/ajax/roles-grid/Roles_sort/prefix.html?ajax=roles-grid
+HTTP_REFERER=http://localhost/landa/sahidmontana_hms/hms/www/hms.sahidmontana/landa/roles/guest.html
+---
+2015/08/05 16:28:09 [error] [exception.CException] exception 'CException' with message 'Alias "landa.LandaModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php:322
+Stack trace:
+#0 /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php(196): YiiBase::import('landa.LandaModu...', true)
+#1 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CModule.php(282): YiiBase::createComponent('landa.LandaModu...', 'landa', NULL, Array)
+#2 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(337): CModule->getModule('landa')
+#3 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(276): CWebApplication->createController('landa/roles/gue...')
+#4 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('landa/roles/gue...')
+#5 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/landa/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/landa/sahidmontana_hms/hms/www/hms.sahidmontana/landa/roles/guest.html
+HTTP_REFERER=http://localhost/landa/sahidmontana_hms/hms/www/hms.sahidmontana/
+---
