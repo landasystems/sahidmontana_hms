@@ -1,50 +1,26 @@
-2015/08/05 15:57:43 [error] [array()] Landa Var Dump
-in /var/www/sahidmontana_hms/common/globals.php (6)
-in /var/www/sahidmontana_hms/hms/controllers/BillChargeController.php (342)
-in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
-2015/08/05 15:57:46 [error] [array
-(
-    'BillCharge' => array
-    (
-        'charge_additional_category_id' => '0'
-        'cover' => ''
-        'description' => ''
-        'total' => ''
-        'cash' => ''
-        'cc_number' => ''
-        'cc_charge' => ''
-        'gl_room_bill_id' => '0'
-        'gl_charge' => ''
-        'ca_user_id' => ''
-        'ca_charge' => ''
-        'refund' => ''
-        'approval_user_id' => ''
-    )
-    'additional_id' => ''
-    'amount' => ''
-    'charge' => '0'
-    'discount' => '0'
-    'username' => ''
-    'password' => ''
-)] Landa Var Dump
-in /var/www/sahidmontana_hms/common/globals.php (6)
-in /var/www/sahidmontana_hms/hms/controllers/BillChargeController.php (342)
-in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
-2015/08/05 15:59:29 [error] [array()] Landa Var Dump
-in /var/www/sahidmontana_hms/common/globals.php (6)
-in /var/www/sahidmontana_hms/hms/controllers/BillChargeController.php (342)
-in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
-2015/08/05 16:11:00 [warning] [application] Failed to set unsafe attribute "avatar_img" of "User".
-in /var/www/sahidmontana_hms/hms/controllers/GuestController.php (65)
-in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
-2015/08/05 16:14:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "generateExcel".' in /var/www/sahidmontana_hms/common/lib/yii/web/CController.php:483
+2015/08/05 16:28:06 [error] [exception.CException] exception 'CException' with message 'Alias "landa.LandaModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php:322
 Stack trace:
-#0 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(270): CController->missingAction('generateExcel')
-#1 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): CController->run('generateExcel')
-#2 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('chargeAdditiona...')
-#3 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
-#4 /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CApplication->run()
-#5 {main}
-REQUEST_URI=/sahidmontana_hms/hms/www/hms.sahidmontana/chargeAdditional/generateExcel.html
-HTTP_REFERER=http://localhost/sahidmontana_hms/hms/www/hms.sahidmontana/chargeAdditional.html
+#0 /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php(196): YiiBase::import('landa.LandaModu...', true)
+#1 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CModule.php(282): YiiBase::createComponent('landa.LandaModu...', 'landa', NULL, Array)
+#2 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(337): CModule->getModule('landa')
+#3 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(276): CWebApplication->createController('landa/roles/gue...')
+#4 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('landa/roles/gue...')
+#5 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/landa/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/landa/sahidmontana_hms/hms/www/hms.sahidmontana/landa/roles/guest/ajax/roles-grid/Roles_sort/prefix.html?ajax=roles-grid
+HTTP_REFERER=http://localhost/landa/sahidmontana_hms/hms/www/hms.sahidmontana/landa/roles/guest.html
+---
+2015/08/05 16:28:09 [error] [exception.CException] exception 'CException' with message 'Alias "landa.LandaModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php:322
+Stack trace:
+#0 /var/www/landa/sahidmontana_hms/common/lib/yii/YiiBase.php(196): YiiBase::import('landa.LandaModu...', true)
+#1 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CModule.php(282): YiiBase::createComponent('landa.LandaModu...', 'landa', NULL, Array)
+#2 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(337): CModule->getModule('landa')
+#3 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(276): CWebApplication->createController('landa/roles/gue...')
+#4 /var/www/landa/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('landa/roles/gue...')
+#5 /var/www/landa/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/landa/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/landa/sahidmontana_hms/hms/www/hms.sahidmontana/landa/roles/guest.html
+HTTP_REFERER=http://localhost/landa/sahidmontana_hms/hms/www/hms.sahidmontana/
 ---

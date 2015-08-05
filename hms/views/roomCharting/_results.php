@@ -130,7 +130,9 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
                 $total_rooms = '';
                 $nextName = '';
 
-                if (isset($mSchedule[$i][$arr->id]) && $mSchedule[$i][$arr->id]->room_id == $arr->id) { //jika ada di room schedule
+                $reservationStatus = isset($mSchedule[$i][$arr->id]->Reservation->status) ? $mSchedule[$i][$arr->id]->Reservation->status : '';
+
+                if (isset($mSchedule[$i][$arr->id]) && $mSchedule[$i][$arr->id]->room_id == $arr->id and $reservationStatus != "cancel") { //jika ada di room schedule
                     $reservation_id = $mSchedule[$i][$arr->id]->reservation_id;
                     $registration_id = $mSchedule[$i][$arr->id]->registration_id;
 //                        $status = (date('Y-m-d', strtotime($siteConfig->date_system)) == date('Y-m-d', strtotime($thisDate)) && $mSchedule[$i][$arr->id]->status != 'reservation' && $mSchedule[$i][$arr->id]->status != 'reserved' ) ? $arr->status : $mSchedule[$i][$arr->id]->status;

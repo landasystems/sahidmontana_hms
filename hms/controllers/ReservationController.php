@@ -56,13 +56,15 @@ class ReservationController extends Controller {
         $warning = '';
         $idNotAva = array();
         $idStatus = array();
-        $cek = RoomSchedule::model()->findAll(array('condition' => $criteria . ' date_schedule between "' . $start . '" and "' . $end . '"', 'order' => 'date_schedule asc'));
+        $cek = RoomSchedule::model()->with('Reservation')->findAll(array('condition' => $criteria . ' date_schedule between "' . $start . '" and "' . $end . '"', 'order' => 'date_schedule asc'));
         if (!empty($cek)) {
             foreach ($cek as $data) {
-                if (!isset($idStatus[$data->room_id]['status'])) {
+                $statusReservation = isset($data->Reservation->status) ? $data->Reservation->status : '';
+                if (!isset($idStatus[$data->room_id]['status']) and $statusReservation != "cancel") {
                     $idNotAva[] = $data->room_id;
                     $idStatus[$data->room_id]['status'] = $data->status;
                     $idStatus[$data->room_id]['date'] = $data->date_schedule;
+                    $idStatus[$data->room_id]['statusReservation'] = isset($data->Reservation->status) ? $data->Reservation->status : '';
                 }
             }
 
