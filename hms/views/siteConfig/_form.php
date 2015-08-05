@@ -554,6 +554,7 @@
                     'buttonType' => 'submit',
                     'type' => 'primary',
                     'icon' => 'ok white',
+                    'visible' => !isset($_GET['v']),
                     'label' => $model->isNewRecord ? 'Create' : 'Save',
                 ));
                 ?>

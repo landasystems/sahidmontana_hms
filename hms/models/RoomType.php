@@ -177,7 +177,8 @@ class RoomType extends CActiveRecord {
                                   </tr>
                                 </thead><tbody>';
         $rates = json_decode($this->rate);
-        $roles = User::model()->typeRoles('guest');
+        $roles = Roles::model()->guest();
+        
         foreach ($rates as $key => $value) {
             //jika ada user groupnya
             if (isset($roles[$key])) {
@@ -185,7 +186,7 @@ class RoomType extends CActiveRecord {
                 $max = (empty($value->max)) ? '<td style="width:150px;">-</td>' : '<td style="width:150px;">' . landa()->rp($value->max) . '</td>';
                 $default = (empty($value->default)) ? '<td style="width:150px;">-</td>' : '<td style="width:150px;">' . landa()->rp($value->default) . '</td>';
                 echo'<tr>
-                                    <td style="width:130px;">' . $roles[$key] . '</td>
+                                    <td style="width:130px;">' . $roles[$key]->name . '</td>
                                     ' . $min . '
                                     ' . $max . '
                                     ' . $default . '

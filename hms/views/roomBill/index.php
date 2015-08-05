@@ -157,9 +157,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     </td>
                     <td style="text-align:right">
                         <?php
-                        $siteConfig = SiteConfig::model()->listSiteConfig();
-                        $sRoles = json_decode($siteConfig->roles_guest, true);
-                        $datauser = CHtml::listData(User::model()->findAll(array('condition' => 'roles IN ("' . implode('","', $sRoles) . '")')), 'id', 'fullName');
+                        $datauser = CHtml::listData(Roles::model()->guest(), 'id', 'fullName');
                         $this->widget(
                                 'bootstrap.widgets.TbSelect2', array(
                             'asDropDownList' => true,

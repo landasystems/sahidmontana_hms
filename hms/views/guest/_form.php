@@ -21,7 +21,7 @@
         <div class="title">
             <h4>
                 <?php
-                echo 'Roles Access<span class="required">*</span> :    ';
+                echo 'Guest Grub<span class="required">*</span> :    ';
 
                 if ($model->id == User()->id) { //if same id, cannot change role it self
                     $listRoles = Roles::model()->user();

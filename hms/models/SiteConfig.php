@@ -45,7 +45,7 @@ class SiteConfig extends CActiveRecord {
         return array(
             array('city_id', 'numerical', 'integerOnly' => true),
             array('client_name,npwp, client_logo, address', 'length', 'max' => 255),
-            array('phone, email, language_default', 'length', 'max' => 45),
+            array('phone, email', 'length', 'max' => 45),
             array('format_reservation,others_include,date_system,settings,report_bill,report_bill_charge,report_deposite, report_registration, format_deposite,format_bill_charge,format_report_bill_charge,format_registration,format_bill', 'safe'),
             array('client_name,email,city_id,address,format_reservation,format_registration,format_bill,format_bill_charge,format_deposite,date_system', 'required'),
             // The following rule is used by search().
@@ -111,10 +111,6 @@ class SiteConfig extends CActiveRecord {
         return $this->address . ', ' . $this->City->name . ', ' . $this->City->Province->name;
     }
 
-    public function getRolesGuest() {
-        return array('user' => 'User', 'guest' => 'Guest');
-    }
-
     public function getStandartTransactionMalang() {
         return array(
             'ATS' => 'Transaksi sewa kamar',
@@ -145,14 +141,10 @@ class SiteConfig extends CActiveRecord {
 
     public function listSiteConfig() {
 
-//        return SiteConfig::model()->findByPk(param('id'));
-//        trace ($this->cache['listSiteConfig']);
-
         if (empty(Yii::app()->session['site'])) {
-//            trace('bb');
             Yii::app()->session['site'] = $this->findByPk(1);
         }
-//        trace ($this->cache['listSiteConfig']);
+
         return Yii::app()->session['site'];
     }
 

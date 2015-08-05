@@ -173,7 +173,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                 <?php
                 $date_siteconfig = $siteConfig->date_system;
-                $sRoles = json_decode($siteConfig->roles_guest, true);
+                
                 ?>
 
                 <?php

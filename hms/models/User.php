@@ -94,14 +94,7 @@ class User extends CActiveRecord {
         $criteria->compare('city_id', $this->city_id);
         $criteria->compare('phone', $this->phone, true);
         $criteria->compare('roles_id', $this->roles_id, true);
-        if ($type == 'guest') {
-//            $criteria->alias = "u";
-            $siteConfig = SiteConfig::model()->listSiteConfig();
-            $sCriteria = json_decode($siteConfig->roles_guest, true);
-            $criteria->addInCondition('roles_id', $sCriteria);
-        } elseif ($type == 'user') {
-            $criteria->compare('Roles.is_allow_login', '1', true);
-        }
+        
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
             'sort' => array('defaultOrder' => 't.id DESC')
@@ -109,23 +102,11 @@ class User extends CActiveRecord {
     }
 
     public function listUser() {
-        if (!app()->session['listUser']) {
-            $result = array();
-            $users = $this->findAll(array('index' => 'id'));
-            app()->session['listUser'] = $users;
-        }
-
-        return app()->session['listUser'];
+        return $this->findAll(array('index' => 'id'));
     }
 
     public function listUserPhone() {
-        if (!app()->session['listUserPhone']) {
-            $result = array();
-            $users = $this->findAll(array('index' => 'phone'));
-            app()->session['listUserPhone'] = $users;
-        }
-
-        return app()->session['listUserPhone'];
+        return $this->findAll(array('index' => 'phone'));
     }
 
     public function roles() {
@@ -146,21 +127,10 @@ class User extends CActiveRecord {
     }
 
     public function listUsers($type = '') {
-        $siteConfig = SiteConfig::model()->listSiteConfig();
         if ($type == 'user') {
             $sResult = User::model()->with('Roles')->findAll(array('condition' => 'Roles.is_allow_login=1'));
         } elseif ($type == 'guest') {
-            $sCriteria = json_decode($siteConfig->roles_guest, true);
-            if (!empty($sCriteria)) {
-                $list = '';
-                foreach ($sCriteria as $o) {
-                    $list .= '"' . $o . '",';
-                }
-                $list = substr($list, 0, strlen($list) - 1);
-                $sResult = User::model()->findAll(array('condition' => 'roles_id in(' . $list . ')'));
-            } else {
-                $sResult = '';
-            }
+            $sResult = User::model()->with('Roles')->findAll(array('condition' => 'Roles.is_allow_login=0'));
         }
         return $sResult;
     }
@@ -183,29 +153,14 @@ class User extends CActiveRecord {
 //    }
 
     public function typeRoles($sType = 'user') {
-        $siteConfig = SiteConfig::model()->listSiteConfig();
         $result = array();
-
         if ($sType == 'user') {
-            if (Yii::app()->user->roles_id == -1) {
-                $array = array(-1 => 'Super User');
-            } else {
-                $array = array();
-            }
-
-            $sResult = Roles::model()->findAll(array('condition' => 'is_allow_login=1'));
+            $sResult = Roles::model()->user();
             $result = $array + Chtml::listdata($sResult, 'id', 'name');
         } elseif ($sType == 'guest') {
-            $customers = json_decode($siteConfig->roles_guest, true);
-            $list = '';
-            foreach ($customers as $customer) {
-                $list .= '"' . $customer . '",';
-            }
-            $list = substr($list, 0, strlen($list) - 1);
-            $sResult = Roles::model()->findAll(array('condition' => 'id in(' . $list . ')'));
+            $sResult = Roles::model()->guest();
             $result = Chtml::listdata($sResult, 'id', 'name');
         }
-
 
         return $result;
     }

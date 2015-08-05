@@ -112,7 +112,6 @@ class RolesController extends Controller {
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 
-            unset(Yii::app()->session['site']);
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
