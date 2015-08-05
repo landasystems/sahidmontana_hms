@@ -1,9 +1,6 @@
 <table>
     <tr>
-        <th colspan="5">DAFTAR GUEST <?php
-            Yii::app()->name;
-            echo param('clientName');
-            ?></th>
+        <th colspan="8">DAFTAR GUEST</th>
     </tr>
     <tr></tr>
     <tr></tr>
