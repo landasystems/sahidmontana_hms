@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle('Users : ' . $model->name);
+$this->setPageTitle('Guest : ' . $model->name);
 ?>
 
 <?php

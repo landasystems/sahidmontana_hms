@@ -69,7 +69,7 @@ class User extends CActiveRecord {
             'username' => 'Username',
             'email' => 'Email',
             'password' => 'Password',
-            'code' => 'Identity Number',
+            'code' => 'KTP/ SIM/ Passport',
             'name' => 'Name',
             'city_id' => 'city_id',
             'address' => 'Address',
@@ -88,12 +88,17 @@ class User extends CActiveRecord {
 
         $criteria->compare('username', $this->username, true);
         $criteria->compare('email', $this->email, true);
-//        $criteria->compare('password', $this->password, true);
         $criteria->compare('code', $this->code, true);
         $criteria->compare('t.name', $this->name, true);
         $criteria->compare('city_id', $this->city_id);
         $criteria->compare('phone', $this->phone, true);
         $criteria->compare('roles_id', $this->roles_id, true);
+        
+        if ($type == 'user'){
+            $criteria->compare('Roles.is_allow_login', 1);
+        }else{
+            $criteria->compare('Roles.is_allow_login', 0);
+        }
         
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -209,7 +214,7 @@ class User extends CActiveRecord {
     }
 
     public function getTagImg() {
-        return '<img src="' . $this->imgUrl['small'] . '" class="img-polaroid" style="width:70px"/><br>';
+        return '<img src="' . $this->imgUrl['small'] . '" class="img-polaroid" style="width:30px"/><br>';
     }
 
     public function getMediumImage() {
@@ -251,7 +256,7 @@ class User extends CActiveRecord {
 
     function getFullName() {
         $roles = (isset($this->Roles->name)) ? $this->Roles->name : '-';
-        if (isset($this->Roles->prefix) and $this->Roles->prefix == 1) {
+        if (isset($this->Roles->is_allow_login) and $this->Roles->is_allow_login == 1) {
             $title = ($this->sex == 'f') ? 'Mrs. ' : 'Mr. ';
         } else {
             $title = '';
@@ -261,7 +266,7 @@ class User extends CActiveRecord {
     }
 
     function getGuestName() {
-        if (isset($this->Roles->prefix) && $this->Roles->prefix == 1) {
+        if (isset($this->Roles->is_allow_login) && $this->Roles->is_allow_login == 1) {
             $title = ($this->sex == 'f') ? 'Mrs. ' : 'Mr. ';
         } else {
             $title = '';

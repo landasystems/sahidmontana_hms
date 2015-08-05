@@ -78,7 +78,7 @@ $this->endWidget();
             <label class="control-label" for="">Extra Package</label>                    
             <div class="controls">
 
-                <table class="table table-striped table-bordered" style="margin-bottom: 0px">
+                <table class="table table-striped " style="margin-bottom: 0px">
                     <thead>
                         <tr>
                             <th style="width: 15px;text-align:center">#</th>
@@ -136,7 +136,7 @@ $this->endWidget();
         <div class="control-group ">
             <label class="control-label" for="">Room Rate</label>                    
             <div class="controls">                    
-                <table class="table table-condensed table-bordered" style="width:100%;margin-bottom: 0px">
+                <table class="table table-condensed " style="width:100%;margin-bottom: 0px">
                     <thead>
                         <tr>
                             <th class="span2" style="text-align: center;vertical-align: middle" rowspan="2">Guest Type</th>

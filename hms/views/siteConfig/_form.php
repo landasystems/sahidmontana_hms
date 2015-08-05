@@ -342,7 +342,7 @@
                     <label class="control-label" for="">Others Include</label>                    
                     <div class="controls">
 
-                        <table class="table table-striped table-bordered" style="margin-bottom: 0px">
+                        <table class="table table-striped " style="margin-bottom: 0px">
                             <thead>
                                 <tr>
                                     <th style="width: 15px;text-align:center">#</th>

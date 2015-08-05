@@ -65,7 +65,7 @@ $this->endWidget();
     $this->widget('bootstrap.widgets.TbGridView', array(
         'id' => 'charge-additional-grid',
         'dataProvider' => $model->search(),
-        'type' => 'striped bordered condensed',
+        'type' => 'striped condensed',
         'template' => '{items}{summary}{pager}',
         'columns' => array(
             array(

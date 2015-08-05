@@ -23,7 +23,7 @@
             <p class="note" style="font-size: 15px"><?php echo date("l d-F-Y"); ?></p>
         </legend>
 
-        <table class="table table-bordered">
+        <table class="table ">
             <thead>
                 <tr>
                     <th class="span1" rowspan="2" style="vertical-align:middle;text-align: center;">No.</th>

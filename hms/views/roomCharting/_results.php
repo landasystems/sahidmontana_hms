@@ -24,7 +24,7 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
             overflow: hidden;
         }
     </style>
-    <table class="table table-bordered" id="table-1" style="width: 1252px;">
+    <table class="table " id="table-1" style="width: 1252px;">
         <thead>
             <tr>
                 <th colspan="3" style="text-align:center;" style="width:75px;">
@@ -275,7 +275,7 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
         ?>
     </tbody>
     </table>
-    <table class="table table-bordered" id="header-fixed" style="width: 1252px;"></table>
+    <table class="table " id="header-fixed" style="width: 1252px;"></table>
     <?php
 } else {
     echo '<div class="alert fade in">

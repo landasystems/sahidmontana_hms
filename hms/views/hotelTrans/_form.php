@@ -67,7 +67,7 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <table class="responsive table table-bordered">
+                    <table class="responsive table ">
                         <thead>
                             <tr>
                                 <th>Date</th>

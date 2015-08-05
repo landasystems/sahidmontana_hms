@@ -86,7 +86,7 @@ if (landa()->checkAccess('User', 'd'))
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'User-grid',
-    'dataProvider' => $model->search(),
+    'dataProvider' => $model->search('user'),
     'type' => 'table table-hover',
     'template' => '{pager}{items}{pager}{summary}',
     'columns' => array(
@@ -102,21 +102,15 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'name' => 'Photo',
             'type' => 'raw',
             'value' => '"$data->tagImg"',
-            'htmlOptions' => array('style' => 'text-align: center; width:90px;text-align:center;')
+            'htmlOptions' => array('style' => 'text-align: center; width:40px;text-align:center;')
         ),
+        'username',
+        'email',
+        'name',
         array(
-            'name' => 'Information',
+            'name' => 'Group User',
             'type' => 'raw',
-            'value' => '"$data->tagBiodata"',
-            'htmlOptions' => array('style' => 'text-align: center;width:30%')
-        ),
-        array(
-            'name' => 'Access',
-            'type' => 'raw',
-            'visible' => '($data->Roles->is_allow_login == 1) ? TRUE : FALSE',
-            'value' => '"$data->tagAccess"',
-            'htmlOptions' => array('style' => 'text-align: center;width:30%'),
-            'headerHtmlOptions' => array('text-align' => 'center'),
+            'value' => '(isset($data->Roles->name)) ? $data->Roles->name : ""',
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',

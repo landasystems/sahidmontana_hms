@@ -41,7 +41,7 @@ $this->endWidget();
 
 
 <div id="room-grid" class="grid-view">
-    <table class="items table table-striped table-bordered table-condensed">
+    <table class="items table table-striped  table-condensed">
         <thead>
             <tr>
                 <th><a  href="#">Linked Room</a></th>

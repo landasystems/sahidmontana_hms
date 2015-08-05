@@ -21,24 +21,14 @@
         <div class="title">
             <h4>
                 <?php
-                echo 'Guest Grub<span class="required">*</span> :    ';
-
-                if ($model->id == User()->id) { //if same id, cannot change role it self
-                    $listRoles = Roles::model()->user();
-                    if (User()->roles_id == -1) {
-                        echo 'Super User';
-                    } elseif (isset($listRoles[User()->roles_id])) {
-                        echo $listRoles[User()->roles_id]['name'];
-                    }
+                echo 'Guest Group<span class="required">*</span> :    ';
+                $array = Roles::model()->guest();
+                if (!empty($array)) {
+                    echo CHtml::dropDownList('User[roles_id]', $model->roles_id, CHtml::listData($array, 'id', 'name'), array(
+                        'empty' => 'Please Choose',
+                    ));
                 } else {
-                    $array = Roles::model()->user();
-                    if (!empty($array)) {
-                        echo CHtml::dropDownList('User[roles_id]', $model->roles_id, CHtml::listData($array, 'id', 'name'), array(
-                            'empty' => 'Please Choose',
-                        ));
-                    } else {
-                        echo'Data is empty please insert data group ' . $type . '.';
-                    }
+                    echo'Data is empty please insert data group guest.';
                 }
                 ?> 
             </h4>
@@ -52,12 +42,6 @@
 
     <div class="tab-content">
         <div class="tab-pane active" id="personal">
-
-
-
-            <?php echo $form->textFieldRow($model, 'username', array('class' => 'span5', 'maxlength' => 20)); ?>
-            <?php echo $form->passwordFieldRow($model, 'password', array('class' => 'span3', 'maxlength' => 255, 'hint' => 'Fill the password, to change',)); ?>
-
             <?php echo $form->textFieldRow($model, 'email', array('class' => 'span5', 'maxlength' => 100)); ?>
             <?php echo $form->textFieldRow($model, 'code', array('class' => 'span5', 'maxlength' => 25)); ?>
 
@@ -171,15 +155,15 @@
 
 
 <div class="form-actions">
-<?php
-$this->widget('bootstrap.widgets.TbButton', array(
-    'buttonType' => 'submit',
-    'type' => 'primary',
-    'icon' => 'ok white',
-    'label' => $model->isNewRecord ? 'Create' : 'Save',
-    'visible' => !isset($_GET['v']),
-));
-?>
+    <?php
+    $this->widget('bootstrap.widgets.TbButton', array(
+        'buttonType' => 'submit',
+        'type' => 'primary',
+        'icon' => 'ok white',
+        'label' => $model->isNewRecord ? 'Create' : 'Save',
+        'visible' => !isset($_GET['v']),
+    ));
+    ?>
 </div>
 
 <?php $this->endWidget(); ?>

@@ -2,7 +2,7 @@
 <center>Date : <?php echo (!empty($date)) ? $date : '' ?></center>
 <hr>
 
-<table class="items table table-striped table-hover table-bordered table-condensed">
+<table class="items table table-striped table-hover  table-condensed">
     <thead>
         <tr>
             <th rowspan="2" class="span1" style="text-align: center">NO</th>

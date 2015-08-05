@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('User');
+$this->setPageTitle('Group Guest');
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -86,7 +86,7 @@ if (landa()->checkAccess('User', 'd'))
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'User-grid',
-    'dataProvider' => $model->search(),
+    'dataProvider' => $model->search('guest'),
     'type' => 'table table-hover',
     'template' => '{pager}{items}{pager}{summary}',
     'columns' => array(
@@ -98,25 +98,18 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 'value' => '$data->id',
             ),
         ),
+        'guestName',
+        'company',
+        'code',
         array(
-            'name' => 'Photo',
+            'header' => 'Phone',
             'type' => 'raw',
-            'value' => '"$data->tagImg"',
-            'htmlOptions' => array('style' => 'text-align: center; width:90px;text-align:center;')
+            'value' => 'landa()->hp($data->phone)',
         ),
         array(
-            'name' => 'Information',
+            'name' => 'Group Guest',
             'type' => 'raw',
-            'value' => '"$data->tagBiodata"',
-            'htmlOptions' => array('style' => 'text-align: center;width:30%')
-        ),
-        array(
-            'name' => 'Access',
-            'type' => 'raw',
-            'visible' => '($data->Roles->is_allow_login == 1) ? TRUE : FALSE',
-            'value' => '"$data->tagAccess"',
-            'htmlOptions' => array('style' => 'text-align: center;width:30%'),
-            'headerHtmlOptions' => array('text-align' => 'center'),
+            'value' => '(isset($data->Roles->name)) ? $data->Roles->name : ""',
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',

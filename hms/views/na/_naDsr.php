@@ -52,7 +52,7 @@ $initial_statistic = json_decode($initialForecast->statistik, true);
 
 
 <hr> 
-<table class="items table table-bordered table-condensed">
+<table class="items table  table-condensed">
     <thead>
         <tr>            
             <th class="span3" rowspan="2" style="text-align: center">ACCOUNT</th>            

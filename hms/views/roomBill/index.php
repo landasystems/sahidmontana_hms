@@ -119,7 +119,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             </tr>
         </table>          
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th style="width: 15px;text-align:center">#</th>

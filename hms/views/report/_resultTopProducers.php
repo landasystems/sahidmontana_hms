@@ -4,7 +4,7 @@ $data = ReportGeographical::model()->with('Na')->find(array('condition' => 'year
 $report = empty($data) ? array() : json_decode($data->top_producer, TRUE);
 foreach ($role as $val) {
     ?>
-    <table class="table table-bordered">
+    <table class="table ">
         <thead>
             <tr>
                 <th rowspan="2">No.</th>

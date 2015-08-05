@@ -52,15 +52,10 @@
 
     <div class="tab-content">
         <div class="tab-pane active" id="personal">
-
-
-
             <?php echo $form->textFieldRow($model, 'username', array('class' => 'span5', 'maxlength' => 20)); ?>
             <?php echo $form->passwordFieldRow($model, 'password', array('class' => 'span3', 'maxlength' => 255, 'hint' => 'Fill the password, to change',)); ?>
 
             <?php echo $form->textFieldRow($model, 'email', array('class' => 'span5', 'maxlength' => 100)); ?>
-            <?php echo $form->textFieldRow($model, 'code', array('class' => 'span5', 'maxlength' => 25)); ?>
-
             <?php echo $form->textFieldRow($model, 'name', array('class' => 'span5', 'maxlength' => 255)); ?> 
             <?php echo $form->textFieldRow($model, 'company', array('class' => 'span5', 'maxlength' => 255)); ?> 
 

@@ -45,7 +45,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             <p class="note" style="font-size: 15px"><?php echo date("l Y-F-d"); ?></p>
         </legend>
 
-        <table class="table table-bordered">
+        <table class="table ">
             <thead>
                 <tr>
                     <th class="span1" rowspan="2">No.</th>

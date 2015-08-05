@@ -5,7 +5,7 @@
     <center><h3>GUEST LEDGER BALANCE</h3></center>
     <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($model->date_na)); ?></center>
     <hr style="border-bottom: 2px solid #bbb !important;border-top: 1px solid #bbb !important;height: 3px">
-    <table class="items table table-striped table-hover  table-condensed table-bordered">
+    <table class="items table table-striped table-hover  table-condensed ">
         <thead>
             <tr>
                 <th class="span1" style="text-align: left">NO</th>

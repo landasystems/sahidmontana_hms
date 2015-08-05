@@ -173,7 +173,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         <table style="width:100%">
             <tr>
                 <td class="span8" >
-                    <table class="table table-bordered table-striped">
+                    <table class="table  table-striped">
                         <thead>
                             <tr>
                                 <th width="5%">#</th>

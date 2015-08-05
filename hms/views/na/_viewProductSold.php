@@ -12,7 +12,7 @@ $productSold = (isset($naProductSold->product_sold)) ? json_decode($naProductSol
     <center><h3>PRODUCT SOLD</h3></center>
     <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($siteConfig->date_system)); ?></center>
     <hr style="border-bottom: 2px solid #bbb !important;border-top: 1px solid #bbb !important;height: 3px">
-    <table class="items table table-striped table-bordered  table-condensed">
+    <table class="items table table-striped   table-condensed">
         <?php
         $qtyAll = 0;
         $totAll = 0;

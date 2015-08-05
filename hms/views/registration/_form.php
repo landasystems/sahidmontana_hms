@@ -470,7 +470,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         <h3 id="myModalLabel">Find Available Room</h3>
                     </div>
                     <div class="modal-body">
-                        <table class="items table table-bordered table-condensed">
+                        <table class="items table  table-condensed">
                             <thead>
                                 <tr>
                                     <th>Type</th>
@@ -490,7 +490,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         </table>
 
                         <div style="overflow:auto;max-height: 300px !important" class="well">
-                            <table class="items table table-striped table-bordered table-condensed">
+                            <table class="items table table-striped  table-condensed">
                                 <thead>
                                     <tr>
                                         <th style="text-align:center">Number</th>
@@ -531,7 +531,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             <a class="btn btn-small btn-primary" data-toggle="modal" data-target="#modalTools"><i class="icon-edit icon-white" style="margin:0px !important"></i> Tools</a>
                         </div><br>
                     <?php } ?>
-                    <table id="tb-choosed-room" class="items table table-striped table-bordered table-condensed">
+                    <table id="tb-choosed-room" class="items table table-striped  table-condensed">
                         <thead>
                             <tr>
                                 <th style="text-align:">Room</th>                                    

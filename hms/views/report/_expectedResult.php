@@ -13,7 +13,7 @@ $date_to = date('d M Y', strtotime($date[1]));
       
    
 
-<table class="responsive table table-bordered" width="100%">
+<table class="responsive table " width="100%">
     <thead>
     <tr>
         <th>No</th>

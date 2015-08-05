@@ -214,7 +214,7 @@ $this->endWidget();
     </div>
 
     <div class="modal-body form-horizontal">
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table  table-striped table-hover">
             <thead>
                 <tr>
                     <th style="text-align: center">No.</th>

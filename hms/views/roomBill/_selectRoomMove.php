@@ -1,5 +1,5 @@
 
-<table class="selectRoom  table-hover table table-bordered table-condensed">
+<table class="selectRoom  table-hover table  table-condensed">
     <thead>
         <tr>
             <th class="span1" style="text-align:center">Number</th>

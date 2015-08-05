@@ -3,7 +3,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
 ?>
-<table class="table table-striped table-bordered">
+<table class="table table-striped ">
     <thead>
 
         <tr>

@@ -8,7 +8,7 @@ $initial_food_analysis = json_decode($initialForecast->food_analysis, true);
 <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($siteConfig->date_system)); ?></center>
 <hr>
 
-<table class="items table table-bordered table-condensed">
+<table class="items table  table-condensed">
     <thead>
         <tr>            
             <th rowspan="2" style="text-align: center">SEGMENT</th>            

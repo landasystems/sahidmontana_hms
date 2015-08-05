@@ -6,7 +6,7 @@
 <center><h3>GUEST IN HOUSE</h3></center>
 <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($siteConfig->date_system)); ?></center>
 <hr>
-<table class="items table table-striped table-hover table-bordered table-condensed">
+<table class="items table table-striped table-hover  table-condensed">
     <thead>
         <tr>
             <th style="width: 50px;text-align: center">#</th>

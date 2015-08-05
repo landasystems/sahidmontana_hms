@@ -13,7 +13,7 @@ if (landa()->checkAccess('RoomType', 'd'))
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'room-type-grid',
     'dataProvider' => $model2->search(),
-    'type' => 'striped bordered condensed',
+    'type' => 'striped condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
         array(

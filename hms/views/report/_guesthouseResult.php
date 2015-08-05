@@ -12,7 +12,7 @@ $end = date('d M Y', strtotime($a[1]));
 
 
 </table>
-<table class="responsive table table-bordered" width="100%">
+<table class="responsive table " width="100%">
     <thead>
         <tr>
             <th rowspan="2">No</th>

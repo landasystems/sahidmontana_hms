@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Create User');
+$this->setPageTitle('Create Guest');
 ?>
 
 <?php 

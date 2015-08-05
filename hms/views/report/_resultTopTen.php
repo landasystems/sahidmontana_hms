@@ -37,7 +37,7 @@ foreach ($role as $val) {
             }
         }
     }
-    echo '  <table class="table table-bordered">
+    echo '  <table class="table ">
                 <thead>
                     <tr>
                         <th width="35">No</th>

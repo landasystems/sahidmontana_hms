@@ -313,7 +313,7 @@ $this->endWidget();
                         ?>
                         <hr>
 
-                        <table class="items table table-striped table-bordered table-condensed">
+                        <table class="items table table-striped  table-condensed">
                             <thead>
                                 <tr>
                                     <th style="text-align:">Room</th>                                    
