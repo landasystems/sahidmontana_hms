@@ -17,7 +17,7 @@
             url: "<?php echo url('user/getDetail'); ?>",
             type: "POST",
             data: {id: id},
-            success: function(data) {
+            success: function (data) {
                 obj = JSON.parse(data);
                 $("#id").val(obj.id);
                 $("#group").val(obj.group);
@@ -1033,7 +1033,7 @@
 <script>
     function calculation() {
 
-        $(".pax").each(function() {
+        $(".pax").each(function () {
             var pax = parseInt($(this).val());
             pax = pax ? pax : 0;
             var bed = parseInt($(this).parent().parent().find(".extrabed").val());
@@ -1046,7 +1046,7 @@
             bed_price = bed_price ? bed_price : 0;
             var rowId = $(this).parent().parent().attr('id');
             var other = 0;
-            $(".others_include").each(function() {
+            $(".others_include").each(function () {
                 var thisRowId = $(this).attr('r');
                 if (rowId == thisRowId) {
                     if (this.checked) {
@@ -1059,7 +1059,7 @@
             $(this).parent().parent().find(".total_rate").val(price_default);
         });
     }
-    $("#Reservation_package_room_type_id").on("change", function() {
+    $("#Reservation_package_room_type_id").on("change", function () {
         if ($(this).val() == 0) {
             $(".detail_paket").html('');
             $(".pckg").html('');
@@ -1069,16 +1069,16 @@
                 url: "<?php echo url('reservation/getPackage'); ?>",
                 type: "POST",
                 data: $('form').serialize(),
-                success: function(data) {
+                success: function (data) {
                     $(".detail_paket").html(data);
                     data = $('#detPackage').val();
                     data = JSON.parse(data);
                     data2 = $('#pricePackage').val();
                     data2 = JSON.parse(data2);
-                    $(".pckg").each(function() {
+                    $(".pckg").each(function () {
                         a = this;
                         result = '';
-                        $.each(data, function(i, n) {
+                        $.each(data, function (i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += '<label><input checked class="others_include ' + n['id'] + '" kode="' + n['id'] + '" style="margin:0px 5px 0px 0px" type="checkbox" r="' + room_id + '" name="others_include[' + room_id + '][' + n['id'] + ']"  value="' + n['total'] + '">' + n['name'] + '</label>';
                         });
@@ -1094,16 +1094,16 @@
                         //});
                         $(b).val(result);
                     });
-                    $(".pax").each(function() {
+                    $(".pax").each(function () {
                         b = this;
                         result = '';
-                        $.each(data, function(i, n) {
+                        $.each(data, function (i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += n['pax'];
                         });
                         $(b).val(result);
                     });
-                    $(".fnb_price").each(function() {
+                    $(".fnb_price").each(function () {
                         b = this;
                         result = '';
                         //$.each(data, function (i, n) {
@@ -1118,7 +1118,7 @@
             });
         }
     })
-    $("#btn_pax").on("click", function() {
+    $("#btn_pax").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_pax").val();
@@ -1126,7 +1126,7 @@
             calculation();
         }
     });
-    $("#btn_eb_price").on("click", function() {
+    $("#btn_eb_price").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_eb_price").val();
@@ -1134,7 +1134,7 @@
             calculation();
         }
     });
-    $("#btn_fb_price").on("click", function() {
+    $("#btn_fb_price").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_fb_price").val();
@@ -1142,7 +1142,7 @@
             calculation();
         }
     });
-    $("#btn_room_rate").on("click", function() {
+    $("#btn_room_rate").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_room_rate").val();
@@ -1155,7 +1155,7 @@
         $("#totalRoom").html(total);
     }
 
-    $('#nationality').on('change', function() {
+    $('#nationality').on('change', function () {
         if ($(this).val() == 'ID') {
             $('#s2id_city_guest').show();
         } else {
@@ -1163,7 +1163,7 @@
         }
     })
 
-    $('#btnFindRoom').on('click', function() {
+    $('#btnFindRoom').on('click', function () {
         $('#findRoom').modal('show');
     })
 
@@ -1177,7 +1177,7 @@
             url: "<?php echo url('reservation/checkRoom'); ?>",
             type: "POST",
             data: $('form').serialize(),
-            success: function(data) {
+            success: function (data) {
                 if (data != '') {
                     $('button[type="submit"]').attr('disabled', 'disabled');
                     $("#teks-warning").html(data);
