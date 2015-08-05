@@ -2,7 +2,7 @@
 
 class RoomTypeController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -200,8 +200,8 @@ class RoomTypeController extends Controller {
         if (isset($_POST['RoomType'])) {
             $model->attributes=$_POST['RoomType'];
             $siteConfig = SiteConfig::model()->listSiteConfig();
-            $str = str_replace(' ', '-', $siteConfig->roles_guest);
-            $decode = json_decode($str, true);
+            
+            $decode = Roles::model()->guest();
             foreach ($decode as $json) {
                 if (isset($_POST[$json]))
                     $array[$json] = $_POST[$json];
@@ -243,8 +243,8 @@ class RoomTypeController extends Controller {
         if (isset($_POST['RoomType'])) {
             $model->attributes=$_POST['RoomType'];            
             $siteConfig = SiteConfig::model()->listSiteConfig();
-            $str = str_replace(' ', '-', $siteConfig->roles_guest);
-            $decode = json_decode($str, true);
+            
+            $decode = Roles::model()->guest();
             foreach ($decode as $json) {
                 if (isset($_POST[$json]))
                     $array[$json] = $_POST[$json];
@@ -298,7 +298,6 @@ class RoomTypeController extends Controller {
                     $(this).tab("show");
                 });  '
         );
-        $criteria = new CDbCriteria();
 
         $model = new RoomType('search');
         $model->unsetAttributes();  // clear any default values
@@ -309,33 +308,7 @@ class RoomTypeController extends Controller {
 
         if (isset($_GET['RoomType'])) {
             $model->attributes = $_GET['RoomType'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-            
-            if (!empty($model->is_package))
-                $criteria->addCondition('is_package = "' . $model->is_package . '"');
-
-
-            if (!empty($model->standart_rate))
-                $criteria->addCondition('standart_rate = "' . $model->standart_rate . '"');
-
-
-            if (!empty($model->max_pax))
-                $criteria->addCondition('max_pax = "' . $model->max_pax . '"');
         }
-        
-
 
         $this->render('index', array(
             'model' => $model,

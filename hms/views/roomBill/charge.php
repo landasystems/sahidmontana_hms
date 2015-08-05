@@ -12,10 +12,6 @@ if (!empty($_GET['number'])) {
 
 <?php
 $this->setPageTitle('Charge Guest Ledger');
-$this->breadcrumbs = array(
-    'Charge Guest Ledger',
-);
-
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'sms-form',
@@ -125,7 +121,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         </table>          
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th style="width: 15px;text-align:center">#</th>

@@ -2,7 +2,7 @@
 
 class RoomScheduleController extends Controller
 {
-        public $breadcrumbs;
+        
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -108,39 +108,14 @@ class RoomScheduleController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	 
                 $model=new RoomSchedule('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['RoomSchedule']))
 		{
                         $model->attributes=$_GET['RoomSchedule'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->room_id)) $criteria->addCondition('room_id = "'.$model->room_id.'"');
-                     
-                    	
-                       if (!empty($model->date_schedule)) $criteria->addCondition('date_schedule = "'.$model->date_schedule.'"');
-                     
-                    	
-                       if (!empty($model->status)) $criteria->addCondition('status = "'.$model->status.'"');
-                     
-                    	
-                       if (!empty($model->reservation_id)) $criteria->addCondition('reservation_id = "'.$model->reservation_id.'"');
-                     
-                    	
-                       if (!empty($model->registration_id)) $criteria->addCondition('registration_id = "'.$model->registration_id.'"');
-                     
-                    			
 		}
-               
-       
 
                 $this->render('index',array(
 			'model'=>$model,

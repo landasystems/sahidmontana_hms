@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Na Balances');
-$this->breadcrumbs=array(
-	'Na Balances',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

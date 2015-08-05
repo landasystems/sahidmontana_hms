@@ -18,7 +18,7 @@ $date_na = date('Y-m-d', strtotime($siteConfig->date_system));
 <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($siteConfig->date_system)); ?></center>
 <hr>
 
-<table class="items table table-bordered table-condensed">
+<table class="items table  table-condensed">
     <thead>
         <tr>            
             <th class="span3" rowspan="2" style="text-align: center">ACCOUNT</th>            

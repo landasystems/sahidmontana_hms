@@ -8,7 +8,7 @@ $account = Account::model()->findAll();
 <center><h3>PRODUCT SOLD</h3></center>
 <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($siteConfig->date_system)); ?></center>
 <hr>
-<table class="items table table-striped table-bordered  table-condensed">
+<table class="items table table-striped   table-condensed">
     <?php
     $qtyAll = 0;
     $totAll = 0;

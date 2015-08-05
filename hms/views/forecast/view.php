@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Forecasts | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Forecasts' => array('index'),
-    $model->id,
-);
+
 ?>
 
 <?php

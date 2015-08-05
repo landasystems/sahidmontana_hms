@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Gls');
-$this->breadcrumbs=array(
-	'Gls',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

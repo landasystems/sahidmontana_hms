@@ -2,7 +2,7 @@
 
 class ForecastController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -123,41 +123,12 @@ class ForecastController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
-
         $model = new Forecast('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Forecast'])) {
             $model->attributes = $_GET['Forecast'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->tahun))
-                $criteria->addCondition('tahun = "' . $model->tahun . '"');
-
-
-            if (!empty($model->forecast))
-                $criteria->addCondition('forecast = "' . $model->forecast . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
-       
-
 
         $this->render('index', array(
             'model' => $model,

@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Move Room');
-$this->breadcrumbs = array(
-    'Move Room',
-);
+
 $siteConfig = SiteConfig::model()->findByPk(1);
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -198,7 +196,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         <hr>
 
-        <table class="selectRoom table table-striped table-bordered table-condensed">
+        <table class="selectRoom table table-striped  table-condensed">
             <thead>
                 <tr>
                     <th class="span1" style="text-align:center">Number</th>

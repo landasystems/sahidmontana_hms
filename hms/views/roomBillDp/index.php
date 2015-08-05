@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Room Bill Dps');
-$this->breadcrumbs = array(
-    'Room Bill Dps',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -52,7 +50,7 @@ $this->endWidget();
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'room-bill-dp-grid',
     'dataProvider' => $model->search(),
-    'type' => 'striped bordered condensed',
+    'type' => 'striped condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
         array(

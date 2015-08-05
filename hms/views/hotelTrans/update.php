@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Hotel Trans | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Hotel Trans'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

@@ -1,8 +1,5 @@
 <?php
 $this->setPageTitle('Na Trans');
-$this->breadcrumbs=array(
-	'Na Trans',
-);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

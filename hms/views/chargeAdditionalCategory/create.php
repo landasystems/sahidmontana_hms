@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Create Departement');
-$this->breadcrumbs=array(
-	'Charge Departement'=>array('index'),
-	'Create',
-);
 
 ?>
 

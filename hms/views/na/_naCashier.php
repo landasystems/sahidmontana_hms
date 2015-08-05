@@ -2,7 +2,7 @@
 <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($siteConfig->date_system)); ?></center>
 <hr>
 
-<table class="table table-bordered">
+<table class="table ">
     <thead>
         <tr>
             <th class="span1" rowspan="2" style="vertical-align:middle;text-align: center;">No.</th>

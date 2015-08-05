@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Reservations | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Reservations' => array('index'),
-    $model->id,
-);
+
 ?>
 
 <?php
@@ -92,8 +89,7 @@ $this->endWidget();
 
 
                     <?php
-                    $siteConfig = SiteConfig::model()->listSiteConfig();
-                    $sRoles = json_decode($siteConfig->roles_guest, true);
+                    
                     $data = array(0 => 'Please Choose') + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
                     ?>
 
@@ -317,7 +313,7 @@ $this->endWidget();
                         ?>
                         <hr>
 
-                        <table class="items table table-striped table-bordered table-condensed">
+                        <table class="items table table-striped  table-condensed">
                             <thead>
                                 <tr>
                                     <th style="text-align:">Room</th>                                    

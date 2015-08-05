@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Bill Cashier Charges | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Bill Cashier Charges'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

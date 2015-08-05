@@ -2,7 +2,7 @@
 
 class RegistrationController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -1079,40 +1079,11 @@ class RegistrationController extends Controller {
      */
     public function actionIndex() {
 
-        $criteria = new CDbCriteria();
-
         $model = new Registration('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Registration'])) {
             $model->attributes = $_GET['Registration'];
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->reservation_id))
-                $criteria->addCondition('reservation_id = "' . $model->reservation_id . '"');
-
-
-            if (!empty($model->guest_user_id))
-                $criteria->addCondition('guest_user_id = "' . $model->guest_user_id . '"');
-
-
-            if (!empty($model->note))
-                $criteria->addCondition('note = "' . $model->note . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-//                       if (!empty($model->billing)) $criteria->addCondition('billing = "'.$model->billing.'"');
-//                       if (!empty($model->col)) $criteria->addCondition('col = "'.$model->col.'"');
         }
 
 

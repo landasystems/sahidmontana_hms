@@ -1,8 +1,5 @@
 <?php
 $this->setPageTitle('Accounts');
-$this->breadcrumbs = array(
-    'Accounts',
-);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -52,7 +49,7 @@ $this->endWidget();
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'account-grid',
     'dataProvider' => $model->search(),
-    'type' => 'striped bordered condensed',
+    'type' => 'striped condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
         'id',

@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Night Audit');
-$this->breadcrumbs = array(
-    'Night Audit',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -52,7 +50,7 @@ $this->endWidget();
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'na-grid',
     'dataProvider' => $model->search(),
-    'type' => 'striped bordered condensed',
+    'type' => 'striped condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
         array(

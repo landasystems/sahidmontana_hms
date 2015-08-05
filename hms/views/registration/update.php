@@ -1,12 +1,7 @@
 <?php
-
+$this->setPageTitle('Registrations | ID : ' . $model->id);
 if (isset($_GET['v'])) {
-    $this->setPageTitle('View Registrations | ID : ' . $model->id);
-    $this->breadcrumbs = array(
-        'Registrations' => array('index'),
-        $model->id => array('view', 'id' => $model->id),
-        'View',
-    );
+    
     $itemBread = array(
         array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'linkOptions' => array()),
@@ -14,12 +9,8 @@ if (isset($_GET['v'])) {
         array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv("printableArea");return false;')),
     );
 } else {
-    $this->setPageTitle('Edit Registrations | ID : ' . $model->id);
-    $this->breadcrumbs = array(
-        'Registrations' => array('index'),
-        $model->id => array('view', 'id' => $model->id),
-        'Update',
-    );
+    
+
     $itemBread = array(
         array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'linkOptions' => array()),

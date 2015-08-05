@@ -17,9 +17,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Source Of Business');
-$this->breadcrumbs = array(
-    'Source Of Business',
-);
+
 ?>
 
 <div class="well">

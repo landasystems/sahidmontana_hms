@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Registration Dps | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Registration Dps'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

@@ -125,7 +125,7 @@
                         <td align="center"><a href="#" class="btn" onclick="delRowCharge(' . $value->id . ')"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></a></td>
                       </tr>';
         }
-        echo '<table class="table table-bordered" id="listCharge">
+        echo '<table class="table " id="listCharge">
                     <thead>
                         <tr>
                             <th>Name</th>

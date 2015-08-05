@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Create Na Balances');
-$this->breadcrumbs=array(
-	'Na Balances'=>array('index'),
-	'Create',
-);
 
 ?>
 

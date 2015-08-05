@@ -51,7 +51,7 @@
                         <td width="300">
                             <?php
                             $siteConfig = SiteConfig::model()->listSiteConfig();
-                            $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, param('id'));
+                            $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, 1);
                             echo '<img src="' . $img['big'] . '" class="img-polaroid"/>';
                             ?>
                             <div style="margin-left: -100px;"> <?php echo $form->fileFieldRow($model, 'client_logo', array('class' => 'span3')); ?></div>
@@ -342,7 +342,7 @@
                     <label class="control-label" for="">Others Include</label>                    
                     <div class="controls">
 
-                        <table class="table table-striped table-bordered" style="margin-bottom: 0px">
+                        <table class="table table-striped " style="margin-bottom: 0px">
                             <thead>
                                 <tr>
                                     <th style="width: 15px;text-align:center">#</th>
@@ -554,6 +554,7 @@
                     'buttonType' => 'submit',
                     'type' => 'primary',
                     'icon' => 'ok white',
+                    'visible' => !isset($_GET['v']),
                     'label' => $model->isNewRecord ? 'Create' : 'Save',
                 ));
                 ?>

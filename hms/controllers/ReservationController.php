@@ -2,7 +2,7 @@
 
 class ReservationController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -784,8 +784,6 @@ class ReservationController extends Controller {
      */
     public function actionIndex() {
 
-        $criteria = new CDbCriteria();
-
         $model = new Reservation('search');
         $model->unsetAttributes();  // clear any default values
 
@@ -812,43 +810,6 @@ class ReservationController extends Controller {
             $model->attributes = $_GET['Reservation'];
             $model->date_from = (!empty($model->date_from)) ? date('Y-m-d', strtotime($model->date_from)) : '';
             $model->date_to = (!empty($model->date_to)) ? date('Y-m-d', strtotime($model->date_to)) : '';
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->guest_user_id))
-                $criteria->addCondition('guest_user_id = "' . $model->guest_user_id . '"');
-
-
-            if (!empty($model->guest_user_id))
-                $criteria->addCondition('guest_user_id = "' . $model->guest_user_id . '"');
-
-
-            if (!empty($model->departement_id))
-                $criteria->addCondition('departement_id = "' . $model->departement_id . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->cp_name))
-                $criteria->addCondition('cp_name = "' . $model->cp_name . '"');
-
-
-            if (!empty($model->cp_telephone_number))
-                $criteria->addCondition('cp_telephone_number = "' . $model->cp_telephone_number . '"');
-
-
-
-            if (!empty($model->note))
-                $criteria->addCondition('note = "' . $model->note . '"');
         }
 
         $this->render('index', array(

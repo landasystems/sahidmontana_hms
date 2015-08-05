@@ -51,9 +51,9 @@ class User extends CActiveRecord {
             array('name, city_id, roles_id', 'required'),
             array('city_id, created_user_id', 'numerical', 'integerOnly' => true),
             array('username, phone', 'length', 'max' => 20),
-            array('password, name,description, address', 'length', 'max' => 255),
+            array('password, name,description,company, address', 'length', 'max' => 255),
             array('code', 'length', 'max' => 100),
-            array('modified,sex,nationality,others,birth, enabled', 'safe'),
+            array('modified,sex,nationality,birth, enabled', 'safe'),
             array('username, email', 'unique', 'message' => '{attribute} : {value} already exists!', 'on' => 'allow'),
             array('email', 'email', 'on' => 'allow'),
             array('username, email', 'required', 'on' => 'allow'),
@@ -69,7 +69,7 @@ class User extends CActiveRecord {
             'username' => 'Username',
             'email' => 'Email',
             'password' => 'Password',
-            'code' => 'Identity Number',
+            'code' => 'KTP/ SIM/ Passport',
             'name' => 'Name',
             'city_id' => 'city_id',
             'address' => 'Address',
@@ -88,20 +88,18 @@ class User extends CActiveRecord {
 
         $criteria->compare('username', $this->username, true);
         $criteria->compare('email', $this->email, true);
-//        $criteria->compare('password', $this->password, true);
         $criteria->compare('code', $this->code, true);
         $criteria->compare('t.name', $this->name, true);
         $criteria->compare('city_id', $this->city_id);
         $criteria->compare('phone', $this->phone, true);
         $criteria->compare('roles_id', $this->roles_id, true);
-        if ($type == 'guest') {
-//            $criteria->alias = "u";
-            $siteConfig = SiteConfig::model()->listSiteConfig();
-            $sCriteria = json_decode($siteConfig->roles_guest, true);
-            $criteria->addInCondition('roles_id', $sCriteria);
-        } elseif ($type == 'user') {
-            $criteria->compare('Roles.is_allow_login', '1', true);
+        
+        if ($type == 'user'){
+            $criteria->compare('Roles.is_allow_login', 1);
+        }else{
+            $criteria->compare('Roles.is_allow_login', 0);
         }
+        
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
             'sort' => array('defaultOrder' => 't.id DESC')
@@ -109,23 +107,11 @@ class User extends CActiveRecord {
     }
 
     public function listUser() {
-        if (!app()->session['listUser']) {
-            $result = array();
-            $users = $this->findAll(array('index' => 'id'));
-            app()->session['listUser'] = $users;
-        }
-
-        return app()->session['listUser'];
+        return $this->findAll(array('index' => 'id'));
     }
 
     public function listUserPhone() {
-        if (!app()->session['listUserPhone']) {
-            $result = array();
-            $users = $this->findAll(array('index' => 'phone'));
-            app()->session['listUserPhone'] = $users;
-        }
-
-        return app()->session['listUserPhone'];
+        return $this->findAll(array('index' => 'phone'));
     }
 
     public function roles() {
@@ -146,21 +132,10 @@ class User extends CActiveRecord {
     }
 
     public function listUsers($type = '') {
-        $siteConfig = SiteConfig::model()->listSiteConfig();
         if ($type == 'user') {
             $sResult = User::model()->with('Roles')->findAll(array('condition' => 'Roles.is_allow_login=1'));
         } elseif ($type == 'guest') {
-            $sCriteria = json_decode($siteConfig->roles_guest, true);
-            if (!empty($sCriteria)) {
-                $list = '';
-                foreach ($sCriteria as $o) {
-                    $list .= '"' . $o . '",';
-                }
-                $list = substr($list, 0, strlen($list) - 1);
-                $sResult = User::model()->findAll(array('condition' => 'roles_id in(' . $list . ')'));
-            } else {
-                $sResult = '';
-            }
+            $sResult = User::model()->with('Roles')->findAll(array('condition' => 'Roles.is_allow_login=0'));
         }
         return $sResult;
     }
@@ -183,29 +158,14 @@ class User extends CActiveRecord {
 //    }
 
     public function typeRoles($sType = 'user') {
-        $siteConfig = SiteConfig::model()->listSiteConfig();
         $result = array();
-
         if ($sType == 'user') {
-            if (Yii::app()->user->roles_id == -1) {
-                $array = array(-1 => 'Super User');
-            } else {
-                $array = array();
-            }
-
-            $sResult = Roles::model()->findAll(array('condition' => 'is_allow_login=1'));
+            $sResult = Roles::model()->user();
             $result = $array + Chtml::listdata($sResult, 'id', 'name');
         } elseif ($sType == 'guest') {
-            $customers = json_decode($siteConfig->roles_guest, true);
-            $list = '';
-            foreach ($customers as $customer) {
-                $list .= '"' . $customer . '",';
-            }
-            $list = substr($list, 0, strlen($list) - 1);
-            $sResult = Roles::model()->findAll(array('condition' => 'id in(' . $list . ')'));
+            $sResult = Roles::model()->guest();
             $result = Chtml::listdata($sResult, 'id', 'name');
         }
-
 
         return $result;
     }
@@ -254,7 +214,7 @@ class User extends CActiveRecord {
     }
 
     public function getTagImg() {
-        return '<img src="' . $this->imgUrl['small'] . '" class="img-polaroid" style="width:70px"/><br>';
+        return '<img src="' . $this->imgUrl['small'] . '" class="img-polaroid" style="width:30px"/><br>';
     }
 
     public function getMediumImage() {
@@ -263,8 +223,6 @@ class User extends CActiveRecord {
 
     public function getTagBiodata() {
         $code = (!empty($this->code)) ? '' : '';
-        $companys = json_decode($this->others, true);
-        $company = (!empty($companys['company'])) ? ' (' . $companys['company'] . ')' : '-';
         $phone = (isset($this->phone)) ? $this->phone : '-';
         return '<div class="row-fluid">
                     <div class="span3" style="text-align:left">
@@ -281,7 +239,7 @@ class User extends CActiveRecord {
                     </div>
                     <div class="span1">:</div>
                     <div class="span8" style="text-align:left">
-                        ' . $this->guestName . $company . '
+                        ' . $this->guestName . $this->company . '
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -298,7 +256,7 @@ class User extends CActiveRecord {
 
     function getFullName() {
         $roles = (isset($this->Roles->name)) ? $this->Roles->name : '-';
-        if (isset($this->Roles->prefix) and $this->Roles->prefix == 1) {
+        if (isset($this->Roles->is_allow_login) and $this->Roles->is_allow_login == 1) {
             $title = ($this->sex == 'f') ? 'Mrs. ' : 'Mr. ';
         } else {
             $title = '';
@@ -308,7 +266,7 @@ class User extends CActiveRecord {
     }
 
     function getGuestName() {
-        if (isset($this->Roles->prefix) && $this->Roles->prefix == 1) {
+        if (isset($this->Roles->is_allow_login) && $this->Roles->is_allow_login == 1) {
             $title = ($this->sex == 'f') ? 'Mrs. ' : 'Mr. ';
         } else {
             $title = '';

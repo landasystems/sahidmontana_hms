@@ -5,10 +5,7 @@
 </style>
 <?php
 $this->setPageTitle('View Night Audit | Date : ' . $model->date_na);
-$this->breadcrumbs = array(
-    'Nas' => array('index'),
-    $model->id,
-);
+
 ?>
 
 <?php

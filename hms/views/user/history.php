@@ -11,9 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
 $this->setPageTitle('Guest History ');
-$this->breadcrumbs = array(
-    'Guest' => array('guest'),
-);
+
 ?>
 <div class="well">
     <div class="control-group ">
@@ -27,14 +25,14 @@ $this->breadcrumbs = array(
                 $id = $_GET['user'];
                 $selName = '[' . $user->Roles->name . '] ' . $user->name;
             }
-            $siteConfig = SiteConfig::model()->listSiteConfig();
-            $sCriteria = json_decode($siteConfig->roles_guest, true);
+            
+            $sCriteria = Roles::model()->guest();
             $list = '';
-            foreach ($sCriteria as $o) {
+            foreach ($sCriteria as $o => $val) {
                 $list .= '"' . $o . '",';
             }
             $list = substr($list, 0, strlen($list) - 1);
-            $sResult = User::model()->findAll(array('condition' => 'roles_id in(' . $list . ')'));
+            $sResult = User::model()->listUsers('guest');
             $listUser = Chtml::listdata($sResult, 'id', 'fullName');
             $this->widget(
                     'bootstrap.widgets.TbSelect2', array(

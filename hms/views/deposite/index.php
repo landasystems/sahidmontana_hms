@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Deposites');
-$this->breadcrumbs = array(
-    'Deposites',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -58,7 +56,7 @@ function by($data) {
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'deposite-grid',
     'dataProvider' => $model->search(),
-    'type' => 'striped bordered condensed',
+    'type' => 'striped condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
         'code',

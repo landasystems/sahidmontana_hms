@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Initial Forecasts');
-$this->breadcrumbs = array(
-    'Initial Forecasts',
-);
+
 ?>
 
 <div class="form">
@@ -38,7 +36,7 @@ $this->breadcrumbs = array(
             4. Lakukan NA.<br>
             5. Bersihkan kembali data Initial Forecast kecuali LAST MONTH. Karena initial LAST MONTH akan digunakan selama 1 bulan ini.
         </div>
-        <table class="table table-bordered table-hover">
+        <table class="table  table-hover">
             <thead>
                 <tr>
                     <th style="text-align: center;vertical-align: middle" rowspan="2">NAME</th>            

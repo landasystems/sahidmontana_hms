@@ -77,7 +77,7 @@ if (!empty($geo)) {
     $yearTotal = $valYear['city']['rno']['total'] + $valYear['province']['rno']['total'] + $valYear['nationality']['rno']['total'];
     ?><h2 align="center">Geographical Origin Report</h2>
     <h3 align="center"><?php echo date('d M Y', strtotime($created)) ?></h3>
-    <table class="table table-bordered table">
+    <table class="table  table">
         <thead>
             <tr>
                 <th colspan="10"><?php echo strtoupper($province_id->Province->name) ?></th>

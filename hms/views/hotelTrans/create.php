@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Create Hotel Trans');
-$this->breadcrumbs=array(
-	'Hotel Trans'=>array('index'),
-	'Create',
-);
 
 ?>
 

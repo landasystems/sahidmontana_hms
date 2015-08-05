@@ -1,8 +1,5 @@
 <?php
 $this->setPageTitle('Room Packages');
-$this->breadcrumbs=array(
-	'Room Packages',
-);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

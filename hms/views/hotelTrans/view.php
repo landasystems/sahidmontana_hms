@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Hotel Trans | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Hotel Trans'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

@@ -2,7 +2,7 @@
 
 class AccountController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -146,39 +146,11 @@ class AccountController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-
-        $criteria = new CDbCriteria();
-
         $model = new Account('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Account'])) {
             $model->attributes = $_GET['Account'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
 
 

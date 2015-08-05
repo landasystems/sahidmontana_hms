@@ -5,7 +5,7 @@
 $category = ChargeAdditionalCategory::model()->findAll(array('condition' => 'level=1'));
 ?>
 
-<table class="items table table-striped table-bordered table-condensed">
+<table class="items table table-striped  table-condensed">
     <?php
     //from siteconfig
     $siteConfig = SiteConfig::model()->findByPk(1);
@@ -219,7 +219,7 @@ $category = ChargeAdditionalCategory::model()->findAll(array('condition' => 'lev
             <tr><td colspan="8">&nbsp;</td></tr>
         </tbody>
 
-        <?
+        <?php
     }
     ?>
     <thead>  

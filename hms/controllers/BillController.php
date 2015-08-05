@@ -2,7 +2,7 @@
 
 class BillController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -384,47 +384,13 @@ class BillController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
 
         $model = new Bill('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Bill'])) {
             $model->attributes = $_GET['Bill'];
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->cash))
-                $criteria->addCondition('cash = "' . $model->cash . '"');
-
-
-            if (!empty($model->charge))
-                $criteria->addCondition('charge = "' . $model->charge . '"');
-
-
-            if (!empty($model->ca_user_id))
-                $criteria->addCondition('ca_user_id = "' . $model->ca_user_id . '"');
-
-
-            if (!empty($model->refund))
-                $criteria->addCondition('refund = "' . $model->refund . '"');
-
-
-            if (!empty($model->total))
-                $criteria->addCondition('total = "' . $model->total . '"');
         }
-
-
 
         $this->render('index', array(
             'model' => $model,

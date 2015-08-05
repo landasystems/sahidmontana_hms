@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Market Segments');
-$this->breadcrumbs = array(
-    'Market Segments',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -52,7 +50,7 @@ $this->endWidget();
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'market-segment-grid',
     'dataProvider' => $model->search(),
-    'type' => 'striped bordered condensed',
+    'type' => 'striped condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
         array(

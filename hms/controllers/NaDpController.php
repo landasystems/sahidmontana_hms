@@ -2,7 +2,7 @@
 
 class NaDpController extends Controller
 {
-        public $breadcrumbs;
+        
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -121,42 +121,13 @@ class NaDpController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	     
                 $model=new NaDp('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['NaDp']))
 		{
-                        $model->attributes=$_GET['NaDp'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->na_id)) $criteria->addCondition('na_id = "'.$model->na_id.'"');
-                     
-                    	
-                       if (!empty($model->name)) $criteria->addCondition('name = "'.$model->name.'"');
-                     
-                    	
-                       if (!empty($model->by_cash)) $criteria->addCondition('by_cash = "'.$model->by_cash.'"');
-                     
-                    	
-                       if (!empty($model->by_cc)) $criteria->addCondition('by_cc = "'.$model->by_cc.'"');
-                     
-                    	
-                       if (!empty($model->by_bank)) $criteria->addCondition('by_bank = "'.$model->by_bank.'"');
-                     
-                    	
-                       if (!empty($model->by_gl)) $criteria->addCondition('by_gl = "'.$model->by_gl.'"');
-                     
-                    	
-                       if (!empty($model->by_cl)) $criteria->addCondition('by_cl = "'.$model->by_cl.'"');
-                     
-                    			
+                        $model->attributes=$_GET['NaDp'];	
 		}
                
        

@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Provinces | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Provinces'=>array('index'),
-	$model->name,
-);
+
 ?>
 
 <?php 

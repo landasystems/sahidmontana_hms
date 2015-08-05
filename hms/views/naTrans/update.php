@@ -1,10 +1,5 @@
 <?php
 $this->setPageTitle('Edit Na Trans | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Na Trans'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
 
 ?>
 

@@ -58,7 +58,7 @@
         if (empty($departement)) {
             echo '<div id="listDepartement"></div>';
         } else {
-            $list = ' <table class="table table-bordered" id="listDepartement">
+            $list = ' <table class="table " id="listDepartement">
                             <thead>
                                 <tr>
                                     <th>Code</th>

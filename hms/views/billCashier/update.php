@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Bill Cashiers | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Bill Cashiers'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

@@ -25,7 +25,7 @@
         <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>
         <?php echo $form->dropDownListRow($model, 'tahun', landa()->yearly(), array('class' => 'span3')); ?>
 
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table  table-striped table-hover">
             <thead>
             <th>Account</th>
             <th>Departement</th>

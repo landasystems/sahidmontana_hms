@@ -2,7 +2,7 @@
 
 class NaController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layoutac for the views. Defaults to '//layouts/column2', meaning
@@ -571,50 +571,11 @@ class NaController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
-
         $model = new Na('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Na'])) {
             $model->attributes = $_GET['Na'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->date_na))
-                $criteria->addCondition('date_na = "' . $model->date_na . '"');
-
-
-            if (!empty($model->global_by_cash))
-                $criteria->addCondition('global_by_cash = "' . $model->global_by_cash . '"');
-
-
-            if (!empty($model->global_by_cc))
-                $criteria->addCondition('global_by_cc = "' . $model->global_by_cc . '"');
-
-
-            if (!empty($model->global_by_gl))
-                $criteria->addCondition('global_by_gl = "' . $model->global_by_gl . '"');
-
-
-            if (!empty($model->global_by_cl))
-                $criteria->addCondition('global_by_cl = "' . $model->global_by_cl . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
 
         $this->render('index', array(

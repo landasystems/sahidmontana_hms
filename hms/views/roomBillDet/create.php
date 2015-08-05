@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Create Room Bill Dets');
-$this->breadcrumbs=array(
-	'Room Bill Dets'=>array('index'),
-	'Create',
-);
 
 ?>
 

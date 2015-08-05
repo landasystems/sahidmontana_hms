@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Bills | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Bills' => array('index'),
-    $model->id => array('view', 'id' => $model->id),
-    'Update',
-);
+
 ?>
 
 <?php
@@ -82,7 +78,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             </tr>                            
         </table>   
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th style="width: 15px;text-align:center">#</th>

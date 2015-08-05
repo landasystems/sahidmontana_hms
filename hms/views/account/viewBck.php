@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Berhasil');
-$this->breadcrumbs=array(
-	'Accounts'=>array('index'),
-);
+
 ?>
 
 <div class="label label-info">

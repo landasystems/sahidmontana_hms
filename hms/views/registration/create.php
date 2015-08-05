@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Registrations');
-$this->breadcrumbs=array(
-	'Registrations'=>array('index'),
-	'Create',
-);
+
 
 ?>
 <?php 

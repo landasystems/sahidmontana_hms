@@ -17,9 +17,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Top Ten');
-$this->breadcrumbs = array(
-    'Top Ten',
-);
+
 ?>
 
 <div class="well">

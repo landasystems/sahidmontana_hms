@@ -12,7 +12,7 @@ $date_to = date('d M Y', strtotime($date[1]));
 </table>
 <div class="row-fluid">
     <div class="span6">
-        <table class="responsive table table-bordered" width="100%">
+        <table class="responsive table " width="100%">
             <thead>
             <tr>
                     <td colspan="6" ><center>ARRIVAL</center></td>
@@ -48,7 +48,7 @@ $date_to = date('d M Y', strtotime($date[1]));
         </table>
     </div>
     <div class="span6">
-        <table class="responsive table table-bordered" width="100%">
+        <table class="responsive table " width="100%">
             <thead>
                 <tr>
                     <td colspan="6"><center>DEPARTURE</center></td>

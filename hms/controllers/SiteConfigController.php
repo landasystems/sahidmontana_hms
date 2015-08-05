@@ -2,12 +2,6 @@
 
 class SiteConfigController extends Controller {
 
-    public $breadcrumbs;
-
-    /**
-     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-     * using two-column layout. See 'protected/views/layouts/column2.php'.
-     */
     public $layout = 'main';
 
     public function filters() {
@@ -37,12 +31,18 @@ class SiteConfigController extends Controller {
         );
     }
 
-    /**
-     * Displays a particular model.
-     * @param integer $id the ID of the model to be displayed
-     */
     public function actionView($id) {
-        $this->render('view', array(
+        cs()->registerScript('tab', '$("#myTab a").click(function(e) {
+                                        e.preventDefault();
+                                        $(this).tab("show");
+                                    })');
+
+        cs()->registerScript('read', '
+            $("form input, form textarea, form select").each(function(){
+                $(this).prop("disabled", true);
+            });');
+        $_GET['v'] = true;
+        $this->render('update', array(
             'model' => $this->loadModel($id),
         ));
     }
@@ -65,9 +65,6 @@ class SiteConfigController extends Controller {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
         cs()->registerScript('tab', '$("#myTab a").click(function(e) {
                                         e.preventDefault();
                                         $(this).tab("show");
@@ -85,10 +82,6 @@ class SiteConfigController extends Controller {
             if (isset($_POST['others_include'])) {
                 $model->others_include = json_encode($_POST['others_include']);
             }
-
-
-            if (!empty($_POST['SiteConfig']['roles_guest']))
-                $model->roles_guest = json_encode($_POST['SiteConfig']['roles_guest']);
 
             $file = CUploadedFile::getInstance($model, 'client_logo');
             if (is_object($file)) {
@@ -126,77 +119,18 @@ class SiteConfigController extends Controller {
     }
 
     /**
-     * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'admin' page.
-     * @param integer $id the ID of the model to be deleted
-     */
-    public function actionDelete($id) {
-        if (Yii::app()->request->isPostRequest) {
-            // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
-
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            if (!isset($_GET['ajax']))
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        } else
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
-    }
-
-    /**
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
 
         $model = new SiteConfig('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['SiteConfig'])) {
             $model->attributes = $_GET['SiteConfig'];
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->client_name))
-                $criteria->addCondition('client_name = "' . $model->client_name . '"');
-
-
-            if (!empty($model->client_logo))
-                $criteria->addCondition('client_logo = "' . $model->client_logo . '"');
-
-
-            if (!empty($model->city_id))
-                $criteria->addCondition('city_id = "' . $model->city_id . '"');
-
-
-            if (!empty($model->address))
-                $criteria->addCondition('address = "' . $model->address . '"');
-
-
-            if (!empty($model->phone))
-                $criteria->addCondition('phone = "' . $model->phone . '"');
-
-
-            if (!empty($model->email))
-                $criteria->addCondition('email = "' . $model->email . '"');
         }
 
         $this->render('index', array(
-            'model' => $model,
-        ));
-    }
-
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin() {
-        $model = new SiteConfig('search');
-        $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['SiteConfig']))
-            $model->attributes = $_GET['SiteConfig'];
-
-        $this->render('admin', array(
             'model' => $model,
         ));
     }

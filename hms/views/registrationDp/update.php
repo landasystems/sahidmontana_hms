@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Registration Dps | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Registration Dps'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

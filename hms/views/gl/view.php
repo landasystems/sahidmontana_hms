@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Gls | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Gls'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

@@ -2,10 +2,7 @@
 $category = ChargeAdditionalCategory::model()->findAll(array('index' => 'id'));
 $id = $model->charge_additional_category_id;
 $this->setPageTitle('View Bill Charges | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Bill Charges' => array('index'),
-    $model->id,
-);
+
 $departement = '';
 ?>
 
@@ -107,7 +104,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 </table>                     
 
 
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th style="width: 15px;text-align:center">#</th>

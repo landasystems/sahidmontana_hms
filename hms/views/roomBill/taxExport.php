@@ -11,9 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Tax Export');
-$this->breadcrumbs = array(
-    'Tax Export',
-);
+
 ?>
 <script>
     function hide() {

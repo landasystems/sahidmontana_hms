@@ -137,7 +137,7 @@ foreach ($naDet as $na) {
 </table>
 <div class="row-fluid">
 
-    <table class="responsive table table-bordered" width="100%">
+    <table class="responsive table " width="100%">
         <thead>
 
             <tr>                

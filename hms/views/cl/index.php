@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Cls');
-$this->breadcrumbs=array(
-	'Cls',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

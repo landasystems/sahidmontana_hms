@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Charge Additionals | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Charge Additionals'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

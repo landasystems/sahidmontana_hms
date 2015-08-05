@@ -7,7 +7,7 @@
         </tr>   
     </table>
 
-    <table class="table table-bordered table">
+    <table class="table  table">
         <thead>
             <tr> 
                 <th rowspan="2" width="10%">City</th>

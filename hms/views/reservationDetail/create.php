@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Reservation Details');
-$this->breadcrumbs=array(
-	'Reservation Details'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

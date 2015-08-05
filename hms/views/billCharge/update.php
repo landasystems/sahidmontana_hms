@@ -1,10 +1,5 @@
 <?php
 $this->setPageTitle('Edit Bill Charges | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Bill Charges' => array('index'),
-    $model->id => array('view', 'id' => $model->id),
-    'Update',
-);
 ?>
 
 <?php
@@ -29,9 +24,6 @@ $this->endWidget();
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'bill-charge-form',
         'enableClientValidation' => true,
-        'clientOptions' => array(
-            'validateOnSubmit' => true,
-        ),
         'method' => 'post',
         'type' => 'horizontal',
         'htmlOptions' => array(
@@ -219,7 +211,7 @@ $this->endWidget();
     </div>
 
     <div class="modal-body form-horizontal">
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table  table-striped table-hover">
             <thead>
                 <tr>
                     <th style="text-align: center">No.</th>

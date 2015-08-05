@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('House Keeping');
-$this->breadcrumbs = array(
-    'House Keeping',
-);
+
 ?>
 
 <?php
@@ -18,7 +16,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 
 
-<table class="table table-bordered" style="margin-top: 0">
+<table class="table " style="margin-top: 0">
     <thead>
         <tr>
             <th style="text-align:center;vertical-align: middle" rowspan="2" class="span2">Status</th>    

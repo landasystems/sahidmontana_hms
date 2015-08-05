@@ -6,9 +6,6 @@
 ?>
 <?php
 $this->setPageTitle('Guest Billing');
-$this->breadcrumbs = array(
-    'Guest Billing',
-);
 ?>
 <?php
 $this->beginWidget('zii.widgets.CPortlet', array(
@@ -217,7 +214,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         </table>          
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th style="width: 15px;text-align:center">#</th>

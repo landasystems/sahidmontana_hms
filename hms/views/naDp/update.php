@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Na Dps | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Na Dps'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Reservation Details | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Reservation Details'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

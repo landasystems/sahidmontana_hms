@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Room Listing / ' . date('d F Y'));
-$this->breadcrumbs = array(
-    'Room Listing',
-);
+
 $siteConfig = SiteConfig::model()->findByPk(1);
 ?>
 
@@ -82,7 +80,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 </div>
 <hr/>
 
-<table class="table table-bordered">
+<table class="table ">
     <thead>
         <tr>            
             <th style="text-align:center;vertical-align: middle" rowspan="2" class="span2">Status</th>

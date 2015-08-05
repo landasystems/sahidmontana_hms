@@ -2,7 +2,7 @@
 
 class ClController extends Controller
 {
-        public $breadcrumbs;
+        
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -121,36 +121,13 @@ class ClController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	          
                 $model=new Cl('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['Cl']))
 		{
                         $model->attributes=$_GET['Cl'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->na_id)) $criteria->addCondition('na_id = "'.$model->na_id.'"');
-                     
-                    	
-                       if (!empty($model->name)) $criteria->addCondition('name = "'.$model->name.'"');
-                     
-                    	
-                       if (!empty($model->cl_user_id)) $criteria->addCondition('cl_user_id = "'.$model->cl_user_id.'"');
-                     
-                    	
-                       if (!empty($model->charge)) $criteria->addCondition('charge = "'.$model->charge.'"');
-                     
-                    	
-                       if (!empty($model->cashier_user_id)) $criteria->addCondition('cashier_user_id = "'.$model->cashier_user_id.'"');
-                     
-                    			
 		}
                 
        

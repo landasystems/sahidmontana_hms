@@ -2,7 +2,7 @@
 
 class RoomController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -122,41 +122,12 @@ class RoomController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
-
         $model = new Room('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Room'])) {
             $model->attributes = $_GET['Room'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->number))
-                $criteria->addCondition('number = "' . $model->number . '"');
-
-
-            if (!empty($model->room_type_id))
-                $criteria->addCondition('room_type_id = "' . $model->room_type_id . '"');
-
-
-            if (!empty($model->floor))
-                $criteria->addCondition('floor = "' . $model->floor . '"');
-
-
-            if (!empty($model->bed))
-                $criteria->addCondition('bed = "' . $model->bed . '"');
-
-
-            if (!empty($model->linked_room_id))
-                $criteria->addCondition('linked_room_id = "' . $model->linked_room_id . '"');
         }
-       
-
 
         $this->render('index', array(
             'model' => $model,

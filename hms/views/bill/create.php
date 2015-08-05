@@ -6,9 +6,6 @@
 ?>
 <?php
 $this->setPageTitle('Guest Billing');
-$this->breadcrumbs = array(
-    'Guest Billing',
-);
 ?>
 <?php
 $this->beginWidget('zii.widgets.CPortlet', array(
@@ -36,9 +33,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'enctype' => 'multipart/form-data',
     ),
     'enableClientValidation' => true,
-    'clientOptions' => array(
-        'validateOnSubmit' => true,
-    ),
+    
         ));
 ?>
 
@@ -209,7 +204,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         </table>          
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th style="width: 15px;text-align:center">#</th>

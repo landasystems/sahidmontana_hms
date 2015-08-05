@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Na Dps');
-$this->breadcrumbs=array(
-	'Na Dps',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

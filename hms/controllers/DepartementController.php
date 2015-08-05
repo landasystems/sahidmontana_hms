@@ -2,7 +2,7 @@
 
 class DepartementController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -112,45 +112,12 @@ class DepartementController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
-
         $model = new Departement('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['Departement'])) {
             $model->attributes = $_GET['Departement'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->address))
-                $criteria->addCondition('address = "' . $model->address . '"');
-
-
-            if (!empty($model->city_id))
-                $criteria->addCondition('city_id = "' . $model->city_id . '"');
-
-
-            if (!empty($model->phone))
-                $criteria->addCondition('phone = "' . $model->phone . '"');
-
-
-            if (!empty($model->email))
-                $criteria->addCondition('email = "' . $model->email . '"');
-
-
-            if (!empty($model->fax))
-                $criteria->addCondition('fax = "' . $model->fax . '"');
         }
-       
-
 
         $this->render('index', array(
             'model' => $model,

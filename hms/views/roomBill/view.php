@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Room Bills | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Room Bills'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <?php 

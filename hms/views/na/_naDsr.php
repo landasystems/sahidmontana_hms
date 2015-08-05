@@ -15,7 +15,7 @@ $initial_statistic = json_decode($initialForecast->statistik, true);
 <center><div class="row-fluid">
         <div class="span3" style="text-align: center">
             <?php
-            $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, param('id'));
+            $img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, 1);
             echo '<img src="' . $img['small'] . '" class="" style="width:40%"/>';
             ?>
         </div>
@@ -52,7 +52,7 @@ $initial_statistic = json_decode($initialForecast->statistik, true);
 
 
 <hr> 
-<table class="items table table-bordered table-condensed">
+<table class="items table  table-condensed">
     <thead>
         <tr>            
             <th class="span3" rowspan="2" style="text-align: center">ACCOUNT</th>            

@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Create Gls');
-$this->breadcrumbs=array(
-	'Gls'=>array('index'),
-	'Create',
-);
 
 ?>
 

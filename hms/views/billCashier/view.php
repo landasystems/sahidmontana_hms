@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('View Bill Cashiers | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Bill Cashiers' => array('index'),
-    $model->id,
-);
+
 ?>
 
 <?php
@@ -51,7 +48,7 @@ $this->endWidget();
             <p class="note"><?php echo date("D, d F Y", strtotime($model->created)); ?></p>
         </legend>
 
-        <table class="table table-bordered">
+        <table class="table ">
             <thead>
                 <tr>
                     <th class="span1" rowspan="2">No.</th>

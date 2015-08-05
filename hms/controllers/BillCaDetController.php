@@ -2,7 +2,7 @@
 
 class BillCaDetController extends Controller
 {
-        public $breadcrumbs;
+        
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -121,42 +121,14 @@ class BillCaDetController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-            $criteria = new CDbCriteria();            
-
+	{	        
                 $model=new BillCaDet('search');
                 $model->unsetAttributes();  // clear any default values
 
                 if(isset($_GET['BillCaDet']))
 		{
-                        $model->attributes=$_GET['BillCaDet'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->bill_ca_id)) $criteria->addCondition('bill_ca_id = "'.$model->bill_ca_id.'"');
-                     
-                    	
-                       if (!empty($model->charge)) $criteria->addCondition('charge = "'.$model->charge.'"');
-                     
-                    	
-                       if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
-                     
-                    	
-                       if (!empty($model->created)) $criteria->addCondition('created = "'.$model->created.'"');
-                     
-                    	
-                       if (!empty($model->created_user_id)) $criteria->addCondition('created_user_id = "'.$model->created_user_id.'"');
-                     
-                    	
-                       if (!empty($model->modified)) $criteria->addCondition('modified = "'.$model->modified.'"');
-                     
-                    			
+                        $model->attributes=$_GET['BillCaDet'];	
 		}
-             
-       
 
                 $this->render('index',array(
 			'model'=>$model,

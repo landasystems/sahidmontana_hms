@@ -2,7 +2,7 @@
 
 class BillCashierController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -68,30 +68,11 @@ class BillCashierController extends Controller {
 
     public function actionApproving() {
         
-        $criteria = new CDbCriteria();
-
         $model = new BillCashier('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['BillCashier'])) {
             $model->attributes = $_GET['BillCashier'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->approved_user_id))
-                $criteria->addCondition('approved_user_id = "' . $model->approved_user_id . '"');
         }
 
 
@@ -190,33 +171,13 @@ class BillCashierController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
 
         $model = new BillCashier('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['BillCashier'])) {
             $model->attributes = $_GET['BillCashier'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->approved_user_id))
-                $criteria->addCondition('approved_user_id = "' . $model->approved_user_id . '"');
         }
-      
-
 
         $this->render('index', array(
             'model' => $model,

@@ -2,10 +2,7 @@
 
 <?php
 $this->setPageTitle('View Guest Bill | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Bills' => array('index'),
-    $model->id,
-);
+
 ?>
 
 <?php

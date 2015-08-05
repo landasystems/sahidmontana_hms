@@ -1,10 +1,6 @@
 <?php
 $this->setPageTitle('Edit Reservation Details | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Reservation Details'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+
 
 ?>
 

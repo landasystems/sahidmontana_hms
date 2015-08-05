@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Forecasts');
-$this->breadcrumbs=array(
-	'Forecasts',
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

@@ -1,9 +1,6 @@
 <?php
 $this->setPageTitle('Create Registration Dps');
-$this->breadcrumbs=array(
-	'Registration Dps'=>array('index'),
-	'Create',
-);
+
 
 ?>
 

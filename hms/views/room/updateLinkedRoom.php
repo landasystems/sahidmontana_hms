@@ -1,8 +1,6 @@
 <?php
 $this->setPageTitle('Linked Room');
-$this->breadcrumbs = array(
-    'Linked Room',
-);
+
 ?>
 <?php
 $this->beginWidget('zii.widgets.CPortlet', array(

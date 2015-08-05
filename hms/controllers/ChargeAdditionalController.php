@@ -2,7 +2,7 @@
 
 class ChargeAdditionalController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -155,39 +155,12 @@ class ChargeAdditionalController extends Controller {
             }
         }
 
-        $criteria = new CDbCriteria();
-
         $model = new ChargeAdditional('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['ChargeAdditional'])) {
             $model->attributes = $_GET['ChargeAdditional'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->charge_additional_category_id))
-                $criteria->addCondition('charge_additional_category_id = "' . $model->charge_additional_category_id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->charge))
-                $criteria->addCondition('charge = "' . $model->charge . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-            if (!empty($model->type_transaction))
-                $criteria->addCondition('type_transaction = "' . $model->type_transaction . '"');
         }
-
-
 
         $this->render('index', array(
             'model' => $model,

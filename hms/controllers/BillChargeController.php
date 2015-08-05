@@ -2,7 +2,7 @@
 
 class BillChargeController extends Controller {
 
-    public $breadcrumbs;
+    
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -42,9 +42,6 @@ class BillChargeController extends Controller {
 
     public function cssJs() {
         cs()->registerScript('', '
-            
-
-
                         $(".btn-add-deposite").click(function(){
                             var id = $(this).attr("dp_id");
                             var postData = "id=" + id;   
@@ -342,6 +339,7 @@ class BillChargeController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
+        logs($_POST);
         $model = new BillCharge;
         $this->cssJs();
         if (isset($_POST['BillCharge'])) {
@@ -531,66 +529,11 @@ class BillChargeController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $criteria = new CDbCriteria();
-
         $model = new BillCharge('search');
         $model->unsetAttributes();  // clear any default values
 
         if (isset($_GET['BillCharge'])) {
             $model->attributes = $_GET['BillCharge'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->guest_user_id))
-                $criteria->addCondition('guest_user_id = "' . $model->guest_user_id . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-
-
-            if (!empty($model->cash))
-                $criteria->addCondition('cash = "' . $model->cash . '"');
-
-
-            if (!empty($model->cc_number))
-                $criteria->addCondition('cc_number = "' . $model->cc_number . '"');
-
-
-            if (!empty($model->charge))
-                $criteria->addCondition('charge = "' . $model->charge . '"');
-
-
-            if (!empty($model->ca_user_id))
-                $criteria->addCondition('ca_user_id = "' . $model->ca_user_id . '"');
-
-
-            if (!empty($model->refund))
-                $criteria->addCondition('refund = "' . $model->refund . '"');
-
-
-            if (!empty($model->total))
-                $criteria->addCondition('total = "' . $model->total . '"');
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
 
         $this->render('index', array(
