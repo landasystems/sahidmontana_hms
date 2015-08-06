@@ -1,9 +1,6 @@
 <table>
     <tr>
-        <th colspan="5">DAFTAR USER PT. <?php
-            Yii::app()->name;
-            echo param('clientName');
-            ?></th>
+        <th colspan="6">DAFTAR USER </th>
     </tr>
     <tr></tr>
     <tr></tr>
@@ -13,6 +10,7 @@
     <table border="1">
         <thead>
             <tr>
+                <th>name</th>
                 <th>username</th>
                 <th>email</th>
                 <th>name</th>
@@ -23,7 +21,9 @@
         <tbody>
             <?php
             foreach ($model as $row) {
-                echo '<tr><td>' . $row->username . '</td>
+                echo '<tr>
+                    <td>' . $row->name . '</td>
+                    <td>' . $row->username . '</td>
                     <td>' . $row->email . '</td>
                     <td>' . $row->name . '</td>
                     <td>' . $row->address . '</td>

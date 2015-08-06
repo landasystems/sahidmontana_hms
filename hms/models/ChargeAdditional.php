@@ -75,7 +75,7 @@ class ChargeAdditional extends CActiveRecord {
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search() {
+    public function search($export = '') {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
@@ -88,13 +88,16 @@ class ChargeAdditional extends CActiveRecord {
         $criteria->compare('account_id', $this->account_id, true);
         $criteria->compare('type_transaction', $this->type_transaction);
 
-        return new CActiveDataProvider($this, array(
-//            'pagination' => array(
-//                'pageSize' => 25,
-//            ),
-            'criteria' => $criteria,
-            'sort' => array('defaultOrder' => 't.id DESC')
-        ));
+        if (empty($export)) {
+            $data = new CActiveDataProvider($this, array(
+                'criteria' => $criteria,
+                'sort' => array('defaultOrder' => 't.id DESC')
+            ));
+        } else {
+            $data = ChargeAdditional::model()->findAll($criteria);
+        }
+        
+        return $data;
     }
 
     /**

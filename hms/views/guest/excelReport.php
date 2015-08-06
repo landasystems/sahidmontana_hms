@@ -1,9 +1,6 @@
 <table>
     <tr>
-        <th colspan="5">DAFTAR USER PT. <?php
-            Yii::app()->name;
-            echo param('clientName');
-            ?></th>
+        <th colspan="8">DAFTAR GUEST</th>
     </tr>
     <tr></tr>
     <tr></tr>
@@ -13,21 +10,27 @@
     <table border="1">
         <thead>
             <tr>
-                <th>username</th>
-                <th>email</th>
-                <th>name</th>
-                <th>address</th>
-                <th>phone</th>
+                <th>Guest Name</th>
+                <th>Company</th>
+                <th>KTP/SIM/Passport</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Nationality</th>
+                <th>Group Guesst</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($model as $row) {
-                echo '<tr><td>' . $row->username . '</td>
-                    <td>' . $row->email . '</td>
-                    <td>' . $row->name . '</td>
+                echo '<tr><td>' . $row->name . '</td>
+                    <td>' . $row->company . '</td>
+                    <td>' . $row->code . '</td>
+                    <td>' . $row->phone . '</td>
                     <td>' . $row->address . '</td>
-                    <td>' . landa()->hp($row->phone) . '</td>
+                    <td>' . (isset($row->City->name)? $row->City->name : "") . '</td>
+                    <td>' . $row->nationality . '</td>
+                    <td>' . ((isset($row->Roles->name)) ? $row->Roles->name : "") . '</td>
                     </tr>';
             }
             ?>

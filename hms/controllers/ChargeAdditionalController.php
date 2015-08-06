@@ -2,8 +2,6 @@
 
 class ChargeAdditionalController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -46,6 +44,15 @@ class ChargeAdditionalController extends Controller {
 //            'model' => $this->loadModel($id),
 //        ));
 //    }
+
+    public function actionGenerateExcel() {
+        $model = new ChargeAdditional;
+        $data = $model->search(true);
+        Yii::app()->request->sendFile(date('YmdHi') . 'AdditionalCharge.xls', $this->renderPartial('excelReport', array(
+                    'model' => $data,
+                        ), true));
+    }
+
     public function actionView($id) {
         cs()->registerScript('read', '
             $("form input, form textarea, form select").each(function(){
@@ -63,7 +70,7 @@ class ChargeAdditionalController extends Controller {
             $list[] = array("id" => "0", "text" => "No Results Found..");
         } else {
             foreach ($data as $val) {
-                $sCat = (isset($val->ChargeAdditionalCategory->code )) ? $val->ChargeAdditionalCategory->code  : "";
+                $sCat = (isset($val->ChargeAdditionalCategory->code)) ? $val->ChargeAdditionalCategory->code : "";
                 $list[] = array("id" => $val->id, "text" => $sCat . ' - ' . $val->name);
             }
         }

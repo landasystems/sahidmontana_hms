@@ -2,8 +2,6 @@
 
 class GuestController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -35,6 +33,14 @@ class GuestController extends Controller {
                 'expression' => 'app()->controller->isValidAccess("Guest","d")'
             )
         );
+    }
+
+    public function actionGenerateExcel() {
+        $model = new User;
+        $data = $model->search('guest', true);
+        Yii::app()->request->sendFile(date('YmdHi') . 'Guest.xls', $this->renderPartial('excelReport', array(
+                    'model' => $data,
+                        ), true));
     }
 
     public function actionView($id) {
@@ -84,7 +90,7 @@ class GuestController extends Controller {
                                         e.preventDefault();
                                         $(this).tab("show");
                                     })
-                                    ',0);
+                                    ', 0);
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
@@ -99,7 +105,6 @@ class GuestController extends Controller {
         ));
     }
 
-    
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
@@ -111,8 +116,6 @@ class GuestController extends Controller {
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
-
-   
 
     public function actionOption() {
         if (isset($_POST['delete']) && isset($_POST['ceckbox'])) {
@@ -154,7 +157,6 @@ class GuestController extends Controller {
         ));
     }
 
-   
     public function loadModel($id) {
         $model = User::model()->findByPk($id);
         if ($model === null)
@@ -168,6 +170,5 @@ class GuestController extends Controller {
             Yii::app()->end();
         }
     }
-
 
 }

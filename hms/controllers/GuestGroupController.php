@@ -2,7 +2,6 @@
 
 class GuestGroupController extends Controller {
 
-    
     public $layout = '//layouts/main';
 
     public function filters() {
@@ -104,13 +103,15 @@ class GuestGroupController extends Controller {
     public function actionDelete($id) {
 
         if (Yii::app()->request->isPostRequest) {
-            $this->loadModel($id)->delete();
-            RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $id));
+            $cek = User::model()->find(array('condition' => 'roles_id=' . $id));
 
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            if (!isset($_GET['ajax']))
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-
+            //delete roles auth
+            if (count($cek) == 0) {
+                $this->loadModel($id)->delete();
+                RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $id));
+            } else {
+                throw new CHttpException(400, "Please empty guest for this group before");
+            }
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }

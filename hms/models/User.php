@@ -81,7 +81,7 @@ class User extends CActiveRecord {
         );
     }
 
-    public function search($type = 'user') {
+    public function search($type = 'user', $export = '') {
         $criteria = new CDbCriteria;
         $criteria->with = array('Roles');
         $criteria->together = true;
@@ -93,17 +93,23 @@ class User extends CActiveRecord {
         $criteria->compare('city_id', $this->city_id);
         $criteria->compare('phone', $this->phone, true);
         $criteria->compare('roles_id', $this->roles_id, true);
-        
-        if ($type == 'user'){
+
+        if ($type == 'user') {
             $criteria->compare('Roles.is_allow_login', 1);
-        }else{
+        } else {
             $criteria->compare('Roles.is_allow_login', 0);
         }
-        
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
-            'sort' => array('defaultOrder' => 't.id DESC')
-        ));
+
+        if (empty($export)) {
+            $data = new CActiveDataProvider($this, array(
+                'criteria' => $criteria,
+                'sort' => array('defaultOrder' => 't.id DESC')
+            ));
+        } else {
+            $data = User::model()->findAll($criteria);
+        }
+
+        return $data;
     }
 
     public function listUser() {
