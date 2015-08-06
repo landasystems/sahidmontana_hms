@@ -178,7 +178,7 @@ $totBill = count($bill);
                     </h4>
                 </div>
                 <div class="content">
-                    <a href="http://www.landa.co.id/manualbook-hms-fo.pdf" target="_blank"><span class="icon32 cut-icon-download blue" style="float: left;padding: 12px 0px"></span></a> Click to download tutorial to operate Front Office Hotel Management Systems 
+                    <a href="http://www.landa.co.id/manualbook-hms-fo.pdf" target="_blank"><span class="icon32 icon-download blue" style="float: left;padding: 3px 0px"></span></a> Click to download tutorial to operate Front Office Hotel Management Systems 
                 </div>
             </div>
 

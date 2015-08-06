@@ -14,7 +14,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
         margin-top: -200px;
         margin-left: -150px;
         padding: 0px 20px;
-        border: 3px solid crimson;
+        border: 3px solid cadetblue;
         box-shadow: 1px 1px 1px 1px #ccc;
         border-radius: 2px;
         background: white;
@@ -48,7 +48,7 @@ $form = $this->beginWidget('CActiveForm', array(
                 echo param('clientName');
                 ?>
             </h3>
-            <span style="color:crimson;font-weight: bold;"><?php echo app()->name; ?></span>
+            <span style="color:cadetblue;font-weight: bold;"><?php echo app()->name; ?></span>
         </center>
         <hr style="margin:10px 0px 20px 0px">
 
