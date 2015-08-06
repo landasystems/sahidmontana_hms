@@ -67,7 +67,7 @@ class HotelTransDetail extends CActiveRecord
 			'hotel_trans_id' => 'Hotel Trans',
 			'bill_type' => 'Bill Type',
 			'price' => 'Price',
-			'description' => 'Description',
+			'description' => 'Note',
 		);
 	}
 

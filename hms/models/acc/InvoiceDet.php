@@ -59,7 +59,7 @@ class InvoiceDet extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'description' => 'Description',
+            'description' => 'Note',
             'user_id' => 'User',
             'payment' => 'Payment',
             'charge' => 'Charge',

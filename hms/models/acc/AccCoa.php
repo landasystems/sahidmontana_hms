@@ -72,7 +72,7 @@ class AccCoa extends CActiveRecord {
             'id' => 'ID',
             'code' => 'Kode Perkiraan',
             'name' => 'Nama Perkiraan',
-            'description' => 'Description',
+            'description' => 'Note',
             'created_user_id' => 'Created User',
             'modified' => 'Modified',
             'created' => 'Tanggal',

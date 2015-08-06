@@ -59,7 +59,7 @@ class ChargeAdditional extends CActiveRecord {
             'account_id' => 'Account',
             'charge' => 'Charge',
             'is_publish' => 'Publish',
-            'description' => 'Description',
+            'description' => 'Note',
         );
     }
 

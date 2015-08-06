@@ -60,7 +60,7 @@ class AccApproval extends CActiveRecord {
         return array(
             'id' => 'ID',
             'status' => 'Status',
-            'description' => 'Description',
+            'description' => 'Note',
             'acc_cash_in_id' => 'Acc Cash In',
             'acc_cash_out_id' => 'Acc Cash Out',
             'acc_jurnal_id' => 'Acc Jurnal',

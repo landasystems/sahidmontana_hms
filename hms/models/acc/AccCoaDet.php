@@ -69,7 +69,7 @@ class AccCoaDet extends CActiveRecord {
             'acc_coa_id' => 'Acc Coa',
             'invoice_det_id' => 'Invoice Det',
             'date_coa' => 'Date Coa',
-            'description' => 'Description',
+            'description' => 'Note',
             'debet' => 'Debet',
             'credit' => 'Credit',
             'balance' => 'Balance',

@@ -141,7 +141,7 @@
             } else {
                 $img = Yii::app()->landa->urlImg('avatar/', $model->avatar_img, $_GET['id']);
                 $del = '<div class="btn-group photo-det-btn">';
-                $imgs = param('urlImg') . '150x150-noimage.jpg';
+                $imgs = bu('img/150x150-noimage.jpg');
                 $cc = CHtml::ajaxLink(
                                 '<i class="icon-trash"></i>', url('user/removephoto', array('id' => $model->id)), array(
                             'type' => 'POST',

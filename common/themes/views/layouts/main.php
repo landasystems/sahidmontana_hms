@@ -5,20 +5,20 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="author" content="Landa Systems - Custom Web & Mobile Apps" />
-        <link rel="shortcut icon" href="<?php echo bt() ?>/images/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="<?php echo bu('img/favicon.ico')?>" />
+        <link rel="stylesheet" href="<?php echo bu('css/main.min.css')?>" type="text/css" />
         <?php
         landa()->loginRequired();
-        $cs = Yii::app()->getClientScript();
-        $cs->registerCoreScript('jquery');
-        $cs->registerCssFile(bt() . '/css/main.min.css');
+        cs()->registerCoreScript('jquery');
+        cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     
         <script type="text/javascript">
             document.documentElement.className += 'loadstate';
         </script>
     </head>
     <body>
-        <img src="<?php echo bt("images/loaders/horizontal/004.gif") ?>" id="loader" />
+        <img src="<?php echo bu("img/loaderAjax.gif") ?>" id="loader" />
         <div id="qLoverlay"></div>
         <div id="qLbar"></div>
         <div id="header">
@@ -119,8 +119,5 @@
                 <i class="icon-arrow-left"></i>
             </div>
         </a>
-        <?php
-        $cs->registerScriptFile(bt() . '/js/main.js', CClientScript::POS_END);
-        ?>
     </body>
 </html>

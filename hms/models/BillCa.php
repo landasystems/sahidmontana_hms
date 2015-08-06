@@ -65,7 +65,7 @@ class BillCa extends CActiveRecord {
             'bill_charge_id' => 'Bill Charge',
             'charge' => 'Charge',
             'charge_less' => 'Charge Less',
-            'description' => 'Description',
+            'description' => 'Note',
             'created' => 'Created',
             'created_user_id' => 'Created User',
             'modified' => 'Modified',

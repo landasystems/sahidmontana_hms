@@ -64,7 +64,7 @@ class RoomType extends CActiveRecord {
             'id' => 'ID',
             'name' => 'Name',
             'pax' => 'Default Pax',
-            'description' => 'Description',
+            'description' => 'Note',
             'rate' => 'Standart Rate',
         );
     }

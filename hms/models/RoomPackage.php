@@ -65,7 +65,7 @@ class RoomPackage extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'description' => 'Description',
+			'description' => 'Note',
 			'standart_rate' => 'Standart Rate',
 		);
 	}

@@ -54,7 +54,7 @@ class Account extends CActiveRecord {
         return array(
             'id' => 'ID',
             'name' => 'Name',
-            'description' => 'Description',
+            'description' => 'Note',
             'created_user_id' => 'Created User',
             'created' => 'Created',
             'modified' => 'Modified',

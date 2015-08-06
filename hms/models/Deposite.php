@@ -68,7 +68,7 @@ class Deposite extends CActiveRecord {
             'guest_user_id' => 'Guest',
             'dp_by' => 'Deposite By',
             'amount' => 'Amount',
-            'description' => 'Description',
+            'description' => 'Note',
             'is_applied' => 'Is Applied',
             'created_user_id' => 'Cashier',
             'created' => 'Date Created',

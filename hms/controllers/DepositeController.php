@@ -41,12 +41,7 @@ class DepositeController extends Controller {
     }
 
     public function actionView($id) {
-        cs()->registerScript('read', '
-            $("form input, form textarea, form select").each(function(){
-                $(this).prop("disabled", true);
-            });');
-        $_GET['v'] = true;
-        $this->render('update', array(
+        $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
     }

@@ -60,7 +60,7 @@ class AccJurnalDet extends CActiveRecord {
             'acc_jurnal_id' => 'Acc Jurnal',
             'acc_coa_id' => 'Acc Coa',
             'amount' => 'Amount',
-            'description' => 'Description',
+            'description' => 'Note',
             'InvoiceDet' => 'Invoice Det',
         );
     }

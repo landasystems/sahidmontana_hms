@@ -26,9 +26,9 @@ class LandaCore extends CApplicationComponent {
     public function urlImg($path, $filename = '', $id) {
         $filename = $this->urlParsing($filename);
         if (empty($filename) || empty($id)) {
-            return array('small' => Yii::app()->params['urlImg'] . '150x150-noimage.jpg', 'medium' => Yii::app()->params['urlImg'] . '350x350-noimage.jpg', 'big' => Yii::app()->params['urlImg'] . '700x700-noimage.jpg');
+            return array('small' => bu('img/150x150-noimage.jpg'), 'medium' => bu('img/350x350-noimage.jpg'), 'big' => bu('img/700x700-noimage.jpg'));
         } else {
-            return array('small' => Yii::app()->params['urlImg'] . $path . $id . '-150x150-' . $filename, 'medium' => Yii::app()->params['urlImg'] . $path . $id . '-350x350-' . $filename, 'big' => Yii::app()->params['urlImg'] . $path . $id . '-700x700-' . $filename);
+            return array('small' => bu($path . $id . '-150x150-' . $filename), 'medium' => bu($path . $id . '-350x350-' . $filename), 'big' => bu($path . $id . '-700x700-' . $filename));
         }
     }
 

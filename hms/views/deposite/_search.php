@@ -55,7 +55,7 @@ echo $form->select2Row($model, 'created_user_id', array(
 
 <?php
 $cs = Yii::app()->getClientScript();
-$cs->registerCoreScript('jquery');
+;
 $cs->registerCoreScript('jquery.ui');
 $cs->registerCssFile(Yii::app()->request->baseUrl . '/css/bootstrap/jquery-ui.css');
 ?>	

@@ -55,7 +55,7 @@ class MarketSegment extends CActiveRecord {
         return array(
             'id' => 'ID',
             'name' => 'Name',
-            'description' => 'Description',
+            'description' => 'Note',
             'level' => 'Level',
             'lft' => 'Lft',
             'rgt' => 'Rgt',

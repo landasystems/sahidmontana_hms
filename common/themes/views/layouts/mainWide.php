@@ -4,24 +4,22 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="author" content="Landa Systems - Custom Web & Mobile Apps" />
-        <link rel="shortcut icon" href="<?php echo bt() ?>/images/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="<?php echo bu('img/favicon.ico')?>" />
+        <link rel="stylesheet" href="<?php echo bu('css/main.min.css')?>" type="text/css" />
         <?php
         landa()->loginRequired();
-        $cs = Yii::app()->getClientScript();
-        $cs->registerCoreScript('jquery');
-        $cs->registerCssFile(bt() . '/css/main.min.css');
+        cs()->registerCoreScript('jquery');
+        cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     
         <script type="text/javascript">
             document.documentElement.className += 'loadstate';
         </script>
     </head>
     <body>
-        <img src="<?php echo bt("images/loaders/horizontal/004.gif") ?>" id="loader" />
-        <!-- loading animation -->
+        <img src="<?php echo bt("img/loaderAjax.gif") ?>" id="loader" />
         <div id="qLoverlay"></div>
         <div id="qLbar"></div>
-
         <div id="header">
             <div class="navbar">
                 <div class="navbar-inner">
@@ -68,13 +66,11 @@
                 </div>
             </div>
         </div>
-
         <div id="wrapper">
             <div class="resBtn">
                 <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
             </div>
             <div id="sidebarbg" style="margin-left: -299px;"></div>
-            <!--Sidebar content-->
             <div id="sidebar" style="margin-left: -299px; left: 0px;">
                 <div class="sidenav">
                     <div class="sidebar-widget" style="margin: -1px 0 0 0;">
@@ -88,7 +84,6 @@
                         ));
                         ?>
                     </div>
-
                     <div class="sidebar-widget">
                         <h5 class="title">Server Information</h5>
                         <div class="content">
@@ -106,10 +101,8 @@
                             </table>
                         </div>
                     </div>
-                </div><!-- End sidenav -->
-
-
-            </div><!-- End #sidebar -->
+                </div>
+            </div>
             <div id="content" class="clearfix" style="margin-left: 0px;">
                 <div class="contentwrapper">
                     <div class="heading">
@@ -122,15 +115,11 @@
                     <?php echo app()->name . ' ' . param('appVersion') ?>  ©  2013 All Rights Reserved. Designed and Developed by : <a href="http://www.landa.co.id" target="_blank">Landa Systems</a>
                 </div>
             </div>
-            <!-- End #content -->
-        </div><!-- End #wrapper -->
+        </div>
         <a href="#" class="collapseBtn tipR minim" title="Hide/Show sidebar">
             <div class="landaMin img-polaroid">
                 <i class="icon-arrow-right"></i>
             </div>
         </a>
-        <?php
-        $cs->registerScriptFile(bt() . '/js/main.js', CClientScript::POS_END);
-        ?>
     </body>
 </html>

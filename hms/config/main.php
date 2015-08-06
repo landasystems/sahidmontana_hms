@@ -88,7 +88,6 @@ return array(
         ),
         'themeManager' => array(
             'basePath' => $root . 'common/',
-            'baseUrl' => $themesUrl,
         ),
         'cache' => array(
             'class' => 'system.caching.CFileCache'
@@ -98,8 +97,6 @@ return array(
         'appVersion' => 'v.1',
         'client' => $client,
         'clientName' => $clientName,
-        'id' => '1',
-        'urlImg' => $rootUrl . 'images/',
         'pathImg' => (isset($pathImg)) ? $pathImg : $root . 'hms/www/' . $client . '/images/',
     ),
 );

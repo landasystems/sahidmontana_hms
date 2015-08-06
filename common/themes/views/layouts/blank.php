@@ -4,18 +4,18 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="author" content="Landa Systems - Custom Web & Mobile Apps" />
-        <link rel="shortcut icon" href="<?php echo bt() ?>/images/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="<?php echo bu('img/favicon.ico')?>" />
+        <link rel="stylesheet" href="<?php echo bu('css/main.min.css')?>" type="text/css" />
         <?php
-        $cs = Yii::app()->getClientScript();
-        $cs->registerCoreScript('jquery');
-        $cs->registerCssFile(bt() . '/css/main.min.css');
+        landa()->loginRequired();
+        cs()->registerCoreScript('jquery');
+        cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     
         <script type="text/javascript">
             document.documentElement.className += 'loadstate';
         </script>
     </head>
-
     <body class="errorPage">
         <?php echo $content; ?>
         <script type="text/javascript">
@@ -29,8 +29,5 @@
                 });
             });
         </script>
-        <?php
-        $cs->registerScriptFile(bt() . '/js/main.js', CClientScript::POS_END);
-        ?>
     </body>
 </html>

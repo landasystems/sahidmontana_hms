@@ -80,15 +80,6 @@ function bu($url = null, $absolute = false) {
     return $url === null ? $baseUrl : $baseUrl . '/' . ltrim($url, '/');
 }
 
-function bt($url = null) {
-    static $baseThemeUrl;
-    if ($baseThemeUrl === null)
-        $baseThemeUrl = Yii::app()->theme->baseUrl;
-    //$baseThemeUrl = Yii::app()->getRequest()->getBaseUrl() . '/../themes/' . Yii::app()->theme->name;
-
-    return $url === null ? $baseThemeUrl : $baseThemeUrl . '/' . ltrim($url, '/');
-}
-
 function param($name) {
     return Yii::app()->params[$name];
 }

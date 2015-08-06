@@ -57,7 +57,7 @@ class BillCaDet extends CActiveRecord {
             'id' => 'ID',
             'bill_ca_id' => 'Bill Ca',
             'charge' => 'Charge',
-            'description' => 'Description',
+            'description' => 'Note',
             'created' => 'Created',
             'created_user_id' => 'Created User',
             'modified' => 'Modified',
