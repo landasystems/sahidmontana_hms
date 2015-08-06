@@ -1,4 +1,6 @@
 <?php
+$siteConfig = SiteConfig::model()->listSiteConfig();
+$img = Yii::app()->landa->urlImg('site/', $siteConfig->client_logo, 1);
 $this->pageTitle = Yii::app()->name . ' - Login';
 ?>
 
@@ -36,12 +38,11 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-
 <div class="container-fluid">
     <div class="newLogin">        
         <form class="form-horizontal" action="dashboard.html" />
         <center>
-            <img style="height: 75px;margin: 10px 5px 0 0px;" src="<?php echo bu() ?>/images/logo.png" />
+            <img style="height: 75px;margin: 10px 5px 0 0px;" src="<?php echo $img['small'] ?>" />
             <h3 style="margin:5px 0 0 0">
                 <?php
                 echo param('clientName');

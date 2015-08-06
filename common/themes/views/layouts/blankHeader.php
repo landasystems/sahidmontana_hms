@@ -8,7 +8,6 @@
         <link rel="shortcut icon" href="<?php echo bu('img/favicon.ico')?>" />
         <link rel="stylesheet" href="<?php echo bu('css/main.min.css')?>" type="text/css" />
         <?php
-        landa()->loginRequired();
         cs()->registerCoreScript('jquery');
         cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     

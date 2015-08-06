@@ -140,12 +140,7 @@ class SiteConfig extends CActiveRecord {
     }
 
     public function listSiteConfig() {
-
-        if (empty(Yii::app()->session['site'])) {
-            Yii::app()->session['site'] = $this->findByPk(1);
-        }
-
-        return Yii::app()->session['site'];
+        return $this->findByPk(1);
     }
 
     public function formatting($type, $x = true) {
