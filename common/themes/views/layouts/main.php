@@ -6,16 +6,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="author" content="Landa Systems - Custom Web & Mobile Apps" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" href="<?php echo bu('img/favicon.ico')?>" />
-        <link rel="stylesheet" href="<?php echo bu('css/main.min.css')?>" type="text/css" />
+        <link rel="shortcut icon" href="<?php echo bu('img/favicon.ico') ?>" />
+        <link rel="stylesheet" href="<?php echo bu('css/main.min.css') ?>" type="text/css" />
         <?php
         landa()->loginRequired();
         cs()->registerCoreScript('jquery');
+        cs()->registerScriptFile(bu('js/begin.js'));
         cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     
-        <script type="text/javascript">
-            document.documentElement.className += 'loadstate';
-        </script>
     </head>
     <body>
         <img src="<?php echo bu("img/loaderAjax.gif") ?>" id="loader" />

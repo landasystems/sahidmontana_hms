@@ -10,11 +10,9 @@
         <?php
         landa()->loginRequired();
         cs()->registerCoreScript('jquery');
+        cs()->registerScriptFile(bu('js/begin.js'));
         cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     
-        <script type="text/javascript">
-            document.documentElement.className += 'loadstate';
-        </script>
     </head>
     <body>
         <img src="<?php echo bu("img/loaderAjax.gif") ?>" id="loader" />

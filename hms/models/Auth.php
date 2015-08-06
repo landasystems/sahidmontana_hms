@@ -10,13 +10,9 @@ class Auth extends CActiveRecord {
     public function modules() {
         return array(
             array('label' => '<span class="icon16 icomoon-icon-screen"></span>Dashboard', 'url' => array('/dashboard')),
-            array('visible' => landa()->checkAccess('SiteConfig', 'r') || landa()->checkAccess('Roles', 'r'), 'label' => '<span class="icon16 icomoon-icon-cog"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+            array('visible' => landa()->checkAccess('SiteConfig', 'r') || landa()->checkAccess('Roles', 'r') || landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16 icomoon-icon-cog"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('SiteConfig', 'r'), 'auth_id' => 'SiteConfig', 'label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update/1'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('Roles', 'r'), 'auth_id' => 'Roles', 'label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/roles'), 'crud' => array("c" => 1, "r" => 1, "u" => 1, "d" => 1)),
-                ),
-            ),
-            array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-contact"></span>User', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('GroupUser', 'r'), 'label' => '<span class="icon16 entypo-icon-users"></span>Group User', 'url' => url('/roles'), 'auth_id' => 'GroupUser'),
                     array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16  entypo-icon-user"></span>User', 'url' => url('/user'), 'auth_id' => 'User'),
                 )),
             array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => '<span class="icon16  icomoon-icon-accessibility"></span>Guest', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(

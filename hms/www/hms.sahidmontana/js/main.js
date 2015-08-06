@@ -2,12 +2,7 @@ $(window).resize(function () {
     var s = $(window).width();
     s > 980 && ($(".shortcuts.hided").removeClass("hided").attr("style", ""), $(".sidenav.hided").removeClass("hided").attr("style", "")), "Window size is:" + $(window).width()
 }), $(document).ready(function () {
-    function printElement(elem) {
-        var popupWin = window.open('', '_blank', 'width=1000,height=700');
-        popupWin.document.open()
-        popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/print.css" /></head><body onload="window.print()">' + elem.innerHTML + '</html>');
-        popupWin.document.close();
-    }
+    
     $("form").submit(function () {
         $(this).find(":submit").attr("disabled", "disabled")
     })
@@ -35,7 +30,7 @@ $(window).resize(function () {
                 "" === a.style.MozTransform && (e.textContent = "body{visibility:hidden}", a.firstChild.appendChild(e), addEventListener("load", s, !1), setTimeout(s, 3e3))
             }(), $("a[href^=#]").click(function (s) {
         s.preventDefault()
-    }), mainNav = $(".mainnav>ul>li"), mainNav.find("ul").siblings().addClass("hasUl").append('<span class="hasDrop icon16 icomoon-icon-arrow-down"></span>'), mainNavLink = mainNav.find("a").not(".sub a"), mainNavLinkAll = mainNav.find("a"), mainNavSubLink = mainNav.find(".sub a").not(".sub li .sub a"), mainNavCurrent = mainNav.find("a.current"), mainNavCurrent.removeClass("current");
+    }), mainNav = $(".mainnav>ul>li"), mainNav.find("ul").siblings().addClass("hasUl").append('<span class="hasDrop icon12 icon-chevron-down"></span>'), mainNavLink = mainNav.find("a").not(".sub a"), mainNavLinkAll = mainNav.find("a"), mainNavSubLink = mainNav.find(".sub a").not(".sub li .sub a"), mainNavCurrent = mainNav.find("a.current"), mainNavCurrent.removeClass("current");
     var i = window.location.pathname;
     i = i.replace(/\/$/, ""), i = decodeURIComponent(i), mainNavLinkAll.each(function () {
         var s = $(this).attr("href");

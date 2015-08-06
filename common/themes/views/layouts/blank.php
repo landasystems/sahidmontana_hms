@@ -9,11 +9,9 @@
         <link rel="stylesheet" href="<?php echo bu('css/main.min.css')?>" type="text/css" />
         <?php
         cs()->registerCoreScript('jquery');
+        cs()->registerScriptFile(bu('js/begin.js'));
         cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     
-        <script type="text/javascript">
-            document.documentElement.className += 'loadstate';
-        </script>
     </head>
     <body class="errorPage">
         <?php echo $content; ?>

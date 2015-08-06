@@ -1,6 +1,6 @@
 <?php
 /* @var $this SiteController */
-$this->pageTitle = 'Dashboard - Selamat Datang di Hotel Management Systems';
+$this->pageTitle = 'Dashboard - Hotel Management Systems';
 $siteConfig = SiteConfig::model()->listSiteConfig();
 
 $reservation = Reservation::model()->findAll(array('condition' => 'date_format(created,"%Y-%m-%d")="' . date('Y-m-d') . '"'));
@@ -22,31 +22,31 @@ $totBill = count($bill);
                 <ul class="bigBtnIcon">
                     <li>
                         <a href="<?php echo url('roomCharting/stay') ?>">
-                            <span class="icon silk-icon-office"></span>
+                            <span class="icon icon-list-alt"></span>
                             <span class="txt">Room List</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo url('roomCharting') ?>">
-                            <span class="icon icomoon-icon-calendar"></span>
+                            <span class="icon icon-calendar"></span>
                             <span class="txt">Room Blocking</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo url('reservation/create') ?>">
-                            <span class="icon typ-icon-pencil-2"></span>
+                            <span class="icon icon-pencil"></span>
                             <span class="txt">Reservation</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo url('registration/create') ?>">
-                            <span class="icon wpzoom-key"></span>
+                            <span class="icon icon-time"></span>
                             <span class="txt">Registration</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo url('bill/create') ?>">
-                            <span class="icon silk-icon-drawer"></span>
+                            <span class="icon icon-barcode"></span>
                             <span class="txt">Guest Bill</span>
                             <span class="notification"><?php echo $totExpDeparture ?></span>
                         </a>
@@ -189,23 +189,14 @@ $totBill = count($bill);
                 </h4>
                 <ul>
                     <li class="clearfix">
-                        <div class="icon">
-                            <span class="icon32 eco-bookmark green"></span>
-                        </div>
                         <span class="txt">Reservation</span>
                         <span class="number"><?php echo $totReservation; ?></span> 
                     </li>
                     <li class="clearfix">
-                        <div class="icon">
-                            <span class="icon32 icomoon-icon-briefcase-2 blue"></span>
-                        </div>
                         <span class="txt">Check In</span>
                         <span class="number"><?php echo $totRegistration; ?></span> 
                     </li>
                     <li class="clearfix">
-                        <div class="icon">
-                            <span class="icon32 silk-icon-exit red"></span>
-                        </div>
                         <span class="txt">Check Out</span>
                         <span class="number"><?php echo $totBill; ?></span> 
                     </li>
