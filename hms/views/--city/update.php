@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Market Segments | '. $model->id);
+$this->setPageTitle('Cities | '.$model->id);
 
 ?>
 

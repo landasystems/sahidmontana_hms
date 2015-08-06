@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle(' Rooms | ' . $model->id);
+$this->setPageTitle(' Registration Dps | ' . $model->id);
 ?>
 
 <?php

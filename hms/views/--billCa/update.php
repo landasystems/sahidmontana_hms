@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Market Segments | '. $model->id);
+$this->setPageTitle('Bill Ca | '. $model->id);
 
 ?>
 
@@ -12,7 +12,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
 	'type'=>'pills',
 	'items'=>array(
-		array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create')),
+	array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create')),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index')),
 	),
 ));

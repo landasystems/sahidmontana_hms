@@ -1,5 +1,6 @@
 <?php
-$this->setPageTitle('Market Segments | '. $model->id);
+$this->setPageTitle('Bill Charge Dets | '.$model->id);
+
 
 ?>
 

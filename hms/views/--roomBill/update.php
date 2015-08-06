@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle(' Rooms | ' . $model->id);
+$this->setPageTitle(' Room Bills | ' . $model->id);
 ?>
 
 <?php
