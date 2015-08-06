@@ -570,7 +570,7 @@
                                         $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="' . $detail->charge . '" name="ReservationDetail[charge][]" readonly /></div>';
                                         $row .= "</td>";
                                         $row .= "<td>";
-                                        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="cut-icon-minus-2"></i></a>';
+                                        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
                                         $row .= "</td>";
                                         $row .= "</tr>";
                                         $row .= '<tr id="selected" style="display:none"></tr>';
@@ -639,7 +639,7 @@
                                         $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="' . $rate[$usertype]['default'] . '" name="ReservationDetail[charge][]" readonly /></div>';
                                         $row .= "</td>";
                                         $row .= "<td>";
-                                        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="cut-icon-minus-2"></i></a>';
+                                        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
                                         $row .= "</td>";
                                         $row .= "</tr>";
                                         $row .= '<tr id="selected" style="display:none"></tr>';
@@ -783,6 +783,7 @@
             'buttonType' => 'submit',
             'type' => 'primary',
             'icon' => 'ok white',
+            'visible'=>!isset($_GET['v']),
             'label' => $model->isNewRecord ? 'Reservation' : 'Save Reservation',
         ));
         ?>

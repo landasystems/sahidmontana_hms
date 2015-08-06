@@ -631,7 +631,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="' . $detail->charge . '" name="RegistrationDetail[charge][]" readonly /></div>';
                                     $row .= "</td>";
                                     $row .= "<td>";
-                                    $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="cut-icon-minus-2"></i></a>';
+                                    $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
                                     $row .= "</td>";
                                     $row .= "</tr>";
                                     $row .= '<tr id="selected" style="display:none"></tr>';
@@ -700,7 +700,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="' . $rate[$usertype]['default'] . '" name="RegistrationDetail[charge][]" readonly /></div>';
                                     $row .= "</td>";
                                     $row .= "<td>";
-                                    $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="cut-icon-minus-2"></i></a>';
+                                    $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
                                     $row .= "</td>";
                                     $row .= "</tr>";
                                     $row .= '<tr id="selected" style="display:none"></tr>';

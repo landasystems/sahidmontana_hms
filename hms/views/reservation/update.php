@@ -16,7 +16,7 @@ $this->widget('bootstrap.widgets.TbMenu', array(
     'items' => array(
         array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create')),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index')),
-        array('label' => 'Change Status [' . ucwords($model->status) . ']', 'icon' => 'icon-refresh', 'url' => '#', 'linkOptions' => array('data-target' => '#myModal', 'data-toggle' => 'modal')),
+        array('visible'=>!isset($_GET['v']),'label' => 'Change Status [' . ucwords($model->status) . ']', 'icon' => 'icon-refresh', 'url' => '#', 'linkOptions' => array('data-target' => '#myModal', 'data-toggle' => 'modal')),
     ),
 ));
 $this->endWidget();

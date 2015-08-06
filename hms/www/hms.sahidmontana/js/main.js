@@ -34,7 +34,6 @@ $(window).resize(function () {
     var i = window.location.pathname;
     i = i.replace(/\/$/, ""), i = decodeURIComponent(i), mainNavLinkAll.each(function () {
         var s = $(this).attr("href");
-        console.log(s);
         i.substring(0, s.length) === s && ($(this).addClass("current"), ulElem = $(this).closest("ul"), ulElem.hasClass("sub") && (aElem = ulElem.prev("a.hasUl").addClass("drop"), ulElem.addClass("expand")))
     }), mainNavLink.click(function (s) {
         $this = $(this), $this.hasClass("hasUl") ? (s.preventDefault(), $this.hasClass("drop") ? $(this).siblings("ul.sub").slideUp(500).siblings().removeClass("drop") : $(this).siblings("ul.sub").slideDown(500).siblings().addClass("drop")) : $.cookie("newCurrentMenu", $this.attr("href"), {

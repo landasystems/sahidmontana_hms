@@ -1475,7 +1475,7 @@ select {
     position: relative
 }
 #content {
-    padding: 65px 0px 5px 10px;
+    padding: 65px 5px 5px 10px;
     margin-left: 213px;
     min-height: 100%;
 }

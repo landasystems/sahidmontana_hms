@@ -269,40 +269,9 @@ class RoomBillController extends Controller {
         }
     }
 
-    public function cssJs() {
-//        cs()->registerScript('', '
-//                    ');
-    }
-
-//    public function actionCharge() {
-//        $this->cssJs();
-//        $model = new RoomBill;
-////        $filter = 't.id in (select acca_room_schedule.room_id from acca_room_schedule where status="occupied" and date_schedule = CURRENT_DATE() GROUP BY acca_room_schedule.room_id)';
-//        $filter = 't.status="occupied" or t.status="compliment" or t.status="house use"';
-//
-//        $room = Room::model()->
-//                findAll(array('condition' => $filter));
-//
-//        if (!empty($_POST['idRoomBill'])) {
-//            for ($i = 0; $i < count($_POST['ChargeAdditional']['id']); $i++) {
-//                $mInDet = new RoomBillDet;
-//                $mInDet->room_bill_id = $_POST['idRoomBill'];
-//                $mInDet->charge_additional_id = $_POST['ChargeAdditional']['id'][$i];
-//                $mInDet->amount = $_POST['ChargeAdditional']['amount'][$i];
-//                $mInDet->charge = $_POST['ChargeAdditional']['charge'][$i];
-//                $mInDet->save();
-//            }
-//            Yii::app()->user->setFlash('success', '<strong>Welldone! </strong> Transaction success added.');
-//            $this->redirect(url('roomBill/charge'));
-//        }
-//        $this->render('charge', array(
-//            'model' => $model,
-//            'room' => $room,
-//        ));
-//    }
 
     public function actionExtend() {
-        $this->cssJs();
+        
         $model = new RoomBill;
         $filter = 't.status="occupied" or t.status="compliment" or t.status="house use"';
 
@@ -382,7 +351,7 @@ class RoomBillController extends Controller {
     }
 
     public function actionMove() {
-        $this->cssJs();
+        
         $model = new RoomBill;
         $number = isset($_GET['roomNumber']) ? $_GET['roomNumber'] : '';
 

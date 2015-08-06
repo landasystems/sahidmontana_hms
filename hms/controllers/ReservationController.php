@@ -231,7 +231,7 @@ class ReservationController extends Controller {
                                <td class="span2">' . ucwords($value->bed) . '</td>
                                 <td class="span3">' . $price .
                     '</td>
-                                <td style="width:30px"><a class="btn btn-small btn-add" taro="' . $value->id . '" title="Add" rel="tooltip" "><i class="cut-icon-plus-2"></i></a></td>
+                                <td style="width:30px"><a class="btn btn-small btn-add" taro="' . $value->id . '" title="Add" rel="tooltip" "><i class="icon-plus"></i></a></td>
                             </tr>';
         }
         $return .='<tr id="addRow" style="display:none">
@@ -395,7 +395,7 @@ class ReservationController extends Controller {
         $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="" name="ReservationDetail[charge][]" readonly /></div>';
         $row .= "</td>";
         $row .= "<td>";
-        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom(); $(\'button[type="submit"]\').removeAttr(\'disabled\');"  title="Remove" rel="tooltip" "><i class="cut-icon-minus-2"></i></a>';
+        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom(); $(\'button[type="submit"]\').removeAttr(\'disabled\');"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
         $row .= "</td>";
         $row .= "</tr>";
         $row .= '<tr id="selected" style="display:none"></tr>';
@@ -469,20 +469,29 @@ class ReservationController extends Controller {
         ');
     }
 
+//    public function actionView($id) {
+//        $this->layout = "mainWide";
+//        $model = $this->loadModel($id);
+//        $mDetail = ReservationDetail::model()->findAll(array('condition' => 'reservation_id=' . $id));
+//        $myDetail = ReservationDetail::model()->findByAttributes(array('reservation_id' => $id));
+//        $modelDp = Deposite::model()->findByPk($model->deposite_id);
+//        if (empty($modelDp))
+//            $modelDp = new Deposite();
+//        $this->render('view', array(
+//            'model' => $model,
+//            'mDetail' => $mDetail,
+//            'myDetail' => $myDetail,
+//            'modelDp' => $modelDp,
+//        ));
+//    }
+    
     public function actionView($id) {
-        $this->layout = "mainWide";
-        $model = $this->loadModel($id);
-        $mDetail = ReservationDetail::model()->findAll(array('condition' => 'reservation_id=' . $id));
-        $myDetail = ReservationDetail::model()->findByAttributes(array('reservation_id' => $id));
-        $modelDp = Deposite::model()->findByPk($model->deposite_id);
-        if (empty($modelDp))
-            $modelDp = new Deposite();
-        $this->render('view', array(
-            'model' => $model,
-            'mDetail' => $mDetail,
-            'myDetail' => $myDetail,
-            'modelDp' => $modelDp,
-        ));
+        cs()->registerScript('read', '
+            $("form input, form textarea, form select").each(function(){
+                $(this).prop("disabled", true);
+            });');
+        $_GET['v'] = true;
+        $this->actionUpdate($id);
     }
 
     public function actionCreate() {

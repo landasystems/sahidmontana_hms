@@ -112,7 +112,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         <?php
         if ($model->isNewRecord == FALSE) {
-            $details = BillChargeDet::model()->findAll(array('condition' => 'bill_charge_id=' . $model->id));
             foreach ($details as $detail) {
                 if ($detail->deposite_id != 0) {
                     echo '<tr class="items">
@@ -303,16 +302,3 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         </tr>                       
     </tbody>
 </table>  
-
-<script type="text/javascript">
-
-    function stopRKey(evt) {
-        var evt = (evt) ? evt : ((event) ? event : null);
-        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-        if ((evt.keyCode == 13) && (node.type == "text")) {
-            return false;
-        }
-    }
-
-    document.onkeypress = stopRKey;
-</script>
