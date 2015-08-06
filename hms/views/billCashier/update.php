@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Bill Cashiers | ID : '. $model->id);
+$this->setPageTitle('Bill Cashiers | '. $model->id);
 
 
 ?>

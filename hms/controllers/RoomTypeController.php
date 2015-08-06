@@ -199,10 +199,9 @@ class RoomTypeController extends Controller {
 
         if (isset($_POST['RoomType'])) {
             $model->attributes=$_POST['RoomType'];
-            $siteConfig = SiteConfig::model()->listSiteConfig();
             
             $decode = Roles::model()->guest();
-            foreach ($decode as $json) {
+            foreach ($decode as $json => $val) {
                 if (isset($_POST[$json]))
                     $array[$json] = $_POST[$json];
             }
@@ -242,10 +241,9 @@ class RoomTypeController extends Controller {
 
         if (isset($_POST['RoomType'])) {
             $model->attributes=$_POST['RoomType'];            
-            $siteConfig = SiteConfig::model()->listSiteConfig();
             
             $decode = Roles::model()->guest();
-            foreach ($decode as $json) {
+            foreach ($decode as $json => $val) {
                 if (isset($_POST[$json]))
                     $array[$json] = $_POST[$json];
             }

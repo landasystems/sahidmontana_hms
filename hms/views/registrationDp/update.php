@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Registration Dps | ID : '. $model->id);
+$this->setPageTitle(' Registration Dps | ID : '. $model->id);
 
 
 ?>

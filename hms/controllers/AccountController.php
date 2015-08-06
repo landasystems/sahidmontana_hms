@@ -40,12 +40,13 @@ class AccountController extends Controller {
         );
     }
 
-    /**
-     * Displays a particular model.
-     * @param integer $id the ID of the model to be displayed
-     */
     public function actionView($id) {
-        $this->render('view', array(
+        cs()->registerScript('read', '
+            $("form input, form textarea, form select").each(function(){
+                $(this).prop("disabled", true);
+            });');
+        $_GET['v'] = true;
+        $this->render('update', array(
             'model' => $this->loadModel($id),
         ));
     }

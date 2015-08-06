@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Reservation Details | ID : '. $model->id);
+$this->setPageTitle(' Reservation Details | ID : '. $model->id);
 
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Na Trans | ID : '. $model->id);
+$this->setPageTitle(' Na Trans | ID : '. $model->id);
 
 ?>
 

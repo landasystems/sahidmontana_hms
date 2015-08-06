@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Site Config');
+$this->setPageTitle(' Site Config');
 ?>
 
 <?php 

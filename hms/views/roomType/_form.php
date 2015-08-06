@@ -20,7 +20,7 @@
 
 
         <?php echo $form->textFieldRow($model, 'name', array('class' => 'span5', 'maxlength' => 45)); ?>        
-        <?php echo $form->textFieldRow($model, 'pax', array('class' => 'span1 pax', 'maxlength' => 45)); ?>                
+        <?php echo $form->textFieldRow($model, 'pax', array('class' => 'span1 pax angka', 'maxlength' => 45)); ?>                
         <div class="control-group ">
             <label class="control-label" for="">Food & Baverage / Pax</label>                    
             <div class="controls">
@@ -32,7 +32,7 @@
                     $fnb = (!empty($settings['fb_charge'])) ? $settings['fb_charge'] : 0;
                     $fnb = (!empty($model->fnb_charge)) ? $model->fnb_charge : $fnb;
                     ?>
-                    <input  class="fnb" name="RoomType[fnb_charge]" type="text" value="<?php echo $fnb; ?>">
+                    <input  class="fnb angka" name="RoomType[fnb_charge]" type="text" value="<?php echo $fnb; ?>">
                 </div><br>
                 <i>This field has been set at siteconfig</i>
             </div>
@@ -188,13 +188,12 @@
                         <tr>
                             <th class="span2" style="text-align: center;vertical-align: middle" rowspan="2">Guest Type</th>
                             <th rowspan="2" style="text-align: center;vertical-align: middle">Room Charge</th>
-                            <th colspan="3" style="text-align: center;vertical-align: middle">Result Rate (Room Charge + F&B + Total Package)</th>
+                            <th colspan="2" style="text-align: center;vertical-align: middle">Result Rate (Room Charge + F&B + Total Package)</th>
 
                         </tr>
                         <tr>                                                     
                             <th style="text-align: center;vertical-align: middle">Min</th>
                             <th style="text-align: center;vertical-align: middle">Default</th>
-                            <th style="text-align: center;vertical-align: middle">Max</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -212,20 +211,16 @@
                                     <td>' . $value . '</td>
                                     <td style="background:gainsboro"><div class="input-prepend ">
                                         <span class="add-on">Rp</span>
-                                        <input style="width:77%" class="roomRate" name="' . $role . '[roomRate]" type="text" value="' . $a . '">                                        
+                                        <input style="width:77%" class="roomRate angka" name="' . $role . '[roomRate]" type="text" value="' . $a . '">                                        
                                     </div></td>
                                     <td><div class="input-prepend ">
                                         <span class="add-on">Rp</span>
-                                        <input style="width:77%" class="minRate" id="appendedPrependedInput" name="' . $role . '[min]" type="text" value="' . $b . '">                                        
+                                        <input style="width:77%" class="minRate angka" id="appendedPrependedInput" name="' . $role . '[min]" type="text" value="' . $b . '">                                        
                                     </div></td>
                                     <td><div class="input-prepend ">
                                         <span class="add-on">Rp</span>
-                                        <input style="width:77%" class="defaultRate" id="appendedPrependedInput" name="' . $role . '[default]" type="text" value="' . $c . '">
+                                        <input style="width:77%" class="defaultRate angka" id="appendedPrependedInput" name="' . $role . '[default]" type="text" value="' . $c . '">
                                         
-                                    </div></td>
-                                    <td><div class="input-prepend ">
-                                        <span class="add-on">Rp</span>
-                                        <input  style="width:77%" class="maxRate" id="appendedPrependedInput" name="' . $role . '[max]" type="text" value="' . $d . '">                                        
                                     </div></td>
                                     </tr>
                                   ';

@@ -329,7 +329,12 @@ class BillChargeController extends Controller {
     }
 
     public function actionView($id) {
-        $this->render('view', array(
+        cs()->registerScript('read', '
+            $("form input, form textarea, form select").each(function(){
+                $(this).prop("disabled", true);
+            });');
+        $_GET['v'] = true;
+        $this->render('update', array(
             'model' => $this->loadModel($id),
         ));
     }
@@ -339,7 +344,6 @@ class BillChargeController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        logs($_POST);
         $model = new BillCharge;
         $this->cssJs();
         if (isset($_POST['BillCharge'])) {
