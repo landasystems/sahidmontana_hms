@@ -40,9 +40,6 @@ return array(
         'landa' => array(
             'class' => 'LandaCore',
         ),
-        'messages' => array(
-            'basePath' => $root . 'common/messages/',
-        ),
         'user' => array(
             'loginUrl' => array('/site/login'),
             'allowAutoLogin' => true,
@@ -64,10 +61,6 @@ return array(
         'log' => array(
             'class' => 'CLogRouter',
             'routes' => array(
-//                array(
-//                    'class' => 'common.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-//                    'ipFilters' => array('127.0.0.1', '192.168.1.90'),
-//                ),
                 array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
