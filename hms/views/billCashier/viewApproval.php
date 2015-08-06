@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('View Bill Cashiers  Approval| ID : ' . $model->id);
+$this->setPageTitle('View Bill Cashiers  Approval| '. $model->id);
 
 ?>
 

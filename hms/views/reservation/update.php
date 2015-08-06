@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle(' Reservations | ID : ' . $model->id);
+$this->setPageTitle('Reservations | '. $model->id);
 
 ?>
 

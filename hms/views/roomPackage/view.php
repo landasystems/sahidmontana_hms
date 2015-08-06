@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('View Room Packages | ID : '. $model->id);
+$this->setPageTitle('View Room Packages | '. $model->id);
 
 ?>
 

@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle(' Provinces | ID : '. $model->id);
+$this->setPageTitle(' Provinces | '. $model->id);
 
 
 ?>

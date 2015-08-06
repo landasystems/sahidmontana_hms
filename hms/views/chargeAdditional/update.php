@@ -1,7 +1,5 @@
 <?php
-$this->setPageTitle(' Charge Additionals | ID : '. $model->id);
-
-
+$this->setPageTitle('Charge Additionals | '. $model->id);
 ?>
 
 <?php 

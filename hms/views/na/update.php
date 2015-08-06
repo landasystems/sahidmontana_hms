@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle(' Nas | ID : '. $model->id);
+$this->setPageTitle(' Nas | '. $model->id);
 
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle(' Forecasts | ID : '. $model->id);
+$this->setPageTitle(' Forecasts | '.$model->id);
 
 
 ?>

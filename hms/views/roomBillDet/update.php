@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle(' Room Bill Dets | ID : '. $model->id);
+$this->setPageTitle(' Room Bill Dets | '. $model->id);
 
 
 ?>

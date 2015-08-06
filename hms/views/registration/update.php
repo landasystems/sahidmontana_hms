@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Registrations | ID : ' . $model->id);
+$this->setPageTitle('Registrations | '. $model->id);
 if (isset($_GET['v'])) {
     
     $itemBread = array(

@@ -1,7 +1,7 @@
 
 
 <?php
-$this->setPageTitle('View Guest Bill | ID : ' . $model->id);
+$this->setPageTitle('View Guest Bill | '. $model->id);
 
 ?>
 

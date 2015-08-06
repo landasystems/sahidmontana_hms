@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('View Na Balances | ID : '. $model->id);
+$this->setPageTitle('View Na Balances | '. $model->id);
 
 ?>
 

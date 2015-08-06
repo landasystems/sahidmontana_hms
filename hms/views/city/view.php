@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('View Mcities | ID : '. $model->id);
+$this->setPageTitle('View Mcities | '.$model->id);
 
 ?>
 

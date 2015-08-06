@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('View Hotel Trans | ID : '. $model->id);
+$this->setPageTitle('View Hotel Trans | '. $model->id);
 
 ?>
 
