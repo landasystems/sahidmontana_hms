@@ -17,7 +17,7 @@
         </script>
     </head>
     <body>
-        <img src="<?php echo bt("img/loaderAjax.gif") ?>" id="loader" />
+        <img src="<?php echo bu("img/loaderAjax.gif") ?>" id="loader" />
         <div id="qLoverlay"></div>
         <div id="qLbar"></div>
         <div id="header">

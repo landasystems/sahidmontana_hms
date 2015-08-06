@@ -2,6 +2,16 @@ $(window).resize(function () {
     var s = $(window).width();
     s > 980 && ($(".shortcuts.hided").removeClass("hided").attr("style", ""), $(".sidenav.hided").removeClass("hided").attr("style", "")), "Window size is:" + $(window).width()
 }), $(document).ready(function () {
+    function printElement(elem) {
+        var popupWin = window.open('', '_blank', 'width=1000,height=700');
+        popupWin.document.open()
+        popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/print.css" /></head><body onload="window.print()">' + elem.innerHTML + '</html>');
+        popupWin.document.close();
+    }
+    $("form").submit(function () {
+        $(this).find(":submit").attr("disabled", "disabled")
+    })
+    $(".collapseBtn").trigger("click")
     function s() {
         $this = $(".collapseBtn"), $this.hasClass("minim") ? ($("#sidebarbg").css("margin-left", "0"), $("#content").css("margin-left", "213px"), $("#sidebar").css("left", "0").css("margin-left", "0"), $this.removeClass("minim"), $this.children().children("i").attr("class", "icon-arrow-left")) : ($("#sidebarbg").css("margin-left", "-299px"), $("#sidebar").css("margin-left", "-299px"), $(".collapseBtn").css("top", "20px").css("left", "280px").addClass("shadow"), $this.addClass("minim"), $this.children().children("i").attr("class", "icon-arrow-right"), $("#content").css("margin-left", "0"))
     }
@@ -48,12 +58,4 @@ $(window).resize(function () {
         $(this).hide();
         $("#content").find(":submit").attr("disabled", false);
     })
-}), $(".collapseBtn").trigger("click"), $("form").submit(function () {
-    $(this).find(":submit").attr("disabled", "disabled"),
-            function printElement(elem) {
-                var popupWin = window.open('', '_blank', 'width=1000,height=700');
-                popupWin.document.open()
-                popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/print.css" /></head><body onload="window.print()">' + elem.innerHTML + '</html>');
-                popupWin.document.close();
-            }
 });
