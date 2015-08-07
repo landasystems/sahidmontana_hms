@@ -90,12 +90,11 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'type' => 'raw',
             'value' => 'landa()->rp($data->balance_amount)',
         ),
-        'description',
         array(
             'header' => 'Date',
             'name' => 'created',
             'type' => 'raw',
-            'value' => '$data->created',
+            'value' => 'date("d M Y H:i:s",strtotime($data->created))',
         ),
         array(
             'header' => 'Applied',

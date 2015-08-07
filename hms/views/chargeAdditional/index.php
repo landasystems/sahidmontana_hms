@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Charge Additionals');
+$this->setPageTitle('Additional Charge');
 
 
 Yii::app()->clientScript->registerScript('search', "
@@ -115,7 +115,7 @@ $this->endWidget();
                 'header' => 'Total Charge',
                 'name' => 'charge',
                 'type' => 'raw',
-                'value' => '$data->charge - (($data->discount/100)*$data->charge) ',
+                'value' => '"$data->price"',
                 'htmlOptions' => array('style' => 'width: 100px;')
             ),
             array(

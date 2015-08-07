@@ -113,6 +113,9 @@ class ChargeAdditional extends CActiveRecord {
     public function getPrice() {
         return landa()->rp($this->charge);
     }
+    public function getPricetotal() {
+        return landa()->rp($this->charge - (($this->discount/100)*$this->charge));
+    }
 
     public function getFullInitialCategory() {
         return $this->ChargeAdditionalCategory->code . ' - ' . $this->name;

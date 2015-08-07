@@ -52,7 +52,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'type' => 'striped condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
-        'id',
         'name',
         array(
             'header' => 'Tax',

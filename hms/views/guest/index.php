@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Group Guest');
+$this->setPageTitle('Guest');
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
