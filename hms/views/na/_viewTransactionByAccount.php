@@ -85,10 +85,10 @@
             //from breakfast
             //if ($data->RoomBill->charge != 0 && $data->is_checkedout == 0 || ($data->is_checkedout == 1 && $data->RoomBill->date_bill == $data->Na->date_na && $data->RoomBill->charge != 0)) {
 
-            if ($acc->id == $breakfastAcc && $data->is_checkedout == 0 && $data->RoomBill->charge != 0 || ($acc->id == $breakfastAcc && $data->is_checkedout == 1 && $data->RoomBill->date_bill == $data->Na->date_na && $data->RoomBill->charge != 0)) {
+            if ($acc->id == $breakfastAcc) {
                 foreach ($roomBills as $data) {
 //                    if ($data->RoomBill->charge != 0) {
-                    if ($acc->id == $breakfastAcc && $data->is_checkedout == 0 && $data->RoomBill->charge != 0 || ($acc->id == $breakfastAcc && $data->is_checkedout == 1 && $data->RoomBill->date_bill == $data->Na->date_na && $data->RoomBill->charge != 0)) {
+                    if ($data->is_checkedout == 0 && $data->RoomBill->charge != 0 || ($acc->id == $breakfastAcc && $data->is_checkedout == 1 && $data->RoomBill->date_bill == $data->Na->date_na && $data->RoomBill->charge != 0)) {
                         echo '<tr>';
                         echo '<td class="print2" style="text-align: center;border-bottom:none;border-top:none">' . $no . '</td>';
                         echo '<td class="print2" style="border-bottom:none;border-top:none">Breakfast</td>';
