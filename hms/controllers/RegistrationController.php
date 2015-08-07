@@ -668,7 +668,7 @@ class RegistrationController extends Controller {
     }
 
     public function actionCreate() {
-        $this->layout = "mainWide";
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $model = new Registration;
         $modelDp = new Deposite;
         $modelDp->code = SiteConfig::model()->formatting('deposite');
@@ -878,7 +878,7 @@ class RegistrationController extends Controller {
 
         $siteConfig = SiteConfig::model()->findByPk(1);
         $settings = json_decode($siteConfig->settings, true);
-        $this->layout = "mainWide";
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
 
         if (!empty($model->deposite_id)) {
             $modelDp = Deposite::model()->findByPk($model->deposite_id);

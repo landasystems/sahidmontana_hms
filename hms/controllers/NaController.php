@@ -50,7 +50,7 @@ class NaController extends Controller {
                     $(this).tab("show");
                 });  '
         );
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -80,7 +80,7 @@ class NaController extends Controller {
         }
 
         if (empty($cekForecast)) {
-            $this->layout = 'mainWide';
+            cs()->registerScript('wide', '$(".landaMin").trigger("click");');
             $this->render('create', array(
                 'warning' => '<div class="alert alert-danger fade in">   
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -509,7 +509,7 @@ class NaController extends Controller {
                     $this->redirect(array('view', 'id' => $model->id));
                 }
             }
-            $this->layout = 'mainWide';
+            cs()->registerScript('wide', '$(".landaMin").trigger("click");');
             $this->render('create', array(
                 'model' => $model,
                 'warning' => $warning,

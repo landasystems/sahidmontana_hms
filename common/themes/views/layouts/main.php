@@ -59,7 +59,7 @@
                             </ul>
                         </div>
                         <div class="resBtn pull-right">
-                            <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+                            <a href="#"><span class="icon16 icon-list"></span></a>
                         </div>
                     </div>
                 </div>

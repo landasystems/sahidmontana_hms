@@ -56,9 +56,9 @@ class ForecastController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {      
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $model = new Forecast;
-
+$model = $aa;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -81,7 +81,7 @@ class ForecastController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {        
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed

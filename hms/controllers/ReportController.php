@@ -41,7 +41,7 @@ class ReportController extends Controller {
     }
 
     public function actionGuesthouse() {
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $mRes = new Reservation();
 //        $mRoom = new Room();
         if (!empty($_POST['Reservation']['date_from'])) {
@@ -320,20 +320,20 @@ class ReportController extends Controller {
     }
 
     public function actionsourceOfBusiness() {
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $location = User::model()->find(array());
         $this->render('sourceOfBusiness', array('location' => $location));
     }
 
     public function actionTopProducers() {
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $location = User::model()->find(array());
 
         $this->render('topProducers', array('location' => $location));
     }
 
     public function actionTopTen() {
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $location = User::model()->find(array());
         $this->render('topTen', array('location' => $location));
     }
