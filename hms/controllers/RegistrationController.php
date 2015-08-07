@@ -200,7 +200,7 @@ class RegistrationController extends Controller {
             $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="' . $detail->charge . '" name="RegistrationDetail[charge][]" readonly /></div>';
             $row .= "</td>";
             $row .= "<td>";
-            $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom(); $(\'button[type="submit"]\').removeAttr(\'disabled\');"  title="Remove" rel="tooltip" "><i class="cut-icon-minus-2"></i></a>';
+            $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom(); $(\'button[type="submit"]\').removeAttr(\'disabled\');"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
             $row .= "</td>";
 
             $row .= "</tr>";
@@ -285,7 +285,7 @@ class RegistrationController extends Controller {
                                <td class="span2">' . ucwords($value->bed) . '</td>
                                 <td class="span3">' . $price . '</td>
                                 <td class="span1" style="text-align:center">' . $status_housekeeping . '</td>
-                                <td style="width:30px;text-align:center"><a class="btn btn-small btn-add" taro="' . $value->id . '" title="Add" rel="tooltip" "><i class="cut-icon-plus-2"></i></a></td>
+                                <td style="width:30px;text-align:center"><a class="btn btn-small btn-add" taro="' . $value->id . '" title="Add" rel="tooltip" "><i class="icon-plus"></i></a></td>
                             </tr>';
         }
         $return .='<tr id="addRow" style="display:none">
@@ -503,7 +503,7 @@ class RegistrationController extends Controller {
         $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="" name="RegistrationDetail[charge][]" readonly /></div>';
         $row .= "</td>";
         $row .= "<td>";
-        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom(); $(\'button[type="submit"]\').removeAttr(\'disabled\');"  title="Remove" rel="tooltip" "><i class="cut-icon-minus-2"></i></a>';
+        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom(); $(\'button[type="submit"]\').removeAttr(\'disabled\');"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
         $row .= "</td>";
         $row .= "</tr>";
         $row .= '<tr id="selected" style="display:none"></tr>';
@@ -668,7 +668,7 @@ class RegistrationController extends Controller {
     }
 
     public function actionCreate() {
-        $this->layout = "mainWide";
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $model = new Registration;
         $modelDp = new Deposite;
         $modelDp->code = SiteConfig::model()->formatting('deposite');
@@ -878,7 +878,7 @@ class RegistrationController extends Controller {
 
         $siteConfig = SiteConfig::model()->findByPk(1);
         $settings = json_decode($siteConfig->settings, true);
-        $this->layout = "mainWide";
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
 
         if (!empty($model->deposite_id)) {
             $modelDp = Deposite::model()->findByPk($model->deposite_id);

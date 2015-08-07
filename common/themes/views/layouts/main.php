@@ -47,8 +47,8 @@
 
                                             $this->widget('zii.widgets.CMenu', array(
                                                 'items' => array(
-                                                    array('label' => '<span class="icon16 icomoon-icon-user-3"></span>Edit profile', 'url' => url('user/updateProfile') . '?type=' . $type),
-                                                    array('label' => '<span class="icon16 icomoon-icon-exit"></span> Logout', 'url' => bu() . '/site/logout'),
+                                                    array('label' => '<span class="icon16 icon-user"></span>Edit profile', 'url' => url('user/updateProfile') . '?type=' . $type),
+                                                    array('label' => '<span class="icon16 icon-off"></span> Logout', 'url' => bu() . '/site/logout'),
                                                 ),
                                                 'encodeLabel' => false,
                                             ));
@@ -59,7 +59,7 @@
                             </ul>
                         </div>
                         <div class="resBtn pull-right">
-                            <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+                            <a href="#"><span class="icon16 icon-list"></span></a>
                         </div>
                     </div>
                 </div>

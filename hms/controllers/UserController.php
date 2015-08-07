@@ -53,7 +53,7 @@ class UserController extends Controller {
         $data = array();
         if (!empty($sCriteria)) {
             $list = '';
-            foreach ($sCriteria as $o) {
+            foreach ($sCriteria as $o => $val) {
                 $list .= '"' . $o . '",';
             }
             $list = substr($list, 0, strlen($list) - 1);

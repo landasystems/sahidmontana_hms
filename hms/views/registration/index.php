@@ -139,7 +139,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 ));
 ?>
 
-
+<div class="clearfix"></div>
 <div class="alert alert-danger fade in">   
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Important! </strong> &nbsp;&nbsp;Data has been entered and has been <b>Night Audit</b> can not be <b>Edited</b> or <b>Deleted</b>.    

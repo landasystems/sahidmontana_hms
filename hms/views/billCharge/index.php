@@ -103,21 +103,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'type' => 'raw',
             'value' => '(isset($data->Cashier->name)) ? $data->Cashier->name : ""',
         ),
-//        array(
-//            'header' => 'Discount Approval',
-//            'name' => 'approval_user_id',
-//            'type' => 'raw',
-//            'value' => '($data->approval_user_id=="0")?"-":$data->Approval->name',
-//        ),
-        /*
-          'charge',
-          'ca_user_id',
-          'refund',
-          'total',
-          'created',
-          'created_user_id',
-          'modified',
-         */
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'template' => '{view} {update} {delete}',
@@ -148,6 +133,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     ),
 ));
 ?>
+<div class="clearfix"></div>
 <div class="alert alert-danger fade in">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Important! </strong> Transactions that have been paid can not be edited.

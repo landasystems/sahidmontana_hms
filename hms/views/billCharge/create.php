@@ -245,7 +245,7 @@ $this->endWidget();
                         <td>' . $name . '</td>
                         <td style="text-align: right">' . landa()->rp($dp->balance_amount) . '</td>
                         <td>' . $dp->created . '</td>
-                        <td style="width:30px;text-align:center"><a class="btn btn-small btn-add-deposite" dp_id="' . $dp->id . '" title="Add Deposite" rel="tooltip" "><i class="cut-icon-plus-2"></i></a></td>                        
+                        <td style="width:30px;text-align:center"><a class="btn btn-small btn-add-deposite" dp_id="' . $dp->id . '" title="Add Deposite" rel="tooltip" "><i class="icon-plus"></i></a></td>                        
                       </tr>
                     ';
                     $no++;

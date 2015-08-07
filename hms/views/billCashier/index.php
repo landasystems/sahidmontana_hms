@@ -66,12 +66,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value' => '$data->Cashier->name',
         ),
         array(
-            'header' => 'Approved',
-            'name' => 'approved_user_id',
-            'type' => 'raw',
-            'value' => '(!empty($data->approved_user_id))?$data->Approved->name:""',
-        ),
-        array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'template' => '{view}',
             'buttons' => array(

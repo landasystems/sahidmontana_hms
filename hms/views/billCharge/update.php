@@ -1,8 +1,6 @@
 <?php
-$this->setPageTitle('Bill Charges | '. $model->id);
-?>
+$this->setPageTitle('Bill Charges | ' . $model->id);
 
-<?php
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''
@@ -11,12 +9,18 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
-        array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'linkOptions' => array()),
-        array('label' => 'Edit', 'icon' => 'icon-edit', 'url' => Yii::app()->controller->createUrl('update', array('id' => $model->id)), 'active' => true, 'linkOptions' => array()),
+        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create')),
+        array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index')),
+        array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printElement");return false;')),
     ),
 ));
 $this->endWidget();
+
+if ($model->isNewRecord == FALSE) {
+    $details = BillChargeDet::model()->findAll(array('condition' => 'bill_charge_id=' . $model->id));
+} else {
+    $details = array();
+}
 ?>
 
 <div class="form">
@@ -64,16 +68,6 @@ $this->endWidget();
                             $departement = Chtml::listdata(ChargeAdditionalCategory::model()->findAll(), 'id', 'name');
                             echo CHtml::dropDownList('BillCharge[charge_additional_category_id]', $model->charge_additional_category_id, $departement, array('id' => 'BillCharge_charge_additional_category_id', 'class' => 'span3', 'disabled' => false, 'empty' => 'Please Choose'));
                             echo $form->error($model, 'charge_additional_category_id');
-//                            echo CHtml::dropDownList('BillCharge[charge_additional_category_id]', $model->charge_additional_category_id, $departement, array('id' => 'departement', 'class' => 'span3', 'disabled' => false, 'empty' => 'Please Choose',
-//                                'ajax' => array(
-//                                    'type' => 'POST',
-//                                    'url' => url('billCharge/selectDepartement'),
-//                                    'data' => array('departement_id' => 'js:this.value'),
-//                                    'success' => 'function(data) {
-//                                        $("#content_table").html(data);
-//                                    }
-//                        ',
-//                            )));
                             ?>
                         </td>                                
                     </tr>                                                     
@@ -98,12 +92,14 @@ $this->endWidget();
                         </td>                                
                     </tr>                            
                 </table>   
-                <div style="text-align:right">
-                    <a  class="btn btn-small btn-primary" data-toggle="modal" data-target="#modalAuthority"><i class="icon-cog icon-white" style="margin:0px !important"></i> Change Price</a>
-                    <a style="background: forestgreen" class="btn btn-small  btn-primary" data-toggle="modal" data-target="#modalDeposite"><i class="icon-download-alt icon-white" style="margin:0px !important"></i> Add Deposite</a>
-                </div><br>
+                <?php if (!isset($_GET['v'])) { ?>
+                    <div style="text-align:right">
+                        <a  class="btn btn-small btn-primary" data-toggle="modal" data-target="#modalAuthority"><i class="icon-cog icon-white" style="margin:0px !important"></i> Change Price</a>
+                        <a style="background: forestgreen" class="btn btn-small  btn-primary" data-toggle="modal" data-target="#modalDeposite"><i class="icon-download-alt icon-white" style="margin:0px !important"></i> Add Deposite</a>
+                    </div><br>
+                <?php } ?>
                 <div id="content_table">
-                    <?php echo $this->renderPartial('_form', array('model' => $model, 'id' => $model->charge_additional_category_id)); ?>
+                    <?php echo $this->renderPartial('_form', array('model' => $model, 'id' => $model->charge_additional_category_id, 'details' => $details)); ?>
                 </div>
 
                 <table style="width:100%">
@@ -129,11 +125,14 @@ $this->endWidget();
             </div>
         </div>    
 
-        <div class="form-actions">
-            <button class="btn btn-primary"  type="submit" name ="save" onclick=""><i class="icon-ok icon-white"></i> Save & Print</button>
-            <button class="btn btn-warning"  type="submit" name="saveTemp"><i class="icon-repeat icon-white"></i> Save To Temporary</button>
-
-        </div>
+        <?php
+        if (!isset($_GET['v'])) {
+            ?>
+            <div class="form-actions">
+                <button class="btn btn-primary"  type="submit" name ="save" onclick=""><i class="icon-ok icon-white"></i> Save & Print</button>
+                <button class="btn btn-warning"  type="submit" name="saveTemp"><i class="icon-repeat icon-white"></i> Save To Temporary</button>
+            </div>
+        <?php } ?>
     </fieldset>
     <?php
     $this->beginWidget(
@@ -234,7 +233,7 @@ $this->endWidget();
                         <td>' . $dp->Guest->guestName . '</td>
                         <td style="text-align: right">' . landa()->rp($dp->balance_amount) . '</td>
                         <td>' . $dp->created . '</td>
-                        <td style="width:30px;text-align:center"><a class="btn btn-small btn-add-deposite" dp_id="' . $dp->id . '" title="Add Deposite" rel="tooltip" "><i class="cut-icon-plus-2"></i></a></td>                        
+                        <td style="width:30px;text-align:center"><a class="btn btn-small btn-add-deposite" dp_id="' . $dp->id . '" title="Add Deposite" rel="tooltip" "><i class="icon-plus"></i></a></td>                        
                       </tr>
                     ';
                     $no++;
@@ -253,21 +252,76 @@ $this->endWidget();
 
 </div>
 
+<div id='printElement' style="display: none"> 
+    <?php
+    $departement = (isset($model->ChargeAdditionalCategory->name)) ? $model->ChargeAdditionalCategory->name : '';
+    $siteConfig = SiteConfig::model()->listSiteConfig();
+    $content = $siteConfig->report_bill_charge;
+    $content = str_replace('{departement}', strtoupper($departement), $content);
+    $content = str_replace('{invoice}', $model->code, $content);
+    $content = str_replace('{date}', date('d F Y H:i:s', strtotime($model->created)), $content);
+    $content = str_replace('{desc}', $model->description, $content);
+    $content = str_replace('{cashier}', ucwords($model->Cashier->name), $content);
 
-<style type="text/css" media="print">
-    body {visibility:hidden;}
-    .invoice{visibility:visible;}  
-    .headerInvoice{display: block;}  
-    .headerInvoice{visibility:visible;}  
-    .hidePrint{display: none;}      
-    #sidebar{display: none;}  
-    #content{margin: 10px;padding: 10px;position: relative;top: -150px}  
+    $det = '<table style="width:100%">';
+    foreach ($details as $detail) {
+        if ($detail->deposite_id != 0) {
+            $price = $detail->charge * $detail->amount - (($detail->discount / 100) * $detail->charge * $detail->amount);
+            $det.= '            
+             <tr>                       
+                <td style=";padding:3px 3px;vertical-align:top;width:40%">' . landa()->rp($detail->deposite_amount) . '</td>                                                                     
+                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:20%">' . $detail->discount . '% </td>                                                        
+                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:40%">' . landa()->rp($price) . '</td>                                                        
+             </tr>
+             
+            <tr>                       
+                <td style=";padding:3px 3px;vertical-align:top;" colspan="3">[' . $detail->Deposite->code . '] ' . $detail->Deposite->Guest->guestName . '</td>                                                                     
+             </tr>
+             
 
-</style>
-<script type="text/javascript">
-    function printDiv()
-    {
-        $(".headerInvoice").css({"display": "block"});
-        window.print();
+            ';
+        } else {
+            $price = $detail->charge * $detail->amount - round(($detail->discount / 100) * $detail->charge * $detail->amount);
+            $addName = (isset($detail->Additional->name)) ? $detail->Additional->name : '';
+            $det.= '
+            
+             <tr>                       
+                <td style=";padding:3px 3px;vertical-align:top;width:40%">' . $detail->amount . ' x ' . landa()->rp($detail->charge) . '</td>                                                                     
+                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:20%">' . $detail->discount . '% </td>                                                        
+                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:40%">' . landa()->rp($price) . '</td>                                                        
+             </tr>
+             
+            <tr>                       
+                <td style=";padding:3px 3px;vertical-align:top;" colspan="3">' . $addName . '</td>                                                                     
+             </tr>
+             
+
+            ';
+        }
     }
-</script>
+    $ca_name = ($model->ca_user_id == 0 || empty($model->ca_user_id)) ? '' : $model->CityLedger->name;
+    $gl_name = ($model->gl_room_bill_id == 0 || empty($model->gl_room_bill_id)) ? '' : $model->RoomBill->room_number;
+    $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Total :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->total) . '</td></tr>';
+    if ($model->cash != 0) {
+        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Cash :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->cash) . '</td></tr>';
+    }
+    if ($model->cc_charge != 0) {
+        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Credit :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->cc_charge) . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >CC Numb :</td><td style="text-align:right;padding:3px 3px;">' . $model->cc_number . '</td></tr>';
+    }
+    if ($model->gl_charge != 0) {
+        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >GL :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->gl_charge) . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >GL Room :</td><td style="text-align:right;padding:3px 3px;">' . $gl_name . '</td></tr>';
+    }
+    if ($model->ca_charge != 0) {
+        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >CL :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->ca_charge) . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >CL Name :</td><td style="text-align:right;padding:3px 3px;">' . $ca_name . '</td></tr>';
+    }
+
+    $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Refund :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->refund) . '</td></tr>';
+
+    $det .= '</table>';
+    $content = str_replace('{detail}', $det, $content);
+    echo $content;
+    ?>
+</div>

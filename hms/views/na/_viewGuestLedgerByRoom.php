@@ -61,14 +61,12 @@
                     }
                     $roomNumber = substr($roomNumber, 0, strlen($roomNumber) - 3);
                     $guestName = (isset($r->Registration->Guest->guestName)) ? $r->Registration->Guest->guestNam : '';
-                    $json_user = (isset($r->Registration->Guest->guestName)) ? json_decode($r->Registration->Guest->others, true) : '';
-                    $company = (isset($r->Registration->Guest->guestName)) ? strtoupper($json_user['company']) : '';
+                    $company = (isset($r->Registration->Guest->company)) ? strtoupper($r->Registration->Guest->company) : '';
                 } else {
                     $roomNumber = $r->room_number;
                     if (isset($r->Guest->guestName)) { //jika ada guest user id , belum checkout
                         $guestName = $r->Guest->guestName;
-                        $json_user = json_decode($r->Guest->others, true);
-                        $company = strtoupper($json_user['company']);
+                        $company = strtoupper($r->Guest->company);
                     } else { //jika tidak ada, berarti sudah checkout
                         $guestName = $r->Bill->pax_name;
                         $company = '';

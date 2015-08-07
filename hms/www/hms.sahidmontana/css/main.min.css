@@ -1475,10 +1475,9 @@ select {
     position: relative
 }
 #content {
-    padding: 65px 5px 5px 5px;
+    padding: 65px 5px 5px 10px;
     margin-left: 213px;
     min-height: 100%;
-    background: url(../img/patterns/5.png)
 }
 .contentwrapper {
     background-color: white;
@@ -1651,8 +1650,8 @@ select {
     box-sizing: border-box;
     font-family: sans-serif;
     font-size: 13px;
-    font-size: 13px;
     text-transform: uppercase;
+    padding-left:15px;
 }
 .box1,
 .mainnav li a {
@@ -1682,7 +1681,7 @@ select {
 }
 .box,
 .mainnav ul li .sub li {
-    width: 100%
+    width: 100%;
 }
 .mainnav li a span[class*=" icon-"],
 .mainnav li a span[class*=" brocco-icon-"],
@@ -1734,6 +1733,7 @@ select {
     width: 100%
 }
 .mainnav ul li .sub li a {
+    padding-left: 30px;
     font-size: 13px;
     border-bottom: 1px solid transparent;
     box-shadow: none;
@@ -3148,7 +3148,8 @@ form input.valid {
         position: relative;
         padding-bottom: 0;
         margin-bottom: 0;
-        float: left
+        float: left;
+        margin-left: 0 !important;
     }
     #sidebar .shortcuts,
     #sidebar .sidenav,
