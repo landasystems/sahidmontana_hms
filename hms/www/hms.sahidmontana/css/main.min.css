@@ -3148,7 +3148,8 @@ form input.valid {
         position: relative;
         padding-bottom: 0;
         margin-bottom: 0;
-        float: left
+        float: left;
+        margin-left: 0 !important;
     }
     #sidebar .shortcuts,
     #sidebar .sidenav,

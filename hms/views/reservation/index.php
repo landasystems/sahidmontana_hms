@@ -28,14 +28,10 @@ $this->widget('bootstrap.widgets.TbMenu', array(
         array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
         array('label' => 'Search', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
-//        array('label' => 'Export ke PDF', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
-//        array('label' => 'Export ke Excel', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
     ),
 ));
 $this->endWidget();
 ?>
-
-
 
 <div class="search-form" style="display:none">
     <?php
@@ -43,8 +39,7 @@ $this->endWidget();
         'model' => $model,
     ));
     ?>
-</div><!-- search-form -->
-
+</div>
 
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
@@ -137,28 +132,28 @@ $this->beginWidget(
         'bootstrap.widgets.TbModal', array('id' => 'myModal', 'autoOpen' => false)
 );
 ?>
-<form method="post">
-<div class="modal-header">
-    <a class="close" data-dismiss="modal">&times;</a>
-    <center><h4>STATUS RESERVATION</h4></center>
-</div>
+<form method="post" action="<?php echo url("reservation/index") ?>">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <center><h4>STATUS RESERVATION</h4></center>
+    </div>
 
     <div class="modal-body">
 
     </div>
 
-<div class="modal-footer">
-    <button class="btn btn-primary"  type="submit" name="cancel">Save changes</button>
-    <?php
-    $this->widget(
-            'bootstrap.widgets.TbButton', array(
-        'label' => 'Close',
-        'url' => '#',
-        'htmlOptions' => array('data-dismiss' => 'modal'),
-            )
-    );
-    ?>
-</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary"  type="submit" name="cancel">Save changes</button>
+        <?php
+        $this->widget(
+                'bootstrap.widgets.TbButton', array(
+            'label' => 'Close',
+            'url' => '#',
+            'htmlOptions' => array('data-dismiss' => 'modal'),
+                )
+        );
+        ?>
+    </div>
 </form>
 <?php
 $this->endWidget();

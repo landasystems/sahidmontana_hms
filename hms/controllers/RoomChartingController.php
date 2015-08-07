@@ -107,7 +107,7 @@ class RoomChartingController extends Controller {
     }
 
     public function actionIndex() {
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $this->CSS();
         cs()->registerScript('', '$(".pop").popover();
                 $( document ).ready(function() {
@@ -189,7 +189,7 @@ class RoomChartingController extends Controller {
     }
 
     public function actionStay() {
-        $this->layout = 'mainWide';
+        cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $siteConfig = SiteConfig::model()->findByPk(1);
         $this->CSS();
         if (!empty($_POST)) {
