@@ -2,6 +2,8 @@
 
 class RegistrationController extends Controller {
 
+    
+
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -38,6 +40,7 @@ class RegistrationController extends Controller {
     /**
      * @return array action filters
      */
+
     public function actionCheckRoom() {
         $sDate = str_replace(" ", "", $_POST['Registration']['date_to']);
         $date = explode('-', $sDate);
@@ -74,11 +77,9 @@ class RegistrationController extends Controller {
                 }
             }
 
-            if (isset($_POST['RegistrationDetail']['room_id'])) {
-                for ($i = 0; $i < count($_POST['RegistrationDetail']['room_id']); $i++) {
-                    if (in_array($_POST['RegistrationDetail']['room_id'][$i], $idNotAva)) {
-                        $warning .= 'Room ' . $_POST['RegistrationDetail']['room_id'][$i] . ' has ' . $idStatus[$_POST['RegistrationDetail']['room_id'][$i]]['status'] . ' on ' . $idStatus[$_POST['RegistrationDetail']['room_id'][$i]]['date'] . ' <br>';
-                    }
+            for ($i = 0; $i < count($_POST['RegistrationDetail']['room_id']); $i++) {
+                if (in_array($_POST['RegistrationDetail']['room_id'][$i], $idNotAva)) {
+                    $warning .= 'Room ' . $_POST['RegistrationDetail']['room_id'][$i] . ' has ' . $idStatus[$_POST['RegistrationDetail']['room_id'][$i]]['status'] . ' on ' . $idStatus[$_POST['RegistrationDetail']['room_id'][$i]]['date'] . ' <br>';
                 }
             }
         }
@@ -107,6 +108,12 @@ class RegistrationController extends Controller {
         $return['user_id_number'] = $user->code;
         $return['company'] = $user->company;
         $return['code'] = $user->code;
+        /* if (!empty($user->others)) {
+          $other = json_decode($user->others, true);
+          if (isset($other['company'])) {
+          $return['company'] = $other['company'];
+          }
+          } */
 
         if (!empty($reservation->deposite_id)) {
             $return['deposite_code'] = $reservation->Deposite->code;
@@ -229,6 +236,10 @@ class RegistrationController extends Controller {
             $arrRoomType[$rt->id]['KING'] = 0;
             $arrRoomType[$rt->id]['TWIN'] = 0;
         }
+
+//        $date = explode('-', $sDate);
+//        $start = date("Y/m/d", strtotime($date[0]));
+//        $end = date("Y/m/d", strtotime('-1 day', strtotime($date[1])));
         $date = explode('-', $sDate);
         $date1 = explode('/', $date[0]);
         $date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
@@ -307,6 +318,7 @@ class RegistrationController extends Controller {
     }
 
     public function actionGetListGuest() {
+        //$guestName = User::model()->listUsers('guest');
         $name = $_GET['term'];
         $guestName = User::model()->with('Roles')->findAll(array('condition' => 'Roles.is_allow_login=0 and t.name like "%' . $name . '%"'));
         $source = array();
@@ -370,6 +382,25 @@ class RegistrationController extends Controller {
         }
     }
 
+//    public function actionView($id) {
+//        $this->layout = 'mainWide';
+//        $model = $this->loadModel($id);
+//        $mDetail = RegistrationDetail::model()->findAll(array('condition' => 'registration_id=' . $id));
+//        $myDetail = RegistrationDetail::model()->findByAttributes(array('registration_id' => $id));
+//        if (!empty($model->deposite_id)) {
+//            $modelDp = Deposite::model()->findByPk($model->deposite_id);
+//            if (empty($modelDp))
+//                $modelDp = new Deposite();
+//        } else {
+//            $modelDp = new Deposite();
+//        }
+//        $this->render('view', array(
+//            'model' => $model,
+//            'mDetail' => $mDetail,
+//            'myDetail' => $myDetail,
+//            'modelDp' => $modelDp,
+//        ));
+//    }
     public function actionView($id) {
         cs()->registerScript('read', '
             $("form input, form textarea, form select").each(function(){
@@ -839,10 +870,10 @@ class RegistrationController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $model = $this->loadModel($id)->with('Guest', 'Guest.City', 'Guest.City.province', 'Bill');
+        $model = $this->loadModel($id)->with('Guest','Guest.City','Guest.City.province','Bill');
         $this->js();
 
-        if ($model->is_na == 1 and !isset($_GET['v'])) // jika sudah di NA registrasi tidak bisa di update
+        if ($model->is_na == 1 and ! isset($_GET['v'])) // jika sudah di NA registrasi tidak bisa di update
             throw new CHttpException(500, 'Registrasi already Night Audited, cannot be update.');
 
         $siteConfig = SiteConfig::model()->findByPk(1);
@@ -855,7 +886,7 @@ class RegistrationController extends Controller {
             $modelDp = new Deposite;
             $modelDp->code = SiteConfig::model()->formatting('deposite');
         }
-        $mDetail = RegistrationDetail::model()->with('Room', 'Room.RoomType')->findAll(array('condition' => 't.registration_id=' . $id));
+        $mDetail = RegistrationDetail::model()->with('Room','Room.RoomType')->findAll(array('condition' => 't.registration_id=' . $id));
         if (isset($_POST['Registration'])) {
             if (!empty($_POST['RegistrationDetail']['room_id'])) {
                 $reservation_id = $model->reservation_id;
