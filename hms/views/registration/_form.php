@@ -15,8 +15,6 @@
 </style>
 <script type="text/javascript">
     function getDetail(id) {
-        //var name = $("#Registration_guest_user_id").val();
-        //  alert(name);
         $.ajax({
             url: "<?php echo url('user/getDetail'); ?>",
             type: "POST",
@@ -102,7 +100,7 @@ if ($model->isNewRecord == FALSE) {
     $company = $model->Guest->company;
     $phone = $model->Guest->phone;
     $sex = $model->Guest->sex;
-    $birth = $model->Guest->birth;
+    $birth = date("m/d/Y", strtotime($model->Guest->birth));
     $nationality = $model->Guest->nationality;
 }
 
@@ -125,7 +123,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 }
 ?>
 <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>
-
 <ul class="nav nav-tabs" id="myTab">                                                     
     <li class="active"><a href="#room">Room Information</a></li>                                                 
     <li><a href="#guest">Guest Information</a></li>    
@@ -244,6 +241,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                         $this->widget(
                                                 'bootstrap.widgets.TbDatePicker', array(
                                             'name' => 'birth',
+                                            'value' => $birth,
                                             'options' => array('language' => 'en', 'format' => 'yyyy-mm-dd'),
                                             'htmlOptions' => array('class' => 'span2', 'disabled' => false)
                                         ));
@@ -268,7 +266,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     </tr>
                 </table>         
             </div>
-
         </div><!-- End .box -->
     </div>    
     <div class="tab-pane active" id="room">
@@ -281,11 +278,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     <span>Room Information</span>
                 </h4>
                 <div class="invoice-info">
-                    <span class="number"> <strong class="red">
+                    <span class="number"> 
+                        <strong class="red">
                             <?php
                             echo $model->code;
                             ?>
-                        </strong></span>
+                        </strong>
+                    </span>
                 </div>   
             </div>
 
@@ -463,7 +462,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                         </td>
                     </tr>
-
                 </table>
 
                 <div id="findRoom" class="modal large hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -490,7 +488,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 </tr>
                             </tbody>
                         </table>
-
                         <div style="overflow:auto;max-height: 300px !important" class="well">
                             <table class="items table table-striped  table-condensed">
                                 <thead>
@@ -589,7 +586,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                             $tuyul = ChargeAdditional::model()->findByPk($other);
                                             $checked = (isset($detail_include[$other])) ? 'checked' : '';
                                             if (count($tuyul) > 0) {
-//                                                    $val = (isset($_POST["_" . $tuyul->id])) ? $_POST["_" . $tuyul->id] : 0;
                                                 $val = (isset($detail_include[$other])) ? $detail_include[$other] : $tuyul->charge;
                                                 $checkbox_others_include_sys.= $this->renderPartial('_oi', array('checked' => $checked, 'id' => $tuyul->id, 'room_id' => $detail->Room->id, 'val' => $val, 'name' => $tuyul->name), true);
                                             }
@@ -1061,14 +1057,14 @@ if ($model->isNewRecord == FALSE) {
 }
 ?>
 <script>
-    <?php
-    if (!empty($id)) {
-        ?>
+<?php
+if (!empty($id)) {
+    ?>
         $("#newGuest").hide();
         $("#reservation").hide();
-        <?php
-    }
-    ?>
+    <?php
+}
+?>
     function calculation() {
 
         $(".pax").each(function() {
@@ -1256,10 +1252,6 @@ if ($model->isNewRecord == FALSE) {
                     $("#Deposite_description").val(obj.deposite_description);
                 }
                 ;
-                /*otherInclude = JSON.parse(obj.otherInclude);
-                 $.each(otherInclude, function (index, value) {
-                 $(".price-" + index).val(value);
-                 });*/
 
             }
         });
@@ -1267,13 +1259,13 @@ if ($model->isNewRecord == FALSE) {
     $("#tb-choosed-room").on('click', '.others_include', function(event) {  //on click    
         calculation();
     });
-    <?php
-    if (!empty($reservation_id)) {
-        echo '$("#Registration_reservation_id").trigger("change");';
-        echo '$("seachBy").prop("checked", false);';
-        echo '$("#seachBy").trigger("change");';
-    }
-    ?>
+<?php
+if (!empty($reservation_id)) {
+    echo '$("#Registration_reservation_id").trigger("change");';
+    echo '$("seachBy").prop("checked", false);';
+    echo '$("#seachBy").trigger("change");';
+}
+?>
 
     function clearItem() {
         $(".itemSelected").remove();
@@ -1297,12 +1289,12 @@ if ($model->isNewRecord == FALSE) {
         });
         selisihHari(start, end);
     }
-    <?php
-    $date1 = explode('/', $date);
-    $date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
-    $date2 = explode('/', $date2);
-    $date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
-    ?>
+<?php
+$date1 = explode('/', $date);
+$date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
+$date2 = explode('/', $date2);
+$date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
+?>
     selisihHari("<?php echo $date1 ?>", "<?php echo $date2 ?>");
 
     function selisihHari(start, end) {

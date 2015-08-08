@@ -101,38 +101,6 @@ class UserController extends Controller {
         echo json_encode($list);
     }
 
-//    public function actionGetListGlMove() {
-//        $name = $_GET["q"];
-//        $list = array();
-//        $query = 'select acca_user.name as name, acca_room_bill.room_id as id, acca_room_bill.room_number as room_number from acca_user, acca_registration, acca_room_bill where acca_user.id = acca_registration.guest_user_id and acca_registration.id = acca_room_bill.registration_id and acca_room_bill.is_checkedout=0 and acca_room_bill.lead_room_bill_id=0 and acca_user.name like "%' . $name . '%" or acca_room_bill.room_number = "' . $name . '" order by acca_room_bill.room_number ASC limit 10';
-//        $data =  Yii::app()->db->createCommand($query)->queryAll();
-//        //$data = RoomBill::model()->with('Registration')->with('User')->findAll(array('condition' => 'User.name like "%' . $name . '%" User.id = Registration.guest_user_id and t.is_checkedout=0 and t.lead_room_bill_id=0', "order" => "t.room_number Asc"));
-//        if (empty($data)) {
-//            $list[] = array("id" => "0", "text" => "No Results Found..");
-//        } else {
-//            foreach ($data as $val) {
-//                $list[] = array("id" => $val['id'], "text" => '[' . $val['room_number'] . '] - ' . $val['name']);
-//            }
-//        }
-//        echo json_encode($list);
-//    }
-
-    /* public function actionMigrasiCompany() {
-      $guest = User::model()->listUsers('guest');
-      foreach ($guest as $val) {
-      $other = json_decode($val->others, true);
-      if (isset($other['company'])) {
-      $company = $other['company'];
-      $update = User::model()->findByPk($val->id);
-      $update->company = $company;
-      $update->save();
-      }
-      }
-      $this->render(url('dashboard'));
-      } */
-
-
-
     public function actionHistory() {
         $this->render('history', array(
         ));
@@ -192,8 +160,6 @@ class UserController extends Controller {
 
         $tempRoles = $model->roles_id;
         $tempPass = $model->password;
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
         cs()->registerScript('tab', '$("#myTab a").click(function(e) {
                                         e.preventDefault();
                                         $(this).tab("show");
@@ -239,8 +205,6 @@ class UserController extends Controller {
 
         $tempRoles = $model->roles_id;
         $tempPass = $model->password;
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
         cs()->registerScript('tab', '$("#myTab a").click(function(e) {
                                         e.preventDefault();
                                         $(this).tab("show");
@@ -306,10 +270,8 @@ class UserController extends Controller {
     }
 
     public function actionGetDetail() {
-        //  $id = $_POST['id'];
-        //  $user = User::model()->findByPk($id);
         $id = $_POST['id'];
-        $user = User::model()->find(array('condition' => 'id="' . $id . '"'));
+        $user = User::model()->findByPk($id);
         if (isset($user) and !empty($user)) {
             $return['id'] = $user->id;
             $return['group'] = $user->roles_id;
@@ -321,7 +283,7 @@ class UserController extends Controller {
             $return['phone'] = $user->phone;
             $return['number'] = $user->code;
             $return['sex'] = $user->sex;
-            $return['birth'] = $user->birth;
+            $return['birth'] = ($user->birth == "0000-00-00") ? '' : date("m/d/Y", strtotime($user->birth));
             $return['nationality'] = $user->nationality;
             $return['company'] = $user->company;
             echo json_encode($return);
