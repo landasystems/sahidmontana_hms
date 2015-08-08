@@ -351,7 +351,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     $link .= '<a href="../roomBill/move.html?roomNumber=' . $arr->number . '" target="_blank" class="btn btn-mini blue icon-move" data-toggle="tooltip" title="Move Room"></a>';
                 }
 
-
                 echo '<tr>
                         <td style="text-align:center" class="' . $class . '"><span class="taro">' . ucwords($status) . '</span><br>
                             ' . $link . '                            

@@ -103,7 +103,7 @@ class RegistrationController extends Controller {
         $return['phone'] = $user->phone;
         $return['user_id'] = $user->id;
         $return['sex'] = $user->sex;
-        $return['birth'] = $user->birth;
+        $return['birth'] = date("m/d/Y", strtotime($user->birth));
         $return['nationality'] = $user->nationality;
         $return['user_id_number'] = $user->code;
         $return['company'] = $user->company;
@@ -629,40 +629,22 @@ class RegistrationController extends Controller {
             
             function disEn(state){                
                 if (state=="1"){    
-//                    $("#group").val("");
                     $("#company").val("");
                     $("#birth").val("");
                     $("#nationality").val("");
                     $("#name").val("");
                     $("#userNumber").val("");                    
-//                    $("#province_guest").val(0);
-//                    $("#city_guest").val(0);
                     $("#address").val("");
-                    $("#phone").val("");                      
-//                    $("#Registration_billing_note").val("");                      
-//                    $("#Registration_dp").val("");                      
-//                    $("#Registration_billing_user_id").val("0");                         
-//                    $("#s2id_Registration_billing_user_id .select2-choice").html("<span>Please Choose</span><abbr class=\'select2-search-choice-close\'></abbr><div><b></b></div>");
-//                    $(".itemSelected").remove();
-                    
+                    $("#phone").val("");                                         
                 }else{  
-//                    $("#group").val("");
                     $("#name").val("");                    
                     $("#userNumber").val("");
-//                    $("#province_guest").val(0);
-//                    $("#city_guest").val(0);
                     $("#address").val("");
                     $("#phone").val("");    
                     $("#company").val("");
                     $("#birth").val("");
                     $("#nationality").val("");
-//                    $("#Registration_billing_user_id").val("0");   
-//                    $("#Registration_billing_note").val("");     
-//                    $("#Registration_dp").val("");                      
-//                    $(".itemSelected").remove();
-//                    $("#s2id_Registration_billing_user_id .select2-choice").html("<span>Please Choose</span><abbr class=\'select2-search-choice-close\'></abbr><div><b></b></div>");
                 }
-                
             }
         ');
     }
@@ -677,9 +659,6 @@ class RegistrationController extends Controller {
         $settings = json_decode($siteConfig->settings, true);
 
         if (isset($_POST['Registration'])) {
-//            $this->redirect($_POST['RegistrationDetail']['room_id'][0]);
-//            $this->redirect($_POST['group']);
-
             if (!empty($_POST['RegistrationDetail']['room_id']) && !empty($_POST['group'])) {
                 $model->attributes = $_POST['Registration'];
                 $model->guest_user_id = $_POST['id'];
@@ -701,9 +680,7 @@ class RegistrationController extends Controller {
                         $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
                         $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
                         $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
-                        $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                        //$other = json_encode(array('company' => $company));
-                        $user->company = $company;
+                        $user->company = (!empty($_POST['company'])) ? $_POST['company'] : '';
                         $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
                         $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
                         $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
@@ -720,18 +697,16 @@ class RegistrationController extends Controller {
                         $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
                         $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
                         $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
-                        $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                        //$other = json_encode(array('company' => $company));
-                        $user->company = $company;
+                        $user->company = (!empty($_POST['company'])) ? $_POST['company'] : '';
                         $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
                         $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
                         $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
                         $user->save();
                     }
                     $model->reservation_id = "";
-//note : default guest_user_id is from walk in and load from user
+                    //note : default guest_user_id is from walk in and load from user
                 } else {
-// from reservation
+                    // from reservation
                     $by = "reservation";
                     if (!empty($model->Reservation->deposite_id)) {
                         $modelDp = Deposite::model()->findByPk($model->Reservation->deposite_id);
@@ -893,8 +868,6 @@ class RegistrationController extends Controller {
                 $model->attributes = $_POST['Registration'];
                 $model->guest_user_id = $_POST['id'];
                 $model->reservation_id = $reservation_id;
-//                $sDate = $_POST['Registration']['date_to'];
-//                $date = explode('-', $sDate);
                 $sDate = str_replace(" ", "", $_POST['Registration']['date_to']);
                 $date = explode('-', $sDate);
                 $date1 = explode('/', $date[0]);
@@ -1002,22 +975,10 @@ class RegistrationController extends Controller {
                             $mBill->package_room_type_id = $model->package_room_type_id;
                             $mBill->processed = 0;
                             $mBill->lead_room_bill_id = $lead_room_bill_id;
-//                            if ($b == 0) {
-//                                $mBill->processed = 1; // first day is true, else is false                                
-//                            } else {
-//                                $mBill->processed = 0;
-//                            }
                             $mBill->others_include = $mDet->others_include;
                             $mBill->save();
                             if ($b == 0) { //set lead room bill
                                 $lead_room_bill_id = $mBill->id;
-                                //gl lama di taruh di bill charge yang baru, karena sudah terdelete sebelumnya terkena proses edit
-//                                foreach ($gl_bill_old as $arr) {
-//                                    if ($arr->RoomBill->room_id == $mBill->room_id) {
-//                                        $arr->gl_room_bill_id = $mBill->id;
-//                                        $arr->save();
-//                                    }
-//                                }
                             }
                             $b++;
 //add to schedule

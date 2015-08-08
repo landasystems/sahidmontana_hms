@@ -180,7 +180,7 @@
                         $company = $model->Guest->company;
                         $phone = $model->Guest->phone;
                         $sex = $model->Guest->sex;
-                        $birth = $model->Guest->birth;
+                        $birth = date("m/d/Y", strtotime($model->Guest->birth));
                         $nationality = $model->Guest->nationality;
                     }
                     ?>
@@ -233,6 +233,7 @@
                                             $this->widget(
                                                     'bootstrap.widgets.TbDatePicker', array(
                                                 'name' => 'birth',
+                                                'value' => $birth,
                                                 'options' => array('language' => 'en', 'format' => 'yyyy-mm-dd'),
                                                 'htmlOptions' => array('class' => 'span2', 'disabled' => false)
                                             ));
