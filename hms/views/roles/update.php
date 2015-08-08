@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle('Update Roles | ' . $model->name);
+$this->setPageTitle('Roles | ' . $model->name);
 ?>
 
 <?php

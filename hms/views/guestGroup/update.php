@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle('Update Guest Group | ' . $model->name);
+$this->setPageTitle('Guest Group | ' . $model->name);
 ?>
 
 <?php

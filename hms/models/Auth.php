@@ -12,8 +12,8 @@ class Auth extends CActiveRecord {
             array('label' => 'Dashboard', 'url' => array('/dashboard')),
             array('visible' => landa()->checkAccess('SiteConfig', 'r') || landa()->checkAccess('Roles', 'r') || landa()->checkAccess('User', 'r'), 'label' => 'Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('SiteConfig', 'r'), 'auth_id' => 'SiteConfig', 'label' => 'Site config', 'url' => array('/siteConfig/update/1'), 'crud' => array("r" => 1)),
-                    array('visible' => landa()->checkAccess('Roles', 'r'), 'auth_id' => 'Roles', 'label' => 'Access', 'url' => array('/roles'), 'crud' => array("c" => 1, "r" => 1, "u" => 1, "d" => 1)),
-                    array('visible' => landa()->checkAccess('User', 'r'), 'label' => 'User', 'url' => url('/user'), 'auth_id' => 'User'),
+                    array('visible' => landa()->checkAccess('Roles', 'r'), 'auth_id' => 'Roles', 'label' => 'Access', 'url' => array('/roles'), 'crud' => array("r" => 1)),
+                    array('visible' => landa()->checkAccess('User', 'r'), 'auth_id' => 'User', 'label' => 'User', 'url' => url('/user')),
                 )),
             array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => 'Guest', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'label' => 'Group Guest', 'url' => url('/guestGroup'), 'auth_id' => 'GroupGuest'),
