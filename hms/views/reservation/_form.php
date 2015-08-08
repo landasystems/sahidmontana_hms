@@ -12,12 +12,11 @@
 <script type="text/javascript">
     function getDetail(id) {
         var name = $("#Reservation_guest_user_id").val();
-        //  alert(name);
         $.ajax({
             url: "<?php echo url('user/getDetail'); ?>",
             type: "POST",
             data: {id: id},
-            success: function (data) {
+            success: function(data) {
                 obj = JSON.parse(data);
                 $("#id").val(obj.id);
                 $("#group").val(obj.group);
@@ -38,14 +37,6 @@
             }
         });
     }
-    //$(document).ready(function () {
-    //  $("#Reservation_guest_user_id").blur(function () {
-    //setTimeout(getDetail(),30000);
-    //    setTimeout(function () {
-    //      getDetail()
-    //}, 2000);
-    //})
-    //});
 </script>
 <div class="form">
     <style>        
@@ -92,11 +83,13 @@
                         <span>Guest Information</span>                        
                     </h4>
                     <div class="invoice-info">
-                        <span class="number"> <strong class="red">
+                        <span class="number"> 
+                            <strong class="red">
                                 <?php
                                 echo $model->code;
                                 ?>
-                            </strong></span>
+                            </strong>
+                        </span>
                     </div>
                 </div>
                 <div class="content">   
@@ -131,15 +124,6 @@
                         $dateResult = date('d/m/Y', time()) . ' - ' . date('d/m/Y', time() + 86400);
                         $jsRemove = '';
                     }
-//                    $data = array(0 => 'Please Choose') + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
-                    //$guestName = User::model()->listUsers('guest');
-                    //$source = array();
-                    //foreach ($guestName as $val) {
-                    //    if (empty($val->company))
-                    //        $source[] = $val->name;
-                    //   else
-                    //       $source[] = $val->name . ' ( ' . $val->company . ' )';
-                    //}
                     if ($model->isNewRecord == FALSE) {
                         $guest = User::model()->findByPk($model->guest_user_id);
                         $model->guest_user_id = $guest->name;
@@ -194,12 +178,6 @@
                         $phone = $model->Guest->phone;
                         $idCard = $model->Guest->code;
                         $company = $model->Guest->company;
-                        /* if (!empty($model->Guest->others)) {
-                          $other = json_decode($model->Guest->others, true);
-                          if (isset($other['company'])) {
-                          $company = $other['company'];
-                          }
-                          } */
                         $phone = $model->Guest->phone;
                         $sex = $model->Guest->sex;
                         $birth = $model->Guest->birth;
@@ -290,18 +268,24 @@
                         <span>Room Information</span>                        
                     </h4>
                     <div class="invoice-info">
-                        <span class="number"> <strong class="red">
+                        <span class="number">
+                            <strong class="red">
                                 <?php
                                 echo $model->code;
                                 ?>
-                            </strong></span>
+                            </strong>
+                        </span>
                     </div>
                 </div>
                 <div class="content">
                     <table width="100%">
                         <tr>
                             <td style="vertical-align: top">
-
+                                <style>
+                                    .form-horizontal .input-prepend+.help-block, .form-horizontal .input-append+.help-block {
+                                        margin-top: 0px;
+                                    }
+                                </style>
                                 <?php
                                 if ($model->isNewRecord == FALSE) {
                                     $date = date('d/m/Y', strtotime($model->date_from));
@@ -326,11 +310,19 @@
                                     'options' => array(
                                         'format' => 'dd/MM/yyyy',
                                         'minDate' => $minDate,
-                                        'callback' => 'js:function(start, end){console.log(start.toString("d MMMM, yyyy") + " - " + end.toString("d MMMM, yyyy"));changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
-                                        'startDate' => $date, 'endDate' => $date2),
-                                        )
-                                );
+                                        'callback' => 'js:function(start, end){changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
+                                        'startDate' => $date, 'endDate' => $date2
+                                    ),
+                                    'hint' => '<label><i>Arrival - Departure</i><label>'
+                                ));
                                 ?>
+
+                                <div class="control-group ">
+                                    <label class="control-label">Night</label>
+                                    <div class="controls">
+                                        <input class="span1" name="night" id="night" type="text" readonly>
+                                    </div>
+                                </div>
 
                                 <div class="control-group ">
                                     <label class="control-label">Group</label>
@@ -783,15 +775,11 @@
             'buttonType' => 'submit',
             'type' => 'primary',
             'icon' => 'ok white',
-            'visible'=>!isset($_GET['v']),
+            'visible' => !isset($_GET['v']),
             'label' => $model->isNewRecord ? 'Reservation' : 'Save Reservation',
         ));
         ?>
     </div>
-
-
-
-
 
     <?php
 //change from charting
@@ -821,10 +809,10 @@
                 <div class="span1" style="width:10px">:</div>
                 <div class="span8" style="text-align:left">
                     <?php
-                    $readOnly = ($model->status != 'registered' or $model->status != 'cancel') ? false : true;
+                    $readOnly = ($model->status == 'registered' or $model->status == 'cancel') ? true : false;
                     $array = ($model->status != 'registered') ? array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'cancel' => 'Cancel', 'noshow' => 'No Show') : array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'registered' => 'Registered', 'cancel' => 'Cancel', 'noshow' => 'No Show');
                     ?>
-                    <?php echo $form->dropDownListRow($model, 'status', $array, array('disabled' => $readOnly, 'label' => false)); ?>
+                    <?php echo $form->dropDownListRow($model, 'status', $array, array('readonly' => $readOnly, 'label' => false)); ?>
                 </div>
             </div>        
             <div class="row-fluid">
@@ -833,7 +821,7 @@
                 </div>
                 <div class="span1" style="width:10px">:</div>
                 <div class="span8" style="text-align:left">
-                    <?php echo $form->textAreaRow($model, 'reason_of_cancel', array('style' => 'margin-bottom:5px;height:70px', 'class' => 'span12', 'label' => false)); ?>                    
+                    <?php echo $form->textAreaRow($model, 'reason_of_cancel', array('readonly' => $readOnly, 'style' => 'margin-bottom:5px;height:70px', 'class' => 'span12', 'label' => false)); ?>                    
                 </div>
             </div> 
         </div>
@@ -1032,9 +1020,9 @@
 
 
 <script>
-    function calculation() {
 
-        $(".pax").each(function () {
+    function calculation() {
+        $(".pax").each(function() {
             var pax = parseInt($(this).val());
             pax = pax ? pax : 0;
             var bed = parseInt($(this).parent().parent().find(".extrabed").val());
@@ -1047,7 +1035,7 @@
             bed_price = bed_price ? bed_price : 0;
             var rowId = $(this).parent().parent().attr('id');
             var other = 0;
-            $(".others_include").each(function () {
+            $(".others_include").each(function() {
                 var thisRowId = $(this).attr('r');
                 if (rowId == thisRowId) {
                     if (this.checked) {
@@ -1060,7 +1048,7 @@
             $(this).parent().parent().find(".total_rate").val(price_default);
         });
     }
-    $("#Reservation_package_room_type_id").on("change", function () {
+    $("#Reservation_package_room_type_id").on("change", function() {
         if ($(this).val() == 0) {
             $(".detail_paket").html('');
             $(".pckg").html('');
@@ -1070,23 +1058,23 @@
                 url: "<?php echo url('reservation/getPackage'); ?>",
                 type: "POST",
                 data: $('form').serialize(),
-                success: function (data) {
+                success: function(data) {
                     $(".detail_paket").html(data);
                     data = $('#detPackage').val();
                     data = JSON.parse(data);
                     data2 = $('#pricePackage').val();
                     data2 = JSON.parse(data2);
-                    $(".pckg").each(function () {
+                    $(".pckg").each(function() {
                         a = this;
                         result = '';
-                        $.each(data, function (i, n) {
+                        $.each(data, function(i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += '<label><input checked class="others_include ' + n['id'] + '" kode="' + n['id'] + '" style="margin:0px 5px 0px 0px" type="checkbox" r="' + room_id + '" name="others_include[' + room_id + '][' + n['id'] + ']"  value="' + n['total'] + '">' + n['name'] + '</label>';
                         });
                         $(a).html(result);
                     });
                     // baru diCreatekan
-                    $(".room_rate").each(function () {
+                    $(".room_rate").each(function() {
                         b = this;
                         result = '';
                         //$.each(data, function (i, n) {
@@ -1095,16 +1083,16 @@
                         //});
                         $(b).val(result);
                     });
-                    $(".pax").each(function () {
+                    $(".pax").each(function() {
                         b = this;
                         result = '';
-                        $.each(data, function (i, n) {
+                        $.each(data, function(i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += n['pax'];
                         });
                         $(b).val(result);
                     });
-                    $(".fnb_price").each(function () {
+                    $(".fnb_price").each(function() {
                         b = this;
                         result = '';
                         //$.each(data, function (i, n) {
@@ -1119,7 +1107,7 @@
             });
         }
     })
-    $("#btn_pax").on("click", function () {
+    $("#btn_pax").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_pax").val();
@@ -1127,7 +1115,7 @@
             calculation();
         }
     });
-    $("#btn_eb_price").on("click", function () {
+    $("#btn_eb_price").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_eb_price").val();
@@ -1135,7 +1123,7 @@
             calculation();
         }
     });
-    $("#btn_fb_price").on("click", function () {
+    $("#btn_fb_price").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_fb_price").val();
@@ -1143,7 +1131,7 @@
             calculation();
         }
     });
-    $("#btn_room_rate").on("click", function () {
+    $("#btn_room_rate").on("click", function() {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_room_rate").val();
@@ -1156,7 +1144,7 @@
         $("#totalRoom").html(total);
     }
 
-    $('#nationality').on('change', function () {
+    $('#nationality').on('change', function() {
         if ($(this).val() == 'ID') {
             $('#s2id_city_guest').show();
         } else {
@@ -1164,7 +1152,7 @@
         }
     })
 
-    $('#btnFindRoom').on('click', function () {
+    $('#btnFindRoom').on('click', function() {
         $('#findRoom').modal('show');
     })
 
@@ -1178,7 +1166,7 @@
             url: "<?php echo url('reservation/checkRoom'); ?>",
             type: "POST",
             data: $('form').serialize(),
-            success: function (data) {
+            success: function(data) {
                 if (data != '') {
                     $('button[type="submit"]').attr('disabled', 'disabled');
                     $("#teks-warning").html(data);
@@ -1188,5 +1176,20 @@
                 }
             }
         });
+        selisihHari(start, end);
+    }
+<?php
+$date1 = explode('/', $date);
+$date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
+$date2 = explode('/', $date2);
+$date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
+?>
+    selisihHari("<?php echo $date1 ?>", "<?php echo $date2 ?>");
+
+    function selisihHari(start, end) {
+        var start = new Date(start);
+        var end = new Date(end);
+        var days = (end - start) / 1000 / 60 / 60 / 24;
+        $('#night').val(days);
     }
 </script>

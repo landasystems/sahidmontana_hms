@@ -138,14 +138,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                         $charge = (empty($roomBill)) ? landa()->rp($regDetail->charge, false) : landa()->rp($roomBill->charge, false);
                         $bf = (empty($roomBill)) ? 0 : landa()->rp($roomBill->fnb_price, false);
                         $arival = date('d M', strtotime($regDetail->Registration->date_from));
-                        
+
                         if (isset($roomBill) and $roomBill->others_include != '') {
-                        $others_include = json_decode($roomBill->others_include);
-                        foreach ($others_include as $key => $mInclude) {
-                            //mencari nama charge
-                            $tuyul = ChargeAdditional::model()->findByPk($key);
-                            $txtOther .= $tuyul->name . ' : ' . landa()->rp($mInclude, false) . '<br>';
-                        }
+                            $others_include = json_decode($roomBill->others_include);
+                            foreach ($others_include as $key => $mInclude) {
+                                //mencari nama charge
+                                $tuyul = ChargeAdditional::model()->findByPk($key);
+                                $txtOther .= $tuyul->name . ' : ' . landa()->rp($mInclude, false) . '<br>';
+                            }
                         }
                     }
                 } elseif ($status == 'reserved') {
@@ -332,22 +332,23 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 $link = '';
                 $status = strtolower($status);
                 if ($status == "vacant" || $status == "vacant inspect") {
-                    $link .= '<a href="../reservation/create.html?roomNumber=' . $arr->number . '&date=' . date("m/d/Y", strtotime($siteConfig->date_system)) . '" target="_blank" class="btn btn-mini blue entypo-icon-book" data-toggle="tooltip" title="Reservation"></a>';
-                    $link .= '<a href="../registration/create.html?roomNumber=' . $arr->number . '&date=' . date("m/d/Y", strtotime($siteConfig->date_system)) . '" target="_blank" class="btn btn-mini blue entypo-icon-feather" data-toggle="tooltip" title="Registration"></a>';
+                    $link .= '<a href="../reservation/create.html?roomNumber=' . $arr->number . '&date=' . date("m/d/Y", strtotime($siteConfig->date_system)) . '" target="_blank" class="btn btn-mini blue icon icon-pencil" data-toggle="tooltip" title="Reservation" style="margin-right:5px;"></a>';
+                    $link .= '<a href="../registration/create.html?roomNumber=' . $arr->number . '&date=' . date("m/d/Y", strtotime($siteConfig->date_system)) . '" target="_blank" class="btn btn-mini blue icon icon-time" data-toggle="tooltip" title="Registration"></a>';
                 } elseif ($status == "reservation") {
-                    $link .= '<a href="../registration/create.html?reservationId=' . $regDetail->reservation_id . '" target="_blank" class="btn btn-mini blue entypo-icon-feather" data-toggle="tooltip" title="Registration"></a>';
-                    $link .= '<a href="../reservation/update/' . $regDetail->reservation_id . '.html?changeStatus=reserved" target="_blank" class="btn btn-mini blue entypo-icon-flag" data-toggle="tooltip" title="Confirm Reservation"></a>';
+                    $link .= '<a href="../registration/create.html?reservationId=' . $regDetail->reservation_id . '" target="_blank" class="btn btn-mini blue icon icon-time" data-toggle="tooltip" title="Registration" style="margin-right:5px;"></a>';
+                    $link .= '<a href="../reservation/update/' . $regDetail->reservation_id . '.html?changeStatus=reserved" target="_blank" class="btn btn-mini blue icon icon-ok" data-toggle="tooltip" title="Confirm Reservation" style="margin-right:5px;"></a>';
                     $link .= '<a href="../reservation/update/' . $regDetail->reservation_id . '.html?changeStatus=cancel" target="_blank" class="btn btn-mini blue entypo-icon-reload-CCW" data-toggle="tooltip" title="Cancel Reservation"></a>';
                 } elseif ($status == "reserved") {
-                    $link .= '<a href="../registration/create.html?reservationId=' . $regDetail->reservation_id . '" target="_blank" class="btn btn-mini blue entypo-icon-feather" data-toggle="tooltip" title="Registration"></a>';
-                    $link .= '<a href="../reservation/update/' . $regDetail->reservation_id . '.html?changeStatus=cancel" target="_blank" class="btn btn-mini blue entypo-icon-reload-CCW" data-toggle="tooltip" title="Cancel Reservation"></a>';
+                    $link .= '<a href="../registration/create.html?reservationId=' . $regDetail->reservation_id . '" target="_blank" class="btn btn-mini blue icon icon-time" data-toggle="tooltip" title="Registration" style="margin-right:5px;"></a>';
+                    $link .= '<a href="../reservation/update/' . $regDetail->reservation_id . '.html?changeStatus=cancel" target="_blank" class="btn btn-mini blue icon icon-remove" data-toggle="tooltip" title="Cancel Reservation"></a>';
                 } elseif ($status == "out of order") {
+                    
                 } elseif ($status == "dirty") {
                     
                 } else {
-                    $link .= '<a href="../bill/create.html?roomNumber=' . $arr->number . '" target="_blank" class="btn btn-mini blue entypo-icon-alert" data-toggle="tooltip" title="Checked Out"></a>';
-                    $link .= '<a href="../roomBill/extend.html?roomNumber=' . $arr->number . '" target="_blank" class="btn btn-mini blue entypo-icon-creative-commons" data-toggle="tooltip" title="Extend"></a>';
-                    $link .= '<a href="../roomBill/move.html?roomNumber=' . $arr->number . '" target="_blank" class="btn btn-mini blue entypo-icon-google-circles" data-toggle="tooltip" title="Move Room"></a>';
+                    $link .= '<a href="../bill/create.html?roomNumber=' . $arr->number . '" target="_blank" class="btn btn-mini blue icon-share" data-toggle="tooltip" title="Checked Out" style="margin-right:5px;"></a>';
+                    $link .= '<a href="../roomBill/extend.html?roomNumber=' . $arr->number . '" target="_blank" class="btn btn-mini blue icon-edit" data-toggle="tooltip" title="Extend" style="margin-right:5px;"></a>';
+                    $link .= '<a href="../roomBill/move.html?roomNumber=' . $arr->number . '" target="_blank" class="btn btn-mini blue icon-move" data-toggle="tooltip" title="Move Room"></a>';
                 }
 
 

@@ -79,7 +79,7 @@ class Reservation extends CActiveRecord {
             'cp_name' => 'Name',
             'cp_telephone_number' => 'Phone',
             'cp_note' => 'Note',
-            'date_from' => 'Date From',
+            'date_from' => 'Date',
             'date_to' => 'Date To',
             'status' => 'Status',
             'billing_user_id' => 'Bill To',

@@ -32,23 +32,23 @@ foreach ($arrMenu as $arr) {
                 $arrAuth = $arr['crud'];
                 $r = CHtml::CheckBox($arr['auth_id'] . '[r]', $rValue);
                 echo '<tr>
-                                    <td><input type="hidden" name="auth_id[]" value="' . $arr['auth_id'] . '"/>' . $space. $arr['label'] . '</td>
+                                    <td><input type="hidden" name="auth_id[]" value="' . $arr['auth_id'] . '"/>' . $space . $arr['label'] . '</td>
                                     <td style="text-align:center">' . $r . '</td>
                                 </tr>';
-            }else{
+            } else {
                 echo '<tr>
-                                    <td colspan="5">'. $space . $arr['label'] . '</td>
+                                    <td colspan="5">' . $space . $arr['label'] . '</td>
                     </tr>';
             }
         } else {
             echo '<tr>
-                                    <td colspan="5">'. $space . $arr['label'] . '</td>
+                                    <td colspan="5">' . $space . $arr['label'] . '</td>
                  </tr>';
         }
 
 
         if (isset($arr['items'])) {
-            $this->renderPartial('_menuSub', array('arrMenu' => $arr['items'], 'mRolesAuth' => $mRolesAuth,'model' => $model, 'space'=>$space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
+            $this->renderPartial('_menuSub', array('arrMenu' => $arr['items'], 'mRolesAuth' => $mRolesAuth, 'model' => $model, 'space' => $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Create Charge Additionals');
+$this->setPageTitle('Create Additional Charge');
 
 ?>
 
