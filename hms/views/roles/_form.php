@@ -27,10 +27,7 @@
                         <thead> 
                             <tr>
                                 <th></th>
-                                <th>Access (Read/ View)</th>
-                                <th>Create</th>
-                                <th>Update</th>
-                                <th>Delete</th>
+                                <th>Access</th>
                             </tr>
                         </thead>
                         <tbody>

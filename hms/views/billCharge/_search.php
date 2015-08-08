@@ -17,7 +17,7 @@ $departement = Chtml::listdata(ChargeAdditionalCategory::model()->findAll(array(
 <?php echo $form->textFieldRow($model, 'created_user_id', array('class' => 'span2', 'maxlength' => 45)); ?>       
 
 <div class="form-actions">
-    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'type' => 'primary', 'icon' => 'search white', 'label' => 'Search')); ?>
+    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'type' => 'primary', 'icon' => 'search white', 'label' => 'Search & Export')); ?>
 </div>
 
 <?php $this->endWidget(); ?>

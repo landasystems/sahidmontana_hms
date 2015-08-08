@@ -22,10 +22,7 @@ foreach ($arrMenu as $arr) {
                 if ($model->isNewRecord == false) {
                     if (isset($mRolesAuth[$arr['auth_id']])) {
                         $arrRolesAuth = json_decode($mRolesAuth[$arr['auth_id']]->crud, true);
-                        $cValue = (isset($arrRolesAuth['c']) && $arrRolesAuth['c'] == 1) ? 1 : 0;
                         $rValue = (isset($arrRolesAuth['r']) && $arrRolesAuth['r'] == 1) ? 1 : 0;
-                        $uValue = (isset($arrRolesAuth['u']) && $arrRolesAuth['u'] == 1) ? 1 : 0;
-                        $dValue = (isset($arrRolesAuth['d']) && $arrRolesAuth['d'] == 1) ? 1 : 0;
                     }
                 }
             }
@@ -33,32 +30,25 @@ foreach ($arrMenu as $arr) {
 
             if (isset($arr['crud'])) {
                 $arrAuth = $arr['crud'];
-                $r = (isset($arrAuth['r']) && $arrAuth['r'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[r]', $rValue) : '';
-                $c = (isset($arrAuth['c']) && $arrAuth['c'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[c]', $cValue) : '';
-                $u = (isset($arrAuth['u']) && $arrAuth['u'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[u]', $uValue) : '';
-                $d = (isset($arrAuth['d']) && $arrAuth['d'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[d]', $dValue) : '';
-                
+                $r = CHtml::CheckBox($arr['auth_id'] . '[r]', $rValue);
                 echo '<tr>
-                                    <td><input type="hidden" name="auth_id[]" value="' . $arr['auth_id'] . '"/>' . $space. $arr['label'] . '</td>
+                                    <td><input type="hidden" name="auth_id[]" value="' . $arr['auth_id'] . '"/>' . $space . $arr['label'] . '</td>
                                     <td style="text-align:center">' . $r . '</td>
-                                    <td style="text-align:center">' . $c . '</td>
-                                    <td style="text-align:center">' . $u . '</td>
-                                    <td style="text-align:center">' . $d . '</td>
                                 </tr>';
-            }else{
+            } else {
                 echo '<tr>
-                                    <td colspan="5">'. $space . $arr['label'] . '</td>
+                                    <td colspan="5">' . $space . $arr['label'] . '</td>
                     </tr>';
             }
         } else {
             echo '<tr>
-                                    <td colspan="5">'. $space . $arr['label'] . '</td>
+                                    <td colspan="5">' . $space . $arr['label'] . '</td>
                  </tr>';
         }
 
 
         if (isset($arr['items'])) {
-            $this->renderPartial('_menuSub', array('arrMenu' => $arr['items'], 'mRolesAuth' => $mRolesAuth,'model' => $model, 'space'=>$space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
+            $this->renderPartial('_menuSub', array('arrMenu' => $arr['items'], 'mRolesAuth' => $mRolesAuth, 'model' => $model, 'space' => $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
         }
     }
 }
