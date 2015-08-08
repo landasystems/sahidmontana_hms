@@ -489,7 +489,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             </tbody>
                         </table>
 
-                        <div style="overflow:auto;max-height: 300px !important" class="well">
+                        <div style="overflow:auto;height: auto" class="well">
                             <table class="items table table-striped  table-condensed">
                                 <thead>
                                     <tr>
