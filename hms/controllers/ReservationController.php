@@ -2,6 +2,8 @@
 
 class ReservationController extends Controller {
 
+    
+
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -66,11 +68,9 @@ class ReservationController extends Controller {
                 }
             }
 
-            if (isset($_POST['ReservationDetail']['room_id'])) {
-                for ($i = 0; $i < count($_POST['ReservationDetail']['room_id']); $i++) {
-                    if (in_array($_POST['ReservationDetail']['room_id'][$i], $idNotAva)) {
-                        $warning .= 'Room ' . $_POST['ReservationDetail']['room_id'][$i] . ' has ' . $idStatus[$_POST['ReservationDetail']['room_id'][$i]]['status'] . ' on ' . $idStatus[$_POST['ReservationDetail']['room_id'][$i]]['date'] . ' <br>';
-                    }
+            for ($i = 0; $i < count($_POST['ReservationDetail']['room_id']); $i++) {
+                if (in_array($_POST['ReservationDetail']['room_id'][$i], $idNotAva)) {
+                    $warning .= 'Room ' . $_POST['ReservationDetail']['room_id'][$i] . ' has ' . $idStatus[$_POST['ReservationDetail']['room_id'][$i]]['status'] . ' on ' . $idStatus[$_POST['ReservationDetail']['room_id'][$i]]['date'] . ' <br>';
                 }
             }
         }
@@ -178,6 +178,9 @@ class ReservationController extends Controller {
         $bed = $_POST['bed'];
         $package = $_POST['Reservation']['package_room_type_id'];
 
+//        $date = explode('-', $sDate);
+//        $start = date("Y/m/d", strtotime($date[0]));
+//        $end = date("Y/m/d", strtotime('-1 day', strtotime($date[1])));
         $date = explode('-', $sDate);
         $date1 = explode('/', $date[0]);
         $date1 = $date1[2] . "/" . $date1[1] . "/" . $date1[0];
@@ -466,6 +469,22 @@ class ReservationController extends Controller {
         ');
     }
 
+//    public function actionView($id) {
+//        $this->layout = "mainWide";
+//        $model = $this->loadModel($id);
+//        $mDetail = ReservationDetail::model()->findAll(array('condition' => 'reservation_id=' . $id));
+//        $myDetail = ReservationDetail::model()->findByAttributes(array('reservation_id' => $id));
+//        $modelDp = Deposite::model()->findByPk($model->deposite_id);
+//        if (empty($modelDp))
+//            $modelDp = new Deposite();
+//        $this->render('view', array(
+//            'model' => $model,
+//            'mDetail' => $mDetail,
+//            'myDetail' => $myDetail,
+//            'modelDp' => $modelDp,
+//        ));
+//    }
+    
     public function actionView($id) {
         cs()->registerScript('read', '
             $("form input, form textarea, form select").each(function(){
@@ -485,6 +504,7 @@ class ReservationController extends Controller {
         cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         if (isset($_POST['Reservation'])) {
             if (!empty($_POST['ReservationDetail']['room_id'])) {
+                //$model->guest_user_id = 0;
                 $model->attributes = $_POST['Reservation'];
                 $model->guest_user_id = $_POST['id'];
                 $model->code = SiteConfig::model()->formatting('reservation', FALSE);
@@ -502,6 +522,7 @@ class ReservationController extends Controller {
                     $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
                     $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
                     $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
+                    //$other = json_encode(array('company' => $company));
                     $user->company = $company;
                     $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
                     $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
@@ -520,6 +541,7 @@ class ReservationController extends Controller {
                     $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
                     $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
                     $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
+                    //$other = json_encode(array('company' => $company));
                     $user->company = $company;
                     $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
                     $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
@@ -527,6 +549,8 @@ class ReservationController extends Controller {
                     $user->save();
                 }
 
+//                $sDate = $_POST['Reservation']['date_from'];
+//                $date = explode('-', $sDate);
                 $sDate = str_replace(" ", "", $_POST['Reservation']['date_from']);
                 $date = explode('-', $sDate);
                 $date1 = explode('/', $date[0]);
@@ -618,14 +642,29 @@ class ReservationController extends Controller {
             $modelDp->code = SiteConfig::model()->formatting('deposite');
         }
 
+        if (isset($_POST['cancel'])) {
+            $model->attributes = $_POST['Reservation'];
+            $status = ($model->status == 'cancel' || $model->status == 'noshow') ? 'vacant' : $model->status;
+
+            if ($status == 'vacant') {
+                RoomSchedule::model()->deleteAll(array('condition' => 'reservation_id=' . $model->id));
+            } else {
+                RoomSchedule::model()->updateAll(array('status' => $status), 'reservation_id=' . $model->id);
+            }
+
+            $model->save();
+            $this->redirect(array('index'));
+        }
+
+
+
         if (isset($_POST['Reservation'])) {
             if (!empty($_POST['ReservationDetail']['room_id'])) {
 
                 $model->attributes = $_POST['Reservation'];
-                $model->status = $_POST['Reservation']['status'];
-                $status = ($model->status == 'cancel' || $model->status == 'noshow') ? 'vacant' : $model->status;
-
                 $model->guest_user_id = $_POST['id'];
+//                $sDate = $_POST['Reservation']['date_from'];
+//                $date = explode('-', $sDate);
                 $sDate = str_replace(" ", "", $_POST['Reservation']['date_from']);
                 $date = explode('-', $sDate);
                 $date1 = explode('/', $date[0]);
@@ -699,18 +738,14 @@ class ReservationController extends Controller {
                         $endTime = strtotime("-1 day", strtotime($date2));
 
                         // Loop between timestamps, 24 hours at a time
-                        if ($status == "vacant") {
-                            //do nothing
-                        } else {
-                            for ($t = $startTime; $t <= $endTime; $t = $t + 86400) {
-                                $mSchedule = new RoomSchedule;
-                                $mSchedule->room_id = $mDet->room_id;
-                                $mSchedule->date_schedule = date('Y/m/d', $t);
-                                $mSchedule->status = $status;
-                                $mSchedule->reservation_id = $model->id;
-                                if (!$mSchedule->save())
-                                    throw new CHttpException(404, 'The requested page does not exist.');
-                            }
+                        for ($t = $startTime; $t <= $endTime; $t = $t + 86400) {
+                            $mSchedule = new RoomSchedule;
+                            $mSchedule->room_id = $mDet->room_id;
+                            $mSchedule->date_schedule = date('Y/m/d', $t);
+                            $mSchedule->status = "reservation";
+                            $mSchedule->reservation_id = $model->id;
+                            if (!$mSchedule->save())
+                                throw new CHttpException(404, 'The requested page does not exist.');
                         }
                     }
                     $this->redirect(array('view', 'id' => $model->id));
@@ -760,28 +795,24 @@ class ReservationController extends Controller {
 
         $model = new Reservation('search');
         $model->unsetAttributes();  // clear any default values
-//        if (isset($_POST['cancel'])) {
-        if (!empty($_POST['cancelId'])) {
-            $cancel = Reservation::model()->findByPk($_POST['cancelId']);
-            $cancel->status = $_POST['cancelStatus'];
-            if ($cancel->status == 'cancel') {
-                $cancel->reason_of_cancel = $_POST['cancelReason'];
-            } else {
-                $cancel->reason_of_cancel = '';
-            }
 
-            //update schedule
-            $status = ($cancel->status == 'cancel' || $cancel->status == 'noshow') ? 'vacant' : $cancel->status;
-            if ($status == "vacant") {
-                RoomSchedule::model()->deleteAll('reservation_id=' . $cancel->id);
-            } else {
+        if (isset($_POST['cancel'])) {
+            if (!empty($_POST['cancelId'])) {
+                $cancel = Reservation::model()->findByPk($_POST['cancelId']);
+                $cancel->status = $_POST['cancelStatus'];
+                if ($_POST['cancelStatus'] == 'cancel') {
+                    $cancel->reason_of_cancel = $_POST['cancelReason'];
+                } else {
+                    $cancel->reason_of_cancel = '';
+                }
+                $cancel->save();
+
+                //update schedule
+                $status = ($cancel->status == 'cancel' || $cancel->status == 'noshow') ? 'vacant' : $cancel->status;
                 RoomSchedule::model()->updateAll(array('status' => $status), 'reservation_id=' . $cancel->id);
             }
-            if ($cancel->save()) {
-                $this->redirect(array('index'));
-            }
+            $this->redirect(array('index'));
         }
-//        }
 
 
         if (isset($_GET['Reservation'])) {
