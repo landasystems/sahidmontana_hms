@@ -24,7 +24,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array(),'visible'=>landa()->checkAccess('Room','c')),
+        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
         array('label' => 'Search & Export', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
     ),
@@ -44,16 +44,7 @@ $this->endWidget();
 
 
 <?php
-$buton = '';
-
-if (landa()->checkAccess('Room', 'r'))
-    $buton .= '{view}';
-
-if (landa()->checkAccess('Room', 'u'))
-    $buton .= '{update} ';
-
-if (landa()->checkAccess('Room', 'd'))
-    $buton .= '{delete}';
+$buton = '{view}{update}{delete}';
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'room-grid',

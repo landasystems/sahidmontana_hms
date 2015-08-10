@@ -5,8 +5,6 @@ $this->setPageTitle('Roles | ' . $model->name);
 
 <?php
 
-$visible = landa()->checkAccess('GroupUser', 'c');
-
 
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(

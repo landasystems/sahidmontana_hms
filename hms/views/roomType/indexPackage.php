@@ -1,15 +1,7 @@
 <?php
 
-$buton = '';
+$buton = '{view}{update}{delete}';
 
-if (landa()->checkAccess('RoomType', 'r'))
-    $buton .= '{view}';
-
-if (landa()->checkAccess('RoomType', 'u'))
-    $buton .= '{update} ';
-
-if (landa()->checkAccess('RoomType', 'd'))
-    $buton .= '{delete}';
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'room-type-grid',
     'dataProvider' => $model2->search(),
