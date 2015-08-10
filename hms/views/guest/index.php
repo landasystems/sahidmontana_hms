@@ -73,21 +73,13 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ));
 
 
-$btndelete = '';
-if (landa()->checkAccess('User', 'd'))
-    $btndelete .= '<button type="submit" name="delete" value="dd" style="margin-left: 10px" class="btn btn-danger pull-right"><span class="icon16 brocco-icon-trashcan white"></span> Delete Checked</button>';
+
+    $btndelete = '<button type="submit" name="delete" value="dd" style="margin-left: 10px" class="btn btn-danger pull-right"><span class="icon16 brocco-icon-trashcan white"></span> Delete Checked</button>';
 ?>
 <?php echo $btndelete ?>
 <?php
-$buton = '';
-if (landa()->checkAccess('User', 'r'))
-    $buton .= '{view}';
+    $buton = '{view}{update}{delete}';
 
-if (landa()->checkAccess('User', 'u'))
-    $buton .= '{update} ';
-
-if (landa()->checkAccess('User', 'd'))
-    $buton .= '{delete}';
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'User-grid',

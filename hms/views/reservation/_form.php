@@ -246,7 +246,7 @@
                                         <?php echo CHtml::dropDownList('nationality', $nationality, Province::model()->nationalityList, array('class' => 'span2', 'disabled' => false,)); ?>
                                     </div>
                                 </div>
-                                <?php $this->widget('common.extensions.landa.widgets.LandaProvinceCity', array('name' => 'guest', 'provinceValue' => $province, 'cityValue' => $city, 'disabled' => false,)); ?>                  
+                            <?php $this->widget('common.extensions.landa.widgets.LandaProvinceCity', array('name' => 'guest', 'provinceValue' => $province, 'cityValue' => $city, 'disabled' => false,)); ?>                  
                                 <div class="control-group ">
                                     <label class="control-label">Address</label>
                                     <div class="controls">

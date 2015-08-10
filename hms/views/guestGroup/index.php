@@ -1,4 +1,5 @@
 <?php
+
 $this->setPageTitle('Group Guest');
 
 $this->beginWidget('zii.widgets.CPortlet', array(
@@ -9,24 +10,15 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('visible' => landa()->checkAccess('GroupUser', 'c'), 'label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
+        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
     ),
 ));
 $this->endWidget();
 ?>
 <?php
-$buton = "";
-    if (landa()->checkAccess('GroupUser', 'r')) {
-        $buton .= '{view}';
-    }
 
-    if (landa()->checkAccess('GroupUser', 'u')) {
-        $buton .= '{update}';
-    }
-    if (landa()->checkAccess('GroupUser', 'd')) {
-        $buton .= '{delete}';
-    }
+$buton .= '{view}{update}{delete}';
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'roles-grid',

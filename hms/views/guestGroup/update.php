@@ -5,7 +5,6 @@ $this->setPageTitle('Update Guest Group | ' . $model->name);
 
 <?php
 
-$visible = landa()->checkAccess('GroupUser', 'c');
 
 
 $this->beginWidget('zii.widgets.CPortlet', array(

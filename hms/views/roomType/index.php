@@ -24,7 +24,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array(), 'visible' => landa()->checkAccess('RoomType', 'c')),
+        array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
         array('label' => 'Search', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
 //        array('label' => 'Export ke PDF', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
@@ -45,16 +45,8 @@ $this->endWidget();
 </div><!-- search-form -->
 
 <?php
-$buton = '';
+$buton = '{view}{update}{delete}';
 
-if (landa()->checkAccess('RoomType', 'r'))
-    $buton .= '{view}';
-
-if (landa()->checkAccess('RoomType', 'u'))
-    $buton .= '{update} ';
-
-if (landa()->checkAccess('RoomType', 'd'))
-    $buton .= '{delete}';
 ?>
 
 <ul class="nav nav-tabs" id="myTab">
