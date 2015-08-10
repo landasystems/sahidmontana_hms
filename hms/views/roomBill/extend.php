@@ -169,7 +169,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
     <div class="content">   
 
-
         <table style="width:100%">
             <tr>
                 <td class="span8" >
@@ -252,8 +251,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     }
     function clearList() {
         $(".items").remove();
-//        var row = "<tr id=\"addRow\" style=\"display:none\"></tr>";
-//        $("#addRow").replaceWith(row);
     }
     function calcExtend() {
         var akhir = $(".hasDatepicker").val();
@@ -270,18 +267,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         })
 
     }
-//    $("#addRow").on("load", function() {
-//        $.ajax({
-//            url: "' . url('roomBill/getRegister') . '",
-//            type: "POST",
-//            data: {regID: $(this).val()},
-//            success: function(data) {
-//                $(".items").remove();
-//                $("#addRow").replaceWith(data);
-//                calcExtend();
-//            }
-//        });
-//    });
+    
     $("#roomId").trigger("change");
 
 </script>

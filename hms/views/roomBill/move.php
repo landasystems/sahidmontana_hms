@@ -18,12 +18,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     .controls {margin-left:120px !important}
     #cityq_guest{width:650px !important}
 </style>
-<?php
-foreach (Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
-}
-?>
-
 <div class="box  invoice">
     <div class="title clearfix">
         <h4 class="left">
@@ -36,7 +30,12 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         </div> 
     </div>
 
-    <div class="content" style="padding-left: 0px !important;padding-right: 0px !important">   
+    <div class="content" style="padding-left: 0px !important;padding-right: 0px !important">  
+        <?php
+        foreach (Yii::app()->user->getFlashes() as $key => $message) {
+            echo '<div class="alert alert-' . $key . '" style="margin-left:10px;margin-right:10px;">' . $message . '</div>';
+        }
+        ?>
         <table style="width:100%">
             <tr><td style="vertical-align: top">
 
@@ -55,21 +54,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     "placeholder" => 'Please Choose',
                                     "allowClear" => true,
                                     'width' => '50%',
-//                                    'minimumInputLength' => '3',
-//                                    'ajax' => array(
-//                                        'url' => Yii::app()->createUrl('user/getListGlMove'),
-//                                        'dataType' => 'json',
-//                                        'data' => 'js:function(term, page) { 
-//                                                        return {
-//                                                            q: term 
-//                                                        }; 
-//                                                    }',
-//                                        'results' => 'js:function(data) { 
-//                                                        return {
-//                                                            results: data
-//                                                        };
-//                                                    }',
-//                                    ),
                                 ),
                                     )
                             );
@@ -77,7 +61,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         </div>
                     </div>
                     <hr>
-                    <div class="alert alert-warning hide">
+                    <div class="alert alert-warning hide alert2">
                         <h4 class="alert-heading">Ups! Room must be Checkout this day.</h4>
                         <p>To move this guest to another Room, please <b>Extend</b> this room first</p>
                         <p>
@@ -132,7 +116,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                             <span id="check_out"><?php echo (!empty($checkOut)) ? $checkOut : ''; ?></span>                                            
                                         </td>
                                     </tr>
-
                                 </table>
                             </td>     
                         </tr>
@@ -234,21 +217,21 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
-    $("#roomId").on("change", function () {
+    $("#roomId").on("change", function() {
         $.ajax({
             url: "<?php echo url('roomBill/getRegistration'); ?> ",
             type: "POST",
             data: {regID: $(this).val()},
-            success: function (data) {
+            success: function(data) {
                 $(".items").remove();
                 if (data == "extend") {
                     $(".tbInfo").hide();
                     $("#btnMove").prop("disabled", true);
-                    $(".alert").show()
+                    $(".alert2").show()
                 } else {
                     $(".tbInfo").show();
                     $("#btnMove").prop("disabled", false);
-                    $(".alert").hide()
+                    $(".alert2").hide()
 
                     obj = JSON.parse(data);
                     $("#number").html(obj.number);

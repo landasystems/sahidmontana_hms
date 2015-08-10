@@ -53,7 +53,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
 <div class="form-actions">
-    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'type' => 'primary', 'icon' => 'search white', 'label' => 'Search')); ?>
+    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'type' => 'primary', 'icon' => 'search white', 'label' => 'Search & Export')); ?>
 </div>
 
 <?php $this->endWidget(); ?>
