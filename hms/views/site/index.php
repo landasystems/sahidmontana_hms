@@ -56,7 +56,6 @@ $totBill = count($bill);
 
             <div class="box">
                 <div class="title">
-
                     <h4>
                         <span class="icon16 iconic-icon-bars"></span>
                         <span>Today`s Room Status Statistics</span>
@@ -75,59 +74,59 @@ $totBill = count($bill);
                         <tbody>
                             <tr>
                                 <td class="span8">Vacant Inspected</td>
-                                <td class="span2"><?php echo (isset($roomStatusHouskeeping['vacant inspect'])) ? $roomStatusHouskeeping['vacant inspect']['count'] : '0'; ?></td>
-                                <td class="span2"><?php echo (isset($roomStatusHouskeeping['vacant inspect'])) ? round($roomStatusHouskeeping['vacant inspect']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td class="span2" style="text-align: right"><?php echo (isset($roomStatusHouskeeping['vacant inspect'])) ? $roomStatusHouskeeping['vacant inspect']['count'] : '0'; ?></td>
+                                <td class="span2" style="text-align: right"><?php echo (isset($roomStatusHouskeeping['vacant inspect'])) ? round($roomStatusHouskeeping['vacant inspect']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <td>Vacant</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['vacant'])) ? $roomStatusHouskeeping['vacant']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['vacant'])) ? round($roomStatusHouskeeping['vacant']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['vacant'])) ? $roomStatusHouskeeping['vacant']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['vacant'])) ? round($roomStatusHouskeeping['vacant']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <td>Dirty</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['dirty'])) ? $roomStatusHouskeeping['dirty']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['dirty'])) ? round($roomStatusHouskeeping['dirty']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['dirty'])) ? $roomStatusHouskeeping['dirty']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['dirty'])) ? round($roomStatusHouskeeping['dirty']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <td>Out of Order</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['out of order'])) ? $roomStatusHouskeeping['out of order']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['out of order'])) ? round($roomStatusHouskeeping['out of order']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['out of order'])) ? $roomStatusHouskeeping['out of order']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['out of order'])) ? round($roomStatusHouskeeping['out of order']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
 
                             <tr>
                                 <td>Occupied</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['occupied'])) ? $roomStatusHouskeeping['occupied']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['occupied'])) ? round($roomStatusHouskeeping['occupied']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['occupied'])) ? $roomStatusHouskeeping['occupied']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['occupied'])) ? round($roomStatusHouskeeping['occupied']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <td>Occupied No Luggage</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['occupied no luggage'])) ? $roomStatusHouskeeping['occupied no luggage']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['occupied no luggage'])) ? round($roomStatusHouskeeping['occupied no luggage']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['occupied no luggage'])) ? $roomStatusHouskeeping['occupied no luggage']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['occupied no luggage'])) ? round($roomStatusHouskeeping['occupied no luggage']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>
                             </tr>
                             <tr>
                                 <td>Do Not Disturb</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['do not disturb'])) ? $roomStatusHouskeeping['do not disturb']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['do not disturb'])) ? round($roomStatusHouskeeping['do not disturb']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['do not disturb'])) ? $roomStatusHouskeeping['do not disturb']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['do not disturb'])) ? round($roomStatusHouskeeping['do not disturb']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <td>Sleep Out</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['sleep out'])) ? $roomStatusHouskeeping['sleep out']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['sleep out'])) ? round($roomStatusHouskeeping['sleep out']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['sleep out'])) ? $roomStatusHouskeeping['sleep out']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['sleep out'])) ? round($roomStatusHouskeeping['sleep out']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <td>House Use</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['house use'])) ? $roomStatusHouskeeping['house use']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['house use'])) ? round($roomStatusHouskeeping['house use']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['house use'])) ? $roomStatusHouskeeping['house use']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['house use'])) ? round($roomStatusHouskeeping['house use']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <td>Compliment</td>
-                                <td><?php echo (isset($roomStatusHouskeeping['compliment'])) ? $roomStatusHouskeeping['compliment']['count'] : '0'; ?></td>
-                                <td><?php echo (isset($roomStatusHouskeeping['compliment'])) ? round($roomStatusHouskeeping['compliment']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['compliment'])) ? $roomStatusHouskeeping['compliment']['count'] : '0'; ?></td>
+                                <td style="text-align: right"><?php echo (isset($roomStatusHouskeeping['compliment'])) ? round($roomStatusHouskeeping['compliment']['count'] / $room->count * 100, 2) . ' %' : '0 %'; ?></td>                                
                             </tr>
                             <tr>
                                 <th>Total Rooms</th>
-                                <th><?php echo $room->count; ?></th>                            
-                                <th>100 %</th>                            
+                                <th style="text-align: right !important"><?php echo $room->count; ?></th>                            
+                                <th style="text-align: right !important">100 %</th>                            
                             </tr>
                             <tr>
                                 <th>Average Room Rate</th>
@@ -135,7 +134,7 @@ $totBill = count($bill);
                                 $arr = (isset($roomStatusHouskeeping['occupied'])) ? ($arrRoomBill->totalRoomCharge / 1.21) / $roomStatusHouskeeping['occupied']['count'] : 0;
                                 ?>
                                 <th></th>                            
-                                <th><?php echo landa()->rp($arr, true, 2); ?></th>                            
+                                <th style="text-align: right !important"><?php echo landa()->rp($arr, true, 2); ?></th>                            
                             </tr>
                         </tbody>
                     </table>

@@ -74,16 +74,14 @@
             <?php echo $form->textFieldRow($model, 'nationality', array('class' => 'span5', 'maxlength' => 30)); ?>
 
             <div class="control-group">
-                <div class="control-label">District</div>
+                <div class="control-label">Region</div>
                 <div class="controls">
                     <?php
                     $city = City::model()->findByPk($model->city_id);
                     if (isset($city)) {
-                        $city_id = $city->id;
-                        $city_name = $city->name;
+                        $city_id = $city->id;$city_name = $city->name;
                     } else {
-                        $city_id = 0;
-                        $city_name = '';
+                        $city_id = 0;$city_name = '';
                     }
                     $this->widget(
                             'bootstrap.widgets.TbSelect2', array(

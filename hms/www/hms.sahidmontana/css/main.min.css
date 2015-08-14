@@ -1,3 +1,7 @@
+.control-label.required:after {
+  content:"*";
+  color:red;
+}
 .nav {
     margin-bottom:10px
 }

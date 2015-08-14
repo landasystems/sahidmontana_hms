@@ -85,7 +85,7 @@
             <?php echo $form->textFieldRow($model, 'nationality', array('class' => 'span5', 'maxlength' => 30)); ?>
 
             <div class="control-group">
-                <div class="control-label">District</div>
+                <div class="control-label">Region</div>
                 <div class="controls">
                     <?php
                     $city = City::model()->findByPk($model->city_id);

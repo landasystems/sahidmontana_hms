@@ -2,8 +2,6 @@
 
 class ReservationController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -121,7 +119,7 @@ class ReservationController extends Controller {
 
     public function actionSelectReservation() {
         $model = Reservation::model()->findByPk($_POST['id']);
-        $disabled = ($model->status == 'registered' or $model->status == 'cancel' or (strtotime($model->date_to) < strtotime(date("Y-m-d")))) ? true : false;
+        $disabled = ($model->status == 'registered' or $model->status == 'cancel' or ( strtotime($model->date_to) < strtotime(date("Y-m-d")))) ? true : false;
         $id = ($model->status != 'registered') ? '<input type="hidden" name="cancelId" value="' . $model->id . '" />' : '';
         $array = ($model->status != 'registered') ? array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'cancel' => 'Cancel', 'noshow' => 'No Show') : array('reservation' => 'Reservation', 'reserved' => 'Reserved', 'registered' => 'Registered', 'cancel' => 'Cancel', 'noshow' => 'No Show');
 
@@ -484,7 +482,7 @@ class ReservationController extends Controller {
 //            'modelDp' => $modelDp,
 //        ));
 //    }
-    
+
     public function actionView($id) {
         cs()->registerScript('read', '
             $("form input, form textarea, form select").each(function(){
@@ -563,7 +561,7 @@ class ReservationController extends Controller {
                 $model->date_to = date("Y/m/d", strtotime($date2));
                 $model->status = 'reservation';
 
-                if ($model->guest_user_id != 0 and !empty($model->guest_user_id)) {
+                if ($model->guest_user_id != 0 and ! empty($model->guest_user_id)) {
                     if ($model->save()) {
 
                         if ($_POST['Deposite']['amount'] > 0) {
@@ -618,6 +616,8 @@ class ReservationController extends Controller {
                 }else {
                     Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");
                 }
+            } else {
+                Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
             }
         }
         $model->code = SiteConfig::model()->formatting('reservation');
@@ -751,7 +751,9 @@ class ReservationController extends Controller {
                 }else {
                     Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");
                 }
-            }
+            }else {
+                    Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
+                }
         }
         $this->render('update', array(
             'model' => $model,

@@ -18,8 +18,6 @@ $this->endWidget();
 ?>
 <?php
 
-$buton .= '{view}{update}{delete}';
-
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'roles-grid',
     'dataProvider' => $model->search(),
@@ -29,7 +27,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'name',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => $buton,
+            'template' => '{view}{update}{delete}',
             'buttons' => array(
                 'view' => array(
                     'label' => 'Lihat',

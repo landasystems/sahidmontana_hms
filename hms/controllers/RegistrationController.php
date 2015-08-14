@@ -2,8 +2,6 @@
 
 class RegistrationController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -40,7 +38,6 @@ class RegistrationController extends Controller {
     /**
      * @return array action filters
      */
-
     public function actionCheckRoom() {
         $sDate = str_replace(" ", "", $_POST['Registration']['date_to']);
         $date = explode('-', $sDate);
@@ -828,8 +825,10 @@ class RegistrationController extends Controller {
                         $this->redirect(array('view', 'id' => $model->id));
                     }
                 }else {
-                    Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");
+                    Yii::app()->user->setFlash('error', "<b>Guest Information</b> cannot be blank");
                 }
+            } else {
+                Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
             }
         }
         $model->code = SiteConfig::model()->formatting('registration');
@@ -845,7 +844,7 @@ class RegistrationController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $model = $this->loadModel($id)->with('Guest','Guest.City','Guest.City.province','Bill');
+        $model = $this->loadModel($id)->with('Guest', 'Guest.City', 'Guest.City.province', 'Bill');
         $this->js();
 
         if ($model->is_na == 1 and ! isset($_GET['v'])) // jika sudah di NA registrasi tidak bisa di update
@@ -861,7 +860,7 @@ class RegistrationController extends Controller {
             $modelDp = new Deposite;
             $modelDp->code = SiteConfig::model()->formatting('deposite');
         }
-        $mDetail = RegistrationDetail::model()->with('Room','Room.RoomType')->findAll(array('condition' => 't.registration_id=' . $id));
+        $mDetail = RegistrationDetail::model()->with('Room', 'Room.RoomType')->findAll(array('condition' => 't.registration_id=' . $id));
         if (isset($_POST['Registration'])) {
             if (!empty($_POST['RegistrationDetail']['room_id'])) {
                 $reservation_id = $model->reservation_id;
@@ -996,6 +995,8 @@ class RegistrationController extends Controller {
                 }else {
                     Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");
                 }
+            } else {
+                Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
             }
         }
 

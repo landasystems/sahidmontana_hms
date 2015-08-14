@@ -6,41 +6,14 @@
     }
 
     .modal.large .modal-body{
-        max-height: 700px;
+        max-height: 500px;
     }
 
     .calendar.left{
         display: none !important;
     }
 </style>
-<script type="text/javascript">
-    function getDetail(id) {
-        $.ajax({
-            url: "<?php echo url('user/getDetail'); ?>",
-            type: "POST",
-            data: {id: id},
-            success: function(data) {
-                obj = JSON.parse(data);
-                $("#id").val(obj.id);
-                $("#group").val(obj.group);
-                $("#roles").val(obj.group);
-                $("#name").val(obj.name);
-                $("#province_guest").val(obj.province);
-                $("#city_guest").val(obj.city);
-                $("#address").val(obj.address);
-                $("#phone").val(obj.phone);
-                $("#sex").val(obj.sex);
-                $("#birth").val(obj.birth);
-                $("#email").val(obj.email);
-                $("#nationality").val(obj.nationality);
-                $("#company").val(obj.company);
-                $("#idCard").val(obj.number);
-                $("#userNumber").val(obj.number);
-                $("#nationality").trigger("change");
-            }
-        });
-    }
-</script>
+
 <div class="alert alert-danger fade in">   
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Important! </strong> &nbsp;&nbsp;Data has been entered and has been <b>Night Audit</b> can not be <b>Edited</b> or <b>Deleted</b>.    
@@ -94,8 +67,8 @@ if ($model->isNewRecord == FALSE) {
     $name = $model->Guest->name;
     $email = $model->Guest->email;
     $idCard = $model->Guest->code;
-    $province = $model->Guest->City->Province->id;
-    $city = $model->Guest->City->id;
+    $province = $model->Guest->City->province_id;
+    $city = $model->Guest->city_id;
     $address = $model->Guest->address;
     $company = $model->Guest->company;
     $phone = $model->Guest->phone;
@@ -126,8 +99,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 <ul class="nav nav-tabs" id="myTab">                                                     
     <li class="active"><a href="#room">Room Information</a></li>                                                 
     <li><a href="#guest">Guest Information</a></li>    
-    <li><a href="#dp">Deposite</a></li>                                                 
-    <li><a href="#billing">Billing Instruction</a></li>                       
+    <li><a href="#dp">Deposite</a></li>                                                                
     <li><a href="#remarks">Remarks</a></li>                       
 </ul>
 <div class="tab-content">
@@ -160,17 +132,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 </div> 
 
                 <?php
-                $date_siteconfig = $siteConfig->date_system;
-                ?>
-
-                <?php
                 if ($model->isNewRecord == FALSE) {
                     $guest = User::model()->findByPk($model->guest_user_id);
                     $model->guest_user_id = $guest->name;
                 }
                 ?>
                 <div class="control-group ">
-                    <label class="control-label">Guest Name </label>
+                    <label class="control-label required">Guest Name </label>
                     <div class="controls">
                         <?php
                         $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
@@ -186,8 +154,10 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                         getDetail(ui.item["item_id"]);
                                     }'
                             ),
+                            'htmlOptions'=>array('class' => 'span8')
                         ))
                         ?>   
+                        <span class="help-block">select if it already exists, type if a new guest</span>
                     </div>
                 </div>  
                 <hr/>
@@ -255,7 +225,53 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     <?php echo CHtml::dropDownList('nationality', $nationality, Province::model()->nationalityList, array('class' => 'span2', 'disabled' => false,)); ?>
                                 </div>
                             </div>
-                            <?php $this->widget('common.extensions.landa.widgets.LandaProvinceCity', array('name' => 'guest', 'provinceValue' => $province, 'cityValue' => $city, 'disabled' => false,)); ?>                  
+                            <div class="control-group">
+                                <div class="control-label">Region</div>
+                                <div class="controls">
+                                    <?php
+                                    $m_city = City::model()->findByPk($city);
+                                    if (isset($m_city)) {
+                                        $city_id = $m_city->id;
+                                        $city_name = $m_city->name;
+                                    } else {
+                                        $city_id = 0;
+                                        $city_name = '';
+                                    }
+                                    $this->widget(
+                                            'bootstrap.widgets.TbSelect2', array(
+                                        'name' => "city_guest",
+                                        'val' => $city,
+                                        'asDropDownList' => false,
+                                        'options' => array(
+                                            'allowClear' => true,
+                                            'minimumInputLength' => 3,
+                                            'width' => '100%;margin:0px;text-align:left',
+                                            'minimumInputLength' => '3',
+                                            'initSelection' => 'js:function(element, callback) 
+                            { 
+                                data = {"id": ' . $city_id . ',"text": "' . $city_name . '"}
+                                callback(data);   
+                            }',
+                                            'ajax' => array(
+                                                'url' => Yii::app()->createUrl('city/listajax'),
+                                                'dataType' => 'json',
+                                                'data' => 'js:function(term, page) { 
+                                                        return {
+                                                            q: term 
+                                                        }; 
+                                                    }',
+                                                'results' => 'js:function(data) { 
+                                                        return {
+                                                            results: data
+                                                        };
+                                                    }',
+                                            ),
+                                        ),
+                                            )
+                                    );
+                                    ?>   
+                                </div>
+                            </div>
                             <div class="control-group ">
                                 <label class="control-label">Address</label>
                                 <div class="controls">
@@ -470,49 +486,60 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         <h3 id="myModalLabel">Find Available Room</h3>
                     </div>
                     <div class="modal-body">
-                        <table class="items table  table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>Type</th>
-                                    <th>King</th>
-                                    <th>Twin</th>
-                                    <th>All</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr id="statistik" style="display:none">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div style="overflow:auto;max-height: 300px !important" class="well">
-                            <table class="items table table-striped  table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align:center">Number</th>
-                                        <th>Type</th>
-                                        <th style="text-align:center">Floor</th>
-                                        <th>Bed</th>
-                                        <th>Rate Range</th>
-                                        <th>Room Status</th>
-                                        <th style="text-align:center"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>                           
-                                    <tr id="addRow" style="display:none">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>       
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#tabroom">Room</a></li>
+                            <li><a href="#tabstat">Statistic</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabroom">
+
+                                <table class="items table table-striped  table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center">R. Number</th>
+                                            <th>Type</th>
+                                            <th style="text-align:center">Floor</th>
+                                            <th>Bed</th>
+                                            <th>Rate Range</th>
+                                            <th>Room Status</th>
+                                            <th style="text-align:center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                           
+                                        <tr id="addRow" style="display:none">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>       
+                            </div>
+                            <div class="tab-pane" id="tabstat">
+                                <table class="items table  table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th width="50">King</th>
+                                            <th width="50">Twin</th>
+                                            <th width="50">All</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="statistik" style="display:none">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -716,64 +743,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     </table>  
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="tab-pane" id="billing">
-        <div class="box gradient invoice">
-            <div class="title clearfix">
-                <h4 class="left">
-                    <span class="wpzoom-gamepad"></span>
-                    <span>Billing Instruction</span>
-                </h4>
-                <!--                    <div class="print">
-                                        <a href="#" class="addBill" title="Other Bill" style="padding:3px 6px 3px 6px !important; width:23px !important"><span class="blue  minia-icon-checkmark-2"></span></a>
-                                    </div>-->
-            </div>
-            <div class="content">                                           
-                <?php
-//                $data = array(0 => 'Please Choose') + CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
-                $id = isset($model->billing_user_id) ? $model->billing_user_id : 0;
-                $billName = isset($model->Bill->name) ? '[' . $model->Bill->Roles->name . '] ' . $model->Bill->name : '';
-//                $billName = User::model()->findByPk($model->billing_user_id);
-
-                echo $form->select2Row($model, 'billing_user_id', array(
-                    'asDropDownList' => false,
-//                    'data' => $data,
-//                    'value' => $model->billing_user_id,
-                    'options' => array(
-                        'placeholder' => 'Please Choose',
-                        'allowClear' => true,
-                        'width' => '400px',
-                        'minimumInputLength' => '3',
-                        'ajax' => array(
-                            'url' => Yii::app()->createUrl('user/getBillUser'),
-                            'dataType' => 'json',
-                            'data' => 'js:function(term, page) { 
-                                                        return {
-                                                            q: term 
-                                                        }; 
-                                                    }',
-                            'results' => 'js:function(data) { 
-                                                        return {
-                                                            results: data
-                                                        };
-                                                    }',
-                        ),
-                        'initSelection' => 'js:function(element, callback) 
-                            { 
-                                data = {
-                                    "id": ' . $id . ',
-                                    "text": "' . $billName . '",
-                                }
-                                  callback(data);   
-                            }',
-                    ),
-                        )
-                );
-                ?>
-                <?php echo $form->textAreaRow($model, 'billing_note', array('style' => 'width:98%')); ?>                                                               
-            </div>
-
         </div>
     </div>
     <div class="tab-pane" id="remarks">
@@ -1047,7 +1016,7 @@ if ($model->isNewRecord == FALSE) {
             window.print();
 
             document.body.innerHTML = originalContents;
-            $("#myTab a").click(function(e) {
+            $("#myTab a").click(function (e) {
                 e.preventDefault();
                 $(this).tab("show");
             });
@@ -1056,7 +1025,35 @@ if ($model->isNewRecord == FALSE) {
     <?php
 }
 ?>
-<script>
+<script type="text/javascript">
+    
+    function getDetail(id) {
+        $.ajax({
+            url: "<?php echo url('user/getDetail'); ?>",
+            type: "POST",
+            data: {id: id},
+            success: function (data) {
+                obj = JSON.parse(data);
+                $("#id").val(obj.id);
+                $("#group").val(obj.group);
+                $("#roles").val(obj.group);
+                $("#name").val(obj.name);
+                $("#province_guest").val(obj.province);
+                $("#city_guest").val(obj.city);
+                $("#address").val(obj.address);
+                $("#phone").val(obj.phone);
+                $("#sex").val(obj.sex);
+                $("#birth").val(obj.birth);
+                $("#email").val(obj.email);
+                $("#nationality").val(obj.nationality);
+                $("#company").val(obj.company);
+                $("#idCard").val(obj.number);
+                $("#userNumber").val(obj.number);
+                $("#nationality").trigger("change");
+            }
+        });
+    }
+    
 <?php
 if (!empty($id)) {
     ?>
@@ -1067,7 +1064,7 @@ if (!empty($id)) {
 ?>
     function calculation() {
 
-        $(".pax").each(function() {
+        $(".pax").each(function () {
             var pax = parseInt($(this).val());
             pax = pax ? pax : 0;
             var bed = parseInt($(this).parent().parent().find(".extrabed").val());
@@ -1080,7 +1077,7 @@ if (!empty($id)) {
             bed_price = bed_price ? bed_price : 0;
             var rowId = $(this).parent().parent().attr('id');
             var other = 0;
-            $(".others_include").each(function() {
+            $(".others_include").each(function () {
                 var thisRowId = $(this).attr('r');
                 if (rowId == thisRowId) {
                     if (this.checked) {
@@ -1094,7 +1091,7 @@ if (!empty($id)) {
         });
     }
 
-    $("#Registration_package_room_type_id").on("change", function() {
+    $("#Registration_package_room_type_id").on("change", function () {
         if ($(this).val() == 0) {
             $(".detail_paket").html('');
             $(".pckg").html('');
@@ -1104,23 +1101,23 @@ if (!empty($id)) {
                 url: "<?php echo url('registration/getPackage'); ?>",
                 type: "POST",
                 data: $('form').serialize(),
-                success: function(data) {
+                success: function (data) {
                     $(".detail_paket").html(data);
                     data = $('#detPackage').val();
                     data = JSON.parse(data);
                     data2 = $('#pricePackage').val();
                     data2 = JSON.parse(data2);
-                    $(".pckg").each(function() {
+                    $(".pckg").each(function () {
                         a = this;
                         result = '';
-                        $.each(data, function(i, n) {
+                        $.each(data, function (i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += '<label><input checked class="others_include ' + n['id'] + '" kode="' + n['id'] + '" style="margin:0px 5px 0px 0px" type="checkbox" r="' + room_id + '" name="others_include[' + room_id + '][' + n['id'] + ']"  value="' + n['total'] + '">' + n['name'] + '</label>';
                         });
                         $(a).html(result);
                     });
                     // baru diCreatekan
-                    $(".room_rate").each(function() {
+                    $(".room_rate").each(function () {
                         b = this;
                         result = '';
                         //$.each(data2, function (i, n) {
@@ -1129,16 +1126,16 @@ if (!empty($id)) {
                         //});
                         $(b).val(result);
                     });
-                    $(".pax").each(function() {
+                    $(".pax").each(function () {
                         b = this;
                         result = '';
-                        $.each(data, function(i, n) {
+                        $.each(data, function (i, n) {
                             room_id = $(a).parent().parent().find('.room_id').val();
                             result += n['pax'];
                         });
                         $(b).val(result);
                     });
-                    $(".fnb_price").each(function() {
+                    $(".fnb_price").each(function () {
                         b = this;
                         result = '';
                         //$.each(data2, function (i, n) {
@@ -1153,7 +1150,7 @@ if (!empty($id)) {
             });
         }
     });
-    $("#Registration_type").on("change", function() {
+    $("#Registration_type").on("change", function () {
         if ($(this).val() == 'regular') {
 
         } else {
@@ -1163,7 +1160,7 @@ if (!empty($id)) {
             $('#tb-choosed-room').find(".total_rate").val(0)
         }
     });
-    $("#btn_eb_price").on("click", function() {
+    $("#btn_eb_price").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_eb_price").val();
@@ -1171,7 +1168,7 @@ if (!empty($id)) {
             calculation();
         }
     });
-    $("#btn_pax").on("click", function() {
+    $("#btn_pax").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_pax").val();
@@ -1179,7 +1176,7 @@ if (!empty($id)) {
             calculation();
         }
     });
-    $("#btn_fb_price").on("click", function() {
+    $("#btn_fb_price").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_fb_price").val();
@@ -1187,7 +1184,7 @@ if (!empty($id)) {
             calculation();
         }
     });
-    $("#btn_room_rate").on("click", function() {
+    $("#btn_room_rate").on("click", function () {
         var disabled = $(this).attr("disabled") || 0;
         if (disabled == 0) {
             var nilai = $("#txt_room_rate").val();
@@ -1200,22 +1197,22 @@ if (!empty($id)) {
         $("#totalRoom").html(total);
     }
 
-    $('#nationality').on('change', function() {
+    $('#nationality').on('change', function () {
         if ($(this).val() == 'ID') {
             $('#s2id_city_guest').show();
         } else {
             $('#s2id_city_guest').hide();
         }
     })
-    $('#btnFindRoom').on('click', function() {
+    $('#btnFindRoom').on('click', function () {
         $('#findRoom').modal('show');
     })
-    $("#Registration_reservation_id").on("change", function() {
+    $("#Registration_reservation_id").on("change", function () {
         $.ajax({
             url: "<?php echo url('registration/getReservation'); ?>",
             type: "POST",
             data: {id: $(this).val()},
-            success: function(data) {
+            success: function (data) {
                 obj = JSON.parse(data);
                 $("#group").val(obj.group);
                 $("#roles").val(obj.group);
@@ -1256,7 +1253,7 @@ if (!empty($id)) {
             }
         });
     });
-    $("#tb-choosed-room").on('click', '.others_include', function(event) {  //on click    
+    $("#tb-choosed-room").on('click', '.others_include', function (event) {  //on click    
         calculation();
     });
 <?php
@@ -1277,7 +1274,7 @@ if (!empty($reservation_id)) {
             url: "<?php echo url('registration/checkRoom'); ?>",
             type: "POST",
             data: $('form').serialize(),
-            success: function(data) {
+            success: function (data) {
                 if (data != '') {
                     $('button[type="submit"]').attr('disabled', 'disabled');
                     $("#teks-warning").html(data);
@@ -1303,4 +1300,6 @@ $date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
         var days = (end - start) / 1000 / 60 / 60 / 24;
         $('#night').val(days);
     }
+    
+    $.toaster({priority : 'warning',title : "aa", message : "bbb"});
 </script>

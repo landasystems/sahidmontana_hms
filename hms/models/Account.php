@@ -28,7 +28,7 @@ class Account extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('created_user_id,tax,service', 'numerical', 'integerOnly' => true),
-            array('name', 'length', 'max' => 255),
+            array('name, description', 'length', 'max' => 255),
             array('modified,', 'safe'),
             array('acc_coa_id, name', 'required'),
             // The following rule is used by search().
