@@ -1301,5 +1301,4 @@ $date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
         $('#night').val(days);
     }
     
-    $.toaster({priority : 'warning',title : "aa", message : "bbb"});
 </script>

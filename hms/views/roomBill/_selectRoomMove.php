@@ -114,7 +114,7 @@
         $(this).parent().parent().find('td:eq(7)').find('.price').prop('disabled', false);
         $(this).parent().parent().find('td:eq(7)').find('.room_selected').prop('disabled', false);
         var nomer = $(this).parent().parent().attr('id');
-        alert("Room " + nomer + " Selected");
+        $.toaster({priority : 'success',title : "Information", message : "Room " + nomer + " Selected"});
         return false;
     });
 </script>
