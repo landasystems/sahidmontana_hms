@@ -82,7 +82,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 </div>
 
 
-<div class="control-group" style="display: none">
+<div class="control-group byregistration" style="display: none">
     <label class="control-label" for="Reservation_guest_user_id">Registration By:</label>
     <div class="controls">
         <?php
@@ -130,12 +130,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             <?php
             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'name' => 'extend',
-                'value' => date('d-m-Y'),
+                'value' => date('d M Y', strtotime(app()->session['date_system']. ' +1 day')),
                 'options' => array(
+                    'dateFormat'=>'d M yy',
                     'showAnim' => 'fold',
                     'changeMonth' => 'true',
                     'changeYear' => 'true',
-                    'minDate' => date('m/d/Y', strtotime(app()->session['date_system'] . ' +1 day')),
+                    'minDate' => date('d M Y', strtotime(app()->session['date_system'] . ' +1 day')),
                 ),
                 'htmlOptions' => array(
                     'style' => 'height:20px;width:100px',
@@ -249,6 +250,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             var awal = $(this).val();
             var dateAkhir = new Date(akhir);
             var dateAwal = new Date(awal);
+            
             var diff = (dateAkhir - dateAwal) / (60 * 60 * 24 * 1000);
 
             if (diff <= 0)

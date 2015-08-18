@@ -137,7 +137,7 @@ class RoomBillController extends Controller {
             if (empty($roomBillCurrent)) {
                 echo "extend"; //jika tidak ada room bill hari ini, berarti harus di suruh extend dulu
             } else {
-                $return['check_out'] = date("Y-m-d", strtotime('+1 day', strtotime($roomBill->date_bill)));
+                $return['caheck_out'] = date("Y-m-d", strtotime('+1 day', strtotime($roomBill->date_bill)));
                 $return['date_check_out'] = date("Y-m-d", strtotime('+1 day', strtotime($roomBill->date_bill)));
                 $return['pax'] = $roomBillCurrent->pax;
                 $return['extrabed'] = $roomBillCurrent->extrabed;
@@ -152,6 +152,7 @@ class RoomBillController extends Controller {
 
     public function actionGetRegister() {
         $data = '';
+        $roombill = array();
         if (!empty($_POST['regID'])) {
             $roombill = RoomBill::model()->findAll(array(
                 'condition' => 'registration_id IN (' . implode(',', $_POST['regID']) . ') AND lead_room_bill_id=0 AND is_checkedout=0',
@@ -287,9 +288,9 @@ class RoomBillController extends Controller {
                     $end = date("Y-m-d", strtotime($extendDate));
 
                     //pengecekan jika bentrok dengan room schedule (Reservasi)
-                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status != "vacant"a';
+                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status != "vacant"';
                     $data = RoomSchedule::model()->findAll(array('condition' => $filter));
-                    if (!empty($data)) {
+                    if (empty($data)) {
                         $roomBill = RoomBill::model()->find(array(
                             'condition' => 'room_id=' . $id . ' and is_checkedout=0'
                         ));
@@ -298,7 +299,7 @@ class RoomBillController extends Controller {
                         ));
                         $attributes = $roomBill->getAttributes();
                         if ($extendDate >= $curentDate) {
-                            while (strtotime($curentDate) <= strtotime($extendDate)) {
+                            while (strtotime($curentDate) < strtotime($extendDate)) {
                                 $newRoomBill = new RoomBill;
                                 $newRoomBill->attributes = $attributes;
                                 unset($newRoomBill->id);
