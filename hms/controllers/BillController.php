@@ -18,22 +18,12 @@ class BillController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("Bill","c")'
-            ),
+           
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('index','delete', 'update','view','create'),
                 'expression' => 'app()->controller->isValidAccess("Bill","r")'
             ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("Bill","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("Bill","d")'
-            )
+            
         );
     }
 

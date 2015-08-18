@@ -21,21 +21,10 @@ class AccountController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("Account","c")'
-            ),
+           
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view','update','delete','create'),
                 'expression' => 'app()->controller->isValidAccess("Account","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("Account","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("Account","d")'
             )
         );
     }

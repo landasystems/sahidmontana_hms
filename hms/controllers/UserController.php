@@ -16,21 +16,14 @@ class UserController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("User","c")'
+            
+            array('allow', // r
+                'actions' => array('history', 'view'),
+                'expression' => 'app()->controller->isValidAccess("Report_GuestHistory","r")'
             ),
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('delete','update','create','index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("User","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("User","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("User","d")'
             )
         );
     }

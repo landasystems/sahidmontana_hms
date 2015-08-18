@@ -23,7 +23,7 @@ class ForecastController extends Controller {
         return array(
             array('allow', // r
                 'actions' => array('create','index', 'view', 'update', 'delete'),
-                'expression' => 'app()->controller->isValidAccess(1,"r")'
+                'expression' => 'app()->controller->isValidAccess("Forecast","r")'
             ),
         );
     }

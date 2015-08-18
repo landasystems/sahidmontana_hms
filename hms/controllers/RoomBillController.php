@@ -16,25 +16,18 @@ class RoomBillController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create', 'move', 'extend'),
-                'expression' => 'app()->controller->isValidAccess("RoomBill","c")'
+           
+            array('allow', // r
+                'actions' => array('delete','update','index', 'view', 'move', 'extend'),
+                'expression' => 'app()->controller->isValidAccess("RoomBill","r")'
             ),
             array('allow', // r
-                'actions' => array('index', 'view', 'move', 'extend'),
-                'expression' => 'app()->controller->isValidAccess("RoomBill","r")'
+                'actions' => array('extend'),
+                'expression' => 'app()->controller->isValidAccess("RoomBill_extend","r")'
             ),
             array('allow', // r
                 'actions' => array('index', 'view', 'taxExport'),
                 'expression' => 'app()->controller->isValidAccess("TaxExport","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update',),
-                'expression' => 'app()->controller->isValidAccess("RoomBill","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("RoomBill","d")'
             )
         );
     }

@@ -16,21 +16,10 @@ class ReservationController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("Reservation","c")'
-            ),
+           
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view','create','update','delete'),
                 'expression' => 'app()->controller->isValidAccess("Reservation","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("Reservation","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("Reservation","d")'
             )
         );
     }

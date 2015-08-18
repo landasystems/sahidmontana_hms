@@ -16,21 +16,10 @@ class ChargeAdditionalController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("ChargeAdditional","c")'
-            ),
+           
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('delete','update','create','index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("ChargeAdditional","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("ChargeAdditional","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("ChargeAdditional","d")'
             )
         );
     }

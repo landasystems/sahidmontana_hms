@@ -14,15 +14,15 @@ class ReportController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('arrivdepar', 'view'),
                 'expression' => 'app()->controller->isValidAccess("Report_Arr/Dep","r")'
             ),
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('guestinhouse', 'view'),
                 'expression' => 'app()->controller->isValidAccess("Report_GuestInHouse","r")'
             ),
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('expected', 'view'),
                 'expression' => 'app()->controller->isValidAccess("Report_ExpectedGuest","r")'
             ),
             array('allow', // r
@@ -30,12 +30,24 @@ class ReportController extends Controller {
                 'expression' => 'app()->controller->isValidAccess("Report_RoomSales","r")'
             ),
             array('allow', // r
-                'actions' => array('index', 'view'),
-                'expression' => 'app()->controller->isValidAccess("Report_GuestHistory","r")'
-            ),
-            array('allow', // r
                 'actions' => array('productSold', 'view'),
                 'expression' => 'app()->controller->isValidAccess("Report_ProductSold","r")'
+            ),
+            array('allow', // r
+                'actions' => array('geographical', 'view'),
+                'expression' => 'app()->controller->isValidAccess("Report_geographical","r")'
+            ),
+            array('allow', // r
+                'actions' => array('sourceOfBusiness', 'view'),
+                'expression' => 'app()->controller->isValidAccess("Report_sourceOfBusiness","r")'
+            ),
+            array('allow', // r
+                'actions' => array('topProducers', 'view'),
+                'expression' => 'app()->controller->isValidAccess("Report_topProducers","r")'
+            ),
+            array('allow', // r
+                'actions' => array('topTen', 'view'),
+                'expression' => 'app()->controller->isValidAccess("Report_topTen","r")'
             ),
         );
     }

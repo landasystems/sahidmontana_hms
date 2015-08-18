@@ -30,7 +30,7 @@ class Auth extends CActiveRecord {
             array('visible' => landa()->checkAccess('ChargeAdditional', 'r'), 'auth_id' => 'ChargeAdditional', 'label' => 'Additional Charge', 'url' => array('/chargeAdditional')),
             array('visible' => landa()->checkAccess('Registration', 'r') || landa()->checkAccess('Reservation', 'r') ||landa()->checkAccess('Deposit', 'r') || landa()->checkAccess('RoomCharting', 'r'), 'label' => 'Front Office', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('RoomCharting', 'r'), 'auth_id' => 'RoomCharting', 'label' => 'Room Blocking', 'url' => array('/roomCharting'), 'crud' => array("r" => 1)),
-                    array('visible' => landa()->checkAccess('RoomCharting_stay', 'r'), 'auth_id' => 'RoomCharting_stay', 'label' => 'Room List', 'url' => array('/roomCharting/stay'), 'crud' => array("r" => 1)),
+                    array('visible' => landa()->checkAccess('RoomCharting', 'r'), 'auth_id' => 'RoomCharting', 'label' => 'Room List', 'url' => array('/roomCharting/stay'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('Deposit', 'r'), 'auth_id' => 'Deposit', 'label' => 'Deposite', 'url' => array('/deposite'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('Reservation', 'r'), 'auth_id' => 'Reservation', 'label' => 'Reservation', 'url' => array('/reservation'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('Registration', 'r'), 'auth_id' => 'Registration', 'label' => 'Registration', 'url' => array('/registration'), 'crud' => array("r" => 1)),

@@ -18,26 +18,12 @@ class BillCashierController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("BillChasier","c")'
-            ),
+          
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('create','update','delete','index', 'view','approving'),
                 'expression' => 'app()->controller->isValidAccess("BillChasier","r")'
             ),
-            array('allow', // r
-                'actions' => array('index', 'approving'),
-                'expression' => 'app()->controller->isValidAccess("BillChasierApproving","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("BillChasier","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("BillChasier","d")'
-            )
+            
         );
     }
 

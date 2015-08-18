@@ -10,11 +10,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     <tr>
         <td style="vertical-align: top">
             <?php echo $form->textFieldRow($model, 'code', array('class' => 'span5', 'maxlength' => 45)); ?>
-            <?php echo $form->textFieldRow($model, 'guest_user_id', array('class' => 'span5')); ?>            
+            <?php //echo $form->textFieldRow($model, 'guest_user_id', array('class' => 'span5')); ?>            
         </td>
         <td style="vertical-align: top">
-            <?php echo $form->textFieldRow($model, 'arrival_time', array('class' => 'span5')); ?>
-            <?php echo $form->textFieldRow($model, 'departure_time', array('class' => 'span5')); ?>
+            <?php //echo $form->textFieldRow($model, 'arrival_time', array('class' => 'span5')); ?>
+            <?php //echo $form->textFieldRow($model, 'departure_time', array('class' => 'span5')); ?>
         </td>
     </tr>
 </table>
