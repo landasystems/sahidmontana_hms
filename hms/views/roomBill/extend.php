@@ -22,7 +22,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 }
 ?>
 <div class="control-group ">
-    <label class="control-label" for="Reservation_guest_user_id">Extend By :</label>
+    <label class="control-label">Extend By</label>
     <div class="controls">
         <?php
         $this->widget(
@@ -39,7 +39,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     </div>
 </div>
 <div class="control-group byroom">
-    <label class="control-label" for="Reservation_guest_user_id">Room Number:</label>
+    <label class="control-label required">Room Number</label>
     <div class="controls">
         <?php
         $data = (!empty($room)) ? CHtml::listData($room, 'id', 'fullRoom') : array('0' => 'Please Choose');
@@ -82,7 +82,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 </div>
 
 
-<div class="control-group byregistration" style="display: none">
+<div class="control-group" style="display: none">
     <label class="control-label" for="Reservation_guest_user_id">Registration By:</label>
     <div class="controls">
         <?php
@@ -124,14 +124,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     </div>
 </div>
 <div class="control-group ">
-    <label class="control-label" for="until">Extend to :</label>
+    <label class="control-label required">Extend to</label>
     <div class="controls">        
         <div class="input-prepend"><span class="add-on"><i class="icon-calendar"></i></span>
             <?php
-            
             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'name' => 'extend',
-                'value' => date('m/d/Y'),
+                'value' => date('d-m-Y'),
                 'options' => array(
                     'showAnim' => 'fold',
                     'changeMonth' => 'true',
@@ -139,7 +138,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     'minDate' => date('m/d/Y', strtotime(app()->session['date_system'] . ' +1 day')),
                 ),
                 'htmlOptions' => array(
-                    'style' => 'height:20px;',
+                    'style' => 'height:20px;width:100px',
                     'id' => 'extend',
                     'onChange' => '
                         calcExtend();
@@ -148,7 +147,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             ));
             ?>
         </div>
-        <span class="help-block">Guest Date Checkout</span>
+        <span class="help-block">Guest Departure Date</span>
         <input type="hidden"  id="current_check_out" name="current_check_out" value="<?php echo (!empty($checkOut)) ? $checkOut : ''; ?>" />
     </div>
 </div>
@@ -167,37 +166,32 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         </div> 
     </div>
 
-    <div class="content">   
-
-        <table style="width:100%">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td class="span8" >
-                    <table class="table  table-striped">
-                        <thead>
-                            <tr>
-                                <th width="5%">#</th>
-                                <th>Registration Code</th>
-                                <th>Room Number</th>
-                                <th>Mr. / Mrs.</th>
-                                <th>Date Check In</th>
-                                <th>Date Check Out</th>
-                                <th>Extends For</th>
-                            </tr>
-                        </thead>
-                        <tbody id="addRow">
-                            <?php
-                            if (isset($_GET['roomNumber'])) {
-                                $roombill = RoomBill::model()->find(array(
-                                    'condition' => 'room_number=' . $_GET['roomNumber'] . ' AND lead_room_bill_id=0 AND is_checkedout=0',
-                                    'order' => 'date_bill DESC',
-                                        )
-                                );
-                                $checkout = RoomBill::model()->find(array(
-                                    'condition' => 'room_id=' . $roombill->room_id,
-                                    'order' => 'date_bill DESC',
-                                    'limit' => '1'
-                                ));
-                                echo '<tr class="items">
+                <th width="5%">#</th>
+                <th>Registration Code</th>
+                <th>Room Number</th>
+                <th>Mr. / Mrs.</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Extends For</th>
+            </tr>
+        </thead>
+        <tbody id="addRow">
+            <?php
+            if (isset($_GET['roomNumber'])) {
+                $roombill = RoomBill::model()->find(array(
+                    'condition' => 'room_number=' . $_GET['roomNumber'] . ' AND lead_room_bill_id=0 AND is_checkedout=0',
+                    'order' => 'date_bill DESC',
+                        )
+                );
+                $checkout = RoomBill::model()->find(array(
+                    'condition' => 'room_id=' . $roombill->room_id,
+                    'order' => 'date_bill DESC',
+                    'limit' => '1'
+                ));
+                echo '<tr class="items">
                                     <td><i class="icomoon-icon-arrow-right-7"></i>
                                         <input type="hidden" id="regId" name="id[]" value="' . $roombill->registration_id . '" />
                                         <input type="hidden" id="roomNumber" name="roomId[]" value="' . $roombill->room_number . '" />
@@ -211,15 +205,12 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                         <td>' . date('d F Y', strtotime($checkout->date_bill) + 86400) . '</td>
                                         <td class="ext"></td>
                                         </tr>';
-                            }
-                            ?>
+            }
+            ?>
 
-                        </tbody>
-                    </table>
-                </td>     
-            </tr>
-        </table>          
-    </div>
+        </tbody>
+    </table>       
+
 </div>    
 
 <div class="form-actions">
@@ -228,7 +219,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         'buttonType' => 'submit',
         'type' => 'primary',
         'icon' => 'ok white',
-        'label' => 'Extend Room',
+        'label' => 'Extend',
     ));
     ?>
 </div>
@@ -259,15 +250,15 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             var dateAkhir = new Date(akhir);
             var dateAwal = new Date(awal);
             var diff = (dateAkhir - dateAwal) / (60 * 60 * 24 * 1000);
-            
+
             if (diff <= 0)
                 diff = '-';
-            
+
             $(this).parent().parent().find(".ext").html(diff + ' day');
         })
 
     }
-    
+
     $("#roomId").trigger("change");
 
 </script>

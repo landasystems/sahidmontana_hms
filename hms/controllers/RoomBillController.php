@@ -282,12 +282,12 @@ class RoomBillController extends Controller {
                 $room = Room::model()->findbyPk($_POST['roomId'][$val]);
                 if (isset($_POST['dateOut'][$val])) {
                     $curentDate = date('m/d/Y', strtotime($_POST['dateOut'][$val]));
-                    $extendDate = date('m/d/Y', strtotime(strtotime($_POST['extend'])));
+                    $extendDate = date('m/d/Y', strtotime($_POST['extend']));
                     $start = date("Y-m-d", strtotime($curentDate));
                     $end = date("Y-m-d", strtotime($extendDate));
 
                     //pengecekan jika bentrok dengan room schedule (Reservasi)
-                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status != "vacant"';
+                    $filter = 't.room_id =' . $_POST['roomId'][$val] . ' and t.date_schedule between ("' . $start . '" and "' . $end . '") and t.status != "vacant"a';
                     $data = RoomSchedule::model()->findAll(array('condition' => $filter));
                     if (!empty($data)) {
                         $roomBill = RoomBill::model()->find(array(
@@ -331,7 +331,7 @@ class RoomBillController extends Controller {
                         }
                     } else {
                         $erSch[] = $room->number;
-                        Yii::app()->user->setFlash('error', '<strong>Sorry! </strong> Room ' . join(',', $erSch) . ' is <b>Occupied</b> in arange date. ');
+                        Yii::app()->user->setFlash('error', '<strong>Sorry! </strong> Room ' . join(',', $erSch) . ' is <b>Occupied</b> in that date range. ');
                     }
                 }
             }
