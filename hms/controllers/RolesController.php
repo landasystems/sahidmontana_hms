@@ -13,17 +13,9 @@ class RolesController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-            ),
             array('allow', // r
-                'actions' => array('index', 'view'),
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
+                'actions' => array('delete','update','create','index', 'view'),
+                'expression' => 'app()->controller->isValidAccess("Roles","r")'
             )
         );
     }

@@ -18,25 +18,10 @@ class RoomController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("Room","c")'
-            ),
+           
             array('allow', // r
-                'actions' => array('index', 'view','linkedRoom','updateLinkedRoom'),
+                'actions' => array('index', 'view','create','update','delete'),
                 'expression' => 'app()->controller->isValidAccess("Room","r")'
-            ),
-            array('allow', // r
-                'actions' => array('index', 'view','linkedRoom','updateLinkedRoom'),
-                'expression' => 'app()->controller->isValidAccess("LinkedRoom","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("Room","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("Room","d")'
             )
         );
     }

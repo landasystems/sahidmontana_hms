@@ -21,21 +21,10 @@ class NaController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("NightAudit","c")'
-            ),
+           
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('update','delete','index', 'view','create'),
                 'expression' => 'app()->controller->isValidAccess("NightAudit","r")'
-            ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("NightAudit","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("NightAudit","d")'
             )
         );
     }
