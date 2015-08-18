@@ -1,3 +1,6 @@
+.grid-view .items {
+  clear: both;
+}
 .control-label.required:after {
   content:"*";
   color:red;

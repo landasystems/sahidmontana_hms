@@ -59,7 +59,7 @@ class DepositeController extends Controller {
 
         if (isset($_POST['Deposite'])) {
             $model->attributes = $_POST['Deposite'];
-            $model->code = SiteConfig::model()->formatting('deposite', false);
+            $model->code = SiteConfig::model()->formatting('deposite');
             $used = RoomBill::model()->with('Registration')->findAll(array('condition' => 'is_checkedout=0 and Registration.guest_user_id=' . $model->guest_user_id));
             $model->used_amount = 0;
             $model->balance_amount = $model->amount - $model->used_amount;
@@ -68,10 +68,11 @@ class DepositeController extends Controller {
                 $model->used_today = 1;
             }
 
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
-        $model->code = SiteConfig::model()->formatting('deposite');
         $this->render('create', array(
             'model' => $model,
         ));
@@ -92,8 +93,10 @@ class DepositeController extends Controller {
             $model->attributes = $_POST['Deposite'];
             $model->used_amount = 0;
             $model->balance_amount = $model->amount - $model->used_amount;
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

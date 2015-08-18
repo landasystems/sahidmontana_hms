@@ -24,34 +24,12 @@ class SiteController extends Controller {
         );
     }
 
-    /**
-     * This is the default 'index' action that is invoked
-     * when an action is not explicitly requested by users.
-     */
     public function actionIndex() {
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
-//        Yii::import("xupload.models.XUploadForm");
-//        $model = new XUploadForm;
-//        $this -> render('index', array('model' => $model, ));
-
         $this->layout = 'main';
         $this->render('index');
     }
 
-    public function actionIcons() {
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
-//        Yii::import("xupload.models.XUploadForm");
-//        $model = new XUploadForm;
-//        $this -> render('index', array('model' => $model, ));
-        $this->layout = 'main';
-        $this->render('themes/icons');
-    }
-
-    /**
-     * This is the action to handle external exceptions.
-     */
+  
     public function actionError() {
         $this->layout = 'blankHeader';
         cs()->registerScript('error', '
@@ -265,102 +243,102 @@ class SiteController extends Controller {
 //        }
     }
 
-    public function actionSetup() {
-        $siteConfig = SiteConfig::model()->findByPk(1);
-        $this->layout = 'blankHeader';
-        if ($siteConfig->is_setup == 0) {
-            $this->render('setup', array('model' => $siteConfig));
-            if (isset($_POST['SiteConfig'])) {
-                $model = $siteConfig;
-                $model->attributes = $_POST['SiteConfig'];
-                $model->others_include = "";
-                $model->acc_cash_id = $_POST['SiteConfig']['acc_cash_id'];
-                $model->acc_city_ledger_id = $_POST['SiteConfig']['acc_city_ledger_id'];
-                $model->acc_service_charge_id = $_POST['SiteConfig']['acc_service_charge_id'];
-                $model->acc_tax_id = $_POST['SiteConfig']['acc_tax_id'];
-                $model->acc_clearance_id = $_POST['SiteConfig']['acc_clearance_id'];
-                $model->is_setup = 1;
-
-                if (isset($_POST['others_include'])) {
-                    $model->others_include = json_encode($_POST['others_include']);
-                }
-
-                if (!empty($_POST['SiteConfig']['roles_guest'])) {
-                    $model->roles_guest = json_encode($_POST['SiteConfig']['roles_guest']);
-                }
-
-                $file = CUploadedFile::getInstance($model, 'client_logo');
-                if (is_object($file)) {
-                    $model->client_logo = Yii::app()->landa->urlParsing($model->client_name) . '.' . $file->extensionName;
-                } else {
-                    unset($model->client_logo);
-                }
-
-                $settings = array();
-
-                $settings['fb_charge'] = $_POST['fnb'];
-                $settings['extrabed_charge'] = $_POST['extrabed'];
-                $settings['fb_account'] = $_POST['breakfastAccount'];
-                $settings['room_account'] = $_POST['roomAccount'];
-                $settings['rate'] = $_POST['rate'];
-
-                $model->settings = json_encode($settings);
-
-                if ($model->save()) {
-                    if (is_object($file)) {
-                        $file->saveAs('images/site/' . $model->client_logo);
-                        app()->landa->createImg('site/', $model->client_logo, $model->id, false);
-                    }
-
-                    $cekForecast = Forecast::model()->findAll();
-                    if (empty($cekForecast)) {
-                        $forecast = new Forecast;
-                        $forecast->tahun = date("Y", strtotime($_POST['SiteConfig']['date_system']));
-                        $forecast->save();
-                    }
-
-                    $cekInitialForecast = InitialForecast::model()->findAll();
-                    if (empty($cekInitialForecast)) {
-                        $initialForecast = new InitialForecast;
-                        $initialForecast->id = 1;
-                        $initialForecast->save();
-                    }
-
-                    $account = Account::model()->findAll();
-                    $newForecast = array();
-                    foreach ($account as $valAccount) {
-                        $departement = ChargeAdditional::model()->findAll(array('condition' => 'account_id=' . $valAccount->id, 'group' => 'charge_additional_category_id'));
-                        $month = array();
-                        if (empty($departement)) {
-                            for ($i = 1; $i <= 12; $i++) {
-                                $newForecast[$valAccount->id][$i] = 0;
-                            }
-                        } else {
-                            foreach ($departement as $valDepartement) {
-                                for ($i = 1; $i <= 12; $i++) {
-                                    $newForecast[$valAccount->id][$valDepartement->charge_additional_category_id][$i] = 0;
-                                }
-                            }
-                        }
-                    }
-
-                    $forecast = Forecast::model()->find(array('condition' => 'tahun = ' . date("Y", strtotime($_POST['SiteConfig']['date_system']))));
-                    $forecast->forecast = json_encode($newForecast);
-                    $forecast->save();
-
-
-                    echo '<SCRIPT LANGUAGE="JAVASCRIPT" TYPE="TEXT/JAVASCRIPT">
-					document.location.href="' . Yii::app()->baseUrl . '/site/login.html";
-                            </SCRIPT>';
-                }
-            }
-            if (!empty($model->roles_guest)) {
-                $model->roles_guest = json_decode($model->roles_guest);
-            }
-        } else {
-            $this->redirect(Yii::app()->baseUrl . '/site/login.html');
-        }
-    }
+//    public function actionSetup() {
+//        $siteConfig = SiteConfig::model()->findByPk(1);
+//        $this->layout = 'blankHeader';
+//        if ($siteConfig->is_setup == 0) {
+//            $this->render('setup', array('model' => $siteConfig));
+//            if (isset($_POST['SiteConfig'])) {
+//                $model = $siteConfig;
+//                $model->attributes = $_POST['SiteConfig'];
+//                $model->others_include = "";
+//                $model->acc_cash_id = $_POST['SiteConfig']['acc_cash_id'];
+//                $model->acc_city_ledger_id = $_POST['SiteConfig']['acc_city_ledger_id'];
+//                $model->acc_service_charge_id = $_POST['SiteConfig']['acc_service_charge_id'];
+//                $model->acc_tax_id = $_POST['SiteConfig']['acc_tax_id'];
+//                $model->acc_clearance_id = $_POST['SiteConfig']['acc_clearance_id'];
+//                $model->is_setup = 1;
+//
+//                if (isset($_POST['others_include'])) {
+//                    $model->others_include = json_encode($_POST['others_include']);
+//                }
+//
+//                if (!empty($_POST['SiteConfig']['roles_guest'])) {
+//                    $model->roles_guest = json_encode($_POST['SiteConfig']['roles_guest']);
+//                }
+//
+//                $file = CUploadedFile::getInstance($model, 'client_logo');
+//                if (is_object($file)) {
+//                    $model->client_logo = Yii::app()->landa->urlParsing($model->client_name) . '.' . $file->extensionName;
+//                } else {
+//                    unset($model->client_logo);
+//                }
+//
+//                $settings = array();
+//
+//                $settings['fb_charge'] = $_POST['fnb'];
+//                $settings['extrabed_charge'] = $_POST['extrabed'];
+//                $settings['fb_account'] = $_POST['breakfastAccount'];
+//                $settings['room_account'] = $_POST['roomAccount'];
+//                $settings['rate'] = $_POST['rate'];
+//
+//                $model->settings = json_encode($settings);
+//
+//                if ($model->save()) {
+//                    if (is_object($file)) {
+//                        $file->saveAs('images/site/' . $model->client_logo);
+//                        app()->landa->createImg('site/', $model->client_logo, $model->id, false);
+//                    }
+//
+//                    $cekForecast = Forecast::model()->findAll();
+//                    if (empty($cekForecast)) {
+//                        $forecast = new Forecast;
+//                        $forecast->tahun = date("Y", strtotime($_POST['SiteConfig']['date_system']));
+//                        $forecast->save();
+//                    }
+//
+//                    $cekInitialForecast = InitialForecast::model()->findAll();
+//                    if (empty($cekInitialForecast)) {
+//                        $initialForecast = new InitialForecast;
+//                        $initialForecast->id = 1;
+//                        $initialForecast->save();
+//                    }
+//
+//                    $account = Account::model()->findAll();
+//                    $newForecast = array();
+//                    foreach ($account as $valAccount) {
+//                        $departement = ChargeAdditional::model()->findAll(array('condition' => 'account_id=' . $valAccount->id, 'group' => 'charge_additional_category_id'));
+//                        $month = array();
+//                        if (empty($departement)) {
+//                            for ($i = 1; $i <= 12; $i++) {
+//                                $newForecast[$valAccount->id][$i] = 0;
+//                            }
+//                        } else {
+//                            foreach ($departement as $valDepartement) {
+//                                for ($i = 1; $i <= 12; $i++) {
+//                                    $newForecast[$valAccount->id][$valDepartement->charge_additional_category_id][$i] = 0;
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    $forecast = Forecast::model()->find(array('condition' => 'tahun = ' . date("Y", strtotime($_POST['SiteConfig']['date_system']))));
+//                    $forecast->forecast = json_encode($newForecast);
+//                    $forecast->save();
+//
+//
+//                    echo '<SCRIPT LANGUAGE="JAVASCRIPT" TYPE="TEXT/JAVASCRIPT">
+//					document.location.href="' . Yii::app()->baseUrl . '/site/login.html";
+//                            </SCRIPT>';
+//                }
+//            }
+//            if (!empty($model->roles_guest)) {
+//                $model->roles_guest = json_decode($model->roles_guest);
+//            }
+//        } else {
+//            $this->redirect(Yii::app()->baseUrl . '/site/login.html');
+//        }
+//    }
 
     /**
      * Logs out the current user and redirect to homepage.

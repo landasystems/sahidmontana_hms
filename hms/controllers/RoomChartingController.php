@@ -129,18 +129,18 @@ class RoomChartingController extends Controller {
         $siteConfig = SiteConfig::model()->findByPk(1);
         $modelRoom = Room::model()->findAll(array('order' => 'number'));
         $arrSchedule = array();
-        $month = isset($_POST['month']) ? $_POST['month'] : date("m");
-        $year = isset($_POST['year']) ? $_POST['year'] : date("Y");
+        $month = isset($_POST['month']) ? $_POST['month'] : date("m",  strtotime($siteConfig->date_system));
+        $year = isset($_POST['year']) ? $_POST['year'] : date("Y",  strtotime($siteConfig->date_system));
         $jumHari = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 
         if (isset($_POST['page'])) {
             $page = $_POST['page'];
         } else {
-            if (strtotime($year . "-" . $month . "-" . date("d")) >= strtotime($year . "-" . $month . "-01") and strtotime($year . "-" . $month . "-" . date("d")) <= strtotime($year . "-" . $month . "-10")) {
+            if (strtotime($year . "-" . $month . "-" . date("d", strtotime($siteConfig->date_system))) >= strtotime($year . "-" . $month . "-01") and strtotime($year . "-" . $month . "-" . date("d",  strtotime($siteConfig->date_system))) <= strtotime($year . "-" . $month . "-10")) {
                 $page = 1;
-            } else if (strtotime($year . "-" . $month . "-" . date("d")) >= strtotime($year . "-" . $month . "-11") and strtotime($year . "-" . $month . "-" . date("d")) <= strtotime($year . "-" . $month . "-20")) {
+            } else if (strtotime($year . "-" . $month . "-" . date("d",  strtotime($siteConfig->date_system))) >= strtotime($year . "-" . $month . "-11") and strtotime($year . "-" . $month . "-" . date("d",  strtotime($siteConfig->date_system))) <= strtotime($year . "-" . $month . "-20")) {
                 $page = 2;
-            } else if (strtotime($year . "-" . $month . "-" . date("d")) >= strtotime($year . "-" . $month . "-21") and strtotime($year . "-" . $month . "-" . date("d")) <= strtotime($year . "-" . $month . "-" . $jumHari)) {
+            } else if (strtotime($year . "-" . $month . "-" . date("d",  strtotime($siteConfig->date_system))) >= strtotime($year . "-" . $month . "-21") and strtotime($year . "-" . $month . "-" . date("d",  strtotime($siteConfig->date_system))) <= strtotime($year . "-" . $month . "-" . $jumHari)) {
                 $page = 3;
             }
         }

@@ -108,6 +108,7 @@ class SiteConfigController extends Controller {
                 //clear session site
                 unset(Yii::app()->session['site']);
 
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }

@@ -143,7 +143,7 @@ class SiteConfig extends CActiveRecord {
         return $this->findByPk(1);
     }
 
-    public function formatting($type, $x = true) {
+    public function formatting($type) {
         $siteConfig = $this->listSiteConfig();
         if ($type == 'reservation') {
             $textFormat = $siteConfig['format_reservation'];
@@ -166,18 +166,10 @@ class SiteConfig extends CActiveRecord {
         $textFormat = str_replace('{dd}', date('d'), $textFormat);
         $textFormat = str_replace('{mm}', date('m'), $textFormat);
         $textFormat = str_replace('{yy}', date('y'), $textFormat);
-
-        if ($x) {
-            $textFormat = str_replace('{ai|3}', '***', $textFormat);
-            $textFormat = str_replace('{ai|4}', '****', $textFormat);
-            $textFormat = str_replace('{ai|5}', '*****', $textFormat);
-            $textFormat = str_replace('{ai|6}', '******', $textFormat);
-        } else {
-            $textFormat = str_replace('{ai|3}', substr('0000' . $lastID, -3), $textFormat);
-            $textFormat = str_replace('{ai|4}', substr('0000' . $lastID, -4), $textFormat);
-            $textFormat = str_replace('{ai|5}', substr('0000' . $lastID, -5), $textFormat);
-            $textFormat = str_replace('{ai|6}', substr('0000' . $lastID, -6), $textFormat);
-        }
+        $textFormat = str_replace('{ai|3}', substr('0000' . $lastID, -3), $textFormat);
+        $textFormat = str_replace('{ai|4}', substr('0000' . $lastID, -4), $textFormat);
+        $textFormat = str_replace('{ai|5}', substr('0000' . $lastID, -5), $textFormat);
+        $textFormat = str_replace('{ai|6}', substr('0000' . $lastID, -6), $textFormat);
 
         return $textFormat;
     }

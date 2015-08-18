@@ -481,6 +481,14 @@ class LandaCore extends CApplicationComponent {
             app()->request->redirect(url('site/login'));
             
     }
+    function date2Ind($str) {
+        setlocale(LC_TIME, 'id_ID');
+        $date = strftime("%d %B %Y", strtotime($str));
+        if ($str == '0000-00-00')
+            return '-';
+        else
+            return $date;
+    }
 
 }
 

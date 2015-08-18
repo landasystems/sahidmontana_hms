@@ -72,6 +72,7 @@ class GuestController extends Controller {
             $model->birth = (!empty($_POST['User']['birth'])) ? date('Y/m/d', strtotime($_POST['User']['birth'])) : '';
 
             if ($model->save()) {
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -96,6 +97,7 @@ class GuestController extends Controller {
             $model->attributes = $_POST['User'];
             $model->birth = (!empty($_POST['User']['birth'])) ? date('Y/m/d', strtotime($_POST['User']['birth'])) : '';
             if ($model->save()) {
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }

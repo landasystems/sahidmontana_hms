@@ -17,7 +17,7 @@ class Auth extends CActiveRecord {
                 )),
             array('visible' => landa()->checkAccess('GroupGuest', 'r') || landa()->checkAccess('User', 'r'), 'label' => 'Guest', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('GroupGuest', 'r'), 'auth_id' => 'GroupGuest', 'label' => 'Group Guest', 'url' => url('/guestGroup'), 'crud' => array("r" => 1)),
-                    array('visible' => landa()->checkAccess('User', 'r'), 'auth_id' => 'Guest', 'label' => 'Guest', 'url' => url('/guest'), 'crud' => array("r" => 1)),
+                    array('visible' => landa()->checkAccess('Guest', 'r'), 'auth_id' => 'Guest', 'label' => 'Guest', 'url' => url('/guest'), 'crud' => array("r" => 1)),
                 )),
             array('visible' => landa()->checkAccess('Room', 'r') || landa()->checkAccess('RoomType', 'r'), 'label' => 'Rooms', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('RoomType', 'r'), 'auth_id' => 'RoomType', 'label' => 'Type', 'url' => array('/roomType'), 'crud' => array("r" => 1)),

@@ -21,22 +21,10 @@ class ForecastController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('index', 'create'),
-                'expression' => 'app()->controller->isValidAccess(1,"c")'
-            ),
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('create','index', 'view', 'update', 'delete'),
                 'expression' => 'app()->controller->isValidAccess(1,"r")'
             ),
-            array('allow', // u
-                'actions' => array('index', 'update'),
-                'expression' => 'app()->controller->isValidAccess(1,"u")'
-            ),
-            array('allow', // d
-                'actions' => array('index', 'delete'),
-                'expression' => 'app()->controller->isValidAccess(1,"d")'
-            )
         );
     }
 
@@ -66,8 +54,10 @@ $model = $aa;
             $model->attributes = $_POST['Forecast'];
             $model->forecast = json_encode($_POST['forecast']);
             $model->other_forecast = json_encode($_POST['other_forecast']);
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -92,8 +82,10 @@ $model = $aa;
             $model->forecast = json_encode($_POST['forecast']);
             $model->cover_forecast = json_encode($_POST['cover_forecast']);
             $model->other_forecast = json_encode($_POST['other_forecast']);
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

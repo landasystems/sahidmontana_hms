@@ -70,8 +70,10 @@ class RoomController extends Controller {
         if (isset($_POST['Room'])) {
             $model->attributes = $_POST['Room'];
             $model->id = $model->number;
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -92,8 +94,10 @@ class RoomController extends Controller {
 
         if (isset($_POST['Room'])) {
             $model->attributes = $_POST['Room'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

@@ -62,8 +62,10 @@ class InitialForecastController extends Controller {
 
         if (isset($_POST['InitialForecast'])) {
             $model->attributes = $_POST['InitialForecast'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -84,8 +86,10 @@ class InitialForecastController extends Controller {
 
         if (isset($_POST['InitialForecast'])) {
             $model->attributes = $_POST['InitialForecast'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

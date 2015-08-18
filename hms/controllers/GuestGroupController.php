@@ -47,6 +47,8 @@ class GuestGroupController extends Controller {
             $model->is_allow_login = 0;
             if ($model->save()) {
                 $this->saveRolesAuth($model->id);
+                
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -67,6 +69,7 @@ class GuestGroupController extends Controller {
                 RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $model->id));
                 $this->saveRolesAuth($model->id);
 
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
