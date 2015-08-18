@@ -218,8 +218,10 @@ class RoomTypeController extends Controller {
             $model->charge_additional_ids = json_encode($package);
             $model->rate = json_encode($array);
             $model->attributes = $_POST['RoomType'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(

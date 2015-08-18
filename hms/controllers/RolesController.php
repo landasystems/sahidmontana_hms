@@ -49,6 +49,8 @@ class RolesController extends Controller {
 
             if ($model->save()) {
                 $this->saveRolesAuth($model->id);
+                
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -69,6 +71,7 @@ class RolesController extends Controller {
                 RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $model->id));
                 $this->saveRolesAuth($model->id);
 
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }

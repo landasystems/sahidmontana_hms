@@ -59,8 +59,10 @@ class DepartementController extends Controller {
 
         if (isset($_POST['Departement'])) {
             $model->attributes = $_POST['Departement'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -81,8 +83,10 @@ class DepartementController extends Controller {
 
         if (isset($_POST['Departement'])) {
             $model->attributes = $_POST['Departement'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

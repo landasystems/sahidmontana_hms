@@ -118,6 +118,8 @@ class BillCashierController extends Controller {
                 Bill::model()->updateAll(array('is_cashier' => 1), 'created_user_id=' . Yii::app()->user->id);
                 BillCharge::model()->updateAll(array('is_cashier' => 1), 'created_user_id=' . Yii::app()->user->id);
                 Deposite::model()->updateAll(array('is_cashier' => 1), 'created_user_id=' . Yii::app()->user->id);
+                
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -140,8 +142,10 @@ class BillCashierController extends Controller {
 
         if (isset($_POST['BillCashier'])) {
             $model->attributes = $_POST['BillCashier'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

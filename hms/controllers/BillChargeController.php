@@ -348,7 +348,7 @@ class BillChargeController extends Controller {
         $this->cssJs();
         if (isset($_POST['BillCharge'])) {
             $model->attributes = $_POST['BillCharge'];
-            $model->code = SiteConfig::model()->formatting('billCharge', false);
+            $model->code = SiteConfig::model()->formatting('billCharge');
             $model->is_temp = (isset($_POST['saveTemp'])) ? '1' : '0';
             if (!empty($_POST['detail'])) {
                 if ($model->is_temp == 0) {
@@ -408,13 +408,14 @@ class BillChargeController extends Controller {
                         $detail->discount = $_POST['detail']['discount'][$i];
                         $detail->save();
                     }
+                    
+                    user()->setFlash('success',"Saved successfully");
                     $this->redirect(array('view', 'id' => $model->id, 'print' => $model->is_temp));
                 } else {
                     throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
                 }
             }
         }
-        $model->code = SiteConfig::model()->formatting('billCharge');
         $this->render('create', array(
             'model' => $model,
         ));
@@ -500,6 +501,8 @@ class BillChargeController extends Controller {
                         $detail->discount = $_POST['detail']['discount'][$i];
                         $detail->save();
                     }
+                    
+                    user()->setFlash('success',"Saved successfully");
                     $this->redirect(array('view', 'id' => $model->id, 'print' => $model->is_temp));
                 } else {
                     throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');

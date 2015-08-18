@@ -94,7 +94,8 @@ class AccountController extends Controller {
                 $newDsr[$model->id]['lastMonth'] = $lastmonth;
                 $initialForecast->dsr = json_encode($newDsr);
                 $initialForecast->save();
-
+                
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -117,8 +118,10 @@ class AccountController extends Controller {
 
         if (isset($_POST['Account'])) {
             $model->attributes = $_POST['Account'];
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

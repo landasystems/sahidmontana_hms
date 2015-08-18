@@ -69,8 +69,10 @@ class ChargeAdditionalCategoryController extends Controller {
                     $this->redirect(array('view', 'id' => $child->id));
             }else {
                 $model->attributes = $_POST['ChargeAdditionalCategory'];
-                if ($model->saveNode())
+                if ($model->saveNode()){
+                    user()->setFlash('success',"Saved successfully");
                     $this->redirect(array('view', 'id' => $model->id));
+                }
             }
         }
 
@@ -103,6 +105,8 @@ class ChargeAdditionalCategoryController extends Controller {
                 $model->saveNode();
                 if (!($model->isRoot()))
                     $model->moveAsRoot();
+                
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }

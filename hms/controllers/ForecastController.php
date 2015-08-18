@@ -66,8 +66,10 @@ $model = $aa;
             $model->attributes = $_POST['Forecast'];
             $model->forecast = json_encode($_POST['forecast']);
             $model->other_forecast = json_encode($_POST['other_forecast']);
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -92,8 +94,10 @@ $model = $aa;
             $model->forecast = json_encode($_POST['forecast']);
             $model->cover_forecast = json_encode($_POST['cover_forecast']);
             $model->other_forecast = json_encode($_POST['other_forecast']);
-            if ($model->save())
+            if ($model->save()){
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

@@ -497,7 +497,6 @@ class ReservationController extends Controller {
         $settings = json_decode($siteConfig->settings, true);
         $model = new Reservation;
         $modelDp = new Deposite;
-        $modelDp->code = SiteConfig::model()->formatting('deposite');
         $this->js();
         cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         if (isset($_POST['Reservation'])) {
@@ -505,7 +504,7 @@ class ReservationController extends Controller {
                 //$model->guest_user_id = 0;
                 $model->attributes = $_POST['Reservation'];
                 $model->guest_user_id = $_POST['id'];
-                $model->code = SiteConfig::model()->formatting('reservation', FALSE);
+                $model->code = SiteConfig::model()->formatting('reservation');
                 if (empty($_POST['id'])) { // new guest
                     $user = new User;
                     $user->scenario = 'notAllow';
@@ -566,7 +565,7 @@ class ReservationController extends Controller {
 
                         if ($_POST['Deposite']['amount'] > 0) {
                             $modelDp->attributes = $_POST['Deposite'];
-                            $modelDp->code = SiteConfig::model()->formatting('deposite', false);
+                            $modelDp->code = SiteConfig::model()->formatting('deposite');
                             $modelDp->guest_user_id = $model->guest_user_id;
                             $modelDp->used_amount = 0;
                             $modelDp->is_used = 0;
@@ -611,6 +610,7 @@ class ReservationController extends Controller {
                                     throw new CHttpException(404, 'The requested page does not exist.');
                             }
                         }
+                        user()->setFlash('success',"Reservation has saved, successfully ");
                         $this->redirect(array('view', 'id' => $model->id));
                     }
                 }else {
@@ -620,7 +620,6 @@ class ReservationController extends Controller {
                 Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
             }
         }
-        $model->code = SiteConfig::model()->formatting('reservation');
         $this->render('create', array(
             'model' => $model,
             'modelDp' => $modelDp,
@@ -639,7 +638,6 @@ class ReservationController extends Controller {
             $modelDp = Deposite::model()->findByPk($model->deposite_id);
         } else {
             $modelDp = new Deposite;
-            $modelDp->code = SiteConfig::model()->formatting('deposite');
         }
 
         if (isset($_POST['cancel'])) {
@@ -702,7 +700,7 @@ class ReservationController extends Controller {
                     if ($_POST['Deposite']['amount'] > 0) {
                         $modelDp->attributes = $_POST['Deposite'];
                         if ($modelDp->isNewRecord == true)
-                            $modelDp->code = SiteConfig::model()->formatting('deposite', false);
+                            $modelDp->code = SiteConfig::model()->formatting('deposite');
                         $modelDp->guest_user_id = $model->guest_user_id;
                         $modelDp->used_amount = 0;
                         $modelDp->is_used = 0;
@@ -747,6 +745,7 @@ class ReservationController extends Controller {
                                 throw new CHttpException(404, 'The requested page does not exist.');
                         }
                     }
+                    user()->setFlash('success',"Reservation has saved, successfully ");
                     $this->redirect(array('view', 'id' => $model->id));
                 }else {
                     Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");

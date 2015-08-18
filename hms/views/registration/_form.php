@@ -11,15 +11,7 @@
 
     .calendar.left{
         display: none !important;
-    }
-</style>
-
-<div class="alert alert-danger fade in">   
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>Important! </strong> &nbsp;&nbsp;Data has been entered and has been <b>Night Audit</b> can not be <b>Edited</b> or <b>Deleted</b>.    
-</div> 
-
-<style>        
+    }       
     .control-label{width: 90px !important}
     .controls {margin-left:105px !important}
 </style>
@@ -92,7 +84,7 @@ echo $form->hiddenField($model, 'id');
 ?>
 <?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div class="alert alert-danger">' . $message . "</div>\n";
+    echo '<div class="alert alert-'.$key.'">' . $message . "</div>\n";
 }
 ?>
 <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>

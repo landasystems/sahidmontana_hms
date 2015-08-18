@@ -227,7 +227,7 @@ class BillController extends Controller {
             $model->guest_company = $_POST['guest_company'];
             $model->guest_room_ids = json_encode($_POST['roomId']);
 
-            $model->code = SiteConfig::model()->formatting('bill', false);
+            $model->code = SiteConfig::model()->formatting('bill');
             $model->arrival_time = date('Y-m-d H:i', strtotime($_POST['date_to']));
             $model->departure_time = date("Y-m-d H:i");
             $model->description = $_POST['description'];
@@ -313,11 +313,12 @@ class BillController extends Controller {
                     'extrabed' => 0,
                     'pax' => 0
                         ), 'id IN (' . implode(',', $_POST['roomId']) . ')');
+                
+                user()->setFlash('success',"Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
 
-        $model->code = SiteConfig::model()->formatting('bill');
         $filter = 't.status="occupied" || t.status="house use" || t.status="compliment"';
         $room = Room::model()->findAll(array('condition' => $filter));
         $this->render('create', array(
@@ -354,6 +355,8 @@ class BillController extends Controller {
             $model->pax_name = (!empty($_POST['guest_reciver'])) ? $_POST['guest_reciver'] : "";
             $model->gl_room_bill_id = (!empty($_POST['gl_room_bill_id'])) ? $_POST['gl_room_bill_id'] : "";
             $model->save();
+            
+            user()->setFlash('success',"Saved successfully");
             $this->redirect(array('view', 'id' => $model->id));
         }
 

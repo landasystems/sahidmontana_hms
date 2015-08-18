@@ -661,7 +661,7 @@ class RegistrationController extends Controller {
                 $model->guest_user_id = $_POST['id'];
                 $reservation = Reservation::model()->findByPk($model->reservation_id);
                 $model->approval_user_id = (!empty($reservation)) ? $reservation->approval_user_id : '';
-                $model->code = SiteConfig::model()->formatting('registration', FALSE);
+                $model->code = SiteConfig::model()->formatting('registration');
                 $by = "user";
                 if (!empty($_POST['seachBy'])) { //from walk in     
                     if (empty($_POST['id'])) { // new guest                        
@@ -729,7 +729,7 @@ class RegistrationController extends Controller {
                         if ($_POST['Deposite']['amount'] > 0) {
                             $modelDp->attributes = $_POST['Deposite'];
                             if ($modelDp->isNewRecord == true)
-                                $modelDp->code = SiteConfig::model()->formatting('deposite', false);
+                                $modelDp->code = SiteConfig::model()->formatting('deposite');
                             $modelDp->guest_user_id = $model->guest_user_id;
                             $modelDp->used_amount = 0;
                             $modelDp->is_used = 1;
@@ -822,6 +822,7 @@ class RegistrationController extends Controller {
                                     throw new CHttpException(404, 'The requested page does not exist.');
                             }
                         }
+                        user()->setFlash('success',"Registration has saved, successfully ");
                         $this->redirect(array('view', 'id' => $model->id));
                     }
                 }else {
@@ -831,7 +832,6 @@ class RegistrationController extends Controller {
                 Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
             }
         }
-        $model->code = SiteConfig::model()->formatting('registration');
         $this->render('create', array(
             'model' => $model,
             'modelDp' => $modelDp,
@@ -858,7 +858,6 @@ class RegistrationController extends Controller {
             $modelDp = Deposite::model()->findByPk($model->deposite_id);
         } else {
             $modelDp = new Deposite;
-            $modelDp->code = SiteConfig::model()->formatting('deposite');
         }
         $mDetail = RegistrationDetail::model()->with('Room', 'Room.RoomType')->findAll(array('condition' => 't.registration_id=' . $id));
         if (isset($_POST['Registration'])) {
@@ -909,7 +908,7 @@ class RegistrationController extends Controller {
                     if ($_POST['Deposite']['amount'] > 0) {
                         $modelDp->attributes = $_POST['Deposite'];
                         if ($modelDp->isNewRecord == true)
-                            $modelDp->code = SiteConfig::model()->formatting('deposite', false);
+                            $modelDp->code = SiteConfig::model()->formatting('deposite');
                         $modelDp->guest_user_id = $model->guest_user_id;
                         //$modelDp->guest_user_id = $_POST['id'];
 
@@ -991,6 +990,7 @@ class RegistrationController extends Controller {
                                 throw new CHttpException(404, 'The requested page does not exist.');
                         }
                     }
+                    user()->setFlash('success',"Registration has saved, successfully ");
                     $this->redirect(array('view', 'id' => $model->id));
                 }else {
                     Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");
