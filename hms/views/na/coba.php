@@ -14,7 +14,7 @@
                 <th class="span2" style="text-align: right">PREVIOUS</th>            
                 <th class="span2" style="text-align: right">TOTAL REVENUE</th>                     
                 <th class="span2" style="text-align: right">DEPOSITE</th>                     
-                <th class="span2" style="text-align: right">TUNAI</th>                     
+                <th class="span2" style="text-align: right">CASH</th>                     
                 <th class="span2" style="text-align: right">CREDIT CARD</th>                     
                 <th class="span2" style="text-align: right">CITY LEDGER</th>                     
                 <th class="span2" style="text-align: right">REFUND</th>                     

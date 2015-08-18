@@ -15,7 +15,7 @@
                 <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">PREVIOUS</th>            
                 <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">TOTAL REVENUE</th>                     
                 <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">DEPOSITE</th>                     
-                <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">TUNAI</th>                     
+                <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">CASH</th>                     
                 <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">CREDIT CARD</th>                     
                 <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">CITY LEDGER</th>                     
                 <th class="span2 judul print2" style="text-align: center;border-bottom:solid #000 2px !important;border-top:solid #000 2px">REFUND</th>                     

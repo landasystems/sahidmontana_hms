@@ -1,7 +1,7 @@
 <center><h3>GUEST LEDGER BALANCE</h3></center>
 <center>Date Night Audit : <?php echo date("d-M-Y", strtotime($siteConfig->date_system)); ?></center>
 <hr>
-<table class="items table table-striped table-hover  table-condensed">
+<table class="items table table-striped table-hover table-bordered table-condensed">
     <thead>
         <tr>
             <th class="span1" style="text-align: center">NO</th>
@@ -11,7 +11,7 @@
             <th class="span2" style="text-align: center">PREVIOUS</th>            
             <th class="span2" style="text-align: center">TOTAL REVENUE</th>                     
             <th class="span2" style="text-align: center">DEPOSITE</th>                     
-            <th class="span2" style="text-align: center">TUNAI</th>                     
+            <th class="span2" style="text-align: center">CASH</th>                     
             <th class="span2" style="text-align: center">CREDIT CARD</th>                     
             <th class="span2" style="text-align: center">CITY LEDGER</th>                     
             <th class="span2" style="text-align: center">REFUND</th>                     
@@ -31,7 +31,7 @@
         $totRefund = 0;
         $results = array();
         $tempGuestUserId = 0;
-        //---------------------------- GUES LEDGER THAT NOT CHECKOUT ----------------------------//
+        //---------------------------- GUEST LEDGER BELUM CHECKOUT ----------------------------//
         foreach ($roomBills_By_Registration as $r) {
             $type = '';
             $thisPrev = 0;
@@ -45,21 +45,11 @@
             $regId = $r->registration_id;
 
             //charge            
-            $roomBill = RoomBill::model()->findAll(array('condition' => 'registration_id=' . $regId . ' and is_checkedout=0'));
+            $roomBill = RoomBill::model()->findAll(array('condition' => 'registration_id=' . $regId ));
             foreach ($roomBill as $rb) {
                 $balance = 0;
-//                $thisPackage = 0;
                 //roomcharge                    
                 if ($rb->charge != 0) {
-//                    if ($rb->package_room_type_id != 0) {
-//                        $package = json_decode($roomType[$rb->package_room_type_id]['charge_additional_ids']);
-//                        if (!empty($package)) {
-//                            foreach ($package as $mPackage) {
-//                                $thisPackage += $mPackage->total;
-//                            }
-//                        }
-//                    }
-//                    $balance = $rb->charge + $thisPackage;
                     $balance = $rb->charge;
                 }
 
@@ -83,16 +73,16 @@
                 }
 
                 //pengecekan untuk move room, maka bill2 yang di room move sebelumnya di hitung juga
-                if ($rb->lead_room_bill_id == 0 && !empty($rb->moved_room_bill_id)) {
-                    $arrRoomBill = RoomBill::model()->findAll(array('condition' => 'id IN (' . implode(',', json_decode($rb->moved_room_bill_id)) . ') OR lead_room_bill_id IN (' . implode(',', json_decode($rb->moved_room_bill_id)) . ')'));
-                    foreach ($arrRoomBill as $arr) {
-                        $thisPrev += $arr->charge;
-                    }
-                    $fBillCharge = BillCharge::model()->findAll(array('condition' => 'gl_room_bill_id IN (' . implode(',', json_decode($rb->moved_room_bill_id)) . ')'));
-                    foreach ($fBillCharge as $det) {
-                        $thisPrev += $det->gl_charge;
-                    }
-                }
+//                if ($rb->lead_room_bill_id == 0 && !empty($rb->moved_room_bill_id)) {
+//                    $arrRoomBill = RoomBill::model()->findAll(array('condition' => 'is_na = 1 AND (id IN (' . implode(',', json_decode($rb->moved_room_bill_id)) . ') OR lead_room_bill_id IN (' . implode(',', json_decode($rb->moved_room_bill_id)) . '))'));
+//                    foreach ($arrRoomBill as $arr) {
+//                        $thisPrev += $arr->charge;
+//                    }
+//                    $fBillCharge = BillCharge::model()->findAll(array('condition' => 'is_na = 1 AND (gl_room_bill_id IN (' . implode(',', json_decode($rb->moved_room_bill_id)) . '))'));
+//                    foreach ($fBillCharge as $det) {
+//                        $thisPrev += $det->gl_charge;
+//                    }
+//                }
             }
             //from dp yang belum chekedout                 
             foreach ($deposite_unused as $d) {
@@ -111,11 +101,6 @@
             $totDeposite += $thisDeposite;
 
             $company = $r->Registration->Guest->company;
-            /* if (isset($r->Registration->Guest->others)) {
-              $json_user = json_decode($r->Registration->Guest->others, true);
-              $company = strtoupper($json_user['company']);
-              } */
-
 
             //cek jika sama user guestnya, maka tr nya di gabung
             if ($tempGuestUserId == $r->Registration->Guest->id) {
@@ -179,7 +164,7 @@
             $no++;
         }
 
-        //---------------------------- GUES LEDGER THAT CHECKOUT ----------------------------//
+        //---------------------------- GUES LEDGER YANG CHECKOUT ----------------------------//
         foreach ($bill as $r) {
             $type = '';
             $thisPrev = 0;

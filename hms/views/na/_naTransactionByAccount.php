@@ -69,7 +69,7 @@
                     echo '</tr>';
                     $no++;
                     $totAll += $data->extrabed * $data->extrabed_price;
-                    $totNetAll += $data->extrabed / $acc->net;
+                    $totNetAll += ($data->extrabed * $data->extrabed_price ) / $acc->net;
                     $totalAccount += $data->extrabed * $data->extrabed_price;
                 }
             }

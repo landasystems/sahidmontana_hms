@@ -15,7 +15,7 @@
             <th rowspan="2" class="span2" style="text-align: center">CASHIER</th>            
         </tr>                        
         <tr>
-            <th  class="span2" style="text-align: center">TUNAI</th>
+            <th  class="span2" style="text-align: center">CASH</th>
             <th  class="span2" style="text-align: center">REFUND</th>                
         </tr>                        
     </thead>

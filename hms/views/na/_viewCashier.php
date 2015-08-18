@@ -21,7 +21,7 @@
                 <th class="span1" style="text-align: center;border-bottom:solid #000 2px;border-top:solid #000 2px" rowspan="2">Cashier</th>                                                                    
             </tr>
             <tr >
-                <th style="text-align: center;border-bottom:solid #000 2px;border-top:solid #000 2px" class="span2">Tunai</th>
+                <th style="text-align: center;border-bottom:solid #000 2px;border-top:solid #000 2px" class="span2">Cash</th>
                 <th style="text-align: center;border-bottom:solid #000 2px;border-top:solid #000 2px"    class="span2">Refund DP</th>                                                    
             </tr>                        
         </thead>
