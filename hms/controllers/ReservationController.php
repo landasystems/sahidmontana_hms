@@ -176,7 +176,7 @@ class ReservationController extends Controller {
         $start = date("Y/m/d", strtotime($date1));
         $end = date("Y/m/d", strtotime('-1 day', strtotime($date2)));
 
-        $filter = 't.status!="out of order" and t.id not in (select acca_room_schedule.room_id from acca_room_schedule where status<>"vacant" and date_schedule between "' . $start . '" and "' . $end . '")';
+        $filter = 't.status!="out of order" and t.id not in (select room_schedule.room_id from room_schedule where status<>"vacant" and date_schedule between "' . $start . '" and "' . $end . '")';
         if (!empty($type))
             $filter .= ' and t.room_type_id=' . $type . '';
         if (!empty($floor))

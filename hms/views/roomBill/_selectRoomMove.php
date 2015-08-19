@@ -32,7 +32,7 @@
         ?>
 
         <?php
-        $filter = 't.id not in (select acca_room_schedule.room_id from acca_room_schedule where status<>"vacant" and date_schedule between "' . $start . '" and "' . $end . '")';
+        $filter = 't.id not in (select room_schedule.room_id from room_schedule where status<>"vacant" and date_schedule between "' . $start . '" and "' . $end . '")';
         if (!empty($type))
             $filter .= ' and t.room_type_id=' . $type . '';
         if (!empty($floor))

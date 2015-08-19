@@ -125,7 +125,7 @@ class ChargeAdditionalCategoryController extends Controller {
            // Article::model()->deleteAll(array('condition'=>'article_category_id'.$sWhere));
            // landa()->deleteDir('images/' . $model->path);
            ChargeAdditional::model()->deleteAll(array('condition'=>'charge_additional_category_id IN (' . implode(',', $sWhere) . ')'));
-//            cmd('DELETE FROM acca_article WHERE )->query();
+//            cmd('DELETE FROM article WHERE )->query();
 
             // we only allow deletion via POST request
             $model->deleteNode();

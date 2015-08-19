@@ -84,7 +84,7 @@ echo $form->hiddenField($model, 'id');
 ?>
 <?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div class="alert alert-'.$key.'">' . $message . "</div>\n";
+    echo '<div class="alert alert-' . $key . '">' . $message . "</div>\n";
 }
 ?>
 <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>
@@ -146,7 +146,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                         getDetail(ui.item["item_id"]);
                                     }'
                             ),
-                            'htmlOptions'=>array('class' => 'span8')
+                            'htmlOptions' => array('class' => 'span8')
                         ))
                         ?>   
                         <span class="help-block">select if it already exists, type if a new guest</span>
@@ -453,16 +453,12 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 echo CHtml::ajaxSubmitButton('FIND ROOM', Yii::app()->createUrl('registration/getRoom'), array(
                                     'type' => 'POST',
                                     'success' => 'js:function(data){ 
-                                        if (data==""){
-                                            alert("Room is empty");
-                                        }else{
                                             $(".item").remove();
                                             obj = JSON.parse(data);
                                             $("#addRow").replaceWith(obj.room);
                                             $("#statistik").replaceWith(obj.statistik);
                                             $("#myModalLabel").html("Available Room : "+obj.date_start + " - " + obj.date_end);
                                             totalRoom();
-                                        }                                        
                                     }'
                                         ), array('id' => 'btnFindRoom', 'class' => 'btn btn-primary', 'style' => 'height:130px;width:250px'));
                             }
@@ -1018,7 +1014,7 @@ if ($model->isNewRecord == FALSE) {
 }
 ?>
 <script type="text/javascript">
-    
+
     function getDetail(id) {
         $.ajax({
             url: "<?php echo url('user/getDetail'); ?>",
@@ -1045,7 +1041,7 @@ if ($model->isNewRecord == FALSE) {
             }
         });
     }
-    
+
 <?php
 if (!empty($id)) {
     ?>
@@ -1292,5 +1288,5 @@ $date2 = $date2[2] . "/" . $date2[1] . "/" . $date2[0];
         var days = (end - start) / 1000 / 60 / 60 / 24;
         $('#night').val(days);
     }
-    
+
 </script>

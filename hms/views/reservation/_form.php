@@ -399,15 +399,11 @@
                                 echo CHtml::ajaxSubmitButton('FIND ROOM', Yii::app()->createUrl('reservation/getRoom'), array(
                                     'type' => 'POST',
                                     'success' => 'js:function(data){ 
-                                        if (data==""){
-                                            alert("Room is empty");
-                                        }else{
                                             $(".item").remove();                                            
                                             obj = JSON.parse(data);
                                             $("#addRow").replaceWith(obj.room);
                                             $("#statistik").replaceWith(obj.statistik);
-                                            totalRoom();
-                                        }                                        
+                                            totalRoom();            
                                     }'
                                         ), array('id' => 'btnFindRoom', 'class' => 'btn btn-primary', 'style' => 'height:120px;width:250px'));
                                 ?>                                                     

@@ -31,7 +31,7 @@ return array(
             'emulatePrepare' => true,
             'username' => $dbUser,
             'password' => $dbPwd,
-            'tablePrefix' => '',
+            'tablePrefix' => 'acca_',
             'charset' => 'utf8',
             'enableProfiling' => true,
             'enableParamLogging' => true,

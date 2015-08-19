@@ -163,7 +163,7 @@ class ReportGeographical extends CActiveRecord {
 //        $yearGeo = array();
 
 
-        $data = Yii::app()->db->createCommand('SELECT acca_user.id as id, acca_room.status as room_status, acca_room_bill.id as bill_id, acca_user.nationality as nationality, acca_city.province_id as province_id, acca_user.city_id as city_id ,acca_room_bill.charge as charge, acca_registration.market_segment_id as market_segment_id, acca_room_bill.pax as pax, acca_roles.prefix as prefix ,acca_roles.id as roles_id FROM acca_room, acca_na, acca_room_bill, acca_registration, acca_user, landa_acca.acca_city as acca_city, acca_roles WHERE acca_room_bill.room_id = acca_room.id and acca_na.id = acca_room_bill.na_id and  acca_room_bill.registration_id = acca_registration.id and acca_registration.guest_user_id = acca_user.id and acca_user.city_id = acca_city.id and acca_user.roles_id = acca_roles.id and acca_room.status = "occupied" and acca_na.date_na =  "' . $dateNa . '"')->query();
+        $data = Yii::app()->db->createCommand('SELECT user.id as id, room.status as room_status, room_bill.id as bill_id, user.nationality as nationality, city.province_id as province_id, user.city_id as city_id ,room_bill.charge as charge, registration.market_segment_id as market_segment_id, room_bill.pax as pax, roles.prefix as prefix ,roles.id as roles_id FROM room, na, room_bill, registration, user, landa_acca.city as city, roles WHERE room_bill.room_id = room.id and na.id = room_bill.na_id and  room_bill.registration_id = registration.id and registration.guest_user_id = user.id and user.city_id = city.id and user.roles_id = roles.id and room.status = "occupied" and na.date_na =  "' . $dateNa . '"')->query();
         if (empty($data)) {
             
         } else {

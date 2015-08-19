@@ -180,9 +180,9 @@ class AccountController extends Controller {
         //belum additional package
         //belum na
         $db = 'landa_hms_sahidmontana';
-        $prefix = 'acca_';
+        $prefix = '';
 
-        $modelBck = cmd('SELECT * FROM ' . $db . '.acca_na WHERE id NOT IN (SELECT id FROM acca_na) ORDER BY date_na')->query();
+        $modelBck = cmd('SELECT * FROM ' . $db . '.na WHERE id NOT IN (SELECT id FROM na) ORDER BY date_na')->query();
         if (isset($_POST['p'])) {
             $id = $_POST['id'];
             $pc = $_POST['p'];
@@ -261,19 +261,19 @@ class AccountController extends Controller {
                 }
 
                 $sWhere = (empty($bill)) ? '' : ' WHERE id IN (' . implode(',', $bill) . ')';
-                cmd('UPDATE acca_bill SET cash=cash*' . $p . ',cc_charge=cc_charge*' . $p . ',ca_charge=ca_charge*' . $p . ',refund=refund*' . $p . ',total=total*' . $p . $sWhere)->execute();
+                cmd('UPDATE bill SET cash=cash*' . $p . ',cc_charge=cc_charge*' . $p . ',ca_charge=ca_charge*' . $p . ',refund=refund*' . $p . ',total=total*' . $p . $sWhere)->execute();
 
                 $sWhere = (empty($bill)) ? '' : ' WHERE bill_id IN (' . implode(',', $bill) . ')';
-                cmd('UPDATE acca_bill_det SET deposite_amount=deposite_amount*' . $p . $sWhere)->execute();
+                cmd('UPDATE bill_det SET deposite_amount=deposite_amount*' . $p . $sWhere)->execute();
 
-                $sWhere = (empty($bill)) ? '' : ' WHERE id IN (SELECT room_bill_id from acca_bill_det WHERE bill_id IN (' . implode(',', $bill) . '))';
-                cmd('UPDATE acca_room_bill SET charge=charge*' . $p . ',extrabed_price=extrabed_price*' . $p . ',room_price=room_price*' . $p . ',fnb_price=fnb_price*' . $p . $sWhere)->execute();
+                $sWhere = (empty($bill)) ? '' : ' WHERE id IN (SELECT room_bill_id from bill_det WHERE bill_id IN (' . implode(',', $bill) . '))';
+                cmd('UPDATE room_bill SET charge=charge*' . $p . ',extrabed_price=extrabed_price*' . $p . ',room_price=room_price*' . $p . ',fnb_price=fnb_price*' . $p . $sWhere)->execute();
 //
                 $sWhere = (empty($bill)) ? '' : ' WHERE gl_room_bill_id IN (' . implode(',', $bill) . ')';
-                cmd('UPDATE acca_bill_charge SET cash=cash*' . $p . ',cc_charge=cc_charge*' . $p . ',ca_charge=ca_charge*' . $p . ',refund=refund*' . $p . ',total=total*' . $p . $sWhere)->execute();
+                cmd('UPDATE bill_charge SET cash=cash*' . $p . ',cc_charge=cc_charge*' . $p . ',ca_charge=ca_charge*' . $p . ',refund=refund*' . $p . ',total=total*' . $p . $sWhere)->execute();
 //
-                $sWhere = (empty($bill)) ? '' : ' WHERE bill_charge_id IN (SELECT id FROM acca_bill_charge WHERE gl_room_bill_id IN (' . implode(',', $bill) . '))';
-                cmd('UPDATE acca_bill_charge_det SET charge=charge*' . $p . $sWhere)->execute();
+                $sWhere = (empty($bill)) ? '' : ' WHERE bill_charge_id IN (SELECT id FROM bill_charge WHERE gl_room_bill_id IN (' . implode(',', $bill) . '))';
+                cmd('UPDATE bill_charge_det SET charge=charge*' . $p . $sWhere)->execute();
             }
             $this->redirect(array('viewBck', array()));
         }

@@ -170,9 +170,8 @@ class RoomType extends CActiveRecord {
         echo'<table class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
-                                    <th>User Type</th>
+                                    <th>Group Guest</th>
                                     <th>Min</th>
-                                    <th>Max</th>
                                     <th>Default</th>
                                   </tr>
                                 </thead><tbody>';
@@ -188,7 +187,6 @@ class RoomType extends CActiveRecord {
                 echo'<tr>
                                     <td style="width:130px;">' . $roles[$key]->name . '</td>
                                     ' . $min . '
-                                    ' . $max . '
                                     ' . $default . '
                                   </tr>';
             }

@@ -81,7 +81,7 @@ class UserController extends Controller {
     public function actionGetListGuestLedger() {
         $name = $_GET["q"];
         $list = array();
-        $query = 'select acca_user.name as name, acca_room_bill.id as id, acca_room_bill.room_number as room_number from acca_user, acca_registration, acca_room_bill where acca_user.id = acca_registration.guest_user_id and acca_registration.id = acca_room_bill.registration_id and acca_room_bill.is_checkedout=0 and acca_room_bill.lead_room_bill_id=0 and acca_user.name like "%' . $name . '%" or acca_room_bill.room_number = "' . $name . '" order by acca_room_bill.room_number ASC';
+        $query = 'select user.name as name, room_bill.id as id, room_bill.room_number as room_number from user, registration, room_bill where user.id = registration.guest_user_id and registration.id = room_bill.registration_id and room_bill.is_checkedout=0 and room_bill.lead_room_bill_id=0 and user.name like "%' . $name . '%" or room_bill.room_number = "' . $name . '" order by room_bill.room_number ASC';
         $data = Yii::app()->db->createCommand($query)->queryAll();
         //$data = RoomBill::model()->with('Registration')->with('User')->findAll(array('condition' => 'User.name like "%' . $name . '%" User.id = Registration.guest_user_id and t.is_checkedout=0 and t.lead_room_bill_id=0', "order" => "t.room_number Asc"));
         if (empty($data)) {
