@@ -191,9 +191,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 <td style="width:5px;vertical-align: top">: <input id="guest_phone" type="text" class="span2 guest_phone" name="guest_phone" /></td>
             </tr>
             <tr>
-                <td style="vertical-align: top">Date Check In</td>
+                <td style="vertical-align: top">Arrival</td>
                 <td style="vertical-align: top">: <input id="date_to" name="date_to" type="text" readonly value="<?php echo (!empty($dateTo)) ? $dateTo : ''; ?>"/></td>
-                <td style="vertical-align: top">Date Check Out</td>                                
+                <td style="vertical-align: top">Departure</td>                                
                 <td style="vertical-align: top">: <?php echo date('l, d-M-Y H:i'); ?></td>
             </tr>                                                     
             <tr>
