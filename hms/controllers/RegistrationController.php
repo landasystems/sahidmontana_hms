@@ -128,14 +128,12 @@ class RegistrationController extends Controller {
             if ($reservation->package_room_type_id == 0 || $reservation->package_room_type_id == '') {
                 $rate = json_decode($detail->Room->RoomType->rate, true);
                 $price = 'Min :' . landa()->rp($rate[$reservation->Guest->roles_id]['min']) . '<br> Default : ' .
-                        landa()->rp($rate[$reservation->Guest->roles_id]['default']) . '<br> Max :' .
-                        landa()->rp($rate[$reservation->Guest->roles_id]['max']);
+                        landa()->rp($rate[$reservation->Guest->roles_id]['default']);
             } else {
                 $ratePakcage = RoomType::model()->findByPk($reservation->package_room_type_id);
                 $rate = json_decode($ratePakcage->rate, true);
                 $price = 'Min :' . landa()->rp($rate[$reservation->Guest->roles_id]['min']) . '<br> Default : ' .
-                        landa()->rp($rate[$reservation->Guest->roles_id]['default']) . '<br> Max :' .
-                        landa()->rp($rate[$reservation->Guest->roles_id]['max']);
+                        landa()->rp($rate[$reservation->Guest->roles_id]['default']);
             }
             $checkbox_others_include = "";
             if ($siteConfig->others_include != "") {
@@ -253,14 +251,12 @@ class RegistrationController extends Controller {
             if ($package == 0) {
                 $rate = json_decode($value->RoomType->rate, true);
                 $price = 'Min :' . landa()->rp($rate[$_POST['roles']]['min']) . '<br> Default : ' .
-                        landa()->rp($rate[$_POST['roles']]['default']) . '<br> Max :' .
-                        landa()->rp($rate[$_POST['roles']]['max']);
+                        landa()->rp($rate[$_POST['roles']]['default']);
             } else {
                 $package_model = RoomType::model()->findByPk($package);
                 $rate = json_decode($package_model->rate, true);
                 $price = 'Min :' . landa()->rp($rate[$_POST['roles']]['min']) . '<br> Default : ' .
-                        landa()->rp($rate[$_POST['roles']]['default']) . '<br> Max :' .
-                        landa()->rp($rate[$_POST['roles']]['max']);
+                        landa()->rp($rate[$_POST['roles']]['default']);
             }
             $y = 1;
             $status_housekeeping = ($value->status_housekeeping == "vacant inspect") ? '<span class="label label-info">' . $value->status_housekeeping . '</span>' : '<span class="label label-important">' . $value->status_housekeeping . '</span>';
@@ -423,8 +419,7 @@ class RegistrationController extends Controller {
         if ($package == 0) {
             $rate = json_decode($room->RoomType->rate, true);
             $price = 'Min :' . landa()->rp($rate[$usertype]['min']) . '<br> Default : ' .
-                    landa()->rp($rate[$usertype]['default']) . '<br> Max :' .
-                    landa()->rp($rate[$usertype]['max']);
+                    landa()->rp($rate[$usertype]['default']);
         } else {
             //menambahkan centangan, klo package di pilih
             $package_model = RoomType::model()->findByPk($package);
@@ -440,8 +435,7 @@ class RegistrationController extends Controller {
 
             $rate = json_decode($package_model->rate, true);
             $price = 'Min :' . landa()->rp($rate[$usertype]['min']) . '<br> Default : ' .
-                    landa()->rp($rate[$usertype]['default']) . '<br> Max :' .
-                    landa()->rp($rate[$usertype]['max']);
+                    landa()->rp($rate[$usertype]['default']);
             $fnb_price = $package_model->fnb_charge;
             $pax = $package_model->pax;
         }

@@ -86,7 +86,7 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
                 $thisDate = ($_POST['month'] . '/' . $i . '/' . $_POST['year']);
                 $thisDay = date("l", strtotime($_POST['year'] . "-" . $_POST['month'] . "-" . $i));
                 if (strtotime($thisDate) < strtotime($siteConfig->date_system) and $thisDay != 'Sunday') {
-                    echo '<th style="width:50px;text-align:center;background:lightgray">' . ($i . '/' . $_POST['month']) . '</th>';
+                    echo '<th style="width:50px;text-align:center;background:gray">' . ($i . '/' . $_POST['month']) . '</th>';
                 } elseif ($thisDay == 'Sunday') {
                     echo '<th style="width:50px;text-align:center;background:rgba(255, 110, 110, 1)">' . ($i . '/' . $_POST['month']) . '</th>';
                 } else {

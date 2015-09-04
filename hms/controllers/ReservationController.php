@@ -200,14 +200,12 @@ class ReservationController extends Controller {
             if ($package == 0) {
                 $rate = json_decode($value->RoomType->rate, true);
                 $price = 'Min :' . landa()->rp($rate[$_POST['roles']]['min']) . '<br> Default : ' .
-                        landa()->rp($rate[$_POST['roles']]['default']) . '<br> Max :' .
-                        landa()->rp($rate[$_POST['roles']]['max']);
+                        landa()->rp($rate[$_POST['roles']]['default']);
             } else {
                 $package_model = RoomType::model()->findByPk($package);
                 $rate = json_decode($package_model->rate, true);
                 $price = 'Min :' . landa()->rp($rate[$_POST['roles']]['min']) . '<br> Default : ' .
-                        landa()->rp($rate[$_POST['roles']]['default']) . '<br> Max :' .
-                        landa()->rp($rate[$_POST['roles']]['max']);
+                        landa()->rp($rate[$_POST['roles']]['default']);
             }
             $y = 1;
 
@@ -316,8 +314,7 @@ class ReservationController extends Controller {
         if ($package == 0) {
             $rate = json_decode($room->RoomType->rate, true);
             $price = 'Min :' . landa()->rp($rate[$usertype]['min']) . '<br> Default : ' .
-                    landa()->rp($rate[$usertype]['default']) . '<br> Max :' .
-                    landa()->rp($rate[$usertype]['max']);
+                    landa()->rp($rate[$usertype]['default']);
         } else {
             //menambahkan centangan, klo package di pilih
             $package_model = RoomType::model()->findByPk($package);
@@ -333,8 +330,7 @@ class ReservationController extends Controller {
 
             $rate = json_decode($package_model->rate, true);
             $price = 'Min :' . landa()->rp($rate[$usertype]['min']) . '<br> Default : ' .
-                    landa()->rp($rate[$usertype]['default']) . '<br> Max :' .
-                    landa()->rp($rate[$usertype]['max']);
+                    landa()->rp($rate[$usertype]['default']);
             $fnb_price = $package_model->fnb_charge;
             $pax = $package_model->pax;
         }

@@ -121,8 +121,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 tabel += '<tr><td class="span3">Guest Name</td><td>:</td><td class="span9">' + ($(this).attr("guest")) + '</td></tr>';
                 tabel += '<tr><td>Guest Phone</td><td>:</td><td>' + ($(this).attr("guestPhone")) + '</td></tr>';
                 tabel += '<tr><td>Guest DP</td><td>:</td><td>' + ($(this).attr("guestDP")) + '</td></tr>';
-                tabel += '<tr><td>Check In</td><td>:</td><td>' + ($(this).attr("dateFrom")) + '</td></tr>';
-                tabel += '<tr><td>Check Out</td><td>:</td><td>' + ($(this).attr("dateTo")) + '</td></tr>';
+                tabel += '<tr><td>Arrival</td><td>:</td><td>' + ($(this).attr("dateFrom")) + '</td></tr>';
+                tabel += '<tr><td>Departure</td><td>:</td><td>' + ($(this).attr("dateTo")) + '</td></tr>';
                 tabel += '<tr><td>Rooms</td><td>:</td><td>' + ($(this).attr("rooms")) + '</td></tr>';
                 tabel += '<tr><td>Total Rooms</td><td>:</td><td>' + ($(this).attr("total_rooms")) + '</td></tr>';
                 tabel += '<tr><td>Remarks</td><td>:</td><td>' + ($(this).attr("remarks")) + '</td></tr>';

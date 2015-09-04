@@ -44,7 +44,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     )
                 ),
                 'delete' => array(
-                    'label' => 'Hapus',
+                    'label' => 'Delete',
                     'url' => 'Yii::app()->createUrl("guestGroup/delete", array("id"=>$data->id))',
                     'options' => array(
                         'class' => 'btn btn-small delete'

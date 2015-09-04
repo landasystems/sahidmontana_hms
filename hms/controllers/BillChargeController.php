@@ -335,36 +335,15 @@ class BillChargeController extends Controller {
      */
     public function actionCreate() {
         $model = new BillCharge;
-        $this->cssJs();
+        $this->cssJs();        
         if (isset($_POST['BillCharge'])) {
+            logs($_POST['BillCharge']);
             $model->attributes = $_POST['BillCharge'];
             $model->code = SiteConfig::model()->formatting('billCharge');
-            $model->is_temp = (isset($_POST['saveTemp'])) ? '1' : '0';
+            
             if (!empty($_POST['detail'])) {
-                if ($model->is_temp == 0) {
-                    $bayar = $model->cash + $model->cc_charge + $model->ca_charge + $model->gl_charge;
-                    $total = $model->total;
-                    if ($bayar < $total) {
-                        user()->setFlash('error', '<strong>Wrong Payment! </strong> Please check payment bellow..');
-                        $this->redirect(array('create'));
-                    } elseif ($model->gl_charge > 0 && $model->gl_room_bill_id == 0) {
-                        user()->setFlash('error', '<strong>Wrong Payment! </strong> Please choose guest ledger name.');
-                        $this->redirect(array('create'));
-                    } elseif ($model->ca_charge > 0 && $model->ca_user_id == 0) {
-                        user()->setFlash('error', '<strong>Wrong Payment! </strong> Please choose city ledger name.');
-                        $this->redirect(array('create'));
-                    }
-                }
+                
                 if ($model->save()) {
-                    //add citi ledger if by=ca
-//                    if ($model->is_temp == 0 && !empty($model->ca_charge) && $model->ca_charge != 0) {
-//                        $ca = new BillCa;
-//                        $ca->bill_charge_id = $model->id;
-//                        $ca->guest_user_id = $model->ca_user_id;
-//                        $ca->charge = $model->ca_charge;
-//                        $ca->charge_less = $model->ca_charge * -1;
-//                        $ca->save();
-//                    }
 
                     if (isset($_POST['deposite']['id'])) {
                         for ($i = 0; $i < count($_POST['deposite']['id']); $i++) {
@@ -431,37 +410,13 @@ class BillChargeController extends Controller {
 
         if (isset($_POST['BillCharge'])) {
             $model->attributes = $_POST['BillCharge'];
-            $model->is_temp = (isset($_POST['saveTemp'])) ? '1' : '0';
             if (!empty($_POST['detail'])) {
-                if ($model->is_temp == 0) {
-                    $bayar = $model->cash + $model->cc_charge + $model->ca_charge + $model->gl_charge;
-                    $total = $model->total;
-                    if ($bayar < $total) {
-                        user()->setFlash('error', '<strong>Wrong Payment! </strong> Please check payment bellow..');
-                        $this->redirect(array('update', 'id' => $model->id));
-                    } elseif ($model->gl_charge > 0 && $model->gl_room_bill_id == 0) {
-                        user()->setFlash('error', '<strong>Wrong Payment! </strong> Please choose guest ledger name.');
-                        $this->redirect(array('create'));
-                    } elseif ($model->ca_charge > 0 && $model->ca_user_id == 0) {
-                        user()->setFlash('error', '<strong>Wrong Payment! </strong> Please choose city ledger name.');
-                        $this->redirect(array('create'));
-                    }
-                }
                 if ($model->save()) {
-                    //add citi ledger if by=ca
-//                    if ($model->is_temp == 0 && !empty($model->ca_charge) && $model->ca_charge != 0) {
-//                        $ca = new BillCa;
-//                        $ca->bill_charge_id = $model->id;
-//                        $ca->guest_user_id = $model->ca_user_id;
-//                        $ca->charge = $model->ca_charge;
-//                        $ca->charge_less = $model->ca_charge * -1;
-//                        $ca->save();
-//                    }
 
                     BillChargeDet::model()->deleteAll('bill_charge_id=' . $model->id);
                     if (isset($_POST['deposite']['id'])) {
                         for ($i = 0; $i < count($_POST['deposite']['id']); $i++) {
-                            $detail = new BillChargeDet;
+                            $detaail = new BillChargeDet;
                             $detail->bill_charge_id = $model->id;
                             $detail->deposite_id = $_POST['deposite']['id'][$i];
                             $detail->deposite_amount = $_POST['deposite']['amount'][$i];

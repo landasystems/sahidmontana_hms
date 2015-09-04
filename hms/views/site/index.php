@@ -192,11 +192,11 @@ $totBill = count($bill);
                         <span class="number"><?php echo $totReservation; ?></span> 
                     </li>
                     <li class="clearfix">
-                        <span class="txt">Check In</span>
+                        <span class="txt">Arrival</span>
                         <span class="number"><?php echo $totRegistration; ?></span> 
                     </li>
                     <li class="clearfix">
-                        <span class="txt">Check Out</span>
+                        <span class="txt">Departure</span>
                         <span class="number"><?php echo $totBill; ?></span> 
                     </li>
                 </ul>

@@ -51,7 +51,7 @@ class CHtml
 	 * @var string the HTML code to be appended to the required label.
 	 * @see label
 	 */
-	public static $afterRequiredLabel=' <span class="required">*</span>';
+	public static $afterRequiredLabel='';
 	/**
 	 * @var integer the counter for generating automatic input field names.
 	 */

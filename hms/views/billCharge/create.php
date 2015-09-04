@@ -31,12 +31,6 @@ $this->endWidget();
     ));
     ?>
     <fieldset>
-        <center class="headerInvoice" style="display: none">
-            <h3 style="margin:0px">INVOICE</h3>   
-            <h3 style="margin:0px">HOTEL SAHID MONTANA</h3>        
-            <hr style="margin:0px">
-            <hr style="margin:0px">
-        </center>
         <div class="box gradient invoice">
             <div class="title clearfix">
                 <h4 class="left">
@@ -79,7 +73,7 @@ $this->endWidget();
                         <td >Date </td>
                         <td  style="width:5px">:</td>
                         <?php
-                        $date = (!empty($model->created)) ? date('l Y-F-d H:i:s', strtotime($model->created)) : date('l Y-F-d H:i:s');
+                        $date = (!empty($model->created)) ? date('d F Y, H:i', strtotime($model->created)) : date('d F Y, H:i');
                         ?>
                         <td ><?php echo $date; ?></td>                                
                     </tr>                            
@@ -130,8 +124,10 @@ $this->endWidget();
         </div>    
 
         <div class="form-actions">
-            <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save & Print</button>
-            <button class="btn btn-warning"  type="submit" name="saveTemp" id="saveTemp"><i class="icon-repeat icon-white"></i> Save To Temporary</button>
+            <input type="hidden" name="BillCharge[is_temp]" id="saveTemp" value="1"/>
+            <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save</button>
+            <button class="btn btn-warning"  type="submit"><i class="icon-repeat icon-white"></i> Save Temporary</button>
+            
             <div id="alert" class="modal large hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -279,11 +275,6 @@ $this->endWidget();
 
 </style>
 <script type="text/javascript">
-    function printDiv()
-    {
-        $(".headerInvoice").css({"display": "block"});
-        window.print();
-    }
     $('#save').on('click', function () {
         var refund = $('#BillCharge_refund').val();
         var gl_charge = $('#BillCharge_gl_charge').val();
@@ -307,6 +298,7 @@ $this->endWidget();
             $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose city ledger name.');
             $('#alert').modal('show');
         } else {
+            $('#saveTemp').val(0);
             document.getElementById("bill-charge-form").submit();
         }
     })

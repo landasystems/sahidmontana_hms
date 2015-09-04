@@ -99,12 +99,14 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     )
                 ),
                 'update' => array(
+                    'visible' => '(strtotime($data->date_from)>=strtotime(app()->session["date_system"]))',
                     'label' => 'Edit',
                     'options' => array(
                         'class' => 'btn btn-small update'
                     )
                 ),
                 'status' => array(
+                    'visible' => '(strtotime($data->date_from)>=strtotime(app()->session["date_system"]))',
                     'label' => 'Change Status',
                     'icon' => 'icon-refresh',
                     'url' => '$data->id',
@@ -115,7 +117,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     )
                 ),
                 'delete' => array(
-                    'label' => 'Hapus',
+                    'visible' => '(strtotime($data->date_from)>=strtotime(app()->session["date_system"]))',
+                    'label' => 'Delete',
                     'options' => array(
                         'class' => 'btn btn-small delete'
                     )

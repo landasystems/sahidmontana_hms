@@ -2,7 +2,7 @@
   clear: both;
 }
 .control-label.required:after {
-  content:"*";
+  content:" *";
   color:red;
 }
 .nav {

@@ -163,7 +163,7 @@ class ReportGeographical extends CActiveRecord {
 //        $yearGeo = array();
 
 
-        $data = Yii::app()->db->createCommand('SELECT user.id as id, room.status as room_status, room_bill.id as bill_id, user.nationality as nationality, city.province_id as province_id, user.city_id as city_id ,room_bill.charge as charge, registration.market_segment_id as market_segment_id, room_bill.pax as pax, roles.prefix as prefix ,roles.id as roles_id FROM room, na, room_bill, registration, user, landa_acca.city as city, roles WHERE room_bill.room_id = room.id and na.id = room_bill.na_id and  room_bill.registration_id = registration.id and registration.guest_user_id = user.id and user.city_id = city.id and user.roles_id = roles.id and room.status = "occupied" and na.date_na =  "' . $dateNa . '"')->query();
+        $data = Yii::app()->db->createCommand('SELECT user.id as id, room.status as room_status, room_bill.id as bill_id, user.nationality as nationality, city.province_id as province_id, user.city_id as city_id ,room_bill.charge as charge, registration.market_segment_id as market_segment_id, room_bill.pax as pax, roles.prefix as prefix ,roles.id as roles_id FROM room, na, room_bill, registration, user, city as city, roles WHERE room_bill.room_id = room.id and na.id = room_bill.na_id and  room_bill.registration_id = registration.id and registration.guest_user_id = user.id and user.city_id = city.id and user.roles_id = roles.id and room.status = "occupied" and na.date_na =  "' . $dateNa . '"')->query();
         if (empty($data)) {
             
         } else {

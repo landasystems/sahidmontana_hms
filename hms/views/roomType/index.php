@@ -92,7 +92,7 @@ $buton = '{view}{update}{delete}';
                             )
                         ),
                         'delete' => array(
-                            'label' => 'Hapus',
+                            'label' => 'Delete',
                             'options' => array(
                                 'class' => 'btn btn-small delete'
                             )
@@ -143,7 +143,7 @@ $buton = '{view}{update}{delete}';
                             )
                         ),
                         'delete' => array(
-                            'label' => 'Hapus',
+                            'label' => 'Delete',
                             'options' => array(
                                 'class' => 'btn btn-small delete'
                             )

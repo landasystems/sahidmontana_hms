@@ -66,9 +66,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 <td style="width:5px;vertical-align: top">: <input value="<?php echo $model->guest_phone; ?>" id="guest_phone" type="text" class="span2 guest_phone" name="guest_phone" /></td>
             </tr>
             <tr>
-                <td style="vertical-align: top">Date Check In</td>
+                <td style="vertical-align: top">Arrival</td>
                 <td style="vertical-align: top">: <?php echo date("l Y-m-d H:i:s", strtotime($model->arrival_time)); ?></td>
-                <td style="vertical-align: top">Date Check Out</td>                                
+                <td style="vertical-align: top">Departure</td>                                
                 <td style="vertical-align: top">: <?php echo date("l Y-m-d H:i:s", strtotime($model->departure_time)); ?></td>
             </tr>                                                     
             <tr>

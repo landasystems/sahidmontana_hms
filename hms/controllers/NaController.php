@@ -141,7 +141,7 @@ class NaController extends Controller {
                 $model->rate_dollar = $rateDolar;
                 $model->date_na = $siteConfig->date_system;
                 if ($model->save()) {
-
+                    
                     $roomBills = RoomBill::model()->findAll(array('condition' => '(date_bill<="' . $siteConfig->date_system . '" and is_checkedout=0 and t.is_na=0) or (date_format(Bill.created,"%Y-%m-%d")="' . $siteConfig->date_system . '")', 'order' => 'registration_id', 'index' => 'id', 'with' => array('BillDet', 'BillDet.Bill')));
                     $bill = Bill::model()->findAll(array('condition' => 'is_na=0', 'index' => 'id'));
                     $billCharge = BillCharge::model()->findAll(array('condition' => 'is_na=0 and is_temp=0', 'index' => 'id'));
@@ -488,6 +488,7 @@ class NaController extends Controller {
                     //update date_system + 1
                     $siteConfig->date_system = date("Y-m-d", strtotime('+1 day', strtotime($siteConfig->date_system)));
                     $siteConfig->save();
+                    app()->session['date_system'] = $siteConfig->date_system; //ganti session na date systems
 
                     //simpan report geographical
                     $lastNa = Na::model()->find(array('order' => 'id DESC'));

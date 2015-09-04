@@ -79,7 +79,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value' => 'date("d M", strtotime($data->date_from))',
         ),
         array(
-            'header' => 'Depart',
+            'header' => 'Departure',
             'name' => 'date_to',
             'type' => 'raw',
             'value' => 'date("d M", strtotime($data->date_to))',
@@ -126,7 +126,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     )
                 ),
                 'delete' => array(
-                    'label' => 'Hapus',
+                    'label' => 'Delete',
                     'visible' => '(!isset($data->is_na) or $data->is_na==0)',
                     'options' => array(
                         'class' => 'btn btn-small delete'

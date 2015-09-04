@@ -3,10 +3,10 @@ body {
     margin:0 !important;
     padding:0 !important;
     line-height: 1.1; 
-    font-family: Garamond,"Times New Roman", serif; 
+    font-family: monospace; 
     color: #000; 
     background: none; 
-    font-size: 11pt; }
+    font-size: 10pt; }
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 { page-break-after:avoid; }
@@ -42,8 +42,7 @@ a[href^="#"]:after, a[href^="javascript:"]:after {content: "";}
 /* Table */
 table { margin: 1px; text-align:left; width:100%} 
 th { border-bottom: 1px solid #333;  font-weight: bold; text-align: center }
-td { border-bottom: 1px solid #333; }
-th,td { padding: 4px 10px; }
+th,td { padding: 0px 0px; font-size: 9pt}
 tfoot { font-style: italic; }
 caption { background: #fff; margin-bottom:2em; text-align:left; }
 thead {display: table-header-group;}
@@ -52,21 +51,5 @@ img,tr {page-break-inside: avoid;}
 span.label{width: 180px;display: inline-table;}
 .kiri{float: left;padding:2px 10px;}
 .kanan{float: right;padding:2px 10px;}
-
-/* Hide various parts from the site
-#header, #footer, #navigation, #rightSideBar, #leftSideBar 
-{display:none;}
-*/
-.print-detail{
-    border-collapse: collapse;
-}
-
-.print-detail th, td{
-    border: 1px solid  #333;
-}
-
-.print-detail tfoot td{
-    border: 0px;
-}
 
 

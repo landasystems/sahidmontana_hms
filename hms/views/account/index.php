@@ -82,7 +82,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     )
                 ),
                 'delete' => array(
-                    'label' => 'Hapus',
+                    'label' => 'Delete',
                     'options' => array(
                         'class' => 'btn btn-small delete'
                     )

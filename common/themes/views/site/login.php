@@ -42,7 +42,7 @@ $form = $this->beginWidget('CActiveForm', array(
     <div class="newLogin">        
         <form class="form-horizontal" action="dashboard.html" />
         <center>
-            <img style="height: 75px;margin: 10px 5px 0 0px;" src="<?php echo $img['small'] ?>" />
+            <img style="height: 75px;margin: 10px 5px 0 0px;" src="<?php echo $img['small'] ?>" class="img-circle img-polaroid"/>
             <h3 style="margin:5px 0 0 0">
                 <?php
                 echo param('clientName');

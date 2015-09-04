@@ -36,12 +36,6 @@ if ($model->isNewRecord == FALSE) {
     ));
     ?>
     <fieldset>
-        <center class="headerInvoice" style="display: none">
-            <h3 style="margin:0px">INVOICE</h3>   
-            <h3 style="margin:0px">HOTEL SAHID MONTANA</h3>        
-            <hr style="margin:0px">
-            <hr style="margin:0px">
-        </center>
         <div class="box gradient invoice">
             <div class="title clearfix">
                 <h4 class="left">
@@ -75,7 +69,7 @@ if ($model->isNewRecord == FALSE) {
                         <td >Date </td>
                         <td  style="width:5px">:</td>
                         <?php
-                        $date = (!empty($model->created)) ? date('l Y-F-d H:i:s', strtotime($model->created)) : date('l Y-F-d H:i:s');
+                        $date = (!empty($model->created)) ? date('d F Y, H:i', strtotime($model->created)) : date('d F Y, H:i');
                         ?>
                         <td ><?php echo $date; ?></td>                                
                     </tr>  
@@ -129,8 +123,21 @@ if ($model->isNewRecord == FALSE) {
         if (!isset($_GET['v'])) {
             ?>
             <div class="form-actions">
-                <button class="btn btn-primary"  type="submit" name ="save" onclick=""><i class="icon-ok icon-white"></i> Save & Print</button>
-                <button class="btn btn-warning"  type="submit" name="saveTemp"><i class="icon-repeat icon-white"></i> Save To Temporary</button>
+                <input type="hidden" name="BillCharge[is_temp]" id="saveTemp" value="1"/>
+                <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save </button>
+                <button class="btn btn-warning"  type="submit"><i class="icon-repeat icon-white"></i> Save Temporary</button>
+
+                <div id="alert" class="modal large hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel"><i>Alert !</i></h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-error">
+                            <div id="alertContent"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         <?php } ?>
     </fieldset>
@@ -259,23 +266,24 @@ if ($model->isNewRecord == FALSE) {
     $content = $siteConfig->report_bill_charge;
     $content = str_replace('{departement}', strtoupper($departement), $content);
     $content = str_replace('{invoice}', $model->code, $content);
-    $content = str_replace('{date}', date('d F Y H:i:s', strtotime($model->created)), $content);
+    $content = str_replace('{date}', date('d M Y, H:i', strtotime($model->created)), $content);
     $content = str_replace('{desc}', $model->description, $content);
     $content = str_replace('{cashier}', ucwords($model->Cashier->name), $content);
 
     $det = '<table style="width:100%">';
     foreach ($details as $detail) {
+        $discount =  (empty($detail->discount)) ? '' : $detail->discount . ' %';
         if ($detail->deposite_id != 0) {
             $price = $detail->charge * $detail->amount - (($detail->discount / 100) * $detail->charge * $detail->amount);
             $det.= '            
              <tr>                       
-                <td style=";padding:3px 3px;vertical-align:top;width:40%">' . landa()->rp($detail->deposite_amount) . '</td>                                                                     
-                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:20%">' . $detail->discount . '% </td>                                                        
-                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:40%">' . landa()->rp($price) . '</td>                                                        
+                <td style=";vertical-align:top;width:50%">' . landa()->rp($detail->deposite_amount) . '</td>                                                                     
+                <td style="text-align:right;vertical-align:top;width:10%">' . $discount . '</td>                                                        
+                <td style="text-align:right;vertical-align:top;width:40%">' . landa()->rp($price) . '</td>                                                        
              </tr>
              
             <tr>                       
-                <td style=";padding:3px 3px;vertical-align:top;" colspan="3">[' . $detail->Deposite->code . '] ' . $detail->Deposite->Guest->guestName . '</td>                                                                     
+                <td style=";vertical-align:top;" colspan="3">[' . $detail->Deposite->code . '] ' . $detail->Deposite->Guest->guestName . '</td>                                                                     
              </tr>
              
 
@@ -286,13 +294,13 @@ if ($model->isNewRecord == FALSE) {
             $det.= '
             
              <tr>                       
-                <td style=";padding:3px 3px;vertical-align:top;width:40%">' . $detail->amount . ' x ' . landa()->rp($detail->charge) . '</td>                                                                     
-                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:20%">' . $detail->discount . '% </td>                                                        
-                <td style="text-align:right;padding:3px 3px;vertical-align:top;width:40%">' . landa()->rp($price) . '</td>                                                        
+                <td style=";vertical-align:top;width:50%">' . $detail->amount . ' x ' . landa()->rp($detail->charge) . '</td>                                                                     
+                <td style="text-align:right;vertical-align:top;width:10%">' . $discount . '</td>                                                        
+                <td style="text-align:right;vertical-align:top;width:40%">' . landa()->rp($price) . '</td>                                                        
              </tr>
              
             <tr>                       
-                <td style=";padding:3px 3px;vertical-align:top;" colspan="3">' . $addName . '</td>                                                                     
+                <td style=";vertical-align:top;" colspan="3">' . $addName . '</td>                                                                     
              </tr>
              
 
@@ -301,27 +309,57 @@ if ($model->isNewRecord == FALSE) {
     }
     $ca_name = ($model->ca_user_id == 0 || empty($model->ca_user_id)) ? '' : $model->CityLedger->name;
     $gl_name = ($model->gl_room_bill_id == 0 || empty($model->gl_room_bill_id)) ? '' : $model->RoomBill->room_number;
-    $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Total :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->total) . '</td></tr>';
+    $det.= '<tr><td colspan="2" style="text-align:right;" >Total :</td><td style="text-align:right;">' . landa()->rp($model->total) . '</td></tr>';
     if ($model->cash != 0) {
-        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Cash :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->cash) . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;" >Cash :</td><td style="text-align:right;">' . landa()->rp($model->cash) . '</td></tr>';
     }
     if ($model->cc_charge != 0) {
-        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Credit :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->cc_charge) . '</td></tr>';
-        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >CC Numb :</td><td style="text-align:right;padding:3px 3px;">' . $model->cc_number . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;" >Credit :</td><td style="text-align:right;">' . landa()->rp($model->cc_charge) . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;" >CC Numb :</td><td style="text-align:right;">' . $model->cc_number . '</td></tr>';
     }
     if ($model->gl_charge != 0) {
-        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >GL :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->gl_charge) . '</td></tr>';
-        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >GL Room :</td><td style="text-align:right;padding:3px 3px;">' . $gl_name . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;" >GL :</td><td style="text-align:right;">' . landa()->rp($model->gl_charge) . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;" >GL Room :</td><td style="text-align:right;">' . $gl_name . '</td></tr>';
     }
     if ($model->ca_charge != 0) {
-        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >CL :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->ca_charge) . '</td></tr>';
-        $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >CL Name :</td><td style="text-align:right;padding:3px 3px;">' . $ca_name . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;" >CL :</td><td style="text-align:right;">' . landa()->rp($model->ca_charge) . '</td></tr>';
+        $det.= '<tr><td colspan="2" style="text-align:right;" >CL Name :</td><td style="text-align:right;">' . $ca_name . '</td></tr>';
     }
 
-    $det.= '<tr><td colspan="2" style="text-align:right;padding:3px 3px;" >Refund :</td><td style="text-align:right;padding:3px 3px;">' . landa()->rp($model->refund) . '</td></tr>';
+    $det.= '<tr><td colspan="2" style="text-align:right;" >Refund :</td><td style="text-align:right;">' . landa()->rp($model->refund) . '</td></tr>';
 
     $det .= '</table>';
     $content = str_replace('{detail}', $det, $content);
     echo $content;
     ?>
 </div>
+
+<script type="text/javascript">
+    $('#save').on('click', function () {
+        var refund = $('#BillCharge_refund').val();
+        var gl_charge = $('#BillCharge_gl_charge').val();
+        var gl_id = $('#BillCharge_gl_room_bill_id').val();
+        var ca_charge = $('#BillCharge_ca_charge').val();
+        var ca_id = $('#BillCharge_ca_user_id').val();
+        var departement = $('#BillCharge_charge_additional_category_id').val();
+        if (departement == 0) {
+            $('#alertContent').html('<strong>Wrong ! </strong> Please select departement');
+            $('#alert').modal('show');
+        }
+        else if (refund < 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please check payment bellow');
+            $('#alert').modal('show');
+        }
+        else if (gl_charge > 0 && gl_id == 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose guest ledger name.');
+            $('#alert').modal('show');
+        }
+        else if (ca_charge > 0 && ca_id == 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose city ledger name.');
+            $('#alert').modal('show');
+        } else {
+            $('#saveTemp').val(0);
+            document.getElementById("bill-charge-form").submit();
+        }
+    })
+</script>

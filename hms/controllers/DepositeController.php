@@ -2,8 +2,6 @@
 
 class DepositeController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -21,9 +19,8 @@ class DepositeController extends Controller {
 
     public function accessRules() {
         return array(
-           
             array('allow', // r
-                'actions' => array('delete','update','create','index', 'view'),
+                'actions' => array('delete', 'update', 'create', 'index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("Deposit","r")'
             )
         );
@@ -35,7 +32,6 @@ class DepositeController extends Controller {
         ));
     }
 
-
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -44,12 +40,16 @@ class DepositeController extends Controller {
         $model = new Deposite;
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+//         $this->performAjaxValidation($model);
 
         if (isset($_POST['Deposite'])) {
             $model->attributes = $_POST['Deposite'];
             $model->code = SiteConfig::model()->formatting('deposite');
-            $used = RoomBill::model()->with('Registration')->findAll(array('condition' => 'is_checkedout=0 and Registration.guest_user_id=' . $model->guest_user_id));
+            if (empty($model->guest_user_id)) {
+                $used = array();
+            } else {
+                $used = RoomBill::model()->with('Registration')->findAll(array('condition' => 'is_checkedout=0 and Registration.guest_user_id=' . $model->guest_user_id));
+            }
             $model->used_amount = 0;
             $model->balance_amount = $model->amount - $model->used_amount;
             if (count($used) > 0) {
@@ -57,8 +57,8 @@ class DepositeController extends Controller {
                 $model->used_today = 1;
             }
 
-            if ($model->save()){
-                user()->setFlash('success',"Saved successfully");
+            if ($model->save()) {
+                user()->setFlash('success', "Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -82,8 +82,8 @@ class DepositeController extends Controller {
             $model->attributes = $_POST['Deposite'];
             $model->used_amount = 0;
             $model->balance_amount = $model->amount - $model->used_amount;
-            if ($model->save()){
-                user()->setFlash('success',"Saved successfully");
+            if ($model->save()) {
+                user()->setFlash('success', "Saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -148,7 +148,5 @@ class DepositeController extends Controller {
             Yii::app()->end();
         }
     }
-
-    
 
 }
