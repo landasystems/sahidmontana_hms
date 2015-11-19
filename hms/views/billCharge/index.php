@@ -115,10 +115,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     'label' => 'Edit',
                     'options' => array(
                         'class' => 'btn btn-small update'
-                    )
+                    ),
+                    'visible'=>'$data->is_temp'
                 ),
                 'delete' => array(
                     'label' => 'Hapus',
+                    'visible'=>'landa()->checkAccess("BillCharge", "d")',
                     'options' => array(
                         'class' => 'btn btn-small delete'
                     )

@@ -2,8 +2,6 @@
 
 class BillChargeController extends Controller {
 
-    
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -21,12 +19,10 @@ class BillChargeController extends Controller {
 
     public function accessRules() {
         return array(
-           
             array('allow', // r
-                'actions' => array('index', 'view','create','update','delete'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete'),
                 'expression' => 'app()->controller->isValidAccess("BillCharge","r")'
             ),
-            
         );
     }
 
@@ -339,7 +335,15 @@ class BillChargeController extends Controller {
         if (isset($_POST['BillCharge'])) {
             $model->attributes = $_POST['BillCharge'];
             $model->code = SiteConfig::model()->formatting('billCharge');
-            $model->is_temp = (isset($_POST['saveTemp'])) ? '1' : '0';
+            if (isset($_GET['print']) and $_GET['print'] == 0) {
+                $print = 0;
+                $model->is_temp = 1;
+            } else {
+                $print = 1;
+                $model->is_temp = 0;
+            }
+
+//            $model->is_temp = (isset($_POST['saveTemp'])) ? '1' : '0';
             if (!empty($_POST['detail'])) {
                 if ($model->is_temp == 0) {
                     $bayar = $model->cash + $model->cc_charge + $model->ca_charge + $model->gl_charge;
@@ -398,9 +402,9 @@ class BillChargeController extends Controller {
                         $detail->discount = $_POST['detail']['discount'][$i];
                         $detail->save();
                     }
-                    
-                    user()->setFlash('success',"Saved successfully");
-                    $this->redirect(array('view', 'id' => $model->id, 'print' => $model->is_temp));
+
+                    user()->setFlash('success', "Saved successfully");
+                    $this->redirect(array('view', 'id' => $model->id, 'print' => $print));
                 } else {
                     throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
                 }
@@ -418,7 +422,7 @@ class BillChargeController extends Controller {
      */
     public function actionUpdate($id) {
         $this->cssJs();
-        $model = $this->loadModel($id)->with('Deposite','Deposite.Guest','Additional');
+        $model = $this->loadModel($id)->with('Deposite', 'Deposite.Guest', 'Additional');
 
         if ($model->is_temp == 0 && user()->roles_id != -1 && $model->is_na == 0) {
             user()->setFlash('error', '<strong>Sorry! </strong>This transaction has been paid, so it can not be edited. Call admin to edit this transaction. Thanks!.');
@@ -431,7 +435,13 @@ class BillChargeController extends Controller {
 
         if (isset($_POST['BillCharge'])) {
             $model->attributes = $_POST['BillCharge'];
-            $model->is_temp = (isset($_POST['saveTemp'])) ? '1' : '0';
+            if (isset($_GET['print']) and $_GET['print'] == 0) {
+                $print = 0;
+                $model->is_temp = 1;
+            } else {
+                $print = 1;
+                $model->is_temp = 0;
+            }
             if (!empty($_POST['detail'])) {
                 if ($model->is_temp == 0) {
                     $bayar = $model->cash + $model->cc_charge + $model->ca_charge + $model->gl_charge;
@@ -491,9 +501,9 @@ class BillChargeController extends Controller {
                         $detail->discount = $_POST['detail']['discount'][$i];
                         $detail->save();
                     }
-                    
-                    user()->setFlash('success',"Saved successfully");
-                    $this->redirect(array('view', 'id' => $model->id, 'print' => $model->is_temp));
+
+                    user()->setFlash('success', "Saved successfully");
+                    $this->redirect(array('view', 'id' => $model->id, 'print' => $print));
                 } else {
                     throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
                 }

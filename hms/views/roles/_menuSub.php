@@ -23,6 +23,7 @@ foreach ($arrMenu as $arr) {
                     if (isset($mRolesAuth[$arr['auth_id']])) {
                         $arrRolesAuth = json_decode($mRolesAuth[$arr['auth_id']]->crud, true);
                         $rValue = (isset($arrRolesAuth['r']) && $arrRolesAuth['r'] == 1) ? 1 : 0;
+                        $dValue = (isset($arrRolesAuth['d']) && $arrRolesAuth['d'] == 1) ? 1 : 0;
                     }
                 }
             }
@@ -31,18 +32,23 @@ foreach ($arrMenu as $arr) {
             if (isset($arr['crud'])) {
                 $arrAuth = $arr['crud'];
                 $r = CHtml::CheckBox($arr['auth_id'] . '[r]', $rValue);
+                
+                if($arr['auth_id'] == 'BillCharge')
+                $d = CHtml::CheckBox($arr['auth_id'] . '[d]', $dValue);
+                
                 echo '<tr>
                                     <td><input type="hidden" name="auth_id[]" value="' . $arr['auth_id'] . '"/>' . $space . $arr['label'] . '</td>
                                     <td style="text-align:center">' . $r . '</td>
+                                    <td style="text-align:center">' . $d . '</td>
                                 </tr>';
             } else {
                 echo '<tr>
-                                    <td colspan="5">' . $space . $arr['label'] . '</td>
+                                    <td colspan="3">' . $space . $arr['label'] . '</td>
                     </tr>';
             }
         } else {
             echo '<tr>
-                                    <td colspan="5">' . $space . $arr['label'] . '</td>
+                                    <td colspan="3">' . $space . $arr['label'] . '</td>
                  </tr>';
         }
 

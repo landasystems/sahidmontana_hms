@@ -28,6 +28,7 @@
                             <tr>
                                 <th></th>
                                 <th>Access</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>

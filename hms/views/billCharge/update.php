@@ -11,7 +11,7 @@ $this->widget('bootstrap.widgets.TbMenu', array(
     'items' => array(
         array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create')),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index')),
-        array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printElement");return false;')),
+        array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printElement");return false;'), 'visible' => ($model->is_temp == 0) ? true : false),
     ),
 ));
 $this->endWidget();
@@ -130,7 +130,7 @@ if ($model->isNewRecord == FALSE) {
             ?>
             <div class="form-actions">
                 <button class="btn btn-primary"  type="submit" name ="save" onclick=""><i class="icon-ok icon-white"></i> Save & Print</button>
-                <button class="btn btn-warning"  type="submit" name="saveTemp"><i class="icon-repeat icon-white"></i> Save To Temporary</button>
+                <button class="btn btn-warning"  type="submit" name="saveTemp" onclick='this.form.action = "<?php echo Yii::app()->createUrl("billCharge/create/?print=0") ?>";'><i class="icon-repeat icon-white"></i> Save To Temporary</button>
             </div>
         <?php } ?>
     </fieldset>
@@ -325,3 +325,11 @@ if ($model->isNewRecord == FALSE) {
     echo $content;
     ?>
 </div>
+<script type="text/javascript">
+<?php
+$print = (isset($_GET['print'])) ? $_GET['print'] : '0';
+if ($print == "1" && $model->is_temp == 0) {
+    echo 'printElement("printElement");';
+}
+?>
+</script>
