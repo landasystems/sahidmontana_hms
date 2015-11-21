@@ -378,7 +378,7 @@ class ReservationController extends Controller {
         $row .= '<div class="input-prepend"><span class="add-on">Rp</span><input style="width:70px" onChange="calculation()" type="text" class="total_rate" value="" name="ReservationDetail[charge][]" readonly /></div>';
         $row .= "</td>";
         $row .= "<td>";
-        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom(); $(\'button[type="submit"]\').removeAttr(\'disabled\');"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
+        $row .= '<a class="btn btn-small" onClick="$(this).parent().parent().remove();totalRoom();"  title="Remove" rel="tooltip" "><i class="icon-minus"></i></a>';
         $row .= "</td>";
         $row .= "</tr>";
         $row .= '<tr id="selected" style="display:none"></tr>';

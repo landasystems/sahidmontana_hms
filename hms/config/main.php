@@ -1,5 +1,4 @@
 <?php
-
 Yii::setPathOfAlias('', $root);
 Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 
@@ -90,7 +89,7 @@ return array(
         'appVersion' => 'v.1',
         'client' => $client,
         'clientName' => $clientName,
-        'pathImg' => (isset($pathImg)) ? $pathImg : $root . 'hms/www/' . $client . '/images/',
+        'pathImg' => $root . 'images/',
     ),
 );
 ?>

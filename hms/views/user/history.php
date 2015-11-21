@@ -11,7 +11,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
 $this->setPageTitle('Guest History ');
-
 ?>
 <div class="well">
     <div class="control-group ">
@@ -25,7 +24,7 @@ $this->setPageTitle('Guest History ');
                 $id = $_GET['user'];
                 $selName = '[' . $user->Roles->name . '] ' . $user->name;
             }
-            
+
             $sCriteria = Roles::model()->guest();
             $list = '';
             foreach ($sCriteria as $o => $val) {
@@ -39,7 +38,11 @@ $this->setPageTitle('Guest History ');
                 'asDropDownList' => false,
                 'name' => 'user',
                 'value' => (!empty($_GET['user'])) ? $_GET['user'] : '',
+                'htmlOptions' => array(
+                    'required' => 'true'
+                ),
                 'options' => array(
+                    'required' => true,
                     'allowClear' => true,
                     "placeholder" => 'Please Choose',
                     'width' => '85%',
