@@ -124,10 +124,8 @@ $this->endWidget();
         </div>    
 
         <div class="form-actions">
-            <input type="hidden" name="BillCharge[is_temp]" id="saveTemp" value="1"/>
-            <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save</button>
-            <button class="btn btn-warning"  type="submit"><i class="icon-repeat icon-white"></i> Save Temporary</button>
-            
+            <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save & Print</button>
+            <button class="btn btn-warning"  type="submit" name="saveTemp" id="saveTemp" onclick='this.form.action="<?php echo Yii::app()->createUrl("billCharge/create/?print=0")?>";'><i class="icon-repeat icon-white"></i> Save To Temporary</button>
             <div id="alert" class="modal large hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

@@ -11,7 +11,7 @@ $this->widget('bootstrap.widgets.TbMenu', array(
     'items' => array(
         array('label' => 'Create', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create')),
         array('label' => 'List Data', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index')),
-        array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printElement");return false;')),
+        array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printElement");return false;'), 'visible' => ($model->is_temp == 0) ? true : false),
     ),
 ));
 $this->endWidget();
@@ -123,21 +123,8 @@ if ($model->isNewRecord == FALSE) {
         if (!isset($_GET['v'])) {
             ?>
             <div class="form-actions">
-                <input type="hidden" name="BillCharge[is_temp]" id="saveTemp" value="1"/>
-                <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save </button>
-                <button class="btn btn-warning"  type="submit"><i class="icon-repeat icon-white"></i> Save Temporary</button>
-
-                <div id="alert" class="modal large hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel"><i>Alert !</i></h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-error">
-                            <div id="alertContent"></div>
-                        </div>
-                    </div>
-                </div>
+                <button class="btn btn-primary"  type="submit" name ="save" onclick=""><i class="icon-ok icon-white"></i> Save & Print</button>
+                <button class="btn btn-warning"  type="submit" name="saveTemp" onclick='this.form.action = "<?php echo Yii::app()->createUrl("billCharge/create/?print=0") ?>";'><i class="icon-repeat icon-white"></i> Save To Temporary</button>
             </div>
         <?php } ?>
     </fieldset>
@@ -333,33 +320,11 @@ if ($model->isNewRecord == FALSE) {
     echo $content;
     ?>
 </div>
-
 <script type="text/javascript">
-    $('#save').on('click', function () {
-        var refund = $('#BillCharge_refund').val();
-        var gl_charge = $('#BillCharge_gl_charge').val();
-        var gl_id = $('#BillCharge_gl_room_bill_id').val();
-        var ca_charge = $('#BillCharge_ca_charge').val();
-        var ca_id = $('#BillCharge_ca_user_id').val();
-        var departement = $('#BillCharge_charge_additional_category_id').val();
-        if (departement == 0) {
-            $('#alertContent').html('<strong>Wrong ! </strong> Please select departement');
-            $('#alert').modal('show');
-        }
-        else if (refund < 0) {
-            $('#alertContent').html('<strong>Wrong Payment! </strong> Please check payment bellow');
-            $('#alert').modal('show');
-        }
-        else if (gl_charge > 0 && gl_id == 0) {
-            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose guest ledger name.');
-            $('#alert').modal('show');
-        }
-        else if (ca_charge > 0 && ca_id == 0) {
-            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose city ledger name.');
-            $('#alert').modal('show');
-        } else {
-            $('#saveTemp').val(0);
-            document.getElementById("bill-charge-form").submit();
-        }
-    })
+<?php
+$print = (isset($_GET['print'])) ? $_GET['print'] : '0';
+if ($print == "1" && $model->is_temp == 0) {
+    echo 'printElement("printElement");';
+}
+?>
 </script>
