@@ -16,9 +16,8 @@ class RegistrationController extends Controller {
 
     public function accessRules() {
         return array(
-           
             array('allow', // r
-                'actions' => array('delete','update','create','index', 'view'),
+                'actions' => array('delete', 'update', 'create', 'index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("Registration","r")'
             )
         );
@@ -641,7 +640,7 @@ class RegistrationController extends Controller {
         if (isset($_POST['Registration'])) {
             if (!empty($_POST['RegistrationDetail']['room_id']) && !empty($_POST['group'])) {
                 $model->attributes = $_POST['Registration'];
-                $model->guest_user_id = $_POST['id'];
+//                $model->guest_user_id = $_POST['id'];
                 $reservation = Reservation::model()->findByPk($model->reservation_id);
                 $model->approval_user_id = (!empty($reservation)) ? $reservation->approval_user_id : '';
                 $model->code = SiteConfig::model()->formatting('registration');
@@ -650,35 +649,38 @@ class RegistrationController extends Controller {
                     if (empty($_POST['id'])) { // new guest                        
                         $user = new User;
                         $user->scenario = 'notAllow';
-                        $user->username = '';
-                        $user->password = '';
-                        $user->name = (!empty($_POST['name'])) ? $_POST['name'] : '';
-                        $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : '';
+                        $user->name = (!empty($_POST['nama'])) ? $_POST['nama'] : '-';
+                        $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : 1;
                         $user->enabled = 1;
-                        $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
-                        $user->city_id = $_POST['city_guest'];
+                        $user->city_id = (!empty($_POST['city_guest'])) ? $_POST['city_guest'] : 104;
                         $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
                         $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
+                        $user->username = '-';
+                        $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '-';
                         $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
-                        $user->company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                        $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
+                        $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
+                        $user->company = $company;
+                        $user->birth = (!empty($_POST['birth'])) ? date('Y-m-d', strtotime($_POST['birth'])) : date("Y-m-d");
                         $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
                         $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
                         $user->save();
+
                         $model->guest_user_id = $user->id;
                     } else {
                         $user = User::model()->findByPk($model->guest_user_id);
                         $user->scenario = 'notAllow';
-                        $user->name = (!empty($_POST['name'])) ? $_POST['name'] : '';
-                        $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : '';
+                        $user->name = (!empty($_POST['nama'])) ? $_POST['nama'] : '-';
+                        $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : 1;
                         $user->enabled = 1;
-                        $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
-                        $user->city_id = $_POST['city_guest'];
+                        $user->city_id = (!empty($_POST['city_guest'])) ? $_POST['city_guest'] : 104;
                         $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
                         $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
+                        $user->username = '-';
+                        $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '-';
                         $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
-                        $user->company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                        $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
+                        $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
+                        $user->company = $company;
+                        $user->birth = (!empty($_POST['birth'])) ? date('Y-m-d', strtotime($_POST['birth'])) : date("Y-m-d");
                         $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
                         $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
                         $user->save();
@@ -805,7 +807,7 @@ class RegistrationController extends Controller {
                                     throw new CHttpException(404, 'The requested page does not exist.');
                             }
                         }
-                        user()->setFlash('success',"Registration has saved, successfully ");
+                        user()->setFlash('success', "Registration has saved, successfully ");
                         $this->redirect(array('view', 'id' => $model->id));
                     }
                 }else {
@@ -973,7 +975,7 @@ class RegistrationController extends Controller {
                                 throw new CHttpException(404, 'The requested page does not exist.');
                         }
                     }
-                    user()->setFlash('success',"Registration has saved, successfully ");
+                    user()->setFlash('success', "Registration has saved, successfully ");
                     $this->redirect(array('view', 'id' => $model->id));
                 }else {
                     Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");

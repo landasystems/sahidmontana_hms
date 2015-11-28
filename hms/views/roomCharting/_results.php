@@ -162,9 +162,9 @@ if (!empty($_POST['year']) && !empty($_POST['month'])) {
                         $status = $mSchedule[$i][$arr->id]->Reservation->status;
 //                    $status = ($status == "out of order") ? "out of order" : $status;
                         $status = str_replace(' ', '', $status);
-                        $guestName = $mSchedule[$i][$arr->id]->Reservation->Guest->guestName;
-                        $guestPhone = $mSchedule[$i][$arr->id]->Reservation->Guest->phone;
-                        $remarks = $mSchedule[$i][$arr->id]->Reservation->remarks;
+                        $guestName = isset($mSchedule[$i][$arr->id]->Reservation->Guest->guestName)? $mSchedule[$i][$arr->id]->Reservation->Guest->guestName : '-';
+                        $guestPhone = isset($mSchedule[$i][$arr->id]->Reservation->Guest->phone)? $mSchedule[$i][$arr->id]->Reservation->Guest->phone : '-';
+                        $remarks = isset($mSchedule[$i][$arr->id]->Reservation->remarks) ? $mSchedule[$i][$arr->id]->Reservation->remarks : '-';
                         $dp = (isset($mSchedule[$i][$arr->id]->Reservation->Deposite->amount)) ? landa()->rp($mSchedule[$i][$arr->id]->Reservation->Deposite->amount) : '-';
                         if (isset($mSchedule[$i + 1][$arr->id]->Reservation->Guest->guestName)) {
                             $nextName = $mSchedule[$i + 1][$arr->id]->Reservation->Guest->guestName;

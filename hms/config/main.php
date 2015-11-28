@@ -1,4 +1,5 @@
 <?php
+
 Yii::setPathOfAlias('', $root);
 Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 
@@ -42,6 +43,7 @@ return array(
         'user' => array(
             'loginUrl' => array('/site/login'),
             'allowAutoLogin' => true,
+            'authTimeout' => 900
         ),
         'urlManager' => array(
             'urlFormat' => 'path',

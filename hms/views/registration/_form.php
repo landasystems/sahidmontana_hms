@@ -15,7 +15,6 @@
     .control-label{width: 90px !important}
     .controls {margin-left:105px !important}
 </style>
-
 <?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'registration-form',
@@ -132,11 +131,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 <div class="control-group ">
                     <label class="control-label required">Guest Name </label>
                     <div class="controls">
+                        <input type="hidden" name="Registration[guest_user_id]" id="id" value="<?php echo $model->guest_user_id ?>">
+
                         <?php
                         $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-                            'name' => 'Registration[guest_user_id]',
+                            'name' => 'nama',
                             'sourceUrl' => array('registration/GetListGuest'),
-                            'value' => $model->guest_user_id,
+                            'value' => $name,
                             'options' => array(
                                 'showAnim' => 'fold',
                                 'minLength' => '3',
@@ -169,12 +170,12 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     <?php echo CHtml::radioButtonList('sex', '', array('m' => 'Mr.', 'f' => 'Mrs.'), array('separator' => '')); ?>
                                 </div>
                             </div>
-                            <div class="control-group ">
-                                <label class="control-label">Name</label>
-                                <div class="controls">
-                                    <?php echo CHtml::textField('name', $name, array('class' => 'span4', 'disabled' => false)); ?>
-                                </div>
-                            </div>                                        
+                            <!--                            <div class="control-group ">
+                                                            <label class="control-label">Name</label>
+                                                            <div class="controls">
+                            <?php echo CHtml::textField('name', $name, array('class' => 'span4', 'disabled' => false)); ?>
+                                                            </div>
+                                                        </div>                                        -->
                             <div class="control-group ">
                                 <label class="control-label">Company</label>
                                 <div class="controls">
@@ -218,13 +219,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 </div>
                             </div>
                             <div class="control-group">
-                                <div class="control-label">Region</div>
+                                <div class="control-label required">Region</div>
                                 <div class="controls">
                                     <?php
                                     $m_city = City::model()->findByPk($city);
                                     if (isset($m_city)) {
                                         $city_id = $m_city->id;
-                                        $city_name = $m_city->name;
+                                        $city_name = $m_city->fullName;
                                     } else {
                                         $city_id = 0;
                                         $city_name = '';
@@ -232,6 +233,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     $this->widget(
                                             'bootstrap.widgets.TbSelect2', array(
                                         'name' => "city_guest",
+                                        'id' => "city_guest",
                                         'val' => $city,
                                         'asDropDownList' => false,
                                         'options' => array(
@@ -764,9 +766,10 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     <div class="form-actions">
         <?php
         $this->widget('bootstrap.widgets.TbButton', array(
-            'buttonType' => 'submit',
+            'buttonType' => 'button',
             'type' => 'primary',
             'icon' => 'ok white',
+            'id' => 'save',
             'label' => $model->isNewRecord ? 'Registration (Check In)' : 'Update Registration',
         ));
         ?>
@@ -915,7 +918,34 @@ $this->beginWidget(
 
 <?php $this->endWidget(); ?>
 <?php $this->endWidget(); ?>
+<?php
+    $this->beginWidget(
+            'bootstrap.widgets.TbModal', array('id' => 'warningModal')
+    );
+    ?>
 
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>WARNING !</h3>
+    </div>
+
+    <div class="modal-body form-horizontal">
+        <div class="alert alert-error"><div id="teks-warning"></div></div>
+    </div>
+
+    <div class="modal-footer">  
+        <?php
+        $this->widget(
+                'bootstrap.widgets.TbButton', array(
+            'label' => 'Close',
+            'url' => '#',
+            'htmlOptions' => array('data-dismiss' => 'modal'),
+                )
+        );
+        ?>
+    </div>
+
+    <?php $this->endWidget(); ?>
 <?php
 $this->beginWidget(
         'bootstrap.widgets.TbModal', array('id' => 'warningModal')
@@ -1014,7 +1044,24 @@ if ($model->isNewRecord == FALSE) {
 }
 ?>
 <script type="text/javascript">
-
+    $('#save').on('click', function () {
+        var name = $("#nama").val();
+        var city = $("#city_guest").val();
+        var room = $(".itemSelected").length;
+        if (name == "") {
+            $('#teks-warning').html('<strong>Wrong! </strong> Guest Cannot be blank!');
+            $('#warningModal').modal('show');
+        } else if (city == "") {
+            $('#teks-warning').html('<strong>Wrong! </strong> Guest Cannot be blank!');
+            $('#warningModal').modal('show');
+        } else if (room <= 0) {
+            $('#teks-warning').html('<strong>Wrong! </strong> Room Cannot be blank!');
+            $('#warningModal').modal('show');
+        } else {
+            document.getElementById("registration-form").submit();
+        }
+    });
+    
     function getDetail(id) {
         $.ajax({
             url: "<?php echo url('user/getDetail'); ?>",

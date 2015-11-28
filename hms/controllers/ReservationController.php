@@ -16,9 +16,8 @@ class ReservationController extends Controller {
 
     public function accessRules() {
         return array(
-           
             array('allow', // r
-                'actions' => array('index', 'view','create','update','delete'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete'),
                 'expression' => 'app()->controller->isValidAccess("Reservation","r")'
             )
         );
@@ -484,55 +483,51 @@ class ReservationController extends Controller {
         $modelDp = new Deposite;
         $this->js();
         cs()->registerScript('wide', '$(".landaMin").trigger("click");');
+
         if (isset($_POST['Reservation'])) {
             if (!empty($_POST['ReservationDetail']['room_id'])) {
-                //$model->guest_user_id = 0;
                 $model->attributes = $_POST['Reservation'];
-                $model->guest_user_id = $_POST['id'];
                 $model->code = SiteConfig::model()->formatting('reservation');
-                if (empty($_POST['id'])) { // new guest
+                if (empty($_POST['Reservation']['guest_user_id'])) { // new guest
                     $user = new User;
                     $user->scenario = 'notAllow';
-                    $user->username = '';
-                    $user->password = '';
-                    $user->name = (!empty($_POST['name'])) ? $_POST['name'] : '';
-                    $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : '';
+                    $user->name = (!empty($_POST['nama'])) ? $_POST['nama'] : '-';
+                    $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : 1;
                     $user->enabled = 1;
-                    $user->city_id = $_POST['city_guest'];
+                    $user->city_id = (!empty($_POST['city_guest'])) ? $_POST['city_guest'] : 104;
                     $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
                     $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
-                    $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
+                    $user->username = '-';
+                    $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '-';
                     $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
                     $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                    //$other = json_encode(array('company' => $company));
                     $user->company = $company;
-                    $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
+                    $user->birth = (!empty($_POST['birth'])) ? date('Y-m-d', strtotime($_POST['birth'])) : date("Y-m-d");
                     $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
                     $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
                     $user->save();
+
                     $model->guest_user_id = $user->id;
                 } else {
                     $user = User::model()->findByPk($model->guest_user_id);
                     $user->scenario = 'notAllow';
-                    $user->name = (!empty($_POST['name'])) ? $_POST['name'] : '';
-                    $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : '';
+                    $user->name = (!empty($_POST['nama'])) ? $_POST['nama'] : '-';
+                    $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : 1;
                     $user->enabled = 1;
-                    $user->city_id = $_POST['city_guest'];
+                    $user->city_id = (!empty($_POST['city_guest'])) ? $_POST['city_guest'] : 104;
                     $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
                     $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
-                    $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
+                    $user->username = '-';
+                    $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '-';
                     $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
                     $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                    //$other = json_encode(array('company' => $company));
                     $user->company = $company;
-                    $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
+                    $user->birth = (!empty($_POST['birth'])) ? date('Y-m-d', strtotime($_POST['birth'])) : date("Y-m-d");
                     $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
                     $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
                     $user->save();
                 }
 
-//                $sDate = $_POST['Reservation']['date_from'];
-//                $date = explode('-', $sDate);
                 $sDate = str_replace(" ", "", $_POST['Reservation']['date_from']);
                 $date = explode('-', $sDate);
                 $date1 = explode('/', $date[0]);
@@ -545,7 +540,7 @@ class ReservationController extends Controller {
                 $model->date_to = date("Y/m/d", strtotime($date2));
                 $model->status = 'reservation';
 
-                if ($model->guest_user_id != 0 and ! empty($model->guest_user_id)) {
+                if (!empty($user)) {
                     if ($model->save()) {
 
                         if ($_POST['Deposite']['amount'] > 0) {
@@ -595,7 +590,7 @@ class ReservationController extends Controller {
                                     throw new CHttpException(404, 'The requested page does not exist.');
                             }
                         }
-                        user()->setFlash('success',"Reservation has saved, successfully ");
+                        user()->setFlash('success', "Reservation has saved, successfully ");
                         $this->redirect(array('view', 'id' => $model->id));
                     }
                 }else {
@@ -605,10 +600,12 @@ class ReservationController extends Controller {
                 Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
             }
         }
-        $this->render('create', array(
-            'model' => $model,
-            'modelDp' => $modelDp,
-        ));
+        if (!isset($_POST['Reservation'])) {
+            $this->render('create', array(
+                'model' => $model,
+                'modelDp' => $modelDp,
+            ));
+        }
     }
 
     public function actionUpdate($id) {
@@ -645,9 +642,7 @@ class ReservationController extends Controller {
             if (!empty($_POST['ReservationDetail']['room_id'])) {
 
                 $model->attributes = $_POST['Reservation'];
-                $model->guest_user_id = $_POST['id'];
-//                $sDate = $_POST['Reservation']['date_from'];
-//                $date = explode('-', $sDate);
+//                $model->guest_user_id = ['Reservation']['guest_user_id'];
                 $sDate = str_replace(" ", "", $_POST['Reservation']['date_from']);
                 $date = explode('-', $sDate);
                 $date1 = explode('/', $date[0]);
@@ -660,22 +655,45 @@ class ReservationController extends Controller {
                 $model->date_to = date("Y/m/d", strtotime($date2));
 
 
-                $user = User::model()->findByPk($model->guest_user_id);
-                $user->scenario = 'notAllow';
-                $user->name = (!empty($_POST['name'])) ? $_POST['name'] : '';
-                $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : '';
-                $user->enabled = 1;
-                $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '';
-                $user->city_id = $_POST['city_guest'];
-                $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
-                $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
-                $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
-                $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
-                $user->company = $company;
-                $user->birth = (!empty($_POST['birth'])) ? date('Y/m/d', strtotime($_POST['birth'])) : '';
-                $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
-                $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
-                $user->save();
+                if (empty($_POST['Reservation']['guest_user_id'])) { // new guest
+                    $user = new User;
+                    $user->scenario = 'notAllow';
+                    $user->name = (!empty($_POST['nama'])) ? $_POST['nama'] : '-';
+                    $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : 1;
+                    $user->enabled = 1;
+                    $user->city_id = (!empty($_POST['city_guest'])) ? $_POST['city_guest'] : 104;
+                    $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
+                    $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
+                    $user->username = '-';
+                    $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '-';
+                    $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
+                    $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
+                    $user->company = $company;
+                    $user->birth = (!empty($_POST['birth'])) ? date('Y-m-d', strtotime($_POST['birth'])) : date("Y-m-d");
+                    $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
+                    $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
+                    $user->save();
+
+                    $model->guest_user_id = $user->id;
+                } else {
+                    $user = User::model()->findByPk($model->guest_user_id);
+                    $user->scenario = 'notAllow';
+                    $user->name = (!empty($_POST['nama'])) ? $_POST['nama'] : '-';
+                    $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : 1;
+                    $user->enabled = 1;
+                    $user->city_id = (!empty($_POST['city_guest'])) ? $_POST['city_guest'] : 104;
+                    $user->address = (!empty($_POST['address'])) ? $_POST['address'] : '';
+                    $user->phone = (!empty($_POST['phone'])) ? $_POST['phone'] : '';
+                    $user->username = '-';
+                    $user->email = (!empty($_POST['email'])) ? $_POST['email'] : '-';
+                    $user->code = (!empty($_POST['userNumber'])) ? $_POST['userNumber'] : '';
+                    $company = (!empty($_POST['company'])) ? $_POST['company'] : '';
+                    $user->company = $company;
+                    $user->birth = (!empty($_POST['birth'])) ? date('Y-m-d', strtotime($_POST['birth'])) : date("Y-m-d");
+                    $user->sex = (!empty($_POST['sex'])) ? $_POST['sex'] : '';
+                    $user->nationality = (!empty($_POST['nationality'])) ? $_POST['nationality'] : '';
+                    $user->save();
+                }
 
                 //-----------------------------
 
@@ -730,14 +748,14 @@ class ReservationController extends Controller {
                                 throw new CHttpException(404, 'The requested page does not exist.');
                         }
                     }
-                    user()->setFlash('success',"Reservation has saved, successfully ");
+                    user()->setFlash('success', "Reservation has saved, successfully ");
                     $this->redirect(array('view', 'id' => $model->id));
                 }else {
                     Yii::app()->user->setFlash('error', "<b>Guest information</b> cannot be blank");
                 }
-            }else {
-                    Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
-                }
+            } else {
+                Yii::app()->user->setFlash('error', "<b>List Room</b> cannot be blank");
+            }
         }
         $this->render('update', array(
             'model' => $model,

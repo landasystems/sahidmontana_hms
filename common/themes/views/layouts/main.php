@@ -14,8 +14,22 @@
         cs()->registerScriptFile(bu('js/begin.js'));
         cs()->registerScriptFile(bu('js/main.js'), CClientScript::POS_END);
         ?>     
+        <script>
+            var seconds = <?php Yii::app()->user->authTimeout ?>;
+            function countDown() {
+                if (seconds <= 0) {
+                    document.location.href = "<?php echo Yii::app()->createUrl("site/logout") ?>";
+                }
+
+                seconds--;
+                window.setTimeout("countDown()", 1000);
+            }
+            function resetCounter() {
+                seconds = <?php Yii::app()->user->authTimeout ?>;
+            }
+        </script>
     </head>
-    <body>
+    <body onLoad="countDown()" onmouseover="resetCounter()" onkeypress="resetCounter()">
         <img src="<?php echo bu("img/loaderAjax.gif") ?>" id="loader" />
         <div id="qLoverlay"></div>
         <div id="qLbar"></div>
@@ -25,6 +39,7 @@
                     <div class="container-fluid">
                         <a class="brand" href="<?php echo url('dashboard') ?>">
                             <?php
+                            echo Yii::app()->user->authTimeout;
                             echo param('clientName');
                             ?>
                         </a>

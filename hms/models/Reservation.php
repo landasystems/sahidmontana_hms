@@ -183,7 +183,7 @@ class Reservation extends CActiveRecord {
     }
 
     public function getFullReservation() {
-        return $this->code . ' [ ' . strtoupper($this->Guest->name) . ' ]';
+        return $this->code . ' [ ' . strtoupper(isset($this->Guest->name) ? $this->Guest->name : '-') . ' ]';
     }
 
     protected function beforeValidate() {
