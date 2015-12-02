@@ -117,7 +117,7 @@
                                         getDetail(ui.item["item_id"]);
                                     }'
                                 ),
-                                'htmlOptions'=>array('class' => 'span8')
+                                'htmlOptions' => array('class' => 'span8')
                             ))
                             ?>   
                             <span class="help-block">select if it already exists, type if a new guest</span>
@@ -333,6 +333,7 @@
                                         'callback' => 'js:function(start, end){changeDate(start.toString("yyyy-MM-dd"), end.toString("yyyy-MM-dd"));}',
                                         'startDate' => $date, 'endDate' => $date2
                                     ),
+                                    'style' => 'background-color: white',
                                     'hint' => '<label><i>Arrival - Departure</i><label>'
                                 ));
                                 ?>

@@ -380,6 +380,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 'value' => $dateResult,
                                 'prepend' => '<i class="icon-calendar"></i>',
                                 'readOnly' => true,
+                                'style' => 'background-color: white',
                                 'options' => array(
                                     'format' => 'dd/MM/yyyy',
                                     'minDate' => $minDate,
