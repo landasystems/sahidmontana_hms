@@ -24,7 +24,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 </style>
 <?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div class="alert fade in alert-' . $key . '">' . $message . '</div>';
+    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
 ?>
 

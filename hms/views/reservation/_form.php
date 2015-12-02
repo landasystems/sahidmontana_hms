@@ -1,3 +1,36 @@
+<?php
+$siteConfig = SiteConfig::model()->findByPk(1);
+$group = "1";
+$role = '1';
+$name = "";
+$province = "5";
+$city = "104";
+$totalRoom = 0;
+$address = "";
+$phone = "";
+$email = "";
+$idCard = "";
+$company = '';
+$sex = '';
+$birth = '';
+$nationality = '';
+if ($model->isNewRecord == FALSE) {
+    $role = $model->Guest->roles_id;
+    $group = $model->Guest->roles_id;
+    $name = $model->Guest->name;
+    $email = $model->Guest->email;
+    $province = $model->Guest->City->Province->id;
+    $city = $model->Guest->City->id;
+    $address = $model->Guest->address;
+    $phone = $model->Guest->phone;
+    $idCard = $model->Guest->code;
+    $company = $model->Guest->company;
+    $phone = $model->Guest->phone;
+    $sex = $model->Guest->sex;
+    $birth = date("m/d/Y", strtotime($model->Guest->birth));
+    $nationality = $model->Guest->nationality;
+}
+?>
 <style>
     .modal.large {
         height: 90%; 
@@ -32,7 +65,7 @@
     ?>
     <?php
     foreach (Yii::app()->user->getFlashes() as $key => $message) {
-        echo '<div class="alert alert-danger">' . $message . "</div>\n";
+        echo '<div class="alert alert-' . $key . '">' . $message . "</div>\n";
     }
     ?>
     <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>       
@@ -70,7 +103,6 @@
                     <div class="control-group ">
                         <label class="control-label">Market Seg.</label>
                         <div class="controls">                 
-                            <input type="hidden" name="id" id="id" value="<?php echo $model->guest_user_id ?>">
                             <?php
                             $this->widget(
                                     'bootstrap.widgets.TbSelect2', array(
@@ -95,19 +127,19 @@
                         $dateResult = date('d/m/Y', time()) . ' - ' . date('d/m/Y', time() + 86400);
                         $jsRemove = '';
                     }
-                    if ($model->isNewRecord == FALSE) {
-                        $guest = User::model()->findByPk($model->guest_user_id);
-                        $model->guest_user_id = $guest->name;
-                    }
+//                    if ($model->isNewRecord == FALSE) {
+//                        $guest = User::model()->findByPk($model->guest_user_id);
+//                    }
                     ?>
                     <div class="control-group ">
                         <label class="control-label required">Guest Name </label>
                         <div class="controls">
+                            <input type="hidden" name="Reservation[guest_user_id]" id="id" value="<?php echo $model->guest_user_id ?>">
                             <?php
                             $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-                                'name' => 'Reservation[guest_user_id]',
+                                'name' => 'nama',
                                 'sourceUrl' => array('registration/GetListGuest'),
-                                'value' => $model->guest_user_id,
+                                'value' => $name,
                                 'options' => array(
                                     'showAnim' => 'fold',
                                     'minLength' => '3',
@@ -124,39 +156,6 @@
                         </div>
                     </div>
                     <hr>
-                    <?php
-                    $siteConfig = SiteConfig::model()->findByPk(1);
-                    $group = "1";
-                    $role = '1';
-                    $name = "";
-                    $province = "0";
-                    $city = "0";
-                    $totalRoom = 0;
-                    $address = "";
-                    $phone = "";
-                    $email = "";
-                    $idCard = "";
-                    $company = '';
-                    $sex = '';
-                    $birth = '';
-                    $nationality = '';
-                    if ($model->isNewRecord == FALSE) {
-                        $role = $model->Guest->roles_id;
-                        $group = $model->Guest->roles_id;
-                        $name = $model->Guest->name;
-                        $email = $model->Guest->email;
-                        $province = $model->Guest->City->Province->id;
-                        $city = $model->Guest->City->id;
-                        $address = $model->Guest->address;
-                        $phone = $model->Guest->phone;
-                        $idCard = $model->Guest->code;
-                        $company = $model->Guest->company;
-                        $phone = $model->Guest->phone;
-                        $sex = $model->Guest->sex;
-                        $birth = date("m/d/Y", strtotime($model->Guest->birth));
-                        $nationality = $model->Guest->nationality;
-                    }
-                    ?>
                     <table style="width:100%">
                         <tr>
                             <td style="vertical-align: top">                                
@@ -172,12 +171,12 @@
                                         <?php echo CHtml::radioButtonList('sex', '', array('m' => 'Mr.', 'f' => 'Mrs.'), array('separator' => '')); ?>
                                     </div>
                                 </div>
-                                <div class="control-group ">
-                                    <label class="control-label">Name</label>
-                                    <div class="controls">
-                                        <?php echo CHtml::textField('name', $name, array('class' => 'span4', 'disabled' => false)); ?>
-                                    </div>
-                                </div>                                        
+                                <!--                                <div class="control-group ">
+                                                                    <label class="control-label">Name</label>
+                                                                    <div class="controls">-->
+                                <?php echo CHtml::hiddenField('name', $name, array('type' => 'hidden', 'class' => 'span4', 'disabled' => false)); ?>
+                                <!--                                    </div>
+                                                                </div>                                        -->
                                 <div class="control-group ">
                                     <label class="control-label">Company</label>
                                     <div class="controls">
@@ -221,13 +220,13 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="control-label">Region</div>
+                                    <div class="control-label required">Region</div>
                                     <div class="controls">
                                         <?php
                                         $m_city = City::model()->findByPk($city);
                                         if (isset($m_city)) {
                                             $city_id = $m_city->id;
-                                            $city_name = $m_city->name;
+                                            $city_name = $m_city->fullName;
                                         } else {
                                             $city_id = 0;
                                             $city_name = '';
@@ -236,6 +235,7 @@
                                                 'bootstrap.widgets.TbSelect2', array(
                                             'name' => "city_guest",
                                             'val' => $city,
+                                            'id' => 'city_guest',
                                             'asDropDownList' => false,
                                             'options' => array(
                                                 'allowClear' => true,
@@ -243,10 +243,10 @@
                                                 'width' => '100%;margin:0px;text-align:left',
                                                 'minimumInputLength' => '3',
                                                 'initSelection' => 'js:function(element, callback) 
-                            { 
-                                data = {"id": ' . $city_id . ',"text": "' . $city_name . '"}
-                                callback(data);   
-                            }',
+                                                { 
+                                                    data = {"id": ' . $city_id . ',"text": "' . $city_name . '"}
+                                                    callback(data);   
+                                                }',
                                                 'ajax' => array(
                                                     'url' => Yii::app()->createUrl('city/listajax'),
                                                     'dataType' => 'json',
@@ -481,7 +481,6 @@
                         <h2 style="text-align:center" class="blue">CHOOSED ROOM</h2> 
                         <hr>                           
                         <div class="detail_paket"></div>
-                        <!--<div style="text-align:right"><a class="btn btn-small btn-primary" data-toggle="modal" data-target="#modalAuthority"><i class="icon-cog icon-white" style="margin:0px !important"></i> Change Price</a></div><br>-->
 
                         <div style="text-align:right">
                             <a class="btn btn-small btn-primary" data-toggle="modal" data-target="#modalAuthority"><i class="icon-cog icon-white" style="margin:0px !important"></i> Change Price</a>
@@ -733,11 +732,12 @@
     <div class="form-actions">
         <?php
         $this->widget('bootstrap.widgets.TbButton', array(
-            'buttonType' => 'submit',
+            'buttonType' => 'button',
             'type' => 'primary',
             'icon' => 'ok white',
             'visible' => !isset($_GET['v']),
             'label' => $model->isNewRecord ? 'Reservation' : 'Save Reservation',
+            'id' => 'save'
         ));
         ?>
     </div>
@@ -914,6 +914,7 @@
     </div>
 
     <?php $this->endWidget(); ?>
+
     <?php
     $this->beginWidget(
             'bootstrap.widgets.TbModal', array('id' => 'modalAuthority')
@@ -976,10 +977,61 @@
     </div>
 
     <?php $this->endWidget(); ?>
+
     <?php $this->endWidget(); ?>
+
+    <?php
+    $this->beginWidget(
+            'bootstrap.widgets.TbModal', array('id' => 'modalCheck')
+    );
+    ?>
+
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>Warning</h3>
+    </div>
+
+    <div class="modal-body form-horizontal">
+        <div class="alert alert-danger">
+            <div id="peringatan"></div>
+        </div>
+    </div>
+
+    <div class="modal-footer">   
+        <?php
+        $this->widget(
+                'bootstrap.widgets.TbButton', array(
+            'label' => 'Close',
+            'url' => '#',
+            'htmlOptions' => array('data-dismiss' => 'modal'),
+                )
+        );
+        ?>
+    </div>
+
+    <?php $this->endWidget(); ?>
+
 </div>
 
 <script type="text/javascript">
+    $('#save').on('click', function () {
+        var name = $("#nama").val();
+        var city = $("#city_guest").val();
+        var room = $(".itemSelected").length;
+        if (name == "") {
+            $('#teks-warning').html('<strong>Wrong! </strong> Guest Cannot be blank!');
+            $('#warningModal').modal('show');
+        }else if (city == "") {
+            $('#teks-warning').html('<strong>Wrong! </strong> Guest Cannot be blank!');
+            $('#warningModal').modal('show');
+        } else if (room <= 0) {
+            $('#teks-warning').html('<strong>Wrong! </strong> Room Cannot be blank!');
+            $('#warningModal').modal('show');
+        } else {
+            document.getElementById("reservation-form").submit();
+        }
+    });
+
     function getDetail(id) {
         var name = $("#Reservation_guest_user_id").val();
         $.ajax({
@@ -993,7 +1045,7 @@
                 $("#roles").val(obj.group);
                 $("#name").val(obj.name);
                 $("#province_guest").val(obj.province);
-                $("#city_guest").val(obj.city);
+                $("#city_guest").val(obj.city_guest);
                 $("#address").val(obj.address);
                 $("#phone").val(obj.phone);
                 $("#sex").val(obj.sex);

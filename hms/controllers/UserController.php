@@ -16,13 +16,12 @@ class UserController extends Controller {
 
     public function accessRules() {
         return array(
-            
             array('allow', // r
                 'actions' => array('history', 'view'),
                 'expression' => 'app()->controller->isValidAccess("Report_GuestHistory","r")'
             ),
             array('allow', // r
-                'actions' => array('delete','update','create','index', 'view'),
+                'actions' => array('delete', 'update', 'create', 'index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("User","r")'
             )
         );
@@ -265,12 +264,13 @@ class UserController extends Controller {
     public function actionGetDetail() {
         $id = $_POST['id'];
         $user = User::model()->findByPk($id);
-        if (isset($user) and !empty($user)) {
+        if (isset($user) and ! empty($user)) {
             $return['id'] = $user->id;
             $return['group'] = $user->roles_id;
             $return['name'] = $user->name;
             $return['email'] = $user->email;
-            $return['city'] = $user->City->id;
+            $return['city'] = isset($user->City->id) ? $user->City->id : '';
+            $return['city_guest'] = json_encode(array('id' => isset($user->City->id) ? $user->City->id : '', 'text' => isset($user->City->fullName) ? $user->City->fullName : ''));
             $return['province'] = $user->City->Province->id;
             $return['address'] = $user->address;
             $return['phone'] = $user->phone;
