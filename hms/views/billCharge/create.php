@@ -125,7 +125,7 @@ $this->endWidget();
 
         <div class="form-actions">
             <button class="btn btn-primary"  type="button" name="save" id="save"><i class="icon-ok icon-white"></i> Save & Print</button>
-            <button class="btn btn-warning"  type="submit" name="saveTemp" id="saveTemp" onclick='this.form.action="<?php echo Yii::app()->createUrl("billCharge/create/?print=0")?>";'><i class="icon-repeat icon-white"></i> Save To Temporary</button>
+            <button class="btn btn-warning"  type="button" name="saveTemp" id="saveTemp" ><i class="icon-repeat icon-white"></i> Save To Temporary</button>
             <div id="alert" class="modal large hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -279,9 +279,14 @@ $this->endWidget();
         var gl_id = $('#BillCharge_gl_room_bill_id').val();
         var ca_charge = $('#BillCharge_ca_charge').val();
         var ca_id = $('#BillCharge_ca_user_id').val();
+        var item = $('.items').length;
         var departement = $('#BillCharge_charge_additional_category_id').val();
         if (departement == 0) {
             $('#alertContent').html('<strong>Wrong ! </strong> Please select departement');
+            $('#alert').modal('show');
+        }
+        else if (item <= 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please check list');
             $('#alert').modal('show');
         }
         else if (refund < 0) {
@@ -299,5 +304,42 @@ $this->endWidget();
             $('#saveTemp').val(0);
             document.getElementById("bill-charge-form").submit();
         }
+    })
+    
+//    SAVE TEMPORARY
+    $('#saveTemp').on('click', function () {
+        var refund = $('#BillCharge_refund').val();
+        var gl_charge = $('#BillCharge_gl_charge').val();
+        var gl_id = $('#BillCharge_gl_room_bill_id').val();
+        var ca_charge = $('#BillCharge_ca_charge').val();
+        var ca_id = $('#BillCharge_ca_user_id').val();
+          var item = $('.items').length;
+        var departement = $('#BillCharge_charge_additional_category_id').val();
+        if (departement == 0) {
+            $('#alertContent').html('<strong>Wrong ! </strong> Please select departement');
+            $('#alert').modal('show');
+        }
+        else if (item <= 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please check list');
+            $('#alert').modal('show');
+        }
+        else if (refund < 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please check payment bellow');
+            $('#alert').modal('show');
+        }
+        else if (gl_charge > 0 && gl_id == 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose guest ledger name.');
+            $('#alert').modal('show');
+        }
+        else if (ca_charge > 0 && ca_id == 0) {
+            $('#alertContent').html('<strong>Wrong Payment! </strong> Please choose city ledger name.');
+            $('#alert').modal('show');
+         } else {
+//            $('#saveTemp').val(0);
+//            $('#saveTemp').attr("type","submit");
+           
+            document.getElementById("bill-charge-form").action = "<?php echo Yii::app()->createUrl("billCharge/create/?print=0")?>";
+             document.getElementById("bill-charge-form").submit();
+       }
     })
 </script>

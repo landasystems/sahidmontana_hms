@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle('Registrations | ' . $model->id);
+$this->setPageTitle('Registrations | ' . $model->code);
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''

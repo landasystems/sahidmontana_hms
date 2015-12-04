@@ -48,7 +48,7 @@ class Bill extends CActiveRecord {
         return array(
             'BillTo' => array(self::BELONGS_TO, 'User', 'ca_user_id'),
             'Guest' => array(self::BELONGS_TO, 'User', 'guest_user_id'),
-//            'CityLedger' => array(self::BELONGS_TO, 'User', 'ca_user_id'),
+            'CityLedger' => array(self::BELONGS_TO, 'User', 'ca_user_id'),
             'Room' => array(self::BELONGS_TO, 'Room', 'room_id'),
             'Cashier' => array(self::BELONGS_TO, 'User', 'created_user_id'),
             'RoomBill' => array(self::BELONGS_TO, 'RoomBill', 'gl_room_bill_id'),

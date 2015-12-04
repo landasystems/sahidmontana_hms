@@ -39,10 +39,12 @@
             $filter .= ' and t.floor=' . $floor . '';
         if (!empty($bed))
             $filter .= ' and t.bed="' . strtolower($bed) . '"';
+        
+        $filter .= 'and t.status != "dirty" and t.status!="dirty" and t.status!="occupied" and t.status!="compliment" and t.status!="house use"';
 
 
         $data = Room::model()->with('RoomSchedule')->
-                findAll(array('condition' => $filter));
+                findAll(array('condition' => $filter,'order'=>'number asc'));
         $return = "";
         $y = 0;
 
