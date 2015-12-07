@@ -667,7 +667,7 @@ class RegistrationController extends Controller {
 
                         $model->guest_user_id = $user->id;
                     } else {
-                        $user = User::model()->findByPk($model->guest_user_id);
+                        $user = User::model()->findByPk($_POST['Registration']['guest_user_id']);
                         $user->scenario = 'notAllow';
                         $user->name = (!empty($_POST['nama'])) ? $_POST['nama'] : '-';
                         $user->roles_id = (!empty($_POST['group'])) ? $_POST['group'] : 1;

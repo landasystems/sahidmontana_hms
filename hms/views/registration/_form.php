@@ -131,7 +131,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 <div class="control-group ">
                     <label class="control-label required">Guest Name </label>
                     <div class="controls">
-                        <input type="hidden" name="Registration[guest_user_id]" id="id" value="<?php echo $model->guest_user_id ?>">
+                        <input type="hidden" name="Registration[guest_user_id]" id="id_user" value="<?php echo $model->guest_user_id ?>">
 
                         <?php
                         $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
@@ -1064,13 +1064,14 @@ if ($model->isNewRecord == FALSE) {
     });
     
     function getDetail(id) {
+    var name = $("#Registration_guest_user_id").val();
         $.ajax({
             url: "<?php echo url('user/getDetail'); ?>",
             type: "POST",
             data: {id: id},
             success: function (data) {
                 obj = JSON.parse(data);
-                $("#id").val(obj.id);
+                $("#id_user").val(obj.id);
                 $("#group").val(obj.group);
                 $("#roles").val(obj.group);
                 $("#name").val(obj.name);
