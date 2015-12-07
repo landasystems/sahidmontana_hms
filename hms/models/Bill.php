@@ -228,11 +228,12 @@ class Bill extends CActiveRecord {
         foreach ($billCharge as $valCharge) {
            // $amount = BillChargeDet::model()->find(array('select' => 'sum(amount) as amount', 'condition' => 'bill_charge_id='.$valCharge->bill_charge_id));
            // $price = BillChargeDet::model->find(array())
+            $room = (!empty($valCharge->BillCharge->RoomBill->room_number)) ? $valCharge->BillCharge->RoomBill->room_number : '-';
             if ($print) {
                 $results .= '<tr>'
                         . '<td id="bill_print"  style="text-align:left">' . date("D, d-M-Y H:i", strtotime($valCharge->BillCharge->created)) . '</td>'
                         . '<td id="bill_print"  style="text-align:left">' . $valCharge->BillCharge->ChargeAdditionalCategory->name . ' [' . $valCharge->BillCharge->code . ']' . '</td>'
-                        . '<td id="bill_print">' . $valCharge->BillCharge->RoomBill->room_number . '</td>'
+                        . '<td id="bill_print">' . $room . '</td>'
                         . '<td id="bill_print"  style="text-align:center"></td>'
                         . '<td id="bill_print"  style="text-align:right">' . landa()->rp($valCharge->BillCharge->gl_charge, false) . '</td>'
                         . '<td id="bill_print"  style="text-align:right">' . landa()->rp($valCharge->BillCharge->gl_charge, false) . '</td>'
@@ -241,7 +242,7 @@ class Bill extends CActiveRecord {
                 $results .= '<tr>'
                         . ' <td style="text-align:center"><i class="minia-icon-arrow-right-2"><input type="hidden" name="bill_charge_id[]" value="' . $valCharge->bill_charge_id . '"></td>'
                         . '<td style="text-align:left">' . $valCharge->BillCharge->ChargeAdditionalCategory->name . ' [' . $valCharge->BillCharge->code . ']' . '</td>'
-                        . '<td style="text-align:left">' . $valCharge->BillCharge->RoomBill->room_number . '</td>'
+                        . '<td style="text-align:left">' . $room  . '</td>'
                         . '<td>' . date("D, d-M-Y H:i", strtotime($valCharge->BillCharge->created)) . '</td>'
                         . '<td  style="text-align:center"></td>'
                         . '<td  style="text-align:right">' . landa()->rp($valCharge->BillCharge->gl_charge) . '</td>'

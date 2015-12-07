@@ -192,19 +192,44 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                         <b>City Ledger Name:</b>                        
                     </td>
                     <td colspan="2" style="text-align:right">
-                        <?php
-                        $datauser = CHtml::listData(User::model()->listUsers('guest'), 'id', 'fullName');
+                         <?php
+                        $id = isset($model->ca_user_id) ? $model->ca_user_id : 0;
+                        $selName = isset($model->CityLedger->name) ? $model->CityLedger->name : '';
                         $this->widget(
                                 'bootstrap.widgets.TbSelect2', array(
-                            'asDropDownList' => true,
-                            'value' => (!empty($billTo)) ? $billTo : '',
-                            'name' => 'billedBy',
-                            'data' => array(0 => 'Please Choose') + $datauser,
+                            'asDropDownList' => false,
+                            'name' => 'Bill[ca_user_id]',
+                            'value' => $model->ca_user_id,
                             'options' => array(
+                                'allowClear' => true,
                                 "placeholder" => 'Please Choose',
-                                "allowClear" => true,
-                                "width" => '100%',
-                        )));
+                                'width' => '85%',
+                                'minimumInputLength' => '3',
+                                'ajax' => array(
+                                    'url' => Yii::app()->createUrl('user/getListUser'),
+                                    'dataType' => 'json',
+                                    'data' => 'js:function(term, page) { 
+                                                        return {
+                                                            q: term 
+                                                        }; 
+                                                    }',
+                                    'results' => 'js:function(data) { 
+                                                        return {
+                                                            results: data
+                                                        };
+                                                    }',
+                                ),
+                                'initSelection' => 'js:function(element, callback) 
+                            { 
+                                data = {
+                                    "id": ' . $id . ',
+                                    "text": "' . $selName . '",
+                                }
+                                  callback(data);   
+                            }',
+                            ),
+                                )
+                        );
                         ?>
                     </td>   
                     <td style="text-align: right">

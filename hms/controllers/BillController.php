@@ -237,6 +237,7 @@ class BillController extends Controller {
             if ($model->save()) {
 
                 //baru ditambahkan. get bill charge
+                
                 $billCharge = (isset($_POST['bill_charge_id'])) ? $_POST['bill_charge_id'] : array();
                 foreach ($billCharge as $charge) {
                     $billDet = new BillDet();
