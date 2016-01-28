@@ -46,7 +46,7 @@ class ForecastController extends Controller {
     public function actionCreate() {      
         cs()->registerScript('wide', '$(".landaMin").trigger("click");');
         $model = new Forecast;
-$model = $aa;
+//$model = $aa;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 

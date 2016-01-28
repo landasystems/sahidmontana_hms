@@ -48,8 +48,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <div>Status Color Information : </div>
 <span class="label label-success"> Available </span>
-<span class="label label-reservation" style="background: #4AC3FF"> Reservation (Unconfirmed) </span>
-<span class="label label-info"> Reservation (Confirmed) </span>
+<span class="label label-reservation" style="background: #4AC3FF"> Reservation</span>
+<!--<span class="label label-info"> Reservation (Confirmed) </span>-->
 <span class="label label-important"> Occupied </span>
 <span class="label label-warning"> Vacant & Dirty </span>
 <span class="label">House Use </span>

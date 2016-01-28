@@ -57,7 +57,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value' => '$data->nestedname',
             'htmlOptions' => array('style' => 'text-align: left;')
         ),
-        'description',
+//        'description',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'template' => '{view} {update} {delete}',

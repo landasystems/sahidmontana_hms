@@ -16,7 +16,7 @@ $deposite_unused = Deposite::model()->findAll(array('condition' => 'is_applied=0
 $bill = Bill::model()->findAll(array('condition' => 'is_na=0', 'index' => 'id'));
 $expectedArrival = Reservation::model()->findAll(array('condition' => 'date_from="' . date("Y-m-d", strtotime('+1 days', strtotime($siteConfig->date_system))) . '"'));
 $expectedDeparture = RoomBill::model()->findAll(array('select' => '*,max(date_bill)', 'group' => 'room_id', 'condition' => 'is_checkedout=0', 'order' => 'registration_id', 'index' => 'id', 'having' => 'max(date_bill)="' . date("Y-m-d", strtotime($siteConfig->date_system)) . '"'));
-$forecast = Forecast::model()->findByAttributes(array('tahun' => date('Y')));
+$forecast = Forecast::model()->findByAttributes(array('tahun' => date("Y", strtotime($siteConfig->date_system))));
 $initialForecast = InitialForecast::model()->findByPk(1);
 $roomTodayStatus = Room::model()->todayStatus();
 //mencari numberofguest;

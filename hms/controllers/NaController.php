@@ -51,7 +51,7 @@ class NaController extends Controller {
      */
     public function actionCreate() {
         $siteConfig = SiteConfig::model()->findByPk(1);
-        $cekForecast = Forecast::model()->find(array('condition' => 'tahun="' . date("Y") . '"'));
+        $cekForecast = Forecast::model()->find(array('condition' => 'tahun="' . date("Y", strtotime($siteConfig->date_system)) . '"'));
         $room_number = '';
         $no = 0;
         $warning = '';

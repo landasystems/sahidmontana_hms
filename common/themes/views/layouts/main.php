@@ -99,12 +99,19 @@
                         <div class="content">
                             <table class="table table-condensed">
                                 <tr>
-                                    <td><b>Date</b></td>
+                                    <td><b>Date System</b></td>
                                     <td> : </td>
-                                    <td><?php echo date('d F Y') ?></td>
+                                    <td><?php 
+                                    $siteConfig = SiteConfig::model()->listSiteConfig();
+                                    echo date('d M Y',strtotime($siteConfig->date_system)) ?></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Time</b></td>
+                                    <td><b>Date Server</b></td>
+                                    <td> : </td>
+                                    <td><?php echo date('d M Y') ?></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Time Server</b></td>
                                     <td> : </td>
                                     <td><?php echo date('H:i') ?></td>
                                 </tr>

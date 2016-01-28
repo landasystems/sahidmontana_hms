@@ -106,7 +106,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     )
                 ),
                 'status' => array(
-                    'visible' => '(strtotime($data->date_from)>=strtotime(app()->session["date_system"]))',
+                    'visible' => '(strtotime($data->date_from)>=strtotime(app()->session["date_system"])) && $data->status=="reservation"',
                     'label' => 'Change Status',
                     'icon' => 'icon-refresh',
                     'url' => '$data->id',
