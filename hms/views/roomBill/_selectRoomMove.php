@@ -119,33 +119,4 @@
         $.toaster({priority : 'success',title : "Information", message : "Room " + nomer + " Selected"});
         return false;
     });
-    
-    function calculation() {
-
-        $(".pax").each(function () {
-            var pax = parseInt($(this).val());
-            pax = pax ? pax : 0;
-            var bed = parseInt($(this).parent().parent().find(".extrabed").val());
-            var bed_price = parseInt($(this).parent().parent().find(".extrabed_price").val());
-            var fnb = parseInt($(this).parent().parent().find(".fnb_price").val());
-            var room_rate = parseInt($(this).parent().parent().find(".room_rate").val());
-            room_rate = room_rate ? room_rate : 0;
-            bed = bed ? bed : 0;
-            fnb = fnb ? fnb : 0;
-            bed_price = bed_price ? bed_price : 0;
-            var rowId = $(this).parent().parent().attr('id');
-            var other = 0;
-            $(".others_include").each(function () {
-                var thisRowId = $(this).attr('r');
-                if (rowId == thisRowId) {
-                    if (this.checked) {
-                        other += parseInt($(this).val());
-                    }
-                }
-            });
-            var type = $("#Registration_type").val();
-            var price_default = (fnb * pax) + (bed * bed_price) + room_rate + other;
-            $(this).parent().parent().find(".total_rate").val(price_default);
-        });
-    }
 </script>
