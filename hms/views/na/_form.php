@@ -96,7 +96,7 @@ function getRootId($id, $additional, $category, $category_all) {
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="dsr">
-            <?php echo $this->renderPartial('_naDsr', $array); ?>
+            <?php echo empty($warning) ? $this->renderPartial('_naDsr', $array) : ''; ?>
         </div>
         <div class="tab-pane" id="analysis">
             <?php echo $this->renderPartial('_naAnalysis', $array); ?>

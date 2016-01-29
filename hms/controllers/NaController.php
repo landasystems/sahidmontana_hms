@@ -2,8 +2,6 @@
 
 class NaController extends Controller {
 
-    
-
     /**
      * @var string the default layoutac for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -21,9 +19,8 @@ class NaController extends Controller {
 
     public function accessRules() {
         return array(
-           
             array('allow', // r
-                'actions' => array('update','delete','index', 'view','create'),
+                'actions' => array('update', 'delete', 'index', 'view', 'create'),
                 'expression' => 'app()->controller->isValidAccess("NightAudit","r")'
             )
         );
@@ -55,6 +52,7 @@ class NaController extends Controller {
         $room_number = '';
         $no = 0;
         $warning = '';
+        $model = new Na;
         $roomUser = Room::model()->findAll(array('condition' => 'status="occupied" or status="house use" or status="compliment"', 'order' => 'number'));
         foreach ($roomUser as $val) {
             $max = RoomBill::model()->find(array('order' => 'date_bill DESC', 'condition' => 'room_id=' . $val->id . ' and registration_id=' . $val->registration_id));
@@ -71,6 +69,7 @@ class NaController extends Controller {
         if (empty($cekForecast)) {
             cs()->registerScript('wide', '$(".landaMin").trigger("click");');
             $this->render('create', array(
+                'model' => $model,
                 'warning' => '<div class="alert alert-danger fade in">   
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>Important! </strong> &nbsp;&nbsp; Please insert <b>Forecast</b> before <b>Night Audit</b>.    
@@ -124,7 +123,7 @@ class NaController extends Controller {
                 $warning .= 'Please <b>checkout</b> or <b>extend</b> for :<br><b>' . $room_number . '</b>';
                 $warning .= '</div>';
             }
-            $model = new Na;
+
             cs()->registerScript('', '$("#myTab a").click(function(e) {
                     e.preventDefault();
                     $(this).tab("show");
@@ -141,7 +140,7 @@ class NaController extends Controller {
                 $model->rate_dollar = $rateDolar;
                 $model->date_na = $siteConfig->date_system;
                 if ($model->save()) {
-                    
+
                     $roomBills = RoomBill::model()->findAll(array('condition' => '(date_bill<="' . $siteConfig->date_system . '" and is_checkedout=0 and t.is_na=0) or (date_format(Bill.created,"%Y-%m-%d")="' . $siteConfig->date_system . '")', 'order' => 'registration_id', 'index' => 'id', 'with' => array('BillDet', 'BillDet.Bill')));
                     $bill = Bill::model()->findAll(array('condition' => 'is_na=0', 'index' => 'id'));
                     $billCharge = BillCharge::model()->findAll(array('condition' => 'is_na=0 and is_temp=0', 'index' => 'id'));
@@ -155,7 +154,7 @@ class NaController extends Controller {
                     $outOfOrder = Room::model()->findAll(array('condition' => 'status="out of order"'));
 //                    $account = Account::model()->findAll();
                     $newCityLedger = array();
-                    
+
 //                    //simpan ke jurnal
 //                    $cash = $_POST['cash'];
 //                    $cityLedger = $_POST['grossSales'] - $_POST['cash'];
@@ -256,8 +255,6 @@ class NaController extends Controller {
 //                    $debet[] = (object) array("id" => $jurnal->id, "acc_coa_id" => $siteConfig->acc_clearance_id, "date_trans" => $siteConfig->date_system, "description" => "NA pada tanggal '.$siteConfig->date_system.'", "total" => $_POST['cash'], "code" => $jurnal->code, "reff_type" => "jurnal");
 //
 //                    AccCoa::model()->trans($debet, $credit);
-
-
                     //simpan out of order di room schedule
                     foreach ($outOfOrder as $a) {
                         $roomSchedule = new RoomSchedule;
@@ -311,7 +308,6 @@ class NaController extends Controller {
 
                     //save accounting city ledger
 //                    InvoiceDet::model()->saveCityLedger($newCityLedger);
-
                     //save deposite applied
 //                foreach ($deposite_used as $data) {
 //                    $naDet = new NaDpApplied();
@@ -489,15 +485,14 @@ class NaController extends Controller {
                     $siteConfig->date_system = date("Y-m-d", strtotime('+1 day', strtotime($siteConfig->date_system)));
                     $siteConfig->save();
                     app()->session['date_system'] = $siteConfig->date_system; //ganti session na date systems
-
                     //simpan report geographical
                     $lastNa = Na::model()->find(array('order' => 'id DESC'));
                     $reportGeo = ReportGeographical::model()->insertGeoGraphical($lastNa->id, $lastNa->date_na);
 
                     //update processed roombill where date_bill = date_system siteconfig
                     //RoomBill::model()->updateAll(array('processed' => 1), 'date_bill="' . date("Y-m-d", strtotime($siteConfig->date_system)) . '"');
-                    
-                    user()->setFlash('success',"Saved successfully");
+
+                    user()->setFlash('success', "Saved successfully");
                     $this->redirect(array('view', 'id' => $model->id));
                 }
             }
@@ -535,8 +530,6 @@ class NaController extends Controller {
             'model' => $model,
         ));
     }
-
-  
 
     /**
      * Returns the data model based on the primary key given in the GET variable.
