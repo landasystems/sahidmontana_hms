@@ -1558,3 +1558,95 @@ in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
 2016/01/02 13:35:16 [warning] [application] Failed to set unsafe attribute "id" of "Registration".
 in /var/www/sahidmontana_hms/hms/controllers/RegistrationController.php (851)
 in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
+2016/01/28 17:03:35 [error] [php] Undefined variable: model (/var/www/sahidmontana_hms/hms/views/na/create.php:27)
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): NaController->renderFile()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): NaController->renderPartial()
+#2 /var/www/sahidmontana_hms/hms/controllers/NaController.php(78): NaController->render()
+#3 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(49): NaController->actionCreate()
+#4 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): NaController->runAction()
+#6 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): NaController->filterAccessControl()
+#9 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#11 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): NaController->runActionWithFilters()
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): NaController->run()
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CWebApplication->run()
+REQUEST_URI=/sahidmontana_hms/hms/www/hms.sahidmontana/na/create.html
+in /var/www/sahidmontana_hms/hms/views/na/create.php (27)
+in /var/www/sahidmontana_hms/hms/controllers/NaController.php (78)
+in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
+2016/01/28 17:03:56 [error] [php] Undefined variable: model (/var/www/sahidmontana_hms/hms/views/na/create.php:27)
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): NaController->renderFile()
+#1 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): NaController->renderPartial()
+#2 /var/www/sahidmontana_hms/hms/controllers/NaController.php(78): NaController->render()
+#3 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(49): NaController->actionCreate()
+#4 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): NaController->runAction()
+#6 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): NaController->filterAccessControl()
+#9 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#11 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): NaController->runActionWithFilters()
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): NaController->run()
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CWebApplication->run()
+REQUEST_URI=/sahidmontana_hms/hms/www/hms.sahidmontana/na/create.html
+in /var/www/sahidmontana_hms/hms/views/na/create.php (27)
+in /var/www/sahidmontana_hms/hms/controllers/NaController.php (78)
+in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
+2016/01/28 17:05:10 [warning] [application] Failed to set unsafe attribute "id" of "Registration".
+in /var/www/sahidmontana_hms/hms/controllers/RegistrationController.php (642)
+in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
+2016/01/28 17:05:56 [error] [array
+(
+    'charge_additional_category_id' => '2'
+    'cover' => '2'
+    'description' => ''
+    'total' => '60000'
+    'cash' => '60000'
+    'cc_number' => ''
+    'cc_charge' => ''
+    'gl_room_bill_id' => '0'
+    'gl_charge' => ''
+    'ca_user_id' => ''
+    'ca_charge' => ''
+    'refund' => '0'
+    'approval_user_id' => ''
+)] Landa Var Dump
+in /var/www/sahidmontana_hms/common/globals.php (6)
+in /var/www/sahidmontana_hms/hms/controllers/BillChargeController.php (336)
+in /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php (13)
+2016/01/28 20:30:05 [error] [php] Undefined variable: arrNaDet (/var/www/sahidmontana_hms/hms/views/report/_productSold.php:54)
+Stack trace:
+#0 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): ReportController->renderFile()
+#1 /var/www/sahidmontana_hms/hms/views/report/productSold.php(62): ReportController->renderPartial()
+#2 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(126): require()
+#3 /var/www/sahidmontana_hms/common/lib/yii/web/CBaseController.php(95): ReportController->renderInternal()
+#4 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(869): ReportController->renderFile()
+#5 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(782): ReportController->renderPartial()
+#6 /var/www/sahidmontana_hms/hms/controllers/ReportController.php(88): ReportController->render()
+#7 /var/www/sahidmontana_hms/common/lib/yii/web/actions/CInlineAction.php(49): ReportController->actionProductSold()
+#8 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams()
+#9 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(133): ReportController->runAction()
+#10 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(1145): CAccessControlFilter->filter()
+#12 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CInlineFilter.php(58): ReportController->filterAccessControl()
+#13 /var/www/sahidmontana_hms/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#14 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#15 /var/www/sahidmontana_hms/common/lib/yii/web/CController.php(265): ReportController->runActionWithFilters()
+#16 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(282): ReportController->run()
+#17 /var/www/sahidmontana_hms/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/sahidmontana_hms/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/sahidmontana_hms/hms/www/hms.sahidmontana/index.php(13): CWebApplication->run()
+REQUEST_URI=/sahidmontana_hms/hms/www/hms.sahidmontana/report/productSold.html
+in /var/www/sahidmontana_hms/hms/views/report/_productSold.php (54)
+in /var/www/sahidmontana_hms/hms/views/report/productSold.php (62)
+in /var/www/sahidmontana_hms/hms/controllers/ReportController.php (88)

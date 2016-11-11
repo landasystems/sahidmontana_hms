@@ -23,7 +23,7 @@ class Auth extends CActiveRecord {
                     array('visible' => landa()->checkAccess('RoomType', 'r'), 'auth_id' => 'RoomType', 'label' => 'Type', 'url' => array('/roomType'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('Room', 'r'), 'auth_id' => 'Room', 'label' => 'Room', 'url' => array('/room'), 'crud' => array("r" => 1)),
                 )),
-            array('visible' => landa()->checkAccess('MarketSegment', 'r'), 'auth_id' => 'MarketSegment', 'label' => 'Market Segment', 'url' => array('/marketSegment'), 'crud' => array("r" => 1)),
+//            array('visible' => landa()->checkAccess('MarketSegment', 'r'), 'auth_id' => 'MarketSegment', 'label' => 'Market Segment', 'url' => array('/marketSegment'), 'crud' => array("r" => 1)),
             array('visible' => landa()->checkAccess('Forecast', 'r'), 'auth_id' => 'Forecast', 'label' => 'Forecast', 'url' => array('/forecast'), 'crud' => array("r" => 1)),
             array('visible' => landa()->checkAccess('Account', 'r'), 'auth_id' => 'Account', 'label' => 'Account', 'url' => array('/account'), 'crud' => array("r" => 1)),
             array('visible' => landa()->checkAccess('ChargeAdditionalCategory', 'r'), 'auth_id' => 'ChargeAdditionalCategory', 'label' => 'Departement', 'url' => array('/chargeAdditionalCategory'), 'crud' => array("r" => 1)),
